@@ -1,0 +1,5 @@
+# NIS|NAMA|KELAS|PIN
+1234567|Lazuardi Akbar Imani|AmbaX|1234
+2410001|Andi Pratama|XI-IPA-1|1234
+2410002|Budi Santoso|XI-IPA-1|5678
+2410003|Citra Lestari|XI-IPA-2|2468

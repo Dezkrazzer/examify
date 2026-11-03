@@ -1,0 +1,110 @@
+# =====================================================================
+# Examify - Kursus E-Learning v1.0               Encoding: UTF-8
+# Blok:  [KURSUS]  ->  KODE/NAMA/PENGAJAR/DESKRIPSI  ->  [BAB] Judul ...  ->  [END]
+# Materi (di bawah [BAB]):
+#   TEKS|id|judul|file.md      bacaan Markdown, path relatif ke folder data/
+#   LINK|id|judul|https://...  tautan video/slide/web
+#   PDF|id|judul|file.pdf      dokumen PDF lokal, path relatif ke folder data/
+#   UJIAN|id|judul|KODE-UJIAN  ujian dari bank_soal.txt
+# ID materi harus unik di dalam satu kursus.
+# =====================================================================
+
+[KURSUS]
+KODE=PBO
+NAMA=Pemrograman Berorientasi Objek
+PENGAJAR=Dr. Rina Kartika, M.Kom.
+DESKRIPSI=Konsep OOP dan Java Core: class & object, pewarisan, polimorfisme, hingga GUI dan multithreading.
+[BAB] Pengenalan OOP
+TEKS|pbo-01|Apa itu Pemrograman Berorientasi Objek?|materi/pbo/01-pengenalan.md
+LINK|pbo-01b|Oracle Tutorial: Object-Oriented Concepts|https://docs.oracle.com/javase/tutorial/java/concepts/index.html
+[BAB] Class & Object
+TEKS|pbo-02|Class, Object, dan Konstruktor|materi/pbo/02-class-object.md
+LINK|pbo-02b|Oracle Tutorial: Classes|https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html
+[BAB] Java Variables
+TEKS|pbo-03|Tipe Data dan Jenis Variabel|materi/pbo/03-variables.md
+LINK|pbo-03b|Oracle Tutorial: Variables|https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html
+[BAB] Inheritance
+TEKS|pbo-04|Pewarisan dengan extends dan super|materi/pbo/04-inheritance.md
+LINK|pbo-04b|Oracle Tutorial: Inheritance|https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html
+[BAB] Encapsulation
+TEKS|pbo-05|Access Modifier dan Penyembunyian Data|materi/pbo/05-encapsulation.md
+LINK|pbo-05b|Oracle Tutorial: Access Control|https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html
+[BAB] Polymorphism
+TEKS|pbo-06|Overriding dan Overloading|materi/pbo/06-polymorphism.md
+LINK|pbo-06b|Oracle Tutorial: Polymorphism|https://docs.oracle.com/javase/tutorial/java/IandI/polymorphism.html
+[BAB] Abstraction
+TEKS|pbo-07|Abstract Class dan Interface|materi/pbo/07-abstraction.md
+PDF|pbo-07b|Ringkasan Empat Pilar OOP|materi/pbo/ringkasan-pilar-oop.pdf
+[BAB] UTS
+UJIAN|pbo-uts|Ujian Tengah Semester|PBO-01
+[BAB] String
+TEKS|pbo-08|Manipulasi String dan StringBuilder|materi/pbo/08-string.md
+LINK|pbo-08b|Oracle Tutorial: Strings|https://docs.oracle.com/javase/tutorial/java/data/strings.html
+[BAB] Generics & Collections
+TEKS|pbo-09|List, Set, Map, dan Tipe Generik|materi/pbo/09-generics-collections.md
+LINK|pbo-09b|Oracle Tutorial: Collections|https://docs.oracle.com/javase/tutorial/collections/index.html
+[BAB] Exceptions & Assertions
+TEKS|pbo-10|Menangani Kesalahan dengan Aman|materi/pbo/10-exception.md
+LINK|pbo-10b|Oracle Tutorial: Exceptions|https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html
+[BAB] Java IO
+TEKS|pbo-11|Membaca dan Menulis File|materi/pbo/11-java-io.md
+LINK|pbo-11b|Oracle Tutorial: Basic I/O|https://docs.oracle.com/javase/tutorial/essential/io/index.html
+[BAB] Java GUI
+TEKS|pbo-12|JavaFX, FXML, dan CSS|materi/pbo/12-java-gui.md
+LINK|pbo-12b|Dokumentasi OpenJFX|https://openjfx.io/openjfx-docs/
+[BAB] Multithreading
+TEKS|pbo-13|Thread, Runnable, dan Sinkronisasi|materi/pbo/13-multithreading.md
+LINK|pbo-13b|Oracle Tutorial: Concurrency|https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html
+[BAB] UAS
+PDF|pbo-uas-c|Cheat Sheet Java untuk UAS|materi/pbo/cheatsheet-java.pdf
+UJIAN|pbo-uas|Ujian Akhir Semester|PBO-02
+[END]
+
+[KURSUS]
+KODE=MTK
+NAMA=Matematika
+PENGAJAR=Budi Hartono, S.Pd.
+DESKRIPSI=Operasi bilangan dan aljabar dasar untuk persiapan ujian.
+[BAB] Operasi Bilangan
+TEKS|mtk-01|Urutan Operasi dan Pecahan|materi/mtk/01-bilangan.md
+[BAB] Aljabar Dasar
+TEKS|mtk-02|Bentuk Aljabar dan Persamaan Linear|materi/mtk/02-aljabar.md
+[BAB] Evaluasi
+UJIAN|mtk-uji|Ujian Matematika|MTK-01
+[END]
+
+[KURSUS]
+KODE=BIN
+NAMA=Bahasa Indonesia
+PENGAJAR=Sri Wahyuni, S.Pd.
+DESKRIPSI=Kata baku dan kalimat efektif sesuai PUEBI.
+[BAB] Kata Baku
+TEKS|bin-01|Mengenal Kata Baku|materi/bin/01-kata-baku.md
+[BAB] Kalimat Efektif
+TEKS|bin-02|Ciri Kalimat Efektif|materi/bin/02-kalimat-efektif.md
+[BAB] Evaluasi
+UJIAN|bin-uji|Ujian Bahasa Indonesia|BIN-01
+[END]
+
+[KURSUS]
+KODE=IPA
+NAMA=Ilmu Pengetahuan Alam
+PENGAJAR=Agus Setiawan, S.Si.
+DESKRIPSI=Tata surya dan perubahan wujud zat.
+[BAB] Tata Surya
+TEKS|ipa-01|Planet-Planet di Tata Surya|materi/ipa/01-tata-surya.md
+[BAB] Wujud Zat
+TEKS|ipa-02|Perubahan Wujud Zat|materi/ipa/02-wujud-zat.md
+[BAB] Evaluasi
+UJIAN|ipa-uji|Ujian IPA|IPA-01
+[END]
+
+[KURSUS]
+KODE=UJI
+NAMA=Kelas Uji Coba
+PENGAJAR=Tim Examify
+DESKRIPSI=Ujian singkat 1 menit untuk mencoba fitur auto-submit. Boleh diulang.
+[BAB] Mulai di Sini
+TEKS|uji-01|Panduan Mengikuti Ujian|materi/uji/01-panduan.md
+UJIAN|uji-coba|Ujian Coba 1 Menit|UJI-01
+[END]

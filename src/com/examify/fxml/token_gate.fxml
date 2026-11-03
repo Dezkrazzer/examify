@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.examify.view.IkonView?>
+<?import com.examify.view.LatarAnimasi?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.examify.controller.TokenGateController" styleClass="latar">
+    <LatarAnimasi/>
+    <VBox fx:id="vbKartu" styleClass="kaca" spacing="16" maxWidth="560" maxHeight="-Infinity">
+        <padding><Insets top="32" right="34" bottom="30" left="34"/></padding>
+        <HBox spacing="14" alignment="CENTER_LEFT">
+            <StackPane styleClass="ikon-materi, ikon-materi-ujian"><IkonView ikon="UJIAN" ukuran="22"/></StackPane>
+            <VBox>
+                <Label text="KONFIRMASI UJIAN" styleClass="label-kecil-kapital"/>
+                <Label fx:id="lblJudulUjian" styleClass="judul-halaman" wrapText="true"/>
+            </VBox>
+        </HBox>
+        <HBox spacing="12">
+            <VBox styleClass="kartu-ujian-info" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="Durasi" styleClass="teks-kecil"/><Label fx:id="lblDurasi" styleClass="judul-kartu"/>
+            </VBox>
+            <VBox styleClass="kartu-ujian-info" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="Jumlah soal" styleClass="teks-kecil"/><Label fx:id="lblJumlahSoal" styleClass="judul-kartu"/>
+            </VBox>
+            <VBox styleClass="kartu-ujian-info" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                <Label text="KKM" styleClass="teks-kecil"/><Label fx:id="lblKkm" styleClass="judul-kartu"/>
+            </VBox>
+        </HBox>
+        <VBox fx:id="vbAturan" spacing="6"/>
+        <Label text="Token ujian" styleClass="teks-kecil"/>
+        <TextField fx:id="tfToken" promptText="------" onAction="#handleVerifikasi" styleClass="field-token"/>
+        <Label fx:id="lblSisaPercobaan" styleClass="teks-kecil" wrapText="true"/>
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button text="Kembali" onAction="#handleKembali" styleClass="tombol-sekunder" cancelButton="true">
+                <graphic><IkonView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+            </Button>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Verifikasi &amp; mulai" onAction="#handleVerifikasi" styleClass="tombol-utama"
+                    defaultButton="true" contentDisplay="RIGHT">
+                <graphic><IkonView ikon="PANAH_KANAN" ukuran="16"/></graphic>
+            </Button>
+        </HBox>
+    </VBox>
+</StackPane>

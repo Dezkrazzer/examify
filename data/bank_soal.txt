@@ -1,0 +1,120 @@
+# =====================================================================
+# Examify - Bank Soal v1.0                     Encoding: UTF-8
+# Format soal:
+#   PG|id|pertanyaan|opsi1;opsi2;...;opsiN|kunci(A-E)|bobot
+#   TF|id|pernyataan|kunci(T/F)|bobot
+#   IS|id|pertanyaan|jawaban1;jawaban2;...|bobot
+# Karakter | dan ; tidak boleh dipakai di dalam teks soal.
+# Header opsional ULANG=true membuat ujian boleh dikerjakan ulang (bawaan: false).
+# =====================================================================
+
+[UJIAN]
+KODE=MTK-01
+MAPEL=Matematika
+TOKEN=MTK7X2
+DURASI=30
+KKM=75
+[SOAL]
+PG|1|Hasil dari 12 x 3 adalah ...|30;36;38;42|B|10
+PG|2|Bentuk sederhana dari 2x + 3x - x adalah ...|4x;5x;6x;3x|A|10
+TF|3|Bilangan 2 adalah satu-satunya bilangan prima genap.|T|10
+IS|4|Nilai dari 2 pangkat 5 adalah ...|32;TIGA PULUH DUA|10
+PG|5|Keliling persegi dengan sisi 7 cm adalah ...|14 cm;21 cm;28 cm;49 cm|C|10
+TF|6|Jumlah sudut dalam segitiga adalah 360 derajat.|F|10
+IS|7|Akar kuadrat dari 144 adalah ...|12;DUA BELAS|10
+PG|8|Jika 3x = 21, maka nilai x adalah ...|5;6;7;8|C|10
+PG|9|Hasil dari 1/2 + 1/4 adalah ...|1/6;2/6;3/4;1|C|10
+TF|10|Bilangan 0,5 sama dengan 50 persen.|T|10
+[END]
+
+[UJIAN]
+KODE=BIN-01
+MAPEL=Bahasa Indonesia
+TOKEN=BIN9K4
+DURASI=20
+KKM=70
+[SOAL]
+PG|1|Kata baku dari "aktifitas" adalah ...|aktifitas;aktivitas;aktivitet;aktipitas|B|10
+TF|2|Kalimat efektif boleh mengandung pemborosan kata.|F|10
+IS|3|Ibu kota provinsi Jawa Tengah adalah ...|SEMARANG;KOTA SEMARANG|10
+PG|4|Lawan kata (antonim) dari "rajin" adalah ...|tekun;giat;malas;cermat|C|10
+PG|5|Kata baku yang tepat adalah ...|apotik;apotek;apothek;apoteek|B|10
+TF|6|Huruf kapital dipakai sebagai huruf pertama awal kalimat.|T|10
+IS|7|Sinonim dari kata "pandai" adalah ...|PINTAR;CERDAS;MAHIR|10
+PG|8|Kalimat yang berisi perintah diakhiri dengan tanda ...|titik;koma;seru;tanya|C|10
+TF|9|Paragraf deduktif memiliki kalimat utama di akhir paragraf.|F|10
+IS|10|Bahasa resmi negara Indonesia adalah bahasa ...|INDONESIA;BAHASA INDONESIA|10
+[END]
+
+[UJIAN]
+KODE=IPA-01
+MAPEL=Ilmu Pengetahuan Alam
+TOKEN=IPA3Q8
+DURASI=25
+KKM=75
+[SOAL]
+PG|1|Planet yang paling dekat dengan Matahari adalah ...|Venus;Merkurius;Mars;Bumi|B|10
+TF|2|Air mendidih pada suhu 100 derajat Celsius di permukaan laut.|T|10
+IS|3|Gas yang dihasilkan tumbuhan saat fotosintesis adalah ...|OKSIGEN;O2|10
+PG|4|Satuan SI untuk gaya adalah ...|Joule;Watt;Newton;Pascal|C|10
+PG|5|Organ yang berfungsi memompa darah ke seluruh tubuh adalah ...|paru-paru;jantung;hati;ginjal|B|10
+TF|6|Bulan memancarkan cahayanya sendiri.|F|10
+IS|7|Perubahan wujud dari padat menjadi cair disebut ...|MENCAIR;MELEBUR|10
+PG|8|Hewan yang memakan tumbuhan disebut ...|karnivora;omnivora;herbivora;insektivora|C|10
+TF|9|Magnet dapat menarik benda yang terbuat dari besi.|T|10
+PG|10|Lapisan atmosfer tempat terjadinya cuaca adalah ...|troposfer;stratosfer;mesosfer;termosfer;eksosfer|A|10
+[END]
+
+# Ujian singkat 1 menit untuk mencoba fitur auto-submit (TC-15)
+[UJIAN]
+KODE=UJI-01
+MAPEL=Uji Coba
+TOKEN=UJI123
+DURASI=1
+KKM=60
+ULANG=true
+[SOAL]
+PG|1|Ibu kota Indonesia saat ini adalah ...|Jakarta;Bandung;Surabaya|A|10
+TF|2|Satu jam sama dengan 60 menit.|T|10
+IS|3|Warna langit pada siang hari yang cerah adalah ...|BIRU|10
+[END]
+
+[UJIAN]
+KODE=PBO-01
+MAPEL=Pemrograman Berorientasi Objek
+TOKEN=PBO7UT
+DURASI=30
+KKM=70
+ULANG=false
+[SOAL]
+PG|1|Kata kunci untuk membuat object dari sebuah class adalah ...|class;new;this;extends|B|10
+TF|2|Satu class hanya dapat menghasilkan satu object.|F|10
+PG|3|Tipe primitif yang tepat untuk menyimpan satu huruf kunci jawaban adalah ...|String;int;char;boolean|C|10
+IS|4|Kata kunci untuk mewarisi sebuah class di Java adalah ...|EXTENDS|10
+PG|5|Access modifier yang membuat atribut hanya dapat diakses di dalam class itu sendiri adalah ...|public;protected;default;private|D|10
+TF|6|Method overloading adalah method dengan nama sama tetapi parameter berbeda.|T|10
+PG|7|Anotasi yang dipakai saat menimpa method superclass adalah ...|@Override;@Deprecated;@FXML;@Test|A|10
+IS|8|Class yang tidak dapat dibuat object-nya secara langsung disebut abstract ...|CLASS|10
+TF|9|Sebuah class di Java boleh mengimplementasikan lebih dari satu interface.|T|10
+PG|10|Konstruktor superclass dipanggil dengan kata kunci ...|this;super;parent;base|B|10
+[END]
+
+[UJIAN]
+KODE=PBO-02
+MAPEL=Pemrograman Berorientasi Objek
+TOKEN=PBO9UA
+DURASI=30
+KKM=70
+ULANG=false
+[SOAL]
+PG|1|Class yang tepat untuk menyusun string panjang di dalam perulangan adalah ...|String;StringBuilder;Scanner;Character|B|10
+TF|2|Membandingkan isi dua String sebaiknya memakai operator ==.|F|10
+PG|3|Struktur data yang tidak mengizinkan elemen duplikat adalah ...|List;Set;Map;Array|B|10
+IS|4|Agar objek aman dipakai sebagai key HashMap, method equals harus di-override bersama method ...|HASHCODE;HASHCODE()|10
+PG|5|Blok yang selalu dijalankan baik terjadi exception maupun tidak adalah ...|catch;throw;finally;throws|C|10
+TF|6|Assertion di Java aktif secara bawaan tanpa opsi tambahan.|F|10
+PG|7|Opsi JVM untuk mengaktifkan assertion adalah ...|-ea;-da;-cp;-jar|A|10
+IS|8|Interface yang diimplementasikan untuk membuat tugas yang dijalankan sebuah Thread adalah ...|RUNNABLE|10
+PG|9|Method JavaFX untuk memperbarui tampilan dari thread lain adalah ...|Platform.exit;Platform.runLater;Thread.sleep;Stage.show|B|10
+TF|10|Kata kunci volatile menjamin perubahan variabel terlihat oleh thread lain.|T|10
+[END]

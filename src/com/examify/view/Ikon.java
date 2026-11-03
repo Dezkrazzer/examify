@@ -1,0 +1,39 @@
+package com.examify.view;
+
+/** Ikon garis (stroke) berukuran 24x24, digambar dengan SVGPath tanpa file gambar. */
+public enum Ikon {
+    BERANDA("M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"),
+    BUKU("M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"),
+    PROFIL("M20 21a8 8 0 0 0-16 0 M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10z"),
+    KELUAR("M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4 M16 17l5-5-5-5 M21 12H9"),
+    BULAN("M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"),
+    MATAHARI("M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10z M12 1v2 M12 21v2 M4.2 4.2l1.4 1.4 M18.4 18.4l1.4 1.4 "
+            + "M1 12h2 M21 12h2 M4.2 19.8l1.4-1.4 M18.4 5.6l1.4-1.4"),
+    CARI("M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z M21 21l-4.3-4.3"),
+    JAM("M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z M12 6v6l4 2"),
+    DOKUMEN("M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8"),
+    TAUTAN("M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7 M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"),
+    PDF("M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M8 13h8 M8 17h5"),
+    UJIAN("M9 2h6v4H9z M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2 M9 14l2 2 4-4"),
+    CENTANG("M20 6L9 17l-5-5"),
+    PANAH_KANAN("M5 12h14 M12 5l7 7-7 7"),
+    PANAH_KIRI("M19 12H5 M12 19l-7-7 7-7"),
+    PIALA("M8 21h8 M12 17v4 M7 4h10v5a5 5 0 0 1-10 0z M17 5h3v2a3 3 0 0 1-3 3 M7 5H4v2a3 3 0 0 0 3 3"),
+    GRAFIK("M3 3v18h18 M8 17v-5 M13 17V8 M18 17v-9"),
+    GEMBOK("M5 11h14v10H5z M8 11V7a4 4 0 0 1 8 0v4"),
+    MAIN("M7 4l13 8-13 8z"),
+    SERTIFIKAT("M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12z M8.5 13.5L7 22l5-3 5 3-1.5-8.5"),
+    PENGGUNA("M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z "
+            + "M22 21v-2a4 4 0 0 0-3-3.9 M16 3.1a4 4 0 0 1 0 7.8"),
+    BINTANG("M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z");
+
+    private final String path;
+
+    Ikon(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+}

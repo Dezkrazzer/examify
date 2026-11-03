@@ -1,0 +1,69 @@
+package com.examify.controller;
+
+import com.examify.app.AppSession;
+import com.examify.app.Layar;
+import com.examify.app.SceneRouter;
+import com.examify.model.Siswa;
+import com.examify.utils.FormatUtil;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.WeakChangeListener;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.StackPane;
+
+/** Kerangka halaman setelah login: sidebar navigasi + area konten. */
+public class ShellController {
+
+    @FXML private StackPane spKonten;
+    @FXML private ToggleButton tbKursus;
+    @FXML private ToggleButton tbProfil;
+    @FXML private Button btnTema;
+    @FXML private Label lblAvatar;
+    @FXML private Label lblNama;
+    @FXML private Label lblNis;
+
+    private final AppSession session = AppSession.getInstance();
+    private final ChangeListener<Layar> listenerLayar = (obs, lama, layar) -> sorotMenu(layar);
+
+    @FXML
+    private void initialize() {
+        SceneRouter.pasangKontenShell(spKonten);
+        TemaUtil.pasang(btnTema, true);
+
+        ToggleGroup grup = new ToggleGroup();
+        tbKursus.setToggleGroup(grup);
+        tbProfil.setToggleGroup(grup);
+        SceneRouter.layarAktifProperty().addListener(new WeakChangeListener<>(listenerLayar));
+
+        Siswa siswa = session.getSiswaAktif();
+        lblAvatar.setText(FormatUtil.inisial(siswa.getNama()));
+        lblNama.setText(siswa.getNama());
+        lblNis.setText(siswa.getNis() + " - " + siswa.getKelas());
+    }
+
+    private void sorotMenu(Layar layar) {
+        tbKursus.setSelected(layar == Layar.KURSUS_SAYA || layar == Layar.KURSUS_DETAIL);
+        tbProfil.setSelected(layar == Layar.PROFIL);
+    }
+
+    @FXML
+    private void handleKursus() {
+        SceneRouter.pindah(Layar.KURSUS_SAYA);
+    }
+
+    @FXML
+    private void handleProfil() {
+        SceneRouter.pindah(Layar.PROFIL);
+    }
+
+    @FXML
+    private void handleKeluar() {
+        if (DialogUtil.konfirmasi("Keluar dari akun " + session.getSiswaAktif().getNama() + "?")) {
+            session.logout();
+            SceneRouter.pindah(Layar.LANDING);
+        }
+    }
+}

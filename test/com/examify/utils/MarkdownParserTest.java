@@ -1,0 +1,59 @@
+package com.examify.utils;
+
+import com.examify.utils.MarkdownParser.Blok;
+import com.examify.utils.MarkdownParser.GayaTeks;
+import com.examify.utils.MarkdownParser.JenisBlok;
+import com.examify.utils.MarkdownParser.Potongan;
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class MarkdownParserTest {
+
+    @Test
+    void blokDasarDikenali() {
+        List<Blok> blok = MarkdownParser.parse("""
+                # Judul
+                Baris satu
+                baris dua.
+
+                - butir
+                2. nomor
+                > catatan
+                ---
+                """);
+        assertEquals(List.of(
+                new Blok(JenisBlok.HEADING, "Judul", 1),
+                new Blok(JenisBlok.PARAGRAF, "Baris satu baris dua.", 0),
+                new Blok(JenisBlok.BUTIR, "butir", 0),
+                new Blok(JenisBlok.NOMOR, "nomor", 2),
+                new Blok(JenisBlok.KUTIPAN, "catatan", 0),
+                new Blok(JenisBlok.GARIS, "", 0)), blok);
+    }
+
+    @Test
+    void blokKodeMempertahankanIndentasiDanTidakDiparse() {
+        List<Blok> blok = MarkdownParser.parse("```java\nclass A {\n    # bukan heading\n}\n```");
+        assertEquals(1, blok.size());
+        assertEquals(new Blok(JenisBlok.KODE, "class A {\n    # bukan heading\n}", 0), blok.get(0));
+    }
+
+    @Test
+    void inlineTebalMiringDanKode() {
+        assertEquals(List.of(
+                new Potongan("Pakai ", GayaTeks.BIASA),
+                new Potongan("private", GayaTeks.KODE),
+                new Potongan(" agar ", GayaTeks.BIASA),
+                new Potongan("aman", GayaTeks.TEBAL),
+                new Potongan(" dan ", GayaTeks.BIASA),
+                new Potongan("rapi", GayaTeks.MIRING)),
+                MarkdownParser.parseInline("Pakai `private` agar **aman** dan *rapi*"));
+    }
+
+    @Test
+    void teksTanpaFormatMenjadiSatuPotongan() {
+        assertEquals(List.of(new Potongan("biasa saja", GayaTeks.BIASA)), MarkdownParser.parseInline("biasa saja"));
+    }
+}

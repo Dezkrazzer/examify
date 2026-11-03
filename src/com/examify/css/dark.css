@@ -1,0 +1,24 @@
+/* Tema gelap: hanya menimpa variabel warna dari theme.css */
+.root {
+    -primer: #8cc8ff;
+    -aksen: #38b6ff;
+    -aksen-2: #8b7bff;
+    -latar: #0a1120;
+    -latar-2: #101a33;
+    -permukaan: #131d33;
+    -kaca: rgba(22, 33, 58, 0.62);
+    -kaca-kuat: rgba(30, 44, 74, 0.78);
+    -kaca-garis: rgba(255, 255, 255, 0.08);
+    -teks: #e7eef9;
+    -teks-redup: #93a4bd;
+    -garis: rgba(255, 255, 255, 0.08);
+    -bayangan: rgba(0, 0, 0, 0.45);
+    -blob-1: #1f5fbf;
+    -blob-2: #5b3fd6;
+    -blob-3: #0f8f7a;
+
+    -fx-base: #1b2742;
+    -fx-control-inner-background: #131d33;
+}
+.badge-kaca { -fx-background-color: rgba(10, 17, 32, 0.7); -fx-text-fill: white; }
+.blob { -fx-opacity: 0.55; }

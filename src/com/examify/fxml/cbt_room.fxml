@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.examify.view.IkonView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.examify.controller.CbtRoomController" styleClass="latar">
+    <top>
+        <HBox styleClass="header-ujian" alignment="CENTER_LEFT" spacing="14">
+            <StackPane styleClass="logo-ikon"><IkonView ikon="UJIAN" ukuran="18"/></StackPane>
+            <VBox>
+                <Label fx:id="lblJudulUjian" styleClass="judul-kartu"/>
+                <Label fx:id="lblSiswa" styleClass="teks-kecil"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="lblTimer" styleClass="timer">
+                <graphic><IkonView ikon="JAM" ukuran="18"/></graphic>
+            </Label>
+        </HBox>
+    </top>
+    <center>
+        <VBox styleClass="kaca" spacing="16">
+            <BorderPane.margin><Insets top="20" right="10" bottom="12" left="24"/></BorderPane.margin>
+            <padding><Insets top="24" right="28" bottom="20" left="28"/></padding>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="lblNomor" styleClass="judul-bagian"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblJenis" styleClass="badge-jenis"/>
+            </HBox>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER">
+                <VBox spacing="20">
+                    <padding><Insets top="4" right="6" bottom="4" left="2"/></padding>
+                    <Label fx:id="lblPertanyaan" styleClass="pertanyaan" wrapText="true"/>
+                    <VBox fx:id="vbInput"/>
+                </VBox>
+            </ScrollPane>
+            <Label fx:id="lblPetunjuk" styleClass="teks-kecil" wrapText="true"/>
+            <Label fx:id="lblPeringatan" styleClass="label-error" wrapText="true"/>
+        </VBox>
+    </center>
+    <right>
+        <VBox styleClass="kaca" spacing="14" prefWidth="270" minWidth="250">
+            <BorderPane.margin><Insets top="20" right="24" bottom="12" left="10"/></BorderPane.margin>
+            <Label text="Navigasi soal" styleClass="judul-bagian"/>
+            <FlowPane fx:id="fpNavigasi" hgap="8" vgap="8"/>
+            <VBox spacing="8">
+                <HBox spacing="8" alignment="CENTER_LEFT"><Region styleClass="kotak-legenda, legenda-terjawab"/><Label text="Terjawab" styleClass="teks-kecil"/></HBox>
+                <HBox spacing="8" alignment="CENTER_LEFT"><Region styleClass="kotak-legenda, legenda-kosong"/><Label text="Belum dijawab" styleClass="teks-kecil"/></HBox>
+                <HBox spacing="8" alignment="CENTER_LEFT"><Region styleClass="kotak-legenda, legenda-aktif"/><Label text="Posisi sekarang" styleClass="teks-kecil"/></HBox>
+            </VBox>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label fx:id="lblProgres" styleClass="teks-redup"/>
+            <ProgressBar fx:id="pbProgres" maxWidth="Infinity" progress="0"/>
+        </VBox>
+    </right>
+    <bottom>
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-ujian">
+            <Button fx:id="btnSebelumnya" text="Sebelumnya" onAction="#handleSebelumnya" styleClass="tombol-sekunder">
+                <graphic><IkonView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+            </Button>
+            <Button text="Kosongkan" onAction="#handleKosongkan" styleClass="tombol-hantu"/>
+            <Button fx:id="btnBerikutnya" text="Berikutnya" onAction="#handleBerikutnya" styleClass="tombol-sekunder"
+                    contentDisplay="RIGHT">
+                <graphic><IkonView ikon="PANAH_KANAN" ukuran="16"/></graphic>
+            </Button>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Selesai &amp; kumpulkan" onAction="#handleSelesai" styleClass="tombol-utama">
+                <graphic><IkonView ikon="CENTANG" ukuran="16"/></graphic>
+            </Button>
+        </HBox>
+    </bottom>
+</BorderPane>

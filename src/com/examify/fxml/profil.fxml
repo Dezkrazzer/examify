@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.examify.view.IkonView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.examify.controller.ProfilController" fitToWidth="true" hbarPolicy="NEVER">
+    <VBox spacing="22">
+        <padding><Insets top="32" right="36" bottom="36" left="36"/></padding>
+
+        <!-- Kartu identitas -->
+        <HBox styleClass="kaca" spacing="22" alignment="CENTER_LEFT">
+            <padding><Insets top="24" right="28" bottom="24" left="28"/></padding>
+            <Label fx:id="lblAvatar" styleClass="avatar, avatar-besar" minWidth="86" minHeight="86" maxWidth="86" maxHeight="86"/>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label fx:id="lblNama" styleClass="judul-halaman"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="lblNis" styleClass="badge"/>
+                    <Label fx:id="lblKelas" styleClass="badge"/>
+                    <Label text="Siswa aktif" styleClass="badge, badge-sukses"/>
+                </HBox>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" spacing="2">
+                <Label text="Rata-rata nilai" styleClass="teks-kecil"/>
+                <Label fx:id="lblRataRata" styleClass="skor-besar" style="-fx-font-size: 40px;"/>
+            </VBox>
+        </HBox>
+
+        <!-- Statistik -->
+        <HBox spacing="18">
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur"><IkonView ikon="UJIAN" ukuran="22"/></StackPane>
+                <VBox><Label fx:id="lblUjian" styleClass="angka-tile"/><Label text="Ujian dikerjakan" styleClass="teks-redup"/></VBox>
+            </HBox>
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur"><IkonView ikon="PIALA" ukuran="22"/></StackPane>
+                <VBox><Label fx:id="lblLulus" styleClass="angka-tile"/><Label text="Ujian lulus" styleClass="teks-redup"/></VBox>
+            </HBox>
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur"><IkonView ikon="BINTANG" ukuran="22"/></StackPane>
+                <VBox><Label fx:id="lblTertinggi" styleClass="angka-tile"/><Label text="Nilai tertinggi" styleClass="teks-redup"/></VBox>
+            </HBox>
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur"><IkonView ikon="BUKU" ukuran="22"/></StackPane>
+                <VBox><Label fx:id="lblMateri" styleClass="angka-tile"/><Label text="Materi selesai" styleClass="teks-redup"/></VBox>
+            </HBox>
+        </HBox>
+
+        <!-- Grafik & progres kursus -->
+        <HBox spacing="18">
+            <VBox styleClass="kaca" spacing="8" HBox.hgrow="ALWAYS">
+                <Label text="Nilai terbaik per ujian" styleClass="judul-bagian"/>
+                <BarChart fx:id="chartNilai" legendVisible="false" animated="true" prefHeight="260"
+                          categoryGap="40" barGap="4">
+                    <xAxis><CategoryAxis side="BOTTOM"/></xAxis>
+                    <yAxis><NumberAxis side="LEFT" lowerBound="0" upperBound="100" tickUnit="20" autoRanging="false"/></yAxis>
+                </BarChart>
+                <Label fx:id="lblGrafikKosong" text="Belum ada ujian yang dikerjakan." styleClass="teks-redup"
+                       visible="false" managed="false"/>
+            </VBox>
+            <VBox styleClass="kaca" spacing="14" prefWidth="340" minWidth="320">
+                <Label text="Progres kursus" styleClass="judul-bagian"/>
+                <VBox fx:id="vbProgresKursus" spacing="14"/>
+            </VBox>
+        </HBox>
+
+        <!-- Riwayat -->
+        <VBox styleClass="kaca" spacing="10">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Riwayat ujian" styleClass="judul-bagian" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Label text="Sertifikat tersedia untuk ujian yang lulus" styleClass="teks-kecil"/>
+            </HBox>
+            <TableView fx:id="tvRiwayat" prefHeight="320">
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+                <placeholder><Label text="Belum ada riwayat ujian."/></placeholder>
+                <columns>
+                    <TableColumn fx:id="colTanggal" text="Tanggal" prefWidth="125" minWidth="120"/>
+                    <TableColumn fx:id="colUjian" text="Ujian" prefWidth="210"/>
+                    <TableColumn fx:id="colSkor" text="Skor" prefWidth="70" minWidth="66"/>
+                    <TableColumn fx:id="colPredikat" text="Nilai" prefWidth="58" minWidth="54"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="118" minWidth="112"/>
+                    <TableColumn fx:id="colMode" text="Mode" prefWidth="84" minWidth="80"/>
+                    <TableColumn fx:id="colDurasi" text="Durasi" prefWidth="80" minWidth="76"/>
+                    <TableColumn fx:id="colSertifikat" text="Sertifikat" prefWidth="112" minWidth="108" sortable="false"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+</ScrollPane>

@@ -1,0 +1,440 @@
+/* =====================================================================
+   Examify theme (terang). Semua warna didefinisikan sebagai looked-up color
+   di .root; dark.css cukup menimpa variabel-variabel ini.
+   ===================================================================== */
+.root {
+    -primer: #0b3d66;
+    -aksen: #1aa3e8;
+    -aksen-2: #6d5cff;
+    -sorot: #ffd23f;
+    -latar: #eef4fb;
+    -latar-2: #e3ecf8;
+    -permukaan: #ffffff;
+    -kaca: rgba(255, 255, 255, 0.62);
+    -kaca-kuat: rgba(255, 255, 255, 0.82);
+    -kaca-garis: rgba(255, 255, 255, 0.9);
+    -teks: #0f2236;
+    -teks-redup: #5a6b80;
+    -garis: rgba(15, 34, 54, 0.09);
+    -sukses: #16a34a;
+    -sukses-latar: rgba(22, 163, 74, 0.12);
+    -bahaya: #e5484d;
+    -bahaya-latar: rgba(229, 72, 77, 0.12);
+    -bayangan: rgba(16, 42, 80, 0.13);
+    -blob-1: #7cc8ff;
+    -blob-2: #b9a8ff;
+    -blob-3: #8ff0d6;
+    -gradien-aksen: linear-gradient(to right, -aksen, -aksen-2);
+
+    /* variabel bawaan Modena agar kontrol standar ikut tema */
+    -fx-base: #f4f7fb;
+    -fx-background: -latar;
+    -fx-control-inner-background: -permukaan;
+    -fx-accent: -aksen;
+    -fx-focus-color: -aksen;
+    -fx-faint-focus-color: transparent;
+    -fx-selection-bar: derive(-aksen, 60%);
+    -fx-selection-bar-non-focused: derive(-aksen, 70%);
+
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13.5px;
+    -fx-background-color: -latar;
+}
+
+.label { -fx-text-fill: -teks; }
+.text { -fx-font-smoothing-type: lcd; }
+
+/* ---------- Latar & kaca ---------- */
+.latar { -fx-background-color: linear-gradient(to bottom right, -latar, -latar-2); }
+.blob { -fx-opacity: 0.75; }
+.blob-1 { -fx-fill: -blob-1; }
+.blob-2 { -fx-fill: -blob-2; }
+.blob-3 { -fx-fill: -blob-3; }
+
+.kaca {
+    -fx-background-color: -kaca;
+    -fx-background-radius: 20;
+    -fx-border-color: -kaca-garis;
+    -fx-border-radius: 20;
+    -fx-border-width: 1;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, -bayangan, 32, 0.08, 0, 10);
+}
+.kaca-kuat { -fx-background-color: -kaca-kuat; }
+
+/* ---------- Tipografi ---------- */
+.judul-hero { -fx-font-size: 50px; -fx-font-weight: bold; -fx-text-fill: -teks; }
+.judul-hero-aksen {
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(to right, -aksen, -aksen-2);
+}
+.garis-sorot { -fx-background-color: -sorot; -fx-background-radius: 4; -fx-min-height: 6; -fx-max-height: 6; }
+.judul-halaman { -fx-font-size: 26px; -fx-font-weight: bold; }
+.judul-bagian { -fx-font-size: 17px; -fx-font-weight: bold; }
+.judul-kartu { -fx-font-size: 15.5px; -fx-font-weight: bold; }
+.subjudul { -fx-font-size: 15px; -fx-text-fill: -teks-redup; }
+.teks-redup { -fx-text-fill: -teks-redup; }
+.teks-kecil { -fx-text-fill: -teks-redup; -fx-font-size: 12px; }
+.label-error { -fx-text-fill: -bahaya; -fx-font-size: 12.5px; }
+.logo-teks { -fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: -primer; }
+.logo-titik { -fx-font-size: 21px; -fx-font-weight: bold; -fx-text-fill: -aksen; }
+.logo-ikon {
+    -fx-background-color: -gradien-aksen;
+    -fx-background-radius: 10;
+    -fx-min-width: 34; -fx-min-height: 34; -fx-max-width: 34; -fx-max-height: 34;
+}
+.logo-ikon .ikon { -fx-stroke: white; }
+
+/* ---------- Ikon ---------- */
+.ikon {
+    -fx-fill: transparent;
+    -fx-stroke: -teks-redup;
+    -fx-stroke-width: 2;
+    -fx-stroke-line-cap: round;
+    -fx-stroke-line-join: round;
+}
+.tombol-utama .ikon { -fx-stroke: white; }
+
+/* ---------- Badge ---------- */
+.badge {
+    -fx-background-color: rgba(26, 163, 232, 0.14);
+    -fx-text-fill: -aksen;
+    -fx-background-radius: 999;
+    -fx-padding: 4 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.badge-kaca {
+    -fx-background-color: rgba(255, 255, 255, 0.78);
+    -fx-text-fill: #0f2236;
+    -fx-background-radius: 999;
+    -fx-padding: 3 10;
+    -fx-font-size: 11.5px;
+    -fx-font-weight: bold;
+}
+.badge-teks { -fx-text-fill: -aksen; -fx-font-size: 12px; -fx-font-weight: bold; }
+.badge-netral { -fx-background-color: -garis; -fx-text-fill: -teks-redup; }
+.badge-sukses { -fx-background-color: -sukses-latar; -fx-text-fill: -sukses; }
+.badge-bahaya { -fx-background-color: -bahaya-latar; -fx-text-fill: -bahaya; }
+.titik-hidup { -fx-fill: -aksen; }
+
+/* ---------- Tombol ---------- */
+.button {
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 10 18;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+.tombol-utama {
+    -fx-background-color: -gradien-aksen;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(26, 163, 232, 0.35), 16, 0, 0, 6);
+}
+.tombol-utama:hover { -fx-effect: dropshadow(gaussian, rgba(109, 92, 255, 0.5), 22, 0.1, 0, 8); }
+.tombol-utama:pressed { -fx-scale-x: 0.98; -fx-scale-y: 0.98; }
+.tombol-sekunder {
+    -fx-background-color: -kaca-kuat;
+    -fx-border-color: -garis;
+    -fx-text-fill: -teks;
+}
+.tombol-sekunder:hover { -fx-border-color: -aksen; -fx-text-fill: -aksen; }
+.tombol-sekunder:hover .ikon { -fx-stroke: -aksen; }
+.tombol-hantu { -fx-background-color: transparent; -fx-text-fill: -teks-redup; }
+.tombol-hantu:hover { -fx-background-color: -garis; -fx-text-fill: -teks; }
+.tombol-ikon { -fx-background-color: -kaca-kuat; -fx-background-radius: 999; -fx-padding: 9; -fx-border-color: -garis; -fx-border-radius: 999; }
+.tombol-ikon:hover .ikon { -fx-stroke: -aksen; }
+.tombol-besar { -fx-padding: 14 26; -fx-font-size: 14.5px; }
+.button:disabled { -fx-opacity: 0.45; }
+.hyperlink { -fx-text-fill: -aksen; -fx-border-color: transparent; -fx-padding: 0; }
+
+/* ---------- Input ---------- */
+.text-field, .password-field {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 12;
+    -fx-border-color: -garis;
+    -fx-border-radius: 12;
+    -fx-padding: 11 14;
+    -fx-text-fill: -teks;
+    -fx-prompt-text-fill: -teks-redup;
+}
+.text-field:focused, .password-field:focused {
+    -fx-border-color: -aksen;
+    -fx-effect: dropshadow(gaussian, rgba(26, 163, 232, 0.25), 10, 0.2, 0, 0);
+}
+.kotak-cari { -fx-background-color: -kaca-kuat; -fx-background-radius: 14; -fx-border-color: -garis; -fx-border-radius: 14; -fx-padding: 4 6 4 14; }
+.kotak-cari .text-field, .kotak-cari .text-field:focused { -fx-background-color: transparent; -fx-border-color: transparent; -fx-effect: null; }
+.field-token { -fx-font-family: "Consolas", monospace; -fx-font-size: 22px; -fx-alignment: center; }
+
+.combo-box {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 12;
+    -fx-border-color: -garis;
+    -fx-border-radius: 12;
+    -fx-padding: 3 4;
+}
+.combo-box .list-cell { -fx-text-fill: -teks; -fx-background-color: transparent; }
+.combo-box-popup .list-view { -fx-background-radius: 12; -fx-background-color: -permukaan; }
+.combo-box-popup .list-cell { -fx-padding: 8 12; -fx-background-color: -permukaan; -fx-text-fill: -teks; }
+.combo-box-popup .list-cell:hover { -fx-background-color: -garis; }
+
+/* ---------- Progress ---------- */
+.progress-bar > .track { -fx-background-color: -garis; -fx-background-radius: 999; -fx-background-insets: 0; }
+.progress-bar > .bar {
+    -fx-background-color: -gradien-aksen;
+    -fx-background-radius: 999;
+    -fx-background-insets: 0;
+    -fx-padding: 4;
+}
+.progres-tipis > .bar { -fx-padding: 3; }
+
+/* ---------- Scroll ---------- */
+.scroll-pane, .scroll-pane > .viewport { -fx-background-color: transparent; }
+.scroll-bar { -fx-background-color: transparent; }
+.scroll-bar .thumb { -fx-background-color: -garis; -fx-background-radius: 999; }
+.scroll-bar .thumb:hover { -fx-background-color: derive(-teks-redup, 40%); }
+.scroll-bar .increment-button, .scroll-bar .decrement-button { -fx-padding: 0; -fx-opacity: 0; }
+.scroll-bar:vertical { -fx-pref-width: 10; }
+.scroll-bar:horizontal { -fx-pref-height: 10; }
+
+/* ---------- Navbar landing ---------- */
+.navbar {
+    -fx-background-color: -kaca;
+    -fx-border-color: transparent transparent -garis transparent;
+    -fx-padding: 14 48;
+}
+.nav-link { -fx-background-color: transparent; -fx-text-fill: -teks; -fx-font-weight: 600; -fx-padding: 8 12; }
+.nav-link:hover { -fx-text-fill: -aksen; }
+
+/* ---------- Hero ---------- */
+.hero-lingkaran { -fx-fill: radial-gradient(center 50% 50%, radius 60%, derive(-blob-1, 30%), derive(-blob-2, 40%)); -fx-opacity: 0.75; }
+.hero-cincin { -fx-fill: transparent; -fx-stroke: -aksen; -fx-stroke-width: 2; -fx-stroke-dash-array: 2 10; -fx-opacity: 0.6; }
+.kartu-mengambang { -fx-padding: 16 20; }
+.kartu-gelap { -fx-background-color: linear-gradient(to bottom right, #0b3d66, #14244a); -fx-border-color: rgba(255,255,255,0.12); }
+.kartu-gelap .label { -fx-text-fill: white; }
+.angka-sorot { -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: -sorot; }
+.label-kecil-kapital { -fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: -aksen; }
+
+.strip-statistik { -fx-background-color: linear-gradient(to right, #0b3d66, #142a57); -fx-padding: 34 48; }
+.strip-statistik .label { -fx-text-fill: rgba(255,255,255,0.75); }
+.strip-statistik .angka-statistik { -fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white; }
+.sel-statistik { -fx-border-color: transparent transparent transparent rgba(255,255,255,0.25); -fx-border-width: 0 0 0 2; -fx-padding: 0 0 0 20; }
+
+.kartu-fitur { -fx-padding: 22; }
+.ikon-fitur {
+    -fx-background-color: linear-gradient(to bottom right, rgba(26,163,232,0.18), rgba(109,92,255,0.18));
+    -fx-background-radius: 14;
+    -fx-min-width: 46; -fx-min-height: 46; -fx-max-width: 46; -fx-max-height: 46;
+}
+.ikon-fitur .ikon { -fx-stroke: -aksen; }
+.footer-landing { -fx-padding: 28 48; -fx-border-color: -garis transparent transparent transparent; }
+
+/* ---------- Shell (sidebar) ---------- */
+.sidebar {
+    -fx-background-color: -kaca;
+    -fx-border-color: transparent -garis transparent transparent;
+    -fx-padding: 22 16;
+}
+.nav-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: -teks-redup;
+    -fx-alignment: center-left;
+    -fx-padding: 11 14;
+    -fx-font-weight: 600;
+    -fx-background-radius: 12;
+    -fx-graphic-text-gap: 12;
+}
+.nav-item:hover { -fx-background-color: -garis; -fx-text-fill: -teks; }
+.nav-item:selected { -fx-background-color: -gradien-aksen; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(26,163,232,0.35), 14, 0, 0, 5); }
+.nav-item:selected .ikon { -fx-stroke: white; }
+.avatar {
+    -fx-background-color: -gradien-aksen;
+    -fx-background-radius: 999;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+.kartu-profil-mini { -fx-background-color: -kaca-kuat; -fx-background-radius: 14; -fx-padding: 10; -fx-border-color: -garis; -fx-border-radius: 14; }
+
+/* ---------- Kartu kursus ---------- */
+.kartu-kursus { -fx-padding: 12 12 16 12; -fx-cursor: hand; }
+.kartu-kursus:hover { -fx-border-color: -aksen; }
+
+/* ---------- Detail kursus ---------- */
+.daftar-bab .item-bab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 12;
+    -fx-padding: 10 12;
+    -fx-alignment: center-left;
+    -fx-text-fill: -teks;
+    -fx-graphic-text-gap: 10;
+    -fx-font-weight: 500;
+}
+.daftar-bab .item-bab:hover { -fx-background-color: -garis; }
+.daftar-bab .item-bab:selected { -fx-background-color: rgba(26, 163, 232, 0.16); -fx-text-fill: -aksen; -fx-font-weight: bold; }
+.daftar-bab .item-bab:selected .nomor-bab { -fx-background-color: -aksen; -fx-text-fill: white; }
+.nomor-bab {
+    -fx-background-color: -garis;
+    -fx-background-radius: 999;
+    -fx-min-width: 26; -fx-min-height: 26; -fx-max-width: 26; -fx-max-height: 26;
+    -fx-alignment: center;
+    -fx-font-size: 11.5px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -teks-redup;
+}
+.nomor-bab-selesai { -fx-background-color: -sukses; -fx-text-fill: white; }
+.item-materi {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 14;
+    -fx-border-color: -garis;
+    -fx-border-radius: 14;
+    -fx-padding: 14 16;
+    -fx-cursor: hand;
+}
+.item-materi:hover { -fx-border-color: -aksen; }
+.item-materi-aktif { -fx-border-color: -aksen; -fx-border-width: 1.5; }
+.ikon-materi {
+    -fx-background-radius: 12;
+    -fx-min-width: 40; -fx-min-height: 40; -fx-max-width: 40; -fx-max-height: 40;
+}
+.ikon-materi-teks { -fx-background-color: rgba(26, 163, 232, 0.14); }
+.ikon-materi-teks .ikon { -fx-stroke: -aksen; }
+.ikon-materi-link { -fx-background-color: rgba(109, 92, 255, 0.14); }
+.ikon-materi-link .ikon { -fx-stroke: -aksen-2; }
+.ikon-materi-pdf { -fx-background-color: -bahaya-latar; }
+.ikon-materi-pdf .ikon { -fx-stroke: -bahaya; }
+.ikon-materi-ujian { -fx-background-color: rgba(255, 176, 32, 0.18); }
+.ikon-materi-ujian .ikon { -fx-stroke: #e08a00; }
+.cek-selesai .ikon { -fx-stroke: -sukses; -fx-stroke-width: 3; }
+.panel-baca { -fx-padding: 28 34; }
+.kartu-ujian-info { -fx-background-color: -garis; -fx-background-radius: 14; -fx-padding: 16; }
+
+/* ---------- Markdown ---------- */
+.md-teks { -fx-fill: -teks; -fx-font-size: 14.5px; }
+.md-h1 .md-teks { -fx-font-size: 27px; -fx-font-weight: bold; }
+.md-h2 .md-teks { -fx-font-size: 19px; -fx-font-weight: bold; }
+.md-h3 .md-teks { -fx-font-size: 16px; -fx-font-weight: bold; }
+.md-h2 { -fx-padding: 10 0 0 0; }
+.md-p { -fx-line-spacing: 4; }
+.md-tebal { -fx-font-weight: bold; }
+.md-miring { -fx-font-style: italic; }
+.md-kode { -fx-font-family: "Consolas", monospace; -fx-fill: -aksen-2; -fx-font-size: 13.5px; }
+.md-penanda { -fx-text-fill: -aksen; -fx-font-weight: bold; }
+.md-kutipan {
+    -fx-background-color: rgba(26, 163, 232, 0.09);
+    -fx-border-color: transparent transparent transparent -aksen;
+    -fx-border-width: 0 0 0 4;
+    -fx-background-radius: 0 12 12 0;
+    -fx-padding: 12 16;
+}
+.md > .md-kode {
+    -fx-background-color: #0f1b2e;
+    -fx-background-radius: 14;
+    -fx-padding: 16 18;
+    -fx-font-family: "Consolas", monospace;
+}
+.md-kode-teks { -fx-text-fill: #d6e4ff; -fx-font-family: "Consolas", monospace; -fx-font-size: 13px; }
+.md-garis { -fx-background-color: -garis; -fx-min-height: 1; -fx-max-height: 1; }
+
+/* ---------- Profil ---------- */
+.avatar-besar { -fx-font-size: 30px; }
+.tile-statistik { -fx-padding: 18; -fx-min-width: 170; }
+.angka-tile { -fx-font-size: 28px; -fx-font-weight: bold; }
+.chart { -fx-padding: 0; }
+.chart-plot-background { -fx-background-color: transparent; }
+.chart-vertical-grid-lines, .chart-horizontal-grid-lines { -fx-stroke: -garis; }
+.chart-alternative-row-fill { -fx-fill: transparent; }
+.axis { -fx-tick-label-fill: -teks-redup; }
+.axis-label { -fx-text-fill: -teks-redup; }
+.chart-legend { -fx-background-color: transparent; }
+.default-color0.chart-bar { -fx-background-color: linear-gradient(to top, -aksen, -aksen-2); -fx-background-radius: 8 8 0 0; }
+
+/* ---------- Tabel & list ---------- */
+.table-view, .list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+}
+.table-view .column-header-background { -fx-background-color: transparent; }
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent -garis transparent;
+    -fx-size: 40;
+}
+.table-view .column-header .label { -fx-text-fill: -teks-redup; -fx-font-weight: bold; -fx-font-size: 12px; }
+.table-row-cell { -fx-background-color: transparent; -fx-border-color: transparent transparent -garis transparent; -fx-cell-size: 44; }
+.table-row-cell:hover { -fx-background-color: -garis; }
+.table-row-cell:selected { -fx-background-color: rgba(26, 163, 232, 0.14); }
+.table-cell { -fx-text-fill: -teks; -fx-alignment: center-left; -fx-padding: 0 10; }
+.table-view .placeholder .label { -fx-text-fill: -teks-redup; }
+
+/* ---------- Header ujian ---------- */
+.header-ujian {
+    -fx-background-color: -kaca;
+    -fx-border-color: transparent transparent -garis transparent;
+    -fx-padding: 14 24;
+}
+.timer {
+    -fx-font-family: "Consolas", monospace;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-background-color: -gradien-aksen;
+    -fx-text-fill: white;
+    -fx-background-radius: 999;
+    -fx-padding: 7 18;
+}
+.timer .ikon { -fx-stroke: white; }
+.timer-kritis { -fx-background-color: linear-gradient(to right, #ff5f6d, #e5484d); }
+.pertanyaan { -fx-font-size: 18px; -fx-font-weight: 500; }
+.badge-jenis { -fx-background-color: rgba(109, 92, 255, 0.14); -fx-text-fill: -aksen-2; -fx-background-radius: 999; -fx-padding: 4 12; -fx-font-weight: bold; -fx-font-size: 12px; }
+
+.opsi-jawaban {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 14;
+    -fx-border-color: -garis;
+    -fx-border-radius: 14;
+    -fx-padding: 14 18;
+    -fx-font-size: 14.5px;
+    -fx-text-fill: -teks;
+    -fx-cursor: hand;
+}
+.opsi-jawaban:hover { -fx-border-color: -aksen; }
+.opsi-jawaban:selected { -fx-border-color: -aksen; -fx-border-width: 2; -fx-background-color: rgba(26, 163, 232, 0.1); }
+.opsi-jawaban .radio { -fx-background-color: derive(-teks-redup, 40%), -permukaan; -fx-background-insets: 0, 1.5; }
+.opsi-jawaban:selected .radio .dot { -fx-background-color: -aksen; }
+.opsi-mock-aktif { -fx-border-color: -aksen; -fx-border-width: 2; -fx-background-color: rgba(26, 163, 232, 0.1); }
+.isian-jawaban { -fx-font-size: 15px; -fx-max-width: 480px; }
+
+.nav-soal {
+    -fx-min-width: 42; -fx-min-height: 42; -fx-max-width: 42; -fx-max-height: 42;
+    -fx-padding: 0;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+}
+.nav-kosong { -fx-background-color: -kaca-kuat; -fx-border-color: -garis; -fx-text-fill: -teks; }
+.nav-terjawab { -fx-background-color: -sukses; -fx-text-fill: white; -fx-border-color: transparent; }
+.nav-aktif { -fx-border-color: -aksen; -fx-border-width: 2.5; }
+.kotak-legenda { -fx-min-width: 12; -fx-min-height: 12; -fx-max-width: 12; -fx-max-height: 12; -fx-background-radius: 4; }
+.legenda-terjawab { -fx-background-color: -sukses; }
+.legenda-kosong { -fx-background-color: -permukaan; -fx-border-color: -garis; -fx-border-radius: 4; }
+.legenda-aktif { -fx-background-color: transparent; -fx-border-color: -aksen; -fx-border-width: 2; -fx-border-radius: 4; }
+
+/* ---------- Hasil ---------- */
+.skor-besar { -fx-font-size: 60px; -fx-font-weight: bold; -fx-text-fill: linear-gradient(to right, -aksen, -aksen-2); }
+.lulus { -fx-text-fill: -sukses; }
+.tidak-lulus { -fx-text-fill: -bahaya; }
+.status-kelulusan { -fx-font-size: 20px; -fx-font-weight: bold; }
+
+/* ---------- Dialog ---------- */
+.dialog-pane { -fx-background-color: -permukaan; -fx-padding: 8; }
+.dialog-pane > .content.label { -fx-text-fill: -teks; -fx-font-size: 14px; -fx-padding: 12 8; }
+.dialog-pane .button-bar .button { -fx-background-color: -gradien-aksen; -fx-text-fill: white; }
+.dialog-pane .button-bar .button:default { -fx-background-color: -gradien-aksen; }
+.dialog-pane .button-bar .button.cancel-button, .dialog-pane .button-bar .button:cancel {
+    -fx-background-color: -kaca-kuat; -fx-text-fill: -teks; -fx-border-color: -garis;
+}
+
+/* ---------- Tooltip ---------- */
+.tooltip { -fx-background-color: #0f1b2e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 12px; }
