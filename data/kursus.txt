@@ -79,9 +79,9 @@ NAMA=Bahasa Indonesia
 PENGAJAR=Sri Wahyuni, S.Pd.
 DESKRIPSI=Kata baku dan kalimat efektif sesuai PUEBI.
 [BAB] Kata Baku
-TEKS|bin-01|Mengenal Kata Baku|materi/bin/01-kata-baku.md
+TEKS|bin-01|Mengenal Kata Baku|materi/bahasaindo/01-kata-baku.md
 [BAB] Kalimat Efektif
-TEKS|bin-02|Ciri Kalimat Efektif|materi/bin/02-kalimat-efektif.md
+TEKS|bin-02|Ciri Kalimat Efektif|materi/bahasaindo/02-kalimat-efektif.md
 [BAB] Evaluasi
 UJIAN|bin-uji|Ujian Bahasa Indonesia|BIN-01
 [END]
