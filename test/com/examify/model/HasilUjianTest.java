@@ -147,4 +147,32 @@ class HasilUjianTest {
         assertEquals(1, rekap.size());
         assertEquals(90.0, rekap.get(siswa));
     }
+
+    @Test
+    void tandaiSoalRaguRaguBisaDiToggle() {
+        assertFalse(hasil.isDitandai(1));
+        assertEquals(0, hasil.getJumlahDitandai());
+
+        hasil.setDitandai(1, true);
+        assertTrue(hasil.isDitandai(1));
+        assertEquals(1, hasil.getJumlahDitandai());
+
+        hasil.toggleTandai(1);
+        assertFalse(hasil.isDitandai(1));
+        assertEquals(0, hasil.getJumlahDitandai());
+
+        hasil.toggleTandai(2);
+        assertTrue(hasil.isDitandai(2));
+        assertEquals(1, hasil.getJumlahDitandai());
+    }
+
+    @Test
+    void soalDitandaiTidakBisaDiubahSetelahSelesai() {
+        hasil.setDitandai(1, true);
+        hasil.finalisasi(ModeSubmit.MANUAL);
+        hasil.setDitandai(1, false);
+        assertTrue(hasil.isDitandai(1));
+        hasil.toggleTandai(2);
+        assertFalse(hasil.isDitandai(2));
+    }
 }

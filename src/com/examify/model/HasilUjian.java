@@ -10,7 +10,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /** Lembar jawaban satu siswa pada satu ujian, sekaligus penilaiannya. */
 public class HasilUjian implements Gradable, Comparable<HasilUjian> {
@@ -19,6 +22,7 @@ public class HasilUjian implements Gradable, Comparable<HasilUjian> {
     private final Ujian ujian;
     private final Clock clock;
     private final Map<Integer, String> jawaban = new LinkedHashMap<>();
+    private final Set<Integer> soalDitandai = new LinkedHashSet<>();
     private final LocalDateTime waktuMulai;
     private final LocalDateTime batasWaktu;
 
@@ -51,6 +55,36 @@ public class HasilUjian implements Gradable, Comparable<HasilUjian> {
             throw new JawabanKosongException(idSoal);
         }
         jawaban.put(idSoal, jwb.trim());
+    }
+
+    public void setDitandai(int idSoal, boolean ditandai) {
+        if (status == StatusUjian.BERLANGSUNG) {
+            if (ditandai) {
+                soalDitandai.add(idSoal);
+            } else {
+                soalDitandai.remove(idSoal);
+            }
+        }
+    }
+
+    public void toggleTandai(int idSoal) {
+        if (status == StatusUjian.BERLANGSUNG) {
+            if (!soalDitandai.add(idSoal)) {
+                soalDitandai.remove(idSoal);
+            }
+        }
+    }
+
+    public boolean isDitandai(int idSoal) {
+        return soalDitandai.contains(idSoal);
+    }
+
+    public int getJumlahDitandai() {
+        return soalDitandai.size();
+    }
+
+    public Set<Integer> getSoalDitandai() {
+        return Collections.unmodifiableSet(soalDitandai);
     }
 
     public void hapusJawaban(int idSoal) {
