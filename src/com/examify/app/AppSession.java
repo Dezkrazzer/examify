@@ -1,5 +1,6 @@
 package com.examify.app;
 
+import com.examify.model.Guru;
 import com.examify.model.HasilUjian;
 import com.examify.model.Kursus;
 import com.examify.model.Materi;
@@ -14,7 +15,7 @@ import com.examify.service.UjianService;
 import com.examify.thread.UjianTimer;
 import javafx.application.HostServices;
 
-/** State sesi aplikasi (singleton): service, siswa yang login, serta kursus/ujian yang sedang aktif. */
+/** State sesi aplikasi (singleton): service, siswa/guru yang login, serta kursus/ujian yang sedang aktif. */
 public final class AppSession {
 
     private static final AppSession INSTANCE = new AppSession();
@@ -28,6 +29,7 @@ public final class AppSession {
     private HostServices hostServices;
 
     private Siswa siswaAktif;
+    private Guru guruAktif;
     private Kursus kursusAktif;
     private Materi materiFokus; // dibuka kembali saat kembali ke halaman kursus
     private Ujian ujianAktif;
@@ -71,6 +73,7 @@ public final class AppSession {
         kursusAktif = null;
         materiFokus = null;
         siswaAktif = null;
+        guruAktif = null;
     }
 
     public void hentikanTimer() {
@@ -81,7 +84,27 @@ public final class AppSession {
     }
 
     public boolean isLogin() {
+        return siswaAktif != null || guruAktif != null;
+    }
+
+    public boolean isGuru() {
+        return guruAktif != null;
+    }
+
+    public boolean isSiswa() {
         return siswaAktif != null;
+    }
+
+    public String getNamaPengguna() {
+        if (guruAktif != null) return guruAktif.getNama();
+        if (siswaAktif != null) return siswaAktif.getNama();
+        return "";
+    }
+
+    public String getIdentitasPengguna() {
+        if (guruAktif != null) return "Guru • NIP " + guruAktif.getNip();
+        if (siswaAktif != null) return siswaAktif.getNis() + " - " + siswaAktif.getKelas();
+        return "";
     }
 
     public AuthService getAuthService() {
@@ -114,6 +137,20 @@ public final class AppSession {
 
     public void setSiswaAktif(Siswa siswaAktif) {
         this.siswaAktif = siswaAktif;
+        if (siswaAktif != null) {
+            this.guruAktif = null;
+        }
+    }
+
+    public Guru getGuruAktif() {
+        return guruAktif;
+    }
+
+    public void setGuruAktif(Guru guruAktif) {
+        this.guruAktif = guruAktif;
+        if (guruAktif != null) {
+            this.siswaAktif = null;
+        }
     }
 
     public Kursus getKursusAktif() {

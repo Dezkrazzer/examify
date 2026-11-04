@@ -2,14 +2,18 @@ package com.examify.app;
 
 import com.examify.exception.FormatDataException;
 import com.examify.io.BankSoalReader;
+import com.examify.io.BankSoalWriter;
 import com.examify.io.DataReader;
+import com.examify.io.GuruReader;
 import com.examify.io.KursusReader;
+import com.examify.io.KursusWriter;
 import com.examify.io.ProgresBelajarReader;
 import com.examify.io.ProgresBelajarWriter;
 import com.examify.io.RekapNilaiReader;
 import com.examify.io.RekapNilaiWriter;
 import com.examify.io.SertifikatWriter;
 import com.examify.io.SiswaReader;
+import com.examify.model.Guru;
 import com.examify.model.Siswa;
 import com.examify.model.Ujian;
 import com.examify.service.AuthService;
@@ -28,6 +32,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
+import java.time.Clock;
 import java.util.List;
 
 /** Entry point JavaFX: memuat font dan data, menyiapkan service, lalu menampilkan landing page. */
@@ -44,16 +49,20 @@ public class MainApp extends Application {
         try {
             AppConfig.siapkanFolderOutput();
             List<Siswa> daftarSiswa = muat(new SiswaReader(), AppConfig.FILE_SISWA);
+            List<Guru> daftarGuru = muat(new GuruReader(), AppConfig.FILE_GURU);
             List<Ujian> daftarUjian = muat(new BankSoalReader(), AppConfig.FILE_BANK_SOAL);
             var rekapService = new RekapService(new RekapNilaiWriter(AppConfig.FILE_REKAP),
                     muat(new RekapNilaiReader(), AppConfig.FILE_REKAP));
-            var ujianService = new UjianService(daftarUjian, rekapService);
+            var bankSoalWriter = new BankSoalWriter();
+            var ujianService = new UjianService(daftarUjian, rekapService, Clock.systemDefaultZone(),
+                    bankSoalWriter, AppConfig.FILE_BANK_SOAL);
+            var kursusWriter = new KursusWriter(AppConfig.DIR_DATA);
             var kursusService = new KursusService(
-                    muat(new KursusReader(AppConfig.DIR_DATA), AppConfig.FILE_KURSUS), ujianService);
+                    muat(new KursusReader(AppConfig.DIR_DATA), AppConfig.FILE_KURSUS), ujianService, kursusWriter, AppConfig.FILE_KURSUS);
             var progresService = new ProgresBelajarService(new ProgresBelajarWriter(AppConfig.FILE_PROGRES),
                     muat(new ProgresBelajarReader(), AppConfig.FILE_PROGRES), kursusService, rekapService);
             AppSession.getInstance().pasangService(
-                    new AuthService(daftarSiswa),
+                    new AuthService(daftarSiswa, daftarGuru),
                     ujianService,
                     rekapService,
                     new SertifikatService(new SertifikatWriter(AppConfig.DIR_SERTIFIKAT)),

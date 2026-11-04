@@ -85,6 +85,16 @@ public class Ujian {
         return kkm;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public Ujian denganSoalDiacak() {
+        List<Soal> acak = new ArrayList<>(daftarSoal);
+        Collections.shuffle(acak);
+        return new Ujian(kodeUjian, mataPelajaran, token, durasiMenit, kkm, acak, bolehUlang);
+    }
+
     public boolean isBolehUlang() {
         return bolehUlang;
     }

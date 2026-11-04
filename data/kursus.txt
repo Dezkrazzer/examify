@@ -1,12 +1,5 @@
 # =====================================================================
-# Examify - Kursus E-Learning v1.0               Encoding: UTF-8
-# Blok:  [KURSUS]  ->  KODE/NAMA/PENGAJAR/DESKRIPSI  ->  [BAB] Judul ...  ->  [END]
-# Materi (di bawah [BAB]):
-#   TEKS|id|judul|file.md      bacaan Markdown, path relatif ke folder data/
-#   LINK|id|judul|https://...  tautan video/slide/web
-#   PDF|id|judul|file.pdf      dokumen PDF lokal, path relatif ke folder data/
-#   UJIAN|id|judul|KODE-UJIAN  ujian dari bank_soal.txt
-# ID materi harus unik di dalam satu kursus.
+# Examify - Kursus E-Learning               Encoding: UTF-8
 # =====================================================================
 
 [KURSUS]
@@ -84,6 +77,7 @@ TEKS|bin-01|Mengenal Kata Baku|materi/bahasaindo/01-kata-baku.md
 TEKS|bin-02|Ciri Kalimat Efektif|materi/bahasaindo/02-kalimat-efektif.md
 [BAB] Evaluasi
 UJIAN|bin-uji|Ujian Bahasa Indonesia|BIN-01
+[BAB] Kalimat Majemuk
 [END]
 
 [KURSUS]
@@ -108,3 +102,4 @@ DESKRIPSI=Ujian singkat 1 menit untuk mencoba fitur auto-submit. Boleh diulang.
 TEKS|uji-01|Panduan Mengikuti Ujian|materi/uji/01-panduan.md
 UJIAN|uji-coba|Ujian Coba 1 Menit|UJI-01
 [END]
+

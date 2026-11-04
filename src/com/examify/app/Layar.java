@@ -12,7 +12,8 @@ public enum Layar {
     PROFIL("profil.fxml", "Profil", true),
     TOKEN_GATE("token_gate.fxml", "Token Ujian", false),
     CBT_ROOM("cbt_room.fxml", "Ruang Ujian", false),
-    RESULT("result.fxml", "Hasil Ujian", false);
+    RESULT("result.fxml", "Hasil Ujian", false),
+    EDITOR_UJIAN("editor_ujian.fxml", "Editor Ujian", true);
 
     static final String FOLDER_FXML = "/com/examify/fxml/";
 

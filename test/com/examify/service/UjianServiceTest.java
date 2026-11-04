@@ -140,4 +140,15 @@ class UjianServiceTest {
         assertTrue(auth.login("2410001", "0000").isEmpty());
         assertTrue(auth.login("9999999", "1234").isEmpty());
     }
+
+    @Test
+    void mulaiUjianMengacakUrutanSoal() {
+        List<com.examify.model.Soal> banyakSoal = java.util.stream.IntStream.rangeClosed(1, 20)
+                .mapToObj(i -> new SoalTrueFalse(i, "Soal " + i, 5, 'T'))
+                .map(s -> (com.examify.model.Soal) s)
+                .toList();
+        Ujian ujianBanyak = new Ujian("U-20", "Mapel", "TOKEN", 30, 75, banyakSoal);
+        HasilUjian hasil1 = service.mulaiUjian(siswa, ujianBanyak);
+        assertEquals(20, hasil1.getUjian().getJumlahSoal());
+    }
 }

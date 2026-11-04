@@ -3,6 +3,8 @@ package com.examify.controller;
 import com.examify.app.AppSession;
 import com.examify.app.Layar;
 import com.examify.app.SceneRouter;
+import com.examify.model.Guru;
+import com.examify.model.Siswa;
 import com.examify.utils.StringUtil;
 import com.examify.view.AnimasiUtil;
 import javafx.application.Platform;
@@ -14,9 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.VBox;
 
+import java.util.Optional;
+
 public class LoginController {
 
-    private static final String POLA_DIGIT = "\\d{0,10}";
+    private static final String POLA_IDENTITAS = "[a-zA-Z0-9]{0,20}";
 
     @FXML private VBox vbKartu;
     @FXML private TextField tfNis;
@@ -30,23 +34,36 @@ public class LoginController {
     private void initialize() {
         TemaUtil.pasang(btnTema, false);
         tfNis.setTextFormatter(new TextFormatter<String>(ubah ->
-                ubah.getControlNewText().matches(POLA_DIGIT) ? ubah : null));
+                ubah.getControlNewText().matches(POLA_IDENTITAS) ? ubah : null));
         lblError.setText("");
-        Platform.runLater(tfNis::requestFocus); // fokus awal ke NIS, bukan tombol tema
+        Platform.runLater(tfNis::requestFocus);
     }
 
     @FXML
     private void handleMasuk() {
-        String nis = tfNis.getText();
+        String identitas = tfNis.getText();
         String pin = pfPin.getText();
-        if (StringUtil.isKosong(nis) || StringUtil.isKosong(pin)) {
-            tampilkanError("NIS dan PIN wajib diisi.");
+        if (StringUtil.isKosong(identitas) || StringUtil.isKosong(pin)) {
+            tampilkanError("Nomor Identitas dan PIN wajib diisi.");
             return;
         }
-        session.getAuthService().login(nis, pin).ifPresentOrElse(siswa -> {
-            session.setSiswaAktif(siswa);
+
+        var authService = session.getAuthService();
+        Optional<Guru> optGuru = authService.loginGuru(identitas, pin);
+        if (optGuru.isPresent()) {
+            session.setGuruAktif(optGuru.get());
             SceneRouter.pindah(Layar.KURSUS_SAYA);
-        }, () -> tampilkanError("NIS atau PIN salah."));
+            return;
+        }
+
+        Optional<Siswa> optSiswa = authService.loginSiswa(identitas, pin);
+        if (optSiswa.isPresent()) {
+            session.setSiswaAktif(optSiswa.get());
+            SceneRouter.pindah(Layar.KURSUS_SAYA);
+            return;
+        }
+
+        tampilkanError("Nomor Identitas atau PIN salah.");
     }
 
     private void tampilkanError(String pesan) {

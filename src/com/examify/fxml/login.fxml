@@ -22,7 +22,7 @@
         <Button fx:id="btnTema" styleClass="tombol-ikon"/>
     </HBox>
 
-    <VBox fx:id="vbKartu" styleClass="kaca" spacing="14" maxWidth="420" maxHeight="-Infinity">
+    <VBox fx:id="vbKartu" styleClass="kaca" spacing="14" maxWidth="440" maxHeight="-Infinity">
         <padding><Insets top="36" right="36" bottom="32" left="36"/></padding>
         <HBox spacing="10" alignment="CENTER_LEFT">
             <StackPane styleClass="logo-ikon"><IkonView ikon="BUKU" ukuran="18"/></StackPane>
@@ -31,10 +31,10 @@
         <VBox spacing="4">
             <padding><Insets top="10"/></padding>
             <Label text="Selamat datang kembali" styleClass="judul-halaman"/>
-            <Label text="Masuk dengan NIS dan PIN yang diberikan sekolah." styleClass="teks-redup" wrapText="true"/>
+            <Label text="Masuk dengan Nomor Identitas dan PIN Anda." styleClass="teks-redup" wrapText="true"/>
         </VBox>
-        <Label text="NIS" styleClass="teks-kecil"/>
-        <TextField fx:id="tfNis" promptText="Nomor Induk Siswa" onAction="#handleMasuk"/>
+        <Label text="Nomor Identitas" styleClass="teks-kecil"/>
+        <TextField fx:id="tfNis" promptText="Nomor Identitas (NIS Siswa / NIP Guru)" onAction="#handleMasuk"/>
         <Label text="PIN" styleClass="teks-kecil"/>
         <PasswordField fx:id="pfPin" promptText="4-6 digit PIN" onAction="#handleMasuk"/>
         <Label fx:id="lblError" styleClass="label-error" wrapText="true"/>
@@ -42,6 +42,6 @@
                 styleClass="tombol-utama, tombol-besar" maxWidth="Infinity">
             <graphic><IkonView ikon="PANAH_KANAN" ukuran="18"/></graphic>
         </Button>
-        <Label text="Akun demo: NIS 2410001 - PIN 1234" styleClass="teks-kecil"/>
+        <Label text="Akun demo: Siswa (2410001 - PIN 1234) | Guru (19850101 - PIN 1234)" styleClass="teks-kecil"/>
     </VBox>
 </StackPane>

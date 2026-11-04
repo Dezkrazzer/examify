@@ -2,6 +2,7 @@ package com.examify.service;
 
 import com.examify.exception.TimeOutException;
 import com.examify.exception.TokenTidakValidException;
+import com.examify.io.BankSoalWriter;
 import com.examify.model.HasilUjian;
 import com.examify.model.ModeSubmit;
 import com.examify.model.Siswa;
@@ -9,6 +10,7 @@ import com.examify.model.Ujian;
 import com.examify.utils.AppConfig;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -26,15 +28,24 @@ public class UjianService {
     private final Map<String, Instant> terkunciSampai = new HashMap<>();
     private final RekapService rekapService;
     private final Clock clock;
+    private final BankSoalWriter writer;
+    private final Path fileBankSoal;
 
     public UjianService(List<Ujian> daftarUjian, RekapService rekapService) {
-        this(daftarUjian, rekapService, Clock.systemDefaultZone());
+        this(daftarUjian, rekapService, Clock.systemDefaultZone(), null, null);
     }
 
     public UjianService(List<Ujian> daftarUjian, RekapService rekapService, Clock clock) {
+        this(daftarUjian, rekapService, clock, null, null);
+    }
+
+    public UjianService(List<Ujian> daftarUjian, RekapService rekapService, Clock clock,
+                        BankSoalWriter writer, Path fileBankSoal) {
         daftarUjian.forEach(ujian -> katalog.put(ujian.getKodeUjian(), ujian));
         this.rekapService = rekapService;
         this.clock = clock;
+        this.writer = writer;
+        this.fileBankSoal = fileBankSoal;
     }
 
     public List<String> getDaftarMapel() {
@@ -50,12 +61,36 @@ public class UjianService {
                 .toList();
     }
 
+    public List<Ujian> getDaftarUjian() {
+        return List.copyOf(katalog.values());
+    }
+
     public Optional<Ujian> cariUjian(String kodeUjian) {
+        if (kodeUjian == null) return Optional.empty();
         return Optional.ofNullable(katalog.get(kodeUjian.trim().toUpperCase()));
     }
 
     public int getJumlahUjian() {
         return katalog.size();
+    }
+
+    public synchronized void perbaruiUjian(Ujian ujian) throws IOException {
+        katalog.put(ujian.getKodeUjian(), ujian);
+        simpanKeFile();
+    }
+
+    public synchronized void tambahUjian(Ujian ujian) throws IOException {
+        if (katalog.containsKey(ujian.getKodeUjian())) {
+            throw new IllegalArgumentException("Kode ujian sudah ada: " + ujian.getKodeUjian());
+        }
+        katalog.put(ujian.getKodeUjian(), ujian);
+        simpanKeFile();
+    }
+
+    public synchronized void simpanKeFile() throws IOException {
+        if (writer != null && fileBankSoal != null) {
+            writer.tulis(fileBankSoal, getDaftarUjian());
+        }
     }
 
     /** Ujian boleh dimulai bila belum pernah dikerjakan, atau konfigurasinya ULANG=true. */
@@ -98,8 +133,9 @@ public class UjianService {
         terkunciSampai.remove(kunci);
     }
 
+    /** Memulai sesi ujian siswa dengan soal yang diacak. */
     public HasilUjian mulaiUjian(Siswa siswa, Ujian ujian) {
-        return new HasilUjian(siswa, ujian, clock);
+        return new HasilUjian(siswa, ujian.denganSoalDiacak(), clock);
     }
 
     /**
@@ -108,19 +144,17 @@ public class UjianService {
      */
     public HasilUjian selesaikan(HasilUjian hasil, ModeSubmit mode) throws TimeOutException, IOException {
         if (mode == ModeSubmit.MANUAL && hasil.isLewatBatasWaktu()) {
-            throw new TimeOutException(hasil.getUjian().getKodeUjian(), "Submit manual melewati batas waktu");
+            throw new TimeOutException(hasil.getUjian().getKodeUjian());
         }
-        return finalisasiDanCatat(hasil, mode);
-    }
-
-    public HasilUjian selesaikanPaksa(HasilUjian hasil) throws IOException {
-        return finalisasiDanCatat(hasil, ModeSubmit.AUTO_SUBMIT);
-    }
-
-    private HasilUjian finalisasiDanCatat(HasilUjian hasil, ModeSubmit mode) throws IOException {
-        if (hasil.finalisasi(mode)) { // idempoten: rekap tidak pernah tertulis dua kali
+        if (hasil.finalisasi(mode)) {
             rekapService.catat(hasil);
         }
         return hasil;
+    }
+
+    public void selesaikanPaksa(HasilUjian hasil) throws IOException {
+        if (hasil.finalisasi(ModeSubmit.AUTO_SUBMIT)) {
+            rekapService.catat(hasil);
+        }
     }
 }

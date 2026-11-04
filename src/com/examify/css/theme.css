@@ -279,6 +279,43 @@
 .kartu-kursus { -fx-padding: 12 12 16 12; -fx-cursor: hand; }
 .kartu-kursus:hover { -fx-border-color: -aksen; }
 
+/* ---------- Tab navigasi kursus (Materi & Orang) ---------- */
+.tab-nav-bar {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 999;
+    -fx-border-color: -garis;
+    -fx-border-radius: 999;
+    -fx-padding: 4 6;
+}
+.tab-nav-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: -teks-redup;
+    -fx-font-weight: 600;
+    -fx-font-size: 13.5px;
+    -fx-background-radius: 999;
+    -fx-padding: 8 22;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+}
+.tab-nav-item .ikon {
+    -fx-stroke: -teks-redup;
+}
+.tab-nav-item:hover {
+    -fx-text-fill: -teks;
+    -fx-background-color: -garis;
+}
+.tab-nav-item:hover .ikon {
+    -fx-stroke: -teks;
+}
+.tab-nav-item:selected {
+    -fx-background-color: -gradien-aksen;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(26, 163, 232, 0.35), 14, 0, 0, 4);
+}
+.tab-nav-item:selected .ikon {
+    -fx-stroke: white;
+}
+
 /* ---------- Detail kursus ---------- */
 .daftar-bab .item-bab {
     -fx-background-color: transparent;
@@ -373,6 +410,24 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-table-cell-border-color: transparent;
+}
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -teks;
+    -fx-padding: 8 10;
+    -fx-background-radius: 8;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+}
+.list-view .list-cell:filled:hover {
+    -fx-background-color: -garis;
+}
+.list-view .list-cell:filled:selected {
+    -fx-background-color: rgba(26, 163, 232, 0.18);
+    -fx-border-color: -aksen;
+    -fx-text-fill: -aksen;
+    -fx-font-weight: bold;
 }
 .table-view .column-header-background { -fx-background-color: transparent; }
 .table-view .column-header, .table-view .filler {
