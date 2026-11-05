@@ -22,6 +22,10 @@ public class SoalIsian extends Soal {
         }
     }
 
+    public Set<String> getKunciJawaban() {
+        return kunciJawaban;
+    }
+
     @Override
     public boolean evaluasiJawaban(String inputJawaban) {
         return kunciJawaban.contains(normalisasiIsian(inputJawaban));

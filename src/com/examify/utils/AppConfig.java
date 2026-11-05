@@ -13,6 +13,7 @@ public final class AppConfig {
     public static final Path DIR_DATA = Path.of("data");
     public static final Path FILE_BANK_SOAL = DIR_DATA.resolve("bank_soal.txt");
     public static final Path FILE_SISWA = DIR_DATA.resolve("siswa.txt");
+    public static final Path FILE_GURU = DIR_DATA.resolve("guru.txt");
     public static final Path FILE_KURSUS = DIR_DATA.resolve("kursus.txt");
 
     public static final Path DIR_OUTPUT = Path.of("output");

@@ -2,6 +2,7 @@
 
 <?import com.examify.view.IkonView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -19,33 +20,34 @@
 
         <VBox spacing="4">
             <Label fx:id="lblSapaan" styleClass="judul-halaman"/>
-            <Label text="Lanjutkan belajar dari kursus yang sedang kamu ikuti." styleClass="subjudul"/>
+            <Label fx:id="lblSubjudul" text="Lanjutkan belajar dari kursus yang sedang kamu ikuti." styleClass="subjudul"/>
         </VBox>
 
         <HBox spacing="18">
             <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                 <StackPane styleClass="ikon-fitur"><IkonView ikon="BUKU" ukuran="22"/></StackPane>
-                <VBox><Label fx:id="lblJumlahKursus" styleClass="angka-tile"/><Label text="Kursus diikuti" styleClass="teks-redup"/></VBox>
+                <VBox><Label fx:id="lblJumlahKursus" styleClass="angka-tile"/><Label fx:id="lblTile1" text="Kursus diikuti" styleClass="teks-redup"/></VBox>
             </HBox>
             <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                 <StackPane styleClass="ikon-fitur"><IkonView ikon="CENTANG" ukuran="22"/></StackPane>
-                <VBox><Label fx:id="lblMateriSelesai" styleClass="angka-tile"/><Label text="Materi selesai" styleClass="teks-redup"/></VBox>
+                <VBox><Label fx:id="lblMateriSelesai" styleClass="angka-tile"/><Label fx:id="lblTile2" text="Materi selesai" styleClass="teks-redup"/></VBox>
             </HBox>
             <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                 <StackPane styleClass="ikon-fitur"><IkonView ikon="UJIAN" ukuran="22"/></StackPane>
-                <VBox><Label fx:id="lblUjianDikerjakan" styleClass="angka-tile"/><Label text="Ujian dikerjakan" styleClass="teks-redup"/></VBox>
+                <VBox><Label fx:id="lblUjianDikerjakan" styleClass="angka-tile"/><Label fx:id="lblTile3" text="Ujian dikerjakan" styleClass="teks-redup"/></VBox>
             </HBox>
         </HBox>
 
         <HBox spacing="12" alignment="CENTER_LEFT">
             <Label text="Kursus Saya" styleClass="judul-bagian"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <HBox styleClass="kotak-cari" alignment="CENTER_LEFT" spacing="6" prefWidth="280">
+            <HBox styleClass="kotak-cari" alignment="CENTER_LEFT" spacing="6" prefWidth="240">
                 <IkonView ikon="CARI" ukuran="16"/>
                 <TextField fx:id="tfCari" promptText="Cari kursus..." HBox.hgrow="ALWAYS"/>
             </HBox>
-            <ComboBox fx:id="cbFilter" prefWidth="170"/>
-            <ComboBox fx:id="cbUrut" prefWidth="190"/>
+            <ComboBox fx:id="cbFilter" prefWidth="160"/>
+            <ComboBox fx:id="cbUrut" prefWidth="180"/>
+            <Button fx:id="btnAksiKhusus" onAction="#handleAksiKhusus" styleClass="tombol-utama"/>
         </HBox>
 
         <FlowPane fx:id="fpKursus" hgap="20" vgap="20"/>

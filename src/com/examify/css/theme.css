@@ -20,6 +20,8 @@
     -sukses-latar: rgba(22, 163, 74, 0.12);
     -bahaya: #e5484d;
     -bahaya-latar: rgba(229, 72, 77, 0.12);
+    -ragu: #f59e0b;
+    -ragu-latar: rgba(245, 158, 11, 0.15);
     -bayangan: rgba(16, 42, 80, 0.13);
     -blob-1: #7cc8ff;
     -blob-2: #b9a8ff;
@@ -142,6 +144,21 @@
 }
 .tombol-sekunder:hover { -fx-border-color: -aksen; -fx-text-fill: -aksen; }
 .tombol-sekunder:hover .ikon { -fx-stroke: -aksen; }
+.tombol-ragu {
+    -fx-background-color: -kaca-kuat;
+    -fx-border-color: -garis;
+    -fx-text-fill: -teks;
+}
+.tombol-ragu .ikon { -fx-stroke: -teks-redup; }
+.tombol-ragu:hover { -fx-border-color: -ragu; -fx-text-fill: -ragu; }
+.tombol-ragu:hover .ikon { -fx-stroke: -ragu; }
+.tombol-ragu:selected {
+    -fx-background-color: -ragu;
+    -fx-border-color: derive(-ragu, -15%);
+    -fx-text-fill: #0f172a;
+    -fx-font-weight: bold;
+}
+.tombol-ragu:selected .ikon { -fx-stroke: #0f172a; }
 .tombol-hantu { -fx-background-color: transparent; -fx-text-fill: -teks-redup; }
 .tombol-hantu:hover { -fx-background-color: -garis; -fx-text-fill: -teks; }
 .tombol-ikon { -fx-background-color: -kaca-kuat; -fx-background-radius: 999; -fx-padding: 9; -fx-border-color: -garis; -fx-border-radius: 999; }
@@ -262,6 +279,43 @@
 .kartu-kursus { -fx-padding: 12 12 16 12; -fx-cursor: hand; }
 .kartu-kursus:hover { -fx-border-color: -aksen; }
 
+/* ---------- Tab navigasi kursus (Materi & Orang) ---------- */
+.tab-nav-bar {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 999;
+    -fx-border-color: -garis;
+    -fx-border-radius: 999;
+    -fx-padding: 4 6;
+}
+.tab-nav-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: -teks-redup;
+    -fx-font-weight: 600;
+    -fx-font-size: 13.5px;
+    -fx-background-radius: 999;
+    -fx-padding: 8 22;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 8;
+}
+.tab-nav-item .ikon {
+    -fx-stroke: -teks-redup;
+}
+.tab-nav-item:hover {
+    -fx-text-fill: -teks;
+    -fx-background-color: -garis;
+}
+.tab-nav-item:hover .ikon {
+    -fx-stroke: -teks;
+}
+.tab-nav-item:selected {
+    -fx-background-color: -gradien-aksen;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(26, 163, 232, 0.35), 14, 0, 0, 4);
+}
+.tab-nav-item:selected .ikon {
+    -fx-stroke: white;
+}
+
 /* ---------- Detail kursus ---------- */
 .daftar-bab .item-bab {
     -fx-background-color: transparent;
@@ -357,6 +411,24 @@
     -fx-border-color: transparent;
     -fx-table-cell-border-color: transparent;
 }
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -teks;
+    -fx-padding: 8 10;
+    -fx-background-radius: 8;
+    -fx-font-size: 13px;
+    -fx-border-color: transparent;
+    -fx-border-width: 1;
+}
+.list-view .list-cell:filled:hover {
+    -fx-background-color: -garis;
+}
+.list-view .list-cell:filled:selected {
+    -fx-background-color: rgba(26, 163, 232, 0.18);
+    -fx-border-color: -aksen;
+    -fx-text-fill: -aksen;
+    -fx-font-weight: bold;
+}
 .table-view .column-header-background { -fx-background-color: transparent; }
 .table-view .column-header, .table-view .filler {
     -fx-background-color: transparent;
@@ -415,9 +487,11 @@
 }
 .nav-kosong { -fx-background-color: -kaca-kuat; -fx-border-color: -garis; -fx-text-fill: -teks; }
 .nav-terjawab { -fx-background-color: -sukses; -fx-text-fill: white; -fx-border-color: transparent; }
+.nav-ragu { -fx-background-color: -ragu; -fx-text-fill: #0f172a; -fx-font-weight: bold; -fx-border-color: transparent; }
 .nav-aktif { -fx-border-color: -aksen; -fx-border-width: 2.5; }
 .kotak-legenda { -fx-min-width: 12; -fx-min-height: 12; -fx-max-width: 12; -fx-max-height: 12; -fx-background-radius: 4; }
 .legenda-terjawab { -fx-background-color: -sukses; }
+.legenda-ragu { -fx-background-color: -ragu; }
 .legenda-kosong { -fx-background-color: -permukaan; -fx-border-color: -garis; -fx-border-radius: 4; }
 .legenda-aktif { -fx-background-color: transparent; -fx-border-color: -aksen; -fx-border-width: 2; -fx-border-radius: 4; }
 

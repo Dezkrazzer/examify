@@ -24,6 +24,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.WindowEvent;
@@ -34,6 +35,7 @@ public class CbtRoomController implements TimerListener {
 
     private static final String NAV_TERJAWAB = "nav-terjawab";
     private static final String NAV_KOSONG = "nav-kosong";
+    private static final String NAV_RAGU = "nav-ragu";
     private static final String NAV_AKTIF = "nav-aktif";
     private static final String TIMER_KRITIS = "timer-kritis";
 
@@ -51,6 +53,8 @@ public class CbtRoomController implements TimerListener {
     @FXML private ProgressBar pbProgres;
     @FXML private Button btnSebelumnya;
     @FXML private Button btnBerikutnya;
+    @FXML private Button btnSelesai;
+    @FXML private ToggleButton tbRagu;
 
     private final AppSession session = AppSession.getInstance();
     private final UjianService ujianService = session.getUjianService();
@@ -104,7 +108,11 @@ public class CbtRoomController implements TimerListener {
         vbInput.getChildren().setAll(input);
         input.requestFocus(); // siswa bisa langsung mengetik jawaban isian
         btnSebelumnya.setDisable(indeks == 0);
-        btnBerikutnya.setDisable(indeks == ujian.getJumlahSoal() - 1);
+        boolean nomorTerakhir = (indeks == ujian.getJumlahSoal() - 1);
+        btnBerikutnya.setDisable(nomorTerakhir);
+        btnSelesai.setVisible(nomorTerakhir);
+        btnSelesai.setManaged(nomorTerakhir);
+        tbRagu.setSelected(hasil.isDitandai(soal.getIdSoal()));
         perbaruiNavigasi();
     }
 
@@ -127,17 +135,27 @@ public class CbtRoomController implements TimerListener {
     private void perbaruiNavigasi() {
         for (int i = 0; i < fpNavigasi.getChildren().size(); i++) {
             Node tombol = fpNavigasi.getChildren().get(i);
-            boolean terjawab = hasil.isTerjawab(ujian.getSoalBerdasarkanIndeks(i).getIdSoal());
-            tombol.getStyleClass().removeAll(NAV_TERJAWAB, NAV_KOSONG, NAV_AKTIF);
-            tombol.getStyleClass().add(terjawab ? NAV_TERJAWAB : NAV_KOSONG);
+            int idSoal = ujian.getSoalBerdasarkanIndeks(i).getIdSoal();
+            boolean ditandai = hasil.isDitandai(idSoal);
+            boolean terjawab = hasil.isTerjawab(idSoal);
+            tombol.getStyleClass().removeAll(NAV_TERJAWAB, NAV_KOSONG, NAV_RAGU, NAV_AKTIF);
+            if (ditandai) {
+                tombol.getStyleClass().add(NAV_RAGU);
+            } else if (terjawab) {
+                tombol.getStyleClass().add(NAV_TERJAWAB);
+            } else {
+                tombol.getStyleClass().add(NAV_KOSONG);
+            }
             if (i == indeksAktif) {
                 tombol.getStyleClass().add(NAV_AKTIF);
             }
         }
         float proporsi = hasil.getProporsiTerjawab();
         pbProgres.setProgress(proporsi);
-        lblProgres.setText(String.format("Progres %d/%d (%.0f%%)",
-                hasil.getJumlahTerjawab(), ujian.getJumlahSoal(), proporsi * 100));
+        int ragu = hasil.getJumlahDitandai();
+        String infoRagu = ragu > 0 ? " • " + ragu + " ragu" : "";
+        lblProgres.setText(String.format("Progres %d/%d (%.0f%%)%s",
+                hasil.getJumlahTerjawab(), ujian.getJumlahSoal(), proporsi * 100, infoRagu));
     }
 
     @FXML
@@ -151,6 +169,13 @@ public class CbtRoomController implements TimerListener {
     }
 
     @FXML
+    private void handleTandai() {
+        int idSoal = soalAktif().getIdSoal();
+        hasil.setDitandai(idSoal, tbRagu.isSelected());
+        perbaruiNavigasi();
+    }
+
+    @FXML
     private void handleKosongkan() {
         hasil.hapusJawaban(soalAktif().getIdSoal());
         tampilkanSoal(indeksAktif);
@@ -159,10 +184,24 @@ public class CbtRoomController implements TimerListener {
     @FXML
     private void handleSelesai() {
         int kosong = ujian.getJumlahSoal() - hasil.getJumlahTerjawab();
-        String pesan = kosong > 0
-                ? "Masih ada " + kosong + " soal yang belum dijawab. Yakin ingin mengakhiri ujian?"
-                : "Semua soal sudah dijawab. Kumpulkan jawaban sekarang?";
-        if (DialogUtil.konfirmasi(pesan)) {
+        int ragu = hasil.getJumlahDitandai();
+        StringBuilder sb = new StringBuilder();
+        if (kosong > 0 && ragu > 0) {
+            sb.append("Masih ada ").append(kosong).append(" soal belum dijawab dan ")
+                    .append(ragu).append(" soal ditandai ragu-ragu. ");
+        } else if (kosong > 0) {
+            sb.append("Masih ada ").append(kosong).append(" soal yang belum dijawab. ");
+        } else if (ragu > 0) {
+            sb.append("Semua soal sudah dijawab, namun masih ada ")
+                    .append(ragu).append(" soal ditandai ragu-ragu. ");
+        } else {
+            sb.append("Semua soal sudah dijawab. ");
+        }
+        sb.append("Kumpulkan jawaban sekarang?");
+
+
+
+        if (DialogUtil.konfirmasi(sb.toString())) {
             selesaikanUjian(ModeSubmit.MANUAL);
         }
     }

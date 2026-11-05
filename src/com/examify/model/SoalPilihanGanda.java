@@ -46,6 +46,10 @@ public class SoalPilihanGanda extends Soal {
     }
 
     /** @return daftar opsi yang tidak dapat diubah */
+    public char getKunciRaw() {
+        return kunciJawaban;
+    }
+
     public List<String> getOpsi() {
         return opsi;
     }

@@ -74,6 +74,10 @@ public class Kursus {
         return deskripsi;
     }
 
+    public Kursus denganDaftarBab(List<Bab> babBaru) {
+        return new Kursus(kode, nama, pengajar, deskripsi, babBaru);
+    }
+
     public List<Bab> getDaftarBab() {
         return daftarBab;
     }

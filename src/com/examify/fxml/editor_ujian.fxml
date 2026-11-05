@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.examify.view.IkonView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.examify.controller.EditorUjianController">
+    <top>
+        <VBox spacing="12">
+            <padding><Insets top="16" right="32" bottom="10" left="32"/></padding>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Button text="Kembali ke Kursus" onAction="#handleKembali" styleClass="tombol-hantu">
+                    <graphic><IkonView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+                </Button>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="lblHeaderUjian" styleClass="badge"/>
+            </HBox>
+
+            <HBox spacing="16" alignment="CENTER_LEFT">
+                <VBox spacing="2">
+                    <Label text="Editor Ujian &amp; Soal" styleClass="judul-halaman"/>
+                    <Label text="Kelola pertanyaan, jenis soal, opsi, dan kunci jawaban" styleClass="teks-redup"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <!-- Form Pengaturan Cepat Ujian -->
+                <HBox spacing="10" alignment="CENTER_LEFT" styleClass="kaca" style="-fx-padding: 8 14;">
+                    <VBox spacing="2">
+                        <Label text="Mapel:" styleClass="teks-kecil"/>
+                        <TextField fx:id="tfMapel" prefWidth="150" promptText="Nama Mapel"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="Durasi (mnt):" styleClass="teks-kecil"/>
+                        <TextField fx:id="tfDurasi" prefWidth="75" promptText="30"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="KKM:" styleClass="teks-kecil"/>
+                        <TextField fx:id="tfKkm" prefWidth="60" promptText="75"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="Token:" styleClass="teks-kecil"/>
+                        <TextField fx:id="tfToken" prefWidth="85" promptText="TOKEN6"/>
+                    </VBox>
+                </HBox>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <HBox spacing="18">
+            <padding><Insets top="4" right="32" bottom="20" left="32"/></padding>
+
+            <!-- Kolom Kiri: Daftar Soal -->
+            <VBox styleClass="kaca" spacing="10" prefWidth="290" minWidth="260" maxWidth="320">
+                <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="8">
+                    <Label fx:id="lblJumlahSoal" text="Daftar Soal" styleClass="judul-bagian" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button text="+ Tambah Soal" onAction="#handleTambahSoal" styleClass="tombol-utama">
+                        <graphic><IkonView ikon="DOKUMEN" ukuran="14"/></graphic>
+                    </Button>
+                </HBox>
+                <ListView fx:id="lvSoal" VBox.vgrow="ALWAYS"/>
+                <HBox spacing="8">
+                    <Button text="+ Tambah Soal" onAction="#handleTambahSoal" styleClass="tombol-sekunder" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                    <Button text="Hapus" onAction="#handleHapusSoal" styleClass="tombol-hantu"/>
+                </HBox>
+            </VBox>
+
+            <!-- Kolom Kanan: Form Edit Soal -->
+            <VBox styleClass="kaca" spacing="14" HBox.hgrow="ALWAYS">
+                <padding><Insets top="18" right="24" bottom="18" left="24"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label fx:id="lblNomorSoal" styleClass="judul-bagian"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="Bobot Nilai:" styleClass="teks-kecil"/>
+                    <TextField fx:id="tfBobot" prefWidth="70" promptText="10"/>
+                </HBox>
+
+                <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" hbarPolicy="NEVER">
+                    <VBox spacing="14">
+                        <padding><Insets right="8"/></padding>
+                        <Label text="Pertanyaan / Pernyataan Soal:" styleClass="teks-kecil"/>
+                        <TextArea fx:id="taPertanyaan" prefRowCount="4" wrapText="true" promptText="Ketik pertanyaan di sini..."/>
+
+                        <HBox spacing="12" alignment="CENTER_LEFT">
+                            <Label text="Jenis Soal:" styleClass="teks-kecil"/>
+                            <ComboBox fx:id="cbJenisSoal" prefWidth="230"/>
+                        </HBox>
+
+                        <VBox fx:id="vbAreaKunci" spacing="12"/>
+                    </VBox>
+                </ScrollPane>
+
+                <HBox spacing="12" alignment="CENTER_RIGHT">
+                    <Button text="Batal &amp; Kembali" onAction="#handleKembali" styleClass="tombol-hantu"/>
+                    <Button text="Simpan Perubahan Ujian" onAction="#handleSimpan" styleClass="tombol-utama, tombol-besar">
+                        <graphic><IkonView ikon="CENTANG" ukuran="16"/></graphic>
+                    </Button>
+                </HBox>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>

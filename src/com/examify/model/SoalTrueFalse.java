@@ -21,6 +21,10 @@ public class SoalTrueFalse extends Soal {
         this.kunciJawaban = kunciKapital;
     }
 
+    public char getKunciRaw() {
+        return kunciJawaban;
+    }
+
     @Override
     public boolean evaluasiJawaban(String inputJawaban) {
         String jawaban = normalisasi(inputJawaban);

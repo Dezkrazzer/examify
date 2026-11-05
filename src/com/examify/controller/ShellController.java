@@ -3,6 +3,7 @@ package com.examify.controller;
 import com.examify.app.AppSession;
 import com.examify.app.Layar;
 import com.examify.app.SceneRouter;
+import com.examify.model.Guru;
 import com.examify.model.Siswa;
 import com.examify.utils.FormatUtil;
 import javafx.beans.value.ChangeListener;
@@ -38,10 +39,19 @@ public class ShellController {
         tbProfil.setToggleGroup(grup);
         SceneRouter.layarAktifProperty().addListener(new WeakChangeListener<>(listenerLayar));
 
-        Siswa siswa = session.getSiswaAktif();
-        lblAvatar.setText(FormatUtil.inisial(siswa.getNama()));
-        lblNama.setText(siswa.getNama());
-        lblNis.setText(siswa.getNis() + " - " + siswa.getKelas());
+        if (session.isGuru()) {
+            Guru guru = session.getGuruAktif();
+            lblAvatar.setText(FormatUtil.inisial(guru.getNama()));
+            lblNama.setText(guru.getNama());
+            lblNis.setText("Guru • NIP " + guru.getNip());
+            tbProfil.setVisible(false);
+            tbProfil.setManaged(false);
+        } else if (session.isSiswa()) {
+            Siswa siswa = session.getSiswaAktif();
+            lblAvatar.setText(FormatUtil.inisial(siswa.getNama()));
+            lblNama.setText(siswa.getNama());
+            lblNis.setText(siswa.getNis() + " - " + siswa.getKelas());
+        }
     }
 
     private void sorotMenu(Layar layar) {
@@ -61,7 +71,8 @@ public class ShellController {
 
     @FXML
     private void handleKeluar() {
-        if (DialogUtil.konfirmasi("Keluar dari akun " + session.getSiswaAktif().getNama() + "?")) {
+        String nama = session.getNamaPengguna();
+        if (DialogUtil.konfirmasi("Keluar dari akun " + nama + "?")) {
             session.logout();
             SceneRouter.pindah(Layar.LANDING);
         }
