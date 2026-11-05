@@ -71,8 +71,8 @@ public class ShellController {
     private void sorotMenu(Layar layar) {
         tbKursus.setSelected(layar == Layar.KURSUS_SAYA || layar == Layar.KURSUS_DETAIL);
         tbBankSoal.setSelected(layar == Layar.BANK_SOAL || layar == Layar.EDITOR_UJIAN);
-        tbSiswa.setSelected(layar == Layar.GURU_SISWA);
-        tbProfil.setSelected(layar == Layar.PROFIL);
+        tbSiswa.setSelected(layar == Layar.GURU_SISWA || layar == Layar.GURU_DETAIL_SISWA);
+        tbProfil.setSelected(layar == Layar.PROFIL || layar == Layar.PEMBAHASAN_UJIAN);
     }
 
     @FXML

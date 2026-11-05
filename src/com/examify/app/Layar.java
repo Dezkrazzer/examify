@@ -16,6 +16,8 @@ public enum Layar {
     EDITOR_UJIAN("editor_ujian.fxml", "Editor Ujian", true),
     BANK_SOAL("bank_soal.fxml", "Bank Soal", true),
     GURU_SISWA("guru_siswa.fxml", "Data Siswa", true),
+    GURU_DETAIL_SISWA("guru_detail_siswa.fxml", "Riwayat Siswa", true),
+    PEMBAHASAN_UJIAN("pembahasan_ujian.fxml", "Pembahasan Ujian", true),
     EDITOR_MATERI("editor_materi.fxml", "Editor Materi", false);
 
     static final String FOLDER_FXML = "/com/examify/fxml/";

@@ -6,6 +6,7 @@ import com.examify.model.HasilUjian;
 import com.examify.model.Kursus;
 import com.examify.model.Materi;
 import com.examify.model.MateriTeks;
+import com.examify.model.RiwayatNilai;
 import com.examify.model.Siswa;
 import com.examify.model.Ujian;
 import com.examify.service.AuthService;
@@ -39,6 +40,8 @@ public final class AppSession {
     private Ujian ujianAktif;
     private HasilUjian hasilAktif;
     private UjianTimer timerAktif;
+    private Siswa siswaDipilih;
+    private RiwayatNilai riwayatFokus;
 
     private AppSession() {
     }
@@ -80,6 +83,8 @@ public final class AppSession {
         materiFokus = null;
         siswaAktif = null;
         guruAktif = null;
+        siswaDipilih = null;
+        riwayatFokus = null;
     }
 
     public void hentikanTimer() {
@@ -209,5 +214,21 @@ public final class AppSession {
 
     public void setTimerAktif(UjianTimer timerAktif) {
         this.timerAktif = timerAktif;
+    }
+
+    public Siswa getSiswaDipilih() {
+        return siswaDipilih;
+    }
+
+    public void setSiswaDipilih(Siswa siswaDipilih) {
+        this.siswaDipilih = siswaDipilih;
+    }
+
+    public RiwayatNilai getRiwayatFokus() {
+        return riwayatFokus;
+    }
+
+    public void setRiwayatFokus(RiwayatNilai riwayatFokus) {
+        this.riwayatFokus = riwayatFokus;
     }
 }

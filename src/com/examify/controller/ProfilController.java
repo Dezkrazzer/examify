@@ -1,6 +1,8 @@
 package com.examify.controller;
 
 import com.examify.app.AppSession;
+import com.examify.app.Layar;
+import com.examify.app.SceneRouter;
 import com.examify.model.Kursus;
 import com.examify.model.ModeSubmit;
 import com.examify.model.RiwayatNilai;
@@ -60,6 +62,7 @@ public class ProfilController {
     @FXML private TableColumn<RiwayatNilai, String> colStatus;
     @FXML private TableColumn<RiwayatNilai, String> colMode;
     @FXML private TableColumn<RiwayatNilai, String> colDurasi;
+    @FXML private TableColumn<RiwayatNilai, RiwayatNilai> colPembahasan;
     @FXML private TableColumn<RiwayatNilai, RiwayatNilai> colSertifikat;
 
     private final AppSession session = AppSession.getInstance();
@@ -131,6 +134,10 @@ public class ProfilController {
         TabelUtil.kolom(colDurasi, r -> FormatUtil.hhmmss(r.durasi()));
         TabelUtil.kolom(colStatus, r -> r.lulus() ? "Lulus" : "Tidak lulus");
         colStatus.setCellFactory(kolom -> new SelStatus());
+
+        colPembahasan.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue()));
+        colPembahasan.setCellFactory(kolom -> new SelPembahasan());
+
         colSertifikat.setCellValueFactory(data -> new ReadOnlyObjectWrapper<>(data.getValue()));
         colSertifikat.setCellFactory(kolom -> new SelSertifikat());
         tvRiwayat.setItems(FXCollections.observableArrayList(riwayat));
@@ -150,6 +157,11 @@ public class ProfilController {
         }
     }
 
+    private void bukaHalamanPembahasan(RiwayatNilai r) {
+        session.setRiwayatFokus(r);
+        SceneRouter.pindah(Layar.PEMBAHASAN_UJIAN);
+    }
+
     /** Status kelulusan ditampilkan sebagai badge berwarna. */
     private static final class SelStatus extends TableCell<RiwayatNilai, String> {
         @Override
@@ -164,6 +176,25 @@ public class ProfilController {
             badge.getStyleClass().addAll("badge", getTableRow().getItem() != null && getTableRow().getItem().lulus()
                     ? "badge-sukses" : "badge-bahaya");
             setGraphic(badge);
+        }
+    }
+
+    /** Tombol lihat pembahasan evaluasi ujian. */
+    private final class SelPembahasan extends TableCell<RiwayatNilai, RiwayatNilai> {
+        @Override
+        protected void updateItem(RiwayatNilai r, boolean kosong) {
+            super.updateItem(r, kosong);
+            setText(null);
+            if (kosong || r == null) {
+                setGraphic(null);
+                return;
+            }
+            Button tombol = new Button("Pembahasan", new IkonView(Ikon.MATA, 14));
+            tombol.getStyleClass().add("tombol-sekunder");
+            tombol.setStyle("-fx-padding: 5 12;");
+            tombol.setTooltip(new Tooltip("Lihat evaluasi & pembahasan soal " + r.kodeUjian()));
+            tombol.setOnAction(e -> bukaHalamanPembahasan(r));
+            setGraphic(tombol);
         }
     }
 

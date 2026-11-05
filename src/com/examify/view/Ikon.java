@@ -39,7 +39,11 @@ public enum Ikon {
     DAFTAR("M8 6h13 M8 12h13 M8 18h13 M3 6h.01 M3 12h.01 M3 18h.01"),
     GAMBAR("M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z M8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z M21 15l-5-5L5 21"),
     VIDEO("M23 7l-7 5 7 5V7z M1 5h15v14H1z"),
-    SLIDE("M2 5h20v14H2z M2 9h20 M9 19v-4");
+    SLIDE("M2 5h20v14H2z M2 9h20 M9 19v-4"),
+    FOLDER_KOSONG("M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"),
+    UNDUH("M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4 M7 10l5 5 5-5 M12 15V3"),
+    MATA("M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"),
+    SILANG("M18 6L6 18 M6 6l12 12");
 
     private final String path;
 
