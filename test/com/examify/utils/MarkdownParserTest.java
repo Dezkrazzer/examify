@@ -53,6 +53,16 @@ class MarkdownParserTest {
     }
 
     @Test
+    void inlineGarisBawah() {
+        assertEquals(List.of(
+                new Potongan("Teks ", GayaTeks.BIASA),
+                new Potongan("garis bawah", GayaTeks.GARIS_BAWAH),
+                new Potongan(" dan ", GayaTeks.BIASA),
+                new Potongan("tebal", GayaTeks.TEBAL)),
+                MarkdownParser.parseInline("Teks <u>garis bawah</u> dan **tebal**"));
+    }
+
+    @Test
     void teksTanpaFormatMenjadiSatuPotongan() {
         assertEquals(List.of(new Potongan("biasa saja", GayaTeks.BIASA)), MarkdownParser.parseInline("biasa saja"));
     }

@@ -87,6 +87,13 @@ public class UjianService {
         simpanKeFile();
     }
 
+    public synchronized void hapusUjian(String kodeUjian) throws IOException {
+        if (kodeUjian != null) {
+            katalog.remove(kodeUjian.trim().toUpperCase());
+            simpanKeFile();
+        }
+    }
+
     public synchronized void simpanKeFile() throws IOException {
         if (writer != null && fileBankSoal != null) {
             writer.tulis(fileBankSoal, getDaftarUjian());

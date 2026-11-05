@@ -20,6 +20,8 @@ public class ShellController {
 
     @FXML private StackPane spKonten;
     @FXML private ToggleButton tbKursus;
+    @FXML private ToggleButton tbBankSoal;
+    @FXML private ToggleButton tbSiswa;
     @FXML private ToggleButton tbProfil;
     @FXML private Button btnTema;
     @FXML private Label lblAvatar;
@@ -36,6 +38,8 @@ public class ShellController {
 
         ToggleGroup grup = new ToggleGroup();
         tbKursus.setToggleGroup(grup);
+        tbBankSoal.setToggleGroup(grup);
+        tbSiswa.setToggleGroup(grup);
         tbProfil.setToggleGroup(grup);
         SceneRouter.layarAktifProperty().addListener(new WeakChangeListener<>(listenerLayar));
 
@@ -44,6 +48,10 @@ public class ShellController {
             lblAvatar.setText(FormatUtil.inisial(guru.getNama()));
             lblNama.setText(guru.getNama());
             lblNis.setText("Guru • NIP " + guru.getNip());
+            tbBankSoal.setVisible(true);
+            tbBankSoal.setManaged(true);
+            tbSiswa.setVisible(true);
+            tbSiswa.setManaged(true);
             tbProfil.setVisible(false);
             tbProfil.setManaged(false);
         } else if (session.isSiswa()) {
@@ -51,17 +59,35 @@ public class ShellController {
             lblAvatar.setText(FormatUtil.inisial(siswa.getNama()));
             lblNama.setText(siswa.getNama());
             lblNis.setText(siswa.getNis() + " - " + siswa.getKelas());
+            tbBankSoal.setVisible(false);
+            tbBankSoal.setManaged(false);
+            tbSiswa.setVisible(false);
+            tbSiswa.setManaged(false);
+            tbProfil.setVisible(true);
+            tbProfil.setManaged(true);
         }
     }
 
     private void sorotMenu(Layar layar) {
         tbKursus.setSelected(layar == Layar.KURSUS_SAYA || layar == Layar.KURSUS_DETAIL);
+        tbBankSoal.setSelected(layar == Layar.BANK_SOAL || layar == Layar.EDITOR_UJIAN);
+        tbSiswa.setSelected(layar == Layar.GURU_SISWA);
         tbProfil.setSelected(layar == Layar.PROFIL);
     }
 
     @FXML
     private void handleKursus() {
         SceneRouter.pindah(Layar.KURSUS_SAYA);
+    }
+
+    @FXML
+    private void handleBankSoal() {
+        SceneRouter.pindah(Layar.BANK_SOAL);
+    }
+
+    @FXML
+    private void handleSiswa() {
+        SceneRouter.pindah(Layar.GURU_SISWA);
     }
 
     @FXML

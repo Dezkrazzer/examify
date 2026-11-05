@@ -22,7 +22,7 @@
             </Button>
             <HBox spacing="20" alignment="CENTER_LEFT">
                 <StackPane fx:id="spPola" minWidth="84" maxWidth="84" minHeight="84" maxHeight="84"/>
-                <VBox spacing="4" minWidth="200" prefWidth="280" maxWidth="360">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
                     <Label fx:id="lblKode" styleClass="badge"/>
                     <Label fx:id="lblNama" styleClass="judul-halaman" wrapText="true"/>
                     <Label fx:id="lblPengajar" styleClass="teks-redup">
@@ -30,18 +30,6 @@
                     </Label>
                     <Label fx:id="lblDeskripsi" styleClass="teks-kecil" wrapText="true"/>
                 </VBox>
-
-                <!-- TAB NAVIGASI DI TENGAH: MATERI & ORANG (GOOGLE CLASSROOM STYLE) -->
-                <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
-                    <HBox styleClass="tab-nav-bar" spacing="4" alignment="CENTER">
-                        <ToggleButton fx:id="tabMateri" text="Materi" styleClass="tab-nav-item" selected="true" onAction="#handlePilihTabMateri">
-                            <graphic><IkonView ikon="BUKU" ukuran="16"/></graphic>
-                        </ToggleButton>
-                        <ToggleButton fx:id="tabOrang" text="Orang" styleClass="tab-nav-item" onAction="#handlePilihTabOrang">
-                            <graphic><IkonView ikon="PENGGUNA" ukuran="16"/></graphic>
-                        </ToggleButton>
-                    </HBox>
-                </HBox>
 
                 <VBox styleClass="kaca" spacing="6" minWidth="270" maxWidth="270">
                     <padding><Insets top="16" right="18" bottom="16" left="18"/></padding>
@@ -52,6 +40,19 @@
                     </HBox>
                     <ProgressBar fx:id="pbProgres" maxWidth="Infinity"/>
                 </VBox>
+            </HBox>
+
+            <!-- BAR TAB NAVIGASI: MATERI & ORANG (POSISI KOTAK MERAH) -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <padding><Insets top="6" bottom="2"/></padding>
+                <HBox styleClass="tab-nav-bar" spacing="6" alignment="CENTER_LEFT">
+                    <ToggleButton fx:id="tabMateri" text="Materi" styleClass="tab-nav-item" selected="true" onAction="#handlePilihTabMateri">
+                        <graphic><IkonView ikon="BUKU" ukuran="16"/></graphic>
+                    </ToggleButton>
+                    <ToggleButton fx:id="tabOrang" text="Orang" styleClass="tab-nav-item" onAction="#handlePilihTabOrang">
+                        <graphic><IkonView ikon="PENGGUNA" ukuran="16"/></graphic>
+                    </ToggleButton>
+                </HBox>
             </HBox>
         </VBox>
     </top>

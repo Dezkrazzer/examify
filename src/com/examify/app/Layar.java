@@ -13,7 +13,10 @@ public enum Layar {
     TOKEN_GATE("token_gate.fxml", "Token Ujian", false),
     CBT_ROOM("cbt_room.fxml", "Ruang Ujian", false),
     RESULT("result.fxml", "Hasil Ujian", false),
-    EDITOR_UJIAN("editor_ujian.fxml", "Editor Ujian", true);
+    EDITOR_UJIAN("editor_ujian.fxml", "Editor Ujian", true),
+    BANK_SOAL("bank_soal.fxml", "Bank Soal", true),
+    GURU_SISWA("guru_siswa.fxml", "Data Siswa", true),
+    EDITOR_MATERI("editor_materi.fxml", "Editor Materi", false);
 
     static final String FOLDER_FXML = "/com/examify/fxml/";
 

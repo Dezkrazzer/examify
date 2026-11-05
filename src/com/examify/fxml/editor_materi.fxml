@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.examify.view.IkonView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.examify.controller.EditorMateriController" styleClass="latar">
+    <top>
+        <VBox spacing="0">
+            <!-- 1. NAVBAR ATAS (NAVIGASI & AKSI UTAMA) -->
+            <HBox spacing="16" alignment="CENTER_LEFT" styleClass="navbar">
+                <padding><Insets top="12" right="24" bottom="12" left="24"/></padding>
+                <Button text="Kembali" styleClass="tombol-hantu" onAction="#handleKembali">
+                    <graphic><IkonView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+                </Button>
+                <VBox spacing="2" minWidth="260" prefWidth="340">
+                    <Label fx:id="lblBreadcrumb" text="Kursus · Bab" styleClass="teks-kecil"/>
+                    <TextField fx:id="tfJudulMateri" promptText="Judul Materi Pembelajaran..."
+                               style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 6 10;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <!-- Switcher Mode: Edit Visual vs Pratinjau Siswa -->
+                <HBox styleClass="tab-nav-bar" spacing="4" alignment="CENTER">
+                    <ToggleButton fx:id="tbModeEdit" text="Edit Visual" styleClass="tab-nav-item" selected="true" onAction="#handleModeEdit">
+                        <graphic><IkonView ikon="DOKUMEN" ukuran="15"/></graphic>
+                    </ToggleButton>
+                    <ToggleButton fx:id="tbModePratinjau" text="Pratinjau Siswa" styleClass="tab-nav-item" onAction="#handleModePratinjau">
+                        <graphic><IkonView ikon="MAIN" ukuran="15"/></graphic>
+                    </ToggleButton>
+                </HBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Simpan Materi" onAction="#handleSimpanMateri" styleClass="tombol-utama">
+                    <graphic><IkonView ikon="CENTANG" ukuran="16"/></graphic>
+                </Button>
+            </HBox>
+
+            <!-- 2. SIMPLIFIED RIBBON UI (OFFICE STYLE - 2 TAB UTAMA: HOME & INSERT) -->
+            <TabPane fx:id="ribbonTabPane" tabClosingPolicy="UNAVAILABLE" styleClass="ribbon-tab-pane">
+                <!-- TAB 1: HOME (FOKUS PADA PEMFORMATAN) -->
+                <Tab text="Home">
+                    <HBox styleClass="ribbon-toolbar" spacing="16" alignment="CENTER_LEFT">
+                        <!-- Grup Clipboard: Copy, Paste, Undo -->
+                        <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
+                            <HBox spacing="4" alignment="CENTER">
+                                <Button fx:id="btnCopy" text="Salin" styleClass="ribbon-btn" onAction="#handleCopy" focusTraversable="false">
+                                    <graphic><IkonView ikon="SALIN" ukuran="14"/></graphic>
+                                    <tooltip><Tooltip text="Salin (Ctrl+C)"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnPaste" text="Tempel" styleClass="ribbon-btn" onAction="#handlePaste" focusTraversable="false">
+                                    <graphic><IkonView ikon="TEMPEL" ukuran="14"/></graphic>
+                                    <tooltip><Tooltip text="Tempel (Ctrl+V)"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnUndo" text="Urung" styleClass="ribbon-btn" onAction="#handleUndo" focusTraversable="false">
+                                    <graphic><IkonView ikon="URUNG" ukuran="14"/></graphic>
+                                    <tooltip><Tooltip text="Urungkan (Ctrl+Z)"/></tooltip>
+                                </Button>
+                            </HBox>
+                            <Label text="Clipboard" styleClass="ribbon-group-label"/>
+                        </VBox>
+
+                        <Region styleClass="ribbon-separator"/>
+
+                        <!-- Grup Font: Bold, Italic, Underline -->
+                        <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
+                            <HBox spacing="4" alignment="CENTER">
+                                <Button fx:id="btnBold" text="B" styleClass="ribbon-btn, ribbon-btn-icon-only"
+                                        style="-fx-font-weight: bold; -fx-font-size: 13.5px;"
+                                        onAction="#handleBold" focusTraversable="false">
+                                    <tooltip><Tooltip text="Tebal / Bold (Ctrl+B)"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnItalic" text="I" styleClass="ribbon-btn, ribbon-btn-icon-only"
+                                        style="-fx-font-style: italic; -fx-font-size: 13.5px; -fx-font-family: 'Times New Roman', serif;"
+                                        onAction="#handleItalic" focusTraversable="false">
+                                    <tooltip><Tooltip text="Miring / Italic (Ctrl+I)"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnUnderline" text="U" styleClass="ribbon-btn, ribbon-btn-icon-only"
+                                        style="-fx-underline: true; -fx-font-size: 13.5px;"
+                                        onAction="#handleUnderline" focusTraversable="false">
+                                    <tooltip><Tooltip text="Garis Bawah / Underline (Ctrl+U)"/></tooltip>
+                                </Button>
+                            </HBox>
+                            <Label text="Font" styleClass="ribbon-group-label"/>
+                        </VBox>
+
+                        <Region styleClass="ribbon-separator"/>
+
+                        <!-- Grup Paragraf: Align Left, Center, Right, Bullet List -->
+                        <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
+                            <HBox spacing="4" alignment="CENTER">
+                                <Button fx:id="btnAlignLeft" styleClass="ribbon-btn, ribbon-btn-icon-only"
+                                        onAction="#handleAlignLeft" focusTraversable="false">
+                                    <graphic><IkonView ikon="RATA_KIRI" ukuran="14"/></graphic>
+                                    <tooltip><Tooltip text="Rata Kiri"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnAlignCenter" styleClass="ribbon-btn, ribbon-btn-icon-only"
+                                        onAction="#handleAlignCenter" focusTraversable="false">
+                                    <graphic><IkonView ikon="RATA_TENGAH" ukuran="14"/></graphic>
+                                    <tooltip><Tooltip text="Rata Tengah"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnAlignRight" styleClass="ribbon-btn, ribbon-btn-icon-only"
+                                        onAction="#handleAlignRight" focusTraversable="false">
+                                    <graphic><IkonView ikon="RATA_KANAN" ukuran="14"/></graphic>
+                                    <tooltip><Tooltip text="Rata Kanan"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnBulletList" text="List" styleClass="ribbon-btn"
+                                        onAction="#handleBulletList" focusTraversable="false">
+                                    <graphic><IkonView ikon="DAFTAR" ukuran="14"/></graphic>
+                                    <tooltip><Tooltip text="Daftar Butir (Bullet List)"/></tooltip>
+                                </Button>
+                            </HBox>
+                            <Label text="Paragraf" styleClass="ribbon-group-label"/>
+                        </VBox>
+
+                        <Region styleClass="ribbon-separator"/>
+
+                        <!-- Grup Tipografi: Combobox/Dropdown H1, H2, Paragraf biasa -->
+                        <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
+                            <ComboBox fx:id="cbTipografi" prefWidth="190" onAction="#handleTipografiChanged"
+                                      promptText="Pilih Gaya Tipografi..." focusTraversable="false"/>
+                            <Label text="Tipografi" styleClass="ribbon-group-label"/>
+                        </VBox>
+                    </HBox>
+                </Tab>
+
+                <!-- TAB 2: INSERT (FOKUS PADA PENAMBAHAN ELEMEN) -->
+                <Tab text="Insert">
+                    <HBox styleClass="ribbon-toolbar" spacing="16" alignment="CENTER_LEFT">
+                        <!-- Grup Slide: Tombol "+ Pemisah Slide (Page Break)" -->
+                        <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
+                            <Button fx:id="btnPageBreak" text="+ Pemisah Slide (Page Break)"
+                                    styleClass="ribbon-btn, tombol-aksen-lembut"
+                                    onAction="#handlePageBreak" focusTraversable="false">
+                                <graphic><IkonView ikon="SLIDE" ukuran="15"/></graphic>
+                                <tooltip><Tooltip text="Potong materi menjadi slide/halaman baru"/></tooltip>
+                            </Button>
+                            <Label text="Slide" styleClass="ribbon-group-label"/>
+                        </VBox>
+
+                        <Region styleClass="ribbon-separator"/>
+
+                        <!-- Grup Media: "Sisipkan Gambar" dan "Embed Video" -->
+                        <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
+                            <HBox spacing="6" alignment="CENTER">
+                                <Button fx:id="btnInsertImage" text="Sisipkan Gambar" styleClass="ribbon-btn"
+                                        onAction="#handleInsertImage" focusTraversable="false">
+                                    <graphic><IkonView ikon="GAMBAR" ukuran="15"/></graphic>
+                                    <tooltip><Tooltip text="Sisipkan gambar visual ke dalam materi"/></tooltip>
+                                </Button>
+                                <Button fx:id="btnEmbedVideo" text="Embed Video" styleClass="ribbon-btn"
+                                        onAction="#handleEmbedVideo" focusTraversable="false">
+                                    <graphic><IkonView ikon="VIDEO" ukuran="15"/></graphic>
+                                    <tooltip><Tooltip text="Sematkan video YouTube langsung"/></tooltip>
+                                </Button>
+                            </HBox>
+                            <Label text="Media" styleClass="ribbon-group-label"/>
+                        </VBox>
+
+                        <Region styleClass="ribbon-separator"/>
+
+                        <!-- Grup Lampiran: "Unggah Dokumen (.pdf/.docx)" -->
+                        <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
+                            <Button fx:id="btnUploadDoc" text="Unggah Dokumen (.pdf/.docx)" styleClass="ribbon-btn"
+                                    onAction="#handleUploadDoc" focusTraversable="false">
+                                <graphic><IkonView ikon="DOKUMEN" ukuran="15"/></graphic>
+                                <tooltip><Tooltip text="Unggah atau lampirkan berkas dokumen (.pdf, .docx, .md, .txt)"/></tooltip>
+                            </Button>
+                            <Label text="Lampiran" styleClass="ribbon-group-label"/>
+                        </VBox>
+                    </HBox>
+                </Tab>
+            </TabPane>
+        </VBox>
+    </top>
+
+    <center>
+        <HBox spacing="16" VBox.vgrow="ALWAYS">
+            <padding><Insets top="16" right="24" bottom="16" left="24"/></padding>
+
+            <!-- 1. KOLOM KIRI: NAVIGATOR SLIDE (SLIDE STRIP) -->
+            <VBox styleClass="kaca" spacing="12" prefWidth="230" minWidth="210" maxWidth="250">
+                <padding><Insets top="16" right="12" bottom="16" left="12"/></padding>
+                <HBox alignment="CENTER_LEFT" spacing="6">
+                    <IkonView ikon="SLIDE" ukuran="16"/>
+                    <Label text="DAFTAR SLIDE" styleClass="teks-kecil" style="-fx-font-weight: bold;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblJumlahSlideNav" styleClass="badge" style="-fx-font-size: 10.5px; -fx-padding: 2 8;"/>
+                </HBox>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="vbSlideList" spacing="8"/>
+                </ScrollPane>
+                <Button text="+ Tambah Slide Baru" onAction="#handleTambahSlideBaru"
+                        styleClass="tombol-sekunder" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- 2. AREA PENULISAN LUAS & RESPONSIF (WYSIWYG / BLOCK EDITOR CANVAS) -->
+            <StackPane fx:id="spAreaKerja" HBox.hgrow="ALWAYS">
+                <!-- MODE EDIT VISUAL (WYSIWYG EDITOR CANVAS) -->
+                <VBox fx:id="boxModeEdit" spacing="12" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10" maxWidth="1080">
+                        <Label text="Judul Slide Ini:" styleClass="teks-kecil" style="-fx-font-weight: bold;"/>
+                        <TextField fx:id="tfJudulSlide" promptText="Contoh: Pengenalan / Ciri-Ciri..." HBox.hgrow="ALWAYS"/>
+                    </HBox>
+                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS" style="-fx-padding: 0;">
+                        <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                            <VBox fx:id="vbKanvasBlok" spacing="14" maxWidth="1080" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+                                <padding><Insets top="8" right="16" bottom="40" left="16"/></padding>
+                            </VBox>
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+
+                <!-- MODE PRATINJAU INTERAKTIF SISWA -->
+                <VBox fx:id="boxModePratinjau" spacing="14" alignment="TOP_CENTER" visible="false" managed="false" VBox.vgrow="ALWAYS">
+                    <HBox fx:id="hbPratinjauSegmen" spacing="6" maxWidth="1080" alignment="CENTER"/>
+                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER">
+                            <VBox fx:id="vbPratinjauKonten" styleClass="kaca" spacing="16" maxWidth="1080" alignment="TOP_LEFT">
+                                <padding><Insets top="28" right="36" bottom="36" left="36"/></padding>
+                            </VBox>
+                        </VBox>
+                    </ScrollPane>
+                    <HBox alignment="CENTER" spacing="16" maxWidth="1080">
+                        <padding><Insets top="8" bottom="8"/></padding>
+                        <Button fx:id="btnPrevSlide" text="Sebelumnya" onAction="#handlePrevPratinjau" styleClass="tombol-sekunder"/>
+                        <Label fx:id="lblPratinjauNomor" styleClass="badge-kaca"/>
+                        <Button fx:id="btnNextSlide" text="Berikutnya" onAction="#handleNextPratinjau" styleClass="tombol-utama"/>
+                    </HBox>
+                </VBox>
+            </StackPane>
+        </HBox>
+    </center>
+</BorderPane>

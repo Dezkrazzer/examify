@@ -1,9 +1,11 @@
 package com.examify.app;
 
+import com.examify.model.Bab;
 import com.examify.model.Guru;
 import com.examify.model.HasilUjian;
 import com.examify.model.Kursus;
 import com.examify.model.Materi;
+import com.examify.model.MateriTeks;
 import com.examify.model.Siswa;
 import com.examify.model.Ujian;
 import com.examify.service.AuthService;
@@ -31,6 +33,8 @@ public final class AppSession {
     private Siswa siswaAktif;
     private Guru guruAktif;
     private Kursus kursusAktif;
+    private Bab babAktifMateri;
+    private MateriTeks materiTeksAktif;
     private Materi materiFokus; // dibuka kembali saat kembali ke halaman kursus
     private Ujian ujianAktif;
     private HasilUjian hasilAktif;
@@ -71,6 +75,8 @@ public final class AppSession {
     public void logout() {
         resetUjian();
         kursusAktif = null;
+        babAktifMateri = null;
+        materiTeksAktif = null;
         materiFokus = null;
         siswaAktif = null;
         guruAktif = null;
@@ -159,6 +165,22 @@ public final class AppSession {
 
     public void setKursusAktif(Kursus kursusAktif) {
         this.kursusAktif = kursusAktif;
+    }
+
+    public Bab getBabAktifMateri() {
+        return babAktifMateri;
+    }
+
+    public void setBabAktifMateri(Bab babAktifMateri) {
+        this.babAktifMateri = babAktifMateri;
+    }
+
+    public MateriTeks getMateriTeksAktif() {
+        return materiTeksAktif;
+    }
+
+    public void setMateriTeksAktif(MateriTeks materiTeksAktif) {
+        this.materiTeksAktif = materiTeksAktif;
     }
 
     public Materi getMateriFokus() {

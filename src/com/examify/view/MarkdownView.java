@@ -11,6 +11,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 
 /** Mengubah hasil {@link MarkdownParser} menjadi node JavaFX yang ditata lewat CSS (.md-*). */
@@ -45,7 +46,29 @@ public final class MarkdownView {
     private static TextFlow teks(String isi, String kelas) {
         TextFlow flow = new TextFlow();
         flow.getStyleClass().add(kelas);
-        for (Potongan p : MarkdownParser.parseInline(isi)) {
+
+        String teksBersih = isi != null ? isi : "";
+        if (isi != null) {
+            String lower = isi.trim().toLowerCase();
+            if (lower.startsWith("<center>") && lower.endsWith("</center>") && isi.trim().length() >= 17) {
+                flow.setTextAlignment(TextAlignment.CENTER);
+                teksBersih = isi.trim().substring(8, isi.trim().length() - 9).trim();
+            } else if (lower.startsWith("<div align=\"right\">") && lower.endsWith("</div>") && isi.trim().length() >= 25) {
+                flow.setTextAlignment(TextAlignment.RIGHT);
+                teksBersih = isi.trim().substring(19, isi.trim().length() - 6).trim();
+            } else if (lower.startsWith("<div align=\"center\">") && lower.endsWith("</div>") && isi.trim().length() >= 26) {
+                flow.setTextAlignment(TextAlignment.CENTER);
+                teksBersih = isi.trim().substring(20, isi.trim().length() - 6).trim();
+            } else if (lower.startsWith("<p align=\"center\">") && lower.endsWith("</p>") && isi.trim().length() >= 22) {
+                flow.setTextAlignment(TextAlignment.CENTER);
+                teksBersih = isi.trim().substring(18, isi.trim().length() - 4).trim();
+            } else if (lower.startsWith("<p align=\"right\">") && lower.endsWith("</p>") && isi.trim().length() >= 21) {
+                flow.setTextAlignment(TextAlignment.RIGHT);
+                teksBersih = isi.trim().substring(17, isi.trim().length() - 4).trim();
+            }
+        }
+
+        for (Potongan p : MarkdownParser.parseInline(teksBersih)) {
             Text t = new Text(p.teks());
             t.getStyleClass().addAll("md-teks", "md-" + p.gaya().name().toLowerCase());
             flow.getChildren().add(t);
