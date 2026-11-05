@@ -316,6 +316,173 @@
     -fx-stroke: white;
 }
 
+/* ---------- Block & Slide Editor ---------- */
+.blok-kartu {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 12;
+    -fx-border-color: -garis;
+    -fx-border-radius: 12;
+    -fx-padding: 10 14;
+}
+.blok-kartu:hover {
+    -fx-border-color: rgba(26, 163, 232, 0.4);
+}
+.blok-kartu:focused, .blok-kartu-aktif {
+    -fx-border-color: -aksen;
+}
+.blok-handle-btn {
+    -fx-background-color: transparent;
+    -fx-padding: 3 6;
+    -fx-cursor: hand;
+}
+.blok-handle-btn:hover {
+    -fx-background-color: -garis;
+    -fx-background-radius: 6;
+}
+.slide-nav-kartu {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 10;
+    -fx-border-color: -garis;
+    -fx-border-radius: 10;
+    -fx-padding: 10 12;
+    -fx-cursor: hand;
+}
+.slide-nav-kartu:hover {
+    -fx-border-color: -aksen;
+}
+.slide-nav-kartu-aktif {
+    -fx-background-color: rgba(26, 163, 232, 0.16);
+    -fx-border-color: -aksen;
+    -fx-border-width: 1.5;
+}
+.slash-menu-popup {
+    -fx-background-color: -permukaan;
+    -fx-background-radius: 12;
+    -fx-border-color: -garis;
+    -fx-border-radius: 12;
+    -fx-padding: 6;
+    -fx-effect: dropshadow(gaussian, -bayangan, 24, 0.1, 0, 8);
+}
+
+/* ---------- Visual WYSIWYG HTML Editor ---------- */
+.html-editor {
+    -fx-background-color: -permukaan;
+    -fx-border-color: -garis;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+}
+.html-editor:focused, .html-editor:hover {
+    -fx-border-color: -aksen;
+}
+.html-editor .top-toolbar,
+.html-editor .bottom-toolbar {
+    -fx-padding: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
+    visibility: hidden;
+}
+
+/* ---------- Simplified Ribbon UI (Office Style) ---------- */
+.ribbon-tab-pane {
+    -fx-tab-min-height: 32px;
+    -fx-tab-max-height: 32px;
+    -fx-background-color: -permukaan;
+    -fx-border-color: transparent transparent -garis transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.ribbon-tab-pane .tab-header-area {
+    -fx-padding: 0 16 0 16;
+    -fx-background-color: -kaca-kuat;
+    -fx-border-color: transparent transparent -garis transparent;
+    -fx-border-width: 0 0 1 0;
+}
+.ribbon-tab-pane .tab-header-background {
+    -fx-background-color: transparent;
+}
+.ribbon-tab-pane .tab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 6 18;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+.ribbon-tab-pane .tab:hover {
+    -fx-background-color: -garis;
+}
+.ribbon-tab-pane .tab:selected {
+    -fx-background-color: -permukaan;
+    -fx-border-color: -garis -garis transparent -garis;
+    -fx-border-width: 1 1 0 1;
+    -fx-border-radius: 8 8 0 0;
+}
+.ribbon-tab-pane .tab .tab-label {
+    -fx-text-fill: -teks-redup;
+    -fx-font-weight: 600;
+    -fx-font-size: 13px;
+}
+.ribbon-tab-pane .tab:selected .tab-label {
+    -fx-text-fill: -aksen;
+}
+.ribbon-toolbar {
+    -fx-background-color: -permukaan;
+    -fx-padding: 8 20 6 20;
+    -fx-alignment: center-left;
+    -fx-min-height: 76px;
+    -fx-pref-height: 76px;
+}
+.ribbon-group {
+    -fx-alignment: center;
+    -fx-spacing: 4;
+}
+.ribbon-group-label {
+    -fx-font-size: 10px;
+    -fx-font-weight: 600;
+    -fx-text-fill: -teks-redup;
+    -fx-alignment: center;
+}
+.ribbon-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 6 10;
+    -fx-font-size: 12px;
+    -fx-text-fill: -teks;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 6;
+}
+.ribbon-btn:hover {
+    -fx-background-color: -garis;
+}
+.ribbon-btn:pressed {
+    -fx-background-color: rgba(26, 163, 232, 0.2);
+}
+.ribbon-btn-icon-only {
+    -fx-padding: 6 8;
+    -fx-min-width: 32px;
+    -fx-pref-width: 32px;
+    -fx-alignment: center;
+}
+.ribbon-separator {
+    -fx-background-color: -garis;
+    -fx-pref-width: 1;
+    -fx-min-width: 1;
+    -fx-max-width: 1;
+    -fx-pref-height: 48;
+    -fx-min-height: 48;
+    -fx-max-height: 48;
+}
+.tombol-aksen-lembut {
+    -fx-background-color: rgba(26, 163, 232, 0.14);
+    -fx-text-fill: -aksen;
+    -fx-font-weight: bold;
+}
+.tombol-aksen-lembut:hover {
+    -fx-background-color: rgba(26, 163, 232, 0.24);
+}
+
 /* ---------- Detail kursus ---------- */
 .daftar-bab .item-bab {
     -fx-background-color: transparent;
@@ -374,6 +541,7 @@
 .md-p { -fx-line-spacing: 4; }
 .md-tebal { -fx-font-weight: bold; }
 .md-miring { -fx-font-style: italic; }
+.md-garis_bawah { -fx-underline: true; }
 .md-kode { -fx-font-family: "Consolas", monospace; -fx-fill: -aksen-2; -fx-font-size: 13.5px; }
 .md-penanda { -fx-text-fill: -aksen; -fx-font-weight: bold; }
 .md-kutipan {

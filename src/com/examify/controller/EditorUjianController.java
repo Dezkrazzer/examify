@@ -426,7 +426,7 @@ public class EditorUjianController {
             session.getUjianService().perbaruiUjian(ujianBaru);
             session.setUjianAktif(ujianBaru);
             DialogUtil.info("Perubahan ujian " + ujianBaru.getKodeUjian() + " (" + hasilSoal.size() + " soal) berhasil disimpan!");
-            SceneRouter.pindah(Layar.KURSUS_DETAIL);
+            kembaliKeLayarAsal();
 
         } catch (IllegalArgumentException e) {
             DialogUtil.peringatan("Validasi gagal: " + e.getMessage());
@@ -437,6 +437,14 @@ public class EditorUjianController {
 
     @FXML
     private void handleKembali() {
-        SceneRouter.pindah(Layar.KURSUS_DETAIL);
+        kembaliKeLayarAsal();
+    }
+
+    private void kembaliKeLayarAsal() {
+        if (session.getKursusAktif() != null) {
+            SceneRouter.pindah(Layar.KURSUS_DETAIL);
+        } else {
+            SceneRouter.pindah(Layar.BANK_SOAL);
+        }
     }
 }

@@ -30,6 +30,14 @@
                               onAction="#handleKursus">
                     <graphic><IkonView ikon="BUKU" ukuran="18"/></graphic>
                 </ToggleButton>
+                <ToggleButton fx:id="tbBankSoal" text="Bank Soal" styleClass="nav-item" maxWidth="Infinity"
+                              onAction="#handleBankSoal">
+                    <graphic><IkonView ikon="UJIAN" ukuran="18"/></graphic>
+                </ToggleButton>
+                <ToggleButton fx:id="tbSiswa" text="Siswa" styleClass="nav-item" maxWidth="Infinity"
+                              onAction="#handleSiswa">
+                    <graphic><IkonView ikon="PENGGUNA" ukuran="18"/></graphic>
+                </ToggleButton>
                 <ToggleButton fx:id="tbProfil" text="Profil &amp; Nilai" styleClass="nav-item" maxWidth="Infinity"
                               onAction="#handleProfil">
                     <graphic><IkonView ikon="PROFIL" ukuran="18"/></graphic>

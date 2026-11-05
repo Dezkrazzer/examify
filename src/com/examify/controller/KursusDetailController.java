@@ -3,6 +3,7 @@ package com.examify.controller;
 import com.examify.app.AppSession;
 import com.examify.app.Layar;
 import com.examify.app.SceneRouter;
+import com.examify.io.SlideMarkdownConverter;
 import com.examify.model.Bab;
 import com.examify.model.Guru;
 import com.examify.model.Kursus;
@@ -16,6 +17,7 @@ import com.examify.model.Siswa;
 import com.examify.model.Soal;
 import com.examify.model.SoalPilihanGanda;
 import com.examify.model.Ujian;
+import com.examify.model.materi.DrafSlide;
 import com.examify.service.KursusService;
 import com.examify.service.ProgresBelajarService;
 import com.examify.utils.FormatUtil;
@@ -393,6 +395,10 @@ public class KursusDetailController {
     // ------------------------------------------------------------------ tampilan materi
 
     private void tampilkanTeks(MateriTeks materi) {
+        tampilkanTeksSlide(materi, 0);
+    }
+
+    private void tampilkanTeksSlide(MateriTeks materi, int slideIndex) {
         String markdown;
         try {
             markdown = kursusService.bacaTeks(materi);
@@ -401,21 +407,97 @@ public class KursusDetailController {
             return;
         }
         tandai(materi); // bacaan dianggap selesai saat dibuka
+
+        List<DrafSlide> daftarSlide = SlideMarkdownConverter.parse(markdown);
+        if (daftarSlide == null || daftarSlide.isEmpty()) {
+            daftarSlide = List.of(new DrafSlide(materi.getJudul()));
+        }
+
+        int totalSlide = daftarSlide.size();
+        int indeksAktif = Math.max(0, Math.min(slideIndex, totalSlide - 1));
+        DrafSlide slideAktif = daftarSlide.get(indeksAktif);
+
         VBox isi = panel();
 
         HBox barisAtas = new HBox(12, tombolKembaliKeBab(materi));
         barisAtas.setAlignment(Pos.CENTER_LEFT);
+
+        if (totalSlide > 1) {
+            Label lblSlideInfo = new Label("Halaman " + (indeksAktif + 1) + " dari " + totalSlide);
+            lblSlideInfo.getStyleClass().addAll("badge", "badge-netral");
+            barisAtas.getChildren().add(lblSlideInfo);
+        }
+
         if (session.isGuru()) {
             Region sp = new Region();
             HBox.setHgrow(sp, Priority.ALWAYS);
-            Button btnEdit = new Button("✏️ Edit Isi Materi (WordPress Style)");
+            Button btnEdit = new Button("Edit Isi Materi");
+            btnEdit.setGraphic(new IkonView(Ikon.DOKUMEN, 14));
             btnEdit.getStyleClass().add("tombol-sekunder");
             btnEdit.setOnAction(e -> bukaEditorMateri(babDari(materi).orElse(kursus.getDaftarBab().get(0)), materi));
             barisAtas.getChildren().addAll(sp, btnEdit);
         }
 
-        isi.getChildren().addAll(barisAtas, label(materi.getKeterangan().toUpperCase(), "label-kecil-kapital"),
-                MarkdownView.render(markdown), new Region(), navigasiBerikutnya(materi));
+        String labelKategori = materi.getKeterangan().toUpperCase();
+        if (totalSlide > 1 && slideAktif.getJudulSlide() != null && !slideAktif.getJudulSlide().trim().isEmpty()) {
+            labelKategori += " • " + slideAktif.getJudulSlide().trim().toUpperCase();
+        }
+
+        String slideMarkdown = (totalSlide > 1)
+                ? SlideMarkdownConverter.toMarkdown(slideAktif)
+                : markdown;
+
+        VBox boxSlideKonten = new VBox(12);
+        boxSlideKonten.getChildren().add(MarkdownView.render(slideMarkdown));
+
+        HBox barisBawah = new HBox(12);
+        barisBawah.setAlignment(Pos.CENTER_LEFT);
+        barisBawah.setPadding(new Insets(20, 0, 0, 0));
+
+        if (totalSlide > 1) {
+            Button btnPrev = new Button("Halaman Sebelumnya");
+            btnPrev.setGraphic(new IkonView(Ikon.PANAH_KIRI, 14));
+            btnPrev.getStyleClass().add("tombol-sekunder");
+            btnPrev.setDisable(indeksAktif == 0);
+            btnPrev.setOnAction(e -> tampilkanTeksSlide(materi, indeksAktif - 1));
+
+            Button btnNext = new Button("Halaman Berikutnya");
+            btnNext.setGraphic(new IkonView(Ikon.PANAH_KANAN, 14));
+            btnNext.setContentDisplay(ContentDisplay.RIGHT);
+            btnNext.getStyleClass().add("tombol-utama");
+            btnNext.setOnAction(e -> tampilkanTeksSlide(materi, indeksAktif + 1));
+
+            HBox dots = new HBox(6);
+            dots.setAlignment(Pos.CENTER);
+            for (int i = 0; i < totalSlide; i++) {
+                final int targetIdx = i;
+                Button dot = new Button();
+                dot.setPrefSize(i == indeksAktif ? 20 : 8, 8);
+                dot.setMaxSize(i == indeksAktif ? 20 : 8, 8);
+                dot.setMinSize(i == indeksAktif ? 20 : 8, 8);
+                dot.setStyle(i == indeksAktif
+                        ? "-fx-background-color: -aksen; -fx-background-radius: 4;"
+                        : "-fx-background-color: -garis; -fx-background-radius: 4; -fx-cursor: hand;");
+                dot.setOnAction(e -> tampilkanTeksSlide(materi, targetIdx));
+                dots.getChildren().add(dot);
+            }
+
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+
+            barisBawah.getChildren().addAll(btnPrev, dots, spacer);
+            if (indeksAktif < totalSlide - 1) {
+                barisBawah.getChildren().add(btnNext);
+            } else {
+                barisBawah.getChildren().add(navigasiBerikutnya(materi));
+            }
+        } else {
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
+            barisBawah.getChildren().addAll(spacer, navigasiBerikutnya(materi));
+        }
+
+        isi.getChildren().addAll(barisAtas, label(labelKategori, "label-kecil-kapital"), boxSlideKonten, barisBawah);
         tampilkanKonten(gulir(isi));
     }
 
@@ -738,213 +820,10 @@ public class KursusDetailController {
     }
 
     private void bukaEditorMateri(Bab bab, MateriTeks materiLama) {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle(materiLama == null ? "Tambah Materi Pembelajaran" : "Edit Materi Pembelajaran");
-        dialog.setHeaderText("Bab: " + bab.getJudul() + " • Kursus: " + kursus.getNama());
-
-        ButtonType btnSimpan = new ButtonType("Simpan Materi", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(btnSimpan, ButtonType.CANCEL);
-
-        VBox root = new VBox(12);
-        root.setPrefWidth(740);
-        root.setPrefHeight(560);
-        root.setPadding(new Insets(10));
-
-        HBox barisJudul = new HBox(10);
-        barisJudul.setAlignment(Pos.CENTER_LEFT);
-
-        Label lblJudul = new Label("Judul Materi:");
-        lblJudul.setStyle("-fx-font-weight: bold;");
-        TextField tfJudul = new TextField(materiLama != null ? materiLama.getJudul() : "");
-        tfJudul.setPromptText("Contoh: Pengenalan Kalimat Majemuk");
-        HBox.setHgrow(tfJudul, Priority.ALWAYS);
-
-        Button btnUpload = new Button("📁 Unggah File (.txt / .md)");
-        btnUpload.getStyleClass().add("tombol-sekunder");
-
-        barisJudul.getChildren().addAll(lblJudul, tfJudul, btnUpload);
-
-        HBox toolbar = new HBox(6);
-        toolbar.setAlignment(Pos.CENTER_LEFT);
-        toolbar.setStyle("-fx-padding: 6 10; -fx-background-color: -garis; -fx-background-radius: 8;");
-
-        Label lblToolbar = new Label("Format Cepat:");
-        lblToolbar.getStyleClass().add("teks-kecil");
-
-        Button btnH1 = new Button("H1");
-        btnH1.getStyleClass().add("tombol-hantu");
-        btnH1.setStyle("-fx-padding: 3 8;");
-
-        Button btnH2 = new Button("H2");
-        btnH2.getStyleClass().add("tombol-hantu");
-        btnH2.setStyle("-fx-padding: 3 8;");
-
-        Button btnBold = new Button("B");
-        btnBold.getStyleClass().add("tombol-hantu");
-        btnBold.setStyle("-fx-padding: 3 8; -fx-font-weight: bold;");
-
-        Button btnItalic = new Button("I");
-        btnItalic.getStyleClass().add("tombol-hantu");
-        btnItalic.setStyle("-fx-padding: 3 8; -fx-font-style: italic;");
-
-        Button btnList = new Button("• List");
-        btnList.getStyleClass().add("tombol-hantu");
-        btnList.setStyle("-fx-padding: 3 8;");
-
-        Button btnQuote = new Button("” Kutip");
-        btnQuote.getStyleClass().add("tombol-hantu");
-        btnQuote.setStyle("-fx-padding: 3 8;");
-
-        Button btnCode = new Button("</> Kode");
-        btnCode.getStyleClass().add("tombol-hantu");
-        btnCode.setStyle("-fx-padding: 3 8;");
-
-        Button btnHr = new Button("— Garis");
-        btnHr.getStyleClass().add("tombol-hantu");
-        btnHr.setStyle("-fx-padding: 3 8;");
-
-        toolbar.getChildren().addAll(lblToolbar, btnH1, btnH2, btnBold, btnItalic, btnList, btnQuote, btnCode, btnHr);
-
-        TabPane tabPane = new TabPane();
-        VBox.setVgrow(tabPane, Priority.ALWAYS);
-
-        TextArea taEditor = new TextArea();
-        taEditor.setWrapText(true);
-        taEditor.setPromptText("Tulis isi materi pelajaran di sini. Mendukung format Markdown (# Judul, **tebal**, *miring*, daftar, tabel, dll)...");
-        taEditor.setStyle("-fx-font-size: 13.5px; -fx-font-family: 'Segoe UI', system-ui, sans-serif;");
-
-        if (materiLama != null) {
-            try {
-                taEditor.setText(kursusService.bacaTeks(materiLama));
-            } catch (IOException ignored) {}
-        }
-
-        btnH1.setOnAction(e -> sisipkanTeks(taEditor, "\n# ", ""));
-        btnH2.setOnAction(e -> sisipkanTeks(taEditor, "\n## ", ""));
-        btnBold.setOnAction(e -> sisipkanTeks(taEditor, "**", "**"));
-        btnItalic.setOnAction(e -> sisipkanTeks(taEditor, "*", "*"));
-        btnList.setOnAction(e -> sisipkanTeks(taEditor, "\n- ", ""));
-        btnQuote.setOnAction(e -> sisipkanTeks(taEditor, "\n> ", ""));
-        btnCode.setOnAction(e -> sisipkanTeks(taEditor, "\n```\n", "\n```\n"));
-        btnHr.setOnAction(e -> sisipkanTeks(taEditor, "\n\n---\n\n", ""));
-
-        btnUpload.setOnAction(e -> {
-            javafx.stage.FileChooser fc = new javafx.stage.FileChooser();
-            fc.setTitle("Pilih File Materi (.txt atau .md)");
-            fc.getExtensionFilters().addAll(
-                    new javafx.stage.FileChooser.ExtensionFilter("Dokumen Teks / Markdown (*.txt, *.md)", "*.txt", "*.md", "*.markdown"),
-                    new javafx.stage.FileChooser.ExtensionFilter("Semua File (*.*)", "*.*")
-            );
-            java.io.File file = fc.showOpenDialog(dialog.getDialogPane().getScene().getWindow());
-            if (file != null) {
-                try {
-                    String konten = Files.readString(file.toPath(), StandardCharsets.UTF_8);
-                    taEditor.setText(konten);
-                    if (tfJudul.getText().trim().isEmpty()) {
-                        String nama = file.getName();
-                        int titik = nama.lastIndexOf('.');
-                        if (titik > 0) nama = nama.substring(0, titik);
-                        tfJudul.setText(nama);
-                    }
-                    DialogUtil.info("File '" + file.getName() + "' berhasil dimuat ke editor!");
-                } catch (IOException ex) {
-                    DialogUtil.peringatan("Gagal membaca file: " + ex.getMessage());
-                }
-            }
-        });
-
-        Tab tabTulis = new Tab("Tulis Materi", taEditor);
-        tabTulis.setClosable(false);
-
-        ScrollPane spPreview = new ScrollPane();
-        spPreview.setFitToWidth(true);
-        VBox vbPreview = new VBox(10);
-        vbPreview.setPadding(new Insets(16));
-        spPreview.setContent(vbPreview);
-
-        Tab tabPreview = new Tab("Pratinjau Siswa", spPreview);
-        tabPreview.setClosable(false);
-
-        tabPane.getSelectionModel().selectedItemProperty().addListener((obs, lama, baru) -> {
-            if (baru == tabPreview) {
-                vbPreview.getChildren().clear();
-                Label lblPreviewJudul = new Label(tfJudul.getText().trim().isEmpty() ? "Judul Materi" : tfJudul.getText().trim());
-                lblPreviewJudul.getStyleClass().add("judul-halaman");
-                vbPreview.getChildren().addAll(lblPreviewJudul, MarkdownView.render(taEditor.getText()));
-            }
-        });
-
-        tabPane.getTabs().addAll(tabTulis, tabPreview);
-        root.getChildren().addAll(barisJudul, toolbar, tabPane);
-        dialog.getDialogPane().setContent(root);
-
-        Optional<ButtonType> res = dialog.showAndWait();
-        if (res.isPresent() && res.get() == btnSimpan) {
-            String judulBaru = tfJudul.getText().trim();
-            String konten = taEditor.getText();
-
-            if (StringUtil.isKosong(judulBaru)) {
-                DialogUtil.peringatan("Judul materi wajib diisi!");
-                return;
-            }
-            if (StringUtil.isKosong(konten)) {
-                DialogUtil.peringatan("Isi materi tidak boleh kosong!");
-                return;
-            }
-
-            try {
-                if (materiLama == null) {
-                    MateriTeks mtBaru = kursusService.buatMateriTeksBaru(kursus, judulBaru, konten);
-                    List<Bab> daftarBab = new ArrayList<>();
-                    for (Bab b : kursus.getDaftarBab()) {
-                        if (b.getNomor() == bab.getNomor()) {
-                            List<Materi> daftarMateri = new ArrayList<>(b.getDaftarMateri());
-                            daftarMateri.add(mtBaru);
-                            daftarBab.add(new Bab(b.getNomor(), b.getJudul(), daftarMateri));
-                        } else {
-                            daftarBab.add(b);
-                        }
-                    }
-                    simpanKursus(kursus.denganDaftarBab(daftarBab));
-                    tampilkanBab(kursus.getDaftarBab().get(bab.getNomor() - 1));
-                    DialogUtil.info("Materi '" + judulBaru + "' berhasil ditambahkan ke " + bab.getJudul() + "!");
-                } else {
-                    kursusService.simpanTeksMateri(materiLama, konten);
-                    MateriTeks mtUpdate = new MateriTeks(materiLama.getIdMateri(), judulBaru, materiLama.getFile());
-                    List<Bab> daftarBab = new ArrayList<>();
-                    for (Bab b : kursus.getDaftarBab()) {
-                        if (b.getNomor() == bab.getNomor()) {
-                            List<Materi> daftarMateri = new ArrayList<>();
-                            for (Materi m : b.getDaftarMateri()) {
-                                if (m.getIdMateri().equals(materiLama.getIdMateri())) {
-                                    daftarMateri.add(mtUpdate);
-                                } else {
-                                    daftarMateri.add(m);
-                                }
-                            }
-                            daftarBab.add(new Bab(b.getNomor(), b.getJudul(), daftarMateri));
-                        } else {
-                            daftarBab.add(b);
-                        }
-                    }
-                    simpanKursus(kursus.denganDaftarBab(daftarBab));
-                    tampilkanTeks(mtUpdate);
-                    DialogUtil.info("Materi '" + judulBaru + "' berhasil disimpan!");
-                }
-            } catch (IOException ex) {
-                DialogUtil.peringatan("Gagal menyimpan materi: " + ex.getMessage());
-            }
-        }
-    }
-
-    private void sisipkanTeks(TextArea ta, String awalan, String akhiran) {
-        javafx.scene.control.IndexRange sel = ta.getSelection();
-        int awal = sel.getStart();
-        int akhir = sel.getEnd();
-        String teksTerpilih = ta.getSelectedText();
-        String hasil = awalan + (teksTerpilih.isEmpty() ? "" : teksTerpilih) + akhiran;
-        ta.replaceText(awal, akhir, hasil);
-        ta.requestFocus();
+        session.setKursusAktif(kursus);
+        session.setBabAktifMateri(bab);
+        session.setMateriTeksAktif(materiLama);
+        SceneRouter.pindah(Layar.EDITOR_MATERI);
     }
 
     private void simpanKursus(Kursus baru) {
@@ -1046,7 +925,7 @@ public class KursusDetailController {
             ClipboardContent content = new ClipboardContent();
             content.putString(kursus.getKode());
             Clipboard.getSystemClipboard().setContent(content);
-            btnSalin.setText("Tersalin! ✓");
+            btnSalin.setText("Tersalin!");
         });
         bannerKode.getChildren().addAll(vbInfoKode, btnSalin);
         vbTabOrang.getChildren().add(bannerKode);

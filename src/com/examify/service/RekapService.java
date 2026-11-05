@@ -82,4 +82,8 @@ public class RekapService {
     public long getJumlahPeserta() {
         return riwayat.stream().map(RiwayatNilai::nis).distinct().count();
     }
+
+    public List<RiwayatNilai> getSemuaRiwayat() {
+        return Collections.unmodifiableList(riwayat);
+    }
 }

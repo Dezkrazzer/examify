@@ -8,13 +8,13 @@ import java.util.regex.Pattern;
 /**
  * Parser Markdown sederhana (tanpa library) untuk materi bacaan.
  * Mendukung: heading #..###, paragraf, daftar "-" dan "1.", blok kode ```, kutipan ">",
- * garis "---", serta inline **tebal**, *miring*, dan `kode`.
+ * garis "---", serta inline **tebal**, *miring*, <u>garis bawah</u>, dan `kode`.
  */
 public final class MarkdownParser {
 
     public enum JenisBlok { HEADING, PARAGRAF, BUTIR, NOMOR, KODE, KUTIPAN, GARIS }
 
-    public enum GayaTeks { BIASA, TEBAL, MIRING, KODE }
+    public enum GayaTeks { BIASA, TEBAL, MIRING, KODE, GARIS_BAWAH }
 
     /** level dipakai untuk heading (1-3) dan nomor urut daftar bernomor. */
     public record Blok(JenisBlok jenis, String isi, int level) {
@@ -27,7 +27,7 @@ public final class MarkdownParser {
     private static final Pattern POLA_HEADING = Pattern.compile("^(#{1,3})\\s+(.*)$");
     private static final Pattern POLA_BUTIR = Pattern.compile("^[-*]\\s+(.*)$");
     private static final Pattern POLA_NOMOR = Pattern.compile("^(\\d+)\\.\\s+(.*)$");
-    private static final Pattern POLA_INLINE = Pattern.compile("\\*\\*(.+?)\\*\\*|`([^`]+)`|\\*(.+?)\\*");
+    private static final Pattern POLA_INLINE = Pattern.compile("\\*\\*(.+?)\\*\\*|`([^`]+)`|<u>(.+?)</u>|\\*(.+?)\\*");
 
     private MarkdownParser() {
     }
@@ -113,8 +113,10 @@ public final class MarkdownParser {
                 hasil.add(new Potongan(m.group(1), GayaTeks.TEBAL));
             } else if (m.group(2) != null) {
                 hasil.add(new Potongan(m.group(2), GayaTeks.KODE));
+            } else if (m.group(3) != null) {
+                hasil.add(new Potongan(m.group(3), GayaTeks.GARIS_BAWAH));
             } else {
-                hasil.add(new Potongan(m.group(3), GayaTeks.MIRING));
+                hasil.add(new Potongan(m.group(4), GayaTeks.MIRING));
             }
             posisi = m.end();
         }
