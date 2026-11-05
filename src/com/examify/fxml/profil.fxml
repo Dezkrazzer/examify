@@ -85,13 +85,14 @@
                 <placeholder><Label text="Belum ada riwayat ujian."/></placeholder>
                 <columns>
                     <TableColumn fx:id="colTanggal" text="Tanggal" prefWidth="125" minWidth="120"/>
-                    <TableColumn fx:id="colUjian" text="Ujian" prefWidth="210"/>
-                    <TableColumn fx:id="colSkor" text="Skor" prefWidth="70" minWidth="66"/>
-                    <TableColumn fx:id="colPredikat" text="Nilai" prefWidth="58" minWidth="54"/>
-                    <TableColumn fx:id="colStatus" text="Status" prefWidth="118" minWidth="112"/>
-                    <TableColumn fx:id="colMode" text="Mode" prefWidth="84" minWidth="80"/>
-                    <TableColumn fx:id="colDurasi" text="Durasi" prefWidth="80" minWidth="76"/>
-                    <TableColumn fx:id="colSertifikat" text="Sertifikat" prefWidth="112" minWidth="108" sortable="false"/>
+                    <TableColumn fx:id="colUjian" text="Ujian" prefWidth="190"/>
+                    <TableColumn fx:id="colSkor" text="Skor" prefWidth="65" minWidth="60"/>
+                    <TableColumn fx:id="colPredikat" text="Nilai" prefWidth="55" minWidth="50"/>
+                    <TableColumn fx:id="colStatus" text="Status" prefWidth="110" minWidth="105"/>
+                    <TableColumn fx:id="colMode" text="Mode" prefWidth="75" minWidth="70"/>
+                    <TableColumn fx:id="colDurasi" text="Durasi" prefWidth="75" minWidth="70"/>
+                    <TableColumn fx:id="colPembahasan" text="Pembahasan" prefWidth="130" minWidth="120" sortable="false"/>
+                    <TableColumn fx:id="colSertifikat" text="Sertifikat" prefWidth="100" minWidth="95" sortable="false"/>
                 </columns>
             </TableView>
         </VBox>

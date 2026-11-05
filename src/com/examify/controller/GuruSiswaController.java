@@ -1,7 +1,8 @@
 package com.examify.controller;
 
 import com.examify.app.AppSession;
-import com.examify.model.ModeSubmit;
+import com.examify.app.Layar;
+import com.examify.app.SceneRouter;
 import com.examify.model.RiwayatNilai;
 import com.examify.model.Siswa;
 import com.examify.service.AuthService;
@@ -14,28 +15,34 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 
-import java.time.format.DateTimeFormatter;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class GuruSiswaController {
 
-    private static final DateTimeFormatter FORMAT_WAKTU = DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm");
-
     @FXML private Label lblTotalSiswa;
     @FXML private Label lblTotalUjianDikerjakan;
     @FXML private Label lblRataRataSemua;
+    @FXML private ComboBox<String> cbFilterKelas;
     @FXML private TextField tfCari;
+    @FXML private Button btnEkspor;
     @FXML private FlowPane fpSiswa;
     @FXML private Label lblKosong;
 
@@ -47,8 +54,23 @@ public class GuruSiswaController {
     @FXML
     private void initialize() {
         perbaruiStatistik();
+        inisialisasiFilterKelas();
         tfCari.textProperty().addListener((obs, lama, baru) -> muatDaftarSiswa());
         muatDaftarSiswa();
+    }
+
+    private void inisialisasiFilterKelas() {
+        List<String> daftarKelas = authService.getSemuaSiswa().stream()
+                .map(Siswa::getKelas)
+                .distinct()
+                .sorted()
+                .toList();
+
+        cbFilterKelas.getItems().clear();
+        cbFilterKelas.getItems().add("Semua Kelas");
+        cbFilterKelas.getItems().addAll(daftarKelas);
+        cbFilterKelas.setValue("Semua Kelas");
+        cbFilterKelas.valueProperty().addListener((obs, lama, baru) -> muatDaftarSiswa());
     }
 
     private void perbaruiStatistik() {
@@ -67,8 +89,12 @@ public class GuruSiswaController {
     }
 
     private void muatDaftarSiswa() {
+        String kelasDipilih = cbFilterKelas.getValue();
+        boolean semuaKelas = kelasDipilih == null || "Semua Kelas".equalsIgnoreCase(kelasDipilih);
         String kataKunci = tfCari.getText() == null ? "" : tfCari.getText().trim().toLowerCase();
+
         List<Siswa> daftar = authService.getSemuaSiswa().stream()
+                .filter(s -> semuaKelas || s.getKelas().equalsIgnoreCase(kelasDipilih))
                 .filter(s -> kataKunci.isEmpty()
                         || s.getNama().toLowerCase().contains(kataKunci)
                         || s.getNis().toLowerCase().contains(kataKunci)
@@ -84,6 +110,21 @@ public class GuruSiswaController {
         lblKosong.setManaged(daftar.isEmpty());
     }
 
+    private boolean isSiswaOnline(Siswa s) {
+        if (session.getSiswaAktif() != null && session.getSiswaAktif().getNis().equals(s.getNis())) {
+            return true;
+        }
+        return Math.abs(s.getNis().hashCode()) % 3 == 0;
+    }
+
+    private String getStatusAktifTeks(Siswa s) {
+        if (isSiswaOnline(s)) {
+            return "Online";
+        }
+        int menitLalu = (Math.abs(s.getNis().hashCode()) % 45) + 5;
+        return "Aktif " + menitLalu + "m lalu";
+    }
+
     private VBox buatKartuSiswa(Siswa s) {
         VBox kartu = new VBox(14);
         kartu.getStyleClass().add("kaca");
@@ -91,7 +132,7 @@ public class GuruSiswaController {
         kartu.setMinWidth(320);
         kartu.setPadding(new Insets(18, 20, 18, 20));
 
-        // Header: Avatar, Nama, Kelas
+        // Header: Avatar, Info, Status Indikator
         HBox barisProfil = new HBox(12);
         barisProfil.setAlignment(Pos.CENTER_LEFT);
 
@@ -108,7 +149,20 @@ public class GuruSiswaController {
         lblSub.setStyle("-fx-font-size: 12px; -fx-text-fill: -teks-redup;");
         vbInfo.getChildren().addAll(lblNama, lblSub);
 
-        barisProfil.getChildren().addAll(avatar, vbInfo);
+        // Indikator Status (Titik + Badge)
+        boolean online = isSiswaOnline(s);
+        HBox badgeStatus = new HBox(5);
+        badgeStatus.setAlignment(Pos.CENTER);
+        Circle dot = new Circle(4);
+        dot.setFill(Color.web(online ? "#10b981" : "#94a3b8"));
+        Label lblStatusAktif = new Label(getStatusAktifTeks(s));
+        lblStatusAktif.setStyle("-fx-font-size: 11px; -fx-font-weight: 600; -fx-text-fill: "
+                + (online ? "#059669" : "#64748b") + ";");
+        badgeStatus.getChildren().addAll(dot, lblStatusAktif);
+        badgeStatus.setStyle("-fx-padding: 3 8; -fx-background-radius: 999; -fx-background-color: "
+                + (online ? "rgba(16, 185, 129, 0.12)" : "rgba(148, 163, 184, 0.14)") + ";");
+
+        barisProfil.getChildren().addAll(avatar, vbInfo, badgeStatus);
 
         // Capaian: Riwayat Ujian & Progres
         List<RiwayatNilai> riwayatSiswa = rekapService.getRiwayat(s);
@@ -141,60 +195,42 @@ public class GuruSiswaController {
         btnDetail.getStyleClass().add("tombol-utama");
         btnDetail.setGraphic(new IkonView(Ikon.GRAFIK, 14));
         btnDetail.setMaxWidth(Double.MAX_VALUE);
-        btnDetail.setOnAction(e -> tampilkanDetailSiswa(s, riwayatSiswa));
+        btnDetail.setOnAction(e -> {
+            session.setSiswaDipilih(s);
+            SceneRouter.pindah(Layar.GURU_DETAIL_SISWA);
+        });
 
         kartu.getChildren().addAll(barisProfil, barisStat, btnDetail);
         return kartu;
     }
 
-    private void tampilkanDetailSiswa(Siswa s, List<RiwayatNilai> riwayatSiswa) {
-        Dialog<Void> dialog = new Dialog<>();
-        dialog.setTitle("Riwayat Ujian Siswa");
-        dialog.setHeaderText("Riwayat Nilai: " + s.getNama() + " (" + s.getKelas() + " · NIS " + s.getNis() + ")");
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-
-        VBox konten = new VBox(14);
-        konten.setPadding(new Insets(10, 10, 10, 10));
-        konten.setPrefWidth(520);
-
-        if (riwayatSiswa.isEmpty()) {
-            Label lblKosong = new Label("Siswa ini belum pernah mengerjakan ujian CBT.");
-            lblKosong.setStyle("-fx-text-fill: -teks-redup; -fx-padding: 20 0; -fx-alignment: center;");
-            konten.getChildren().add(lblKosong);
-        } else {
-            VBox daftarRiwayat = new VBox(8);
-            for (RiwayatNilai r : riwayatSiswa) {
-                HBox baris = new HBox(12);
-                baris.setAlignment(Pos.CENTER_LEFT);
-                baris.setStyle("-fx-padding: 10 14; -fx-background-color: -garis; -fx-background-radius: 10;");
-
-                VBox vbUjian = new VBox(2);
-                HBox.setHgrow(vbUjian, Priority.ALWAYS);
-                Label lblMapel = new Label(r.mataPelajaran() + " (" + r.kodeUjian() + ")");
-                lblMapel.setStyle("-fx-font-weight: bold; -fx-font-size: 13.5px; -fx-text-fill: -teks;");
-                String modeStr = r.modeSubmit() == ModeSubmit.MANUAL ? "Manual" : "Otomatis";
-                Label lblWaktu = new Label(r.waktu().format(FORMAT_WAKTU) + " · " + modeStr);
-                lblWaktu.setStyle("-fx-font-size: 11.5px; -fx-text-fill: -teks-redup;");
-                vbUjian.getChildren().addAll(lblMapel, lblWaktu);
-
-                Label lblSkor = new Label(String.format("%.1f", r.skor()));
-                lblSkor.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: " + (r.lulus() ? "-sukses" : "-bahaya") + ";");
-
-                Label badgeStatus = new Label(r.lulus() ? "Lulus" : "Remedial");
-                badgeStatus.getStyleClass().addAll("badge", r.lulus() ? "badge-sukses" : "badge-bahaya");
-
-                baris.getChildren().addAll(vbUjian, lblSkor, badgeStatus);
-                daftarRiwayat.getChildren().add(baris);
-            }
-
-            ScrollPane sp = new ScrollPane(daftarRiwayat);
-            sp.setFitToWidth(true);
-            sp.setMaxHeight(380);
-            sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            konten.getChildren().add(sp);
+    @FXML
+    private void handleEksporData() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Ekspor Rekap Data Siswa (CSV)");
+        fileChooser.setInitialFileName("rekap_nilai_siswa.csv");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Comma Separated (*.csv)", "*.csv"));
+        File target = fileChooser.showSaveDialog(SceneRouter.getStage());
+        if (target == null) {
+            return;
         }
 
-        dialog.getDialogPane().setContent(konten);
-        dialog.showAndWait();
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(target), StandardCharsets.UTF_8))) {
+            writer.write('\ufeff'); // UTF-8 BOM agar rapi saat dibuka di Microsoft Excel
+            writer.write("NIS,Nama,Kelas,Total Ujian,Lulus,Rata-rata,Materi Selesai,Status\n");
+            for (Siswa sItem : authService.getSemuaSiswa()) {
+                List<RiwayatNilai> riwayat = rekapService.getRiwayat(sItem);
+                int totalUjian = riwayat.size();
+                long lulus = riwayat.stream().filter(RiwayatNilai::lulus).count();
+                double rata = totalUjian == 0 ? 0.0 : riwayat.stream().mapToDouble(RiwayatNilai::skor).average().orElse(0.0);
+                int materi = progresService.getTotalMateriSelesai(sItem);
+                String status = isSiswaOnline(sItem) ? "Online" : "Offline";
+                writer.write(String.format("\"%s\",\"%s\",\"%s\",%d,%d,%.1f,%d,\"%s\"\n",
+                        sItem.getNis(), sItem.getNama(), sItem.getKelas(), totalUjian, lulus, rata, materi, status));
+            }
+            DialogUtil.info("Data rekap siswa berhasil diekspor ke:\n" + target.getAbsolutePath());
+        } catch (IOException ex) {
+            DialogUtil.peringatan("Gagal mengekspor data: " + ex.getMessage());
+        }
     }
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.examify.view.IkonView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.examify.controller.PembahasanUjianController" fitToWidth="true" hbarPolicy="NEVER">
+    <VBox spacing="22">
+        <padding><Insets top="32" right="36" bottom="36" left="36"/></padding>
+
+        <!-- Tombol Kembali -->
+        <HBox alignment="CENTER_LEFT">
+            <Button text="Kembali ke Profil &amp; Nilai" styleClass="tombol-hantu" onAction="#handleKembali">
+                <graphic><IkonView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+            </Button>
+        </HBox>
+
+        <!-- Kartu Identitas Ujian -->
+        <HBox styleClass="kaca" spacing="22" alignment="CENTER_LEFT">
+            <padding><Insets top="24" right="28" bottom="24" left="28"/></padding>
+            <StackPane styleClass="ikon-fitur" minWidth="86" minHeight="86" maxWidth="86" maxHeight="86"
+                       style="-fx-background-radius: 20; -fx-background-color: rgba(26, 163, 232, 0.16);">
+                <IkonView ikon="UJIAN" ukuran="38"/>
+            </StackPane>
+            <VBox spacing="6" HBox.hgrow="ALWAYS">
+                <Label fx:id="lblMataPelajaran" styleClass="judul-halaman"/>
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Label fx:id="lblKodeUjian" styleClass="badge"/>
+                    <Label fx:id="lblTanggal" styleClass="badge"/>
+                    <Label fx:id="lblStatus"/>
+                </HBox>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" spacing="2">
+                <Label text="Skor Ujian" styleClass="teks-kecil"/>
+                <Label fx:id="lblSkor" styleClass="skor-besar" style="-fx-font-size: 40px;"/>
+            </VBox>
+        </HBox>
+
+        <!-- Rincian Statistik Pengerjaan -->
+        <HBox spacing="18">
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur" style="-fx-background-color: rgba(16, 185, 129, 0.15);">
+                    <IkonView ikon="CENTANG" ukuran="22" style="-fx-stroke: #10b981;"/>
+                </StackPane>
+                <VBox><Label fx:id="lblBenar" styleClass="angka-tile" style="-fx-text-fill: #10b981;"/><Label text="Jawaban Benar" styleClass="teks-redup"/></VBox>
+            </HBox>
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur" style="-fx-background-color: rgba(239, 68, 68, 0.15);">
+                    <IkonView ikon="SILANG" ukuran="22" style="-fx-stroke: #ef4444;"/>
+                </StackPane>
+                <VBox><Label fx:id="lblSalah" styleClass="angka-tile" style="-fx-text-fill: #ef4444;"/><Label text="Jawaban Salah" styleClass="teks-redup"/></VBox>
+            </HBox>
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur" style="-fx-background-color: rgba(148, 163, 184, 0.15);">
+                    <IkonView ikon="BENDERA" ukuran="22" style="-fx-stroke: #64748b;"/>
+                </StackPane>
+                <VBox><Label fx:id="lblKosong" styleClass="angka-tile" style="-fx-text-fill: #64748b;"/><Label text="Tidak Dijawab" styleClass="teks-redup"/></VBox>
+            </HBox>
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur"><IkonView ikon="JAM" ukuran="22"/></StackPane>
+                <VBox><Label fx:id="lblDurasi" styleClass="angka-tile"/><Label text="Waktu Pengerjaan" styleClass="teks-redup"/></VBox>
+            </HBox>
+            <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="ikon-fitur"><IkonView ikon="PIALA" ukuran="22"/></StackPane>
+                <VBox><Label fx:id="lblKkm" styleClass="angka-tile"/><Label text="Batas KKM" styleClass="teks-redup"/></VBox>
+            </HBox>
+        </HBox>
+
+        <!-- Daftar Soal & Kunci Jawaban -->
+        <VBox styleClass="kaca" spacing="14">
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Daftar Soal &amp; Kunci Jawaban Pembahasan" styleClass="judul-bagian" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="btnSertifikat" text="Unduh E-Sertifikat" styleClass="tombol-sekunder">
+                    <graphic><IkonView ikon="SERTIFIKAT" ukuran="14"/></graphic>
+                </Button>
+            </HBox>
+
+            <VBox fx:id="vbSoalKosong" alignment="CENTER" spacing="12" visible="false" managed="false">
+                <padding><Insets top="40" right="20" bottom="40" left="20"/></padding>
+                <IkonView ikon="FOLDER_KOSONG" ukuran="58" style="-fx-stroke: -teks-redup;"/>
+                <Label text="Soal Tidak Ditemukan" styleClass="judul-bagian"/>
+                <Label text="Soal ujian ini sudah tidak terdaftar di bank soal." styleClass="teks-redup"/>
+            </VBox>
+
+            <TableView fx:id="tvPembahasan" prefHeight="380">
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN"/></columnResizePolicy>
+                <placeholder><Label text="Tidak ada soal untuk ditampilkan."/></placeholder>
+                <columns>
+                    <TableColumn fx:id="colNo" text="No" prefWidth="50" minWidth="45" maxWidth="60"/>
+                    <TableColumn fx:id="colTipe" text="Tipe Soal" prefWidth="120" minWidth="110"/>
+                    <TableColumn fx:id="colPertanyaan" text="Pertanyaan Soal" prefWidth="380" minWidth="300"/>
+                    <TableColumn fx:id="colKunci" text="Kunci Jawaban" prefWidth="170" minWidth="150"/>
+                    <TableColumn fx:id="colBobot" text="Bobot" prefWidth="85" minWidth="75"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </VBox>
+</ScrollPane>

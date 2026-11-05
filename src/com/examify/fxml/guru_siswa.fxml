@@ -2,6 +2,8 @@
 
 <?import com.examify.view.IkonView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -39,9 +41,15 @@
         <HBox spacing="12" alignment="CENTER_LEFT">
             <Label text="Daftar Siswa Terdaftar" styleClass="judul-bagian"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <HBox styleClass="kotak-cari" alignment="CENTER_LEFT" spacing="6" prefWidth="280">
-                <IkonView ikon="CARI" ukuran="16"/>
-                <TextField fx:id="tfCari" promptText="Cari nama, kelas, atau NIS..." HBox.hgrow="ALWAYS"/>
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <ComboBox fx:id="cbFilterKelas" prefWidth="150" promptText="Filter Kelas"/>
+                <HBox styleClass="kotak-cari" alignment="CENTER_LEFT" spacing="6" prefWidth="240">
+                    <IkonView ikon="CARI" ukuran="16"/>
+                    <TextField fx:id="tfCari" promptText="Cari nama atau NIS..." HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <Button fx:id="btnEkspor" text="Ekspor Data (CSV)" onAction="#handleEksporData" styleClass="tombol-sekunder">
+                    <graphic><IkonView ikon="UNDUH" ukuran="14"/></graphic>
+                </Button>
             </HBox>
         </HBox>
 
