@@ -109,6 +109,5 @@ NAMA=JOMOKISASI
 PENGAJAR=Alfian Naufal, S.Mok
 DESKRIPSI=Pembelajaran jomok
 [BAB] Bab 1: Pendahuluan
-UJIAN|jmk48-u4079|Ujian Bab 1: Pendahuluan|JM-48
 [END]
 
