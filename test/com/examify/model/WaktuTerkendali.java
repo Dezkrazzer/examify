@@ -14,6 +14,10 @@ public class WaktuTerkendali extends Clock {
         sekarang = sekarang.plus(durasi);
     }
 
+    public void setWaktu(java.time.LocalDateTime dt) {
+        sekarang = dt.atZone(getZone()).toInstant();
+    }
+
     @Override
     public ZoneId getZone() {
         return ZoneId.of("Asia/Jakarta");

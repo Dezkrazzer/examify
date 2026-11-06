@@ -8,12 +8,14 @@ import com.examify.model.ModeSubmit;
 import com.examify.model.Siswa;
 import com.examify.model.Ujian;
 import com.examify.utils.AppConfig;
+import com.examify.utils.FormatUtil;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -100,9 +102,22 @@ public class UjianService {
         }
     }
 
-    /** Ujian boleh dimulai bila belum pernah dikerjakan, atau konfigurasinya ULANG=true. */
+    /** Ujian boleh dimulai bila belum pernah dikerjakan (atau ULANG=true) dan waktu akses saat ini dibuka. */
     public boolean bolehMulai(Siswa siswa, Ujian ujian) {
-        return ujian.isBolehUlang() || !rekapService.sudahMengerjakan(siswa, ujian);
+        LocalDateTime sekarang = LocalDateTime.now(clock);
+        return (ujian.isBolehUlang() || !rekapService.sudahMengerjakan(siswa, ujian)) && ujian.isAksesDibuka(sekarang);
+    }
+
+    /** Menghasilkan pesan status jika akses ujian belum dibuka atau sudah berakhir, atau null jika dibuka. */
+    public String getPesanStatusAkses(Ujian ujian) {
+        LocalDateTime sekarang = LocalDateTime.now(clock);
+        if (ujian.isBelumMulai(sekarang)) {
+            return "Ujian belum dibuka. Akses dibuka pada " + FormatUtil.formatWaktuAkses(ujian.getWaktuMulai()) + ".";
+        }
+        if (ujian.isSudahBerakhir(sekarang)) {
+            return "Waktu akses ujian telah berakhir pada " + FormatUtil.formatWaktuAkses(ujian.getWaktuSelesai()) + ".";
+        }
+        return null;
     }
 
     /**

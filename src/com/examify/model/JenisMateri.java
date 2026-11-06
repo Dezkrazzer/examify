@@ -5,7 +5,9 @@ public enum JenisMateri {
     TEKS("Bacaan"),
     LINK("Tautan"),
     PDF("Dokumen PDF"),
-    UJIAN("Ujian");
+    UJIAN("Ujian"),
+    QUIZ("Kuis"),
+    TUGAS("Tugas");
 
     private final String label;
 

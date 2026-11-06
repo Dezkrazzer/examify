@@ -1,14 +1,14 @@
 package com.examify.model;
 
-import com.examify.utils.StringUtil;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
-/** Satu paket ujian beserta bank soalnya (komposisi: Ujian memiliki Soal). */
+/** Paket ujian CBT: identitas, token, daftar soal, KKM, durasi, dan jadwal akses. */
 public class Ujian {
 
     public static final short DURASI_MIN_MENIT = 1;
@@ -16,43 +16,59 @@ public class Ujian {
 
     private final String kodeUjian;
     private final String mataPelajaran;
-    private final String token; // tanpa getter publik
-    private final short durasiMenit; // 1-180 menit cukup ditampung short
+    private final String token;
+    private final int durasiMenit;
     private final double kkm;
     private final List<Soal> daftarSoal;
     private final boolean bolehUlang;
+    private final LocalDateTime waktuMulai;
+    private final LocalDateTime waktuSelesai;
 
-    /** Ujian yang hanya boleh dikerjakan sekali. */
-    public Ujian(String kodeUjian, String mataPelajaran, String token,
-                 int durasiMenit, double kkm, List<Soal> daftarSoal) {
-        this(kodeUjian, mataPelajaran, token, durasiMenit, kkm, daftarSoal, false);
+    public Ujian(String kodeUjian, String mataPelajaran, String token, int durasiMenit,
+                 double kkm, List<Soal> daftarSoal) {
+        this(kodeUjian, mataPelajaran, token, durasiMenit, kkm, daftarSoal, false, null, null);
     }
 
-    public Ujian(String kodeUjian, String mataPelajaran, String token,
-                 int durasiMenit, double kkm, List<Soal> daftarSoal, boolean bolehUlang) {
-        if (StringUtil.isKosong(kodeUjian) || StringUtil.isKosong(mataPelajaran) || StringUtil.isKosong(token)) {
-            throw new IllegalArgumentException("Kode, mata pelajaran, dan token wajib diisi");
+    public Ujian(String kodeUjian, String mataPelajaran, String token, int durasiMenit,
+                 double kkm, List<Soal> daftarSoal, boolean bolehUlang) {
+        this(kodeUjian, mataPelajaran, token, durasiMenit, kkm, daftarSoal, bolehUlang, null, null);
+    }
+
+    public Ujian(String kodeUjian, String mataPelajaran, String token, int durasiMenit,
+                 double kkm, List<Soal> daftarSoal, boolean bolehUlang,
+                 LocalDateTime waktuMulai, LocalDateTime waktuSelesai) {
+        if (kodeUjian == null || kodeUjian.isBlank()) {
+            throw new IllegalArgumentException("Kode ujian tidak boleh kosong");
+        }
+        if (mataPelajaran == null || mataPelajaran.isBlank()) {
+            throw new IllegalArgumentException("Mata pelajaran tidak boleh kosong");
+        }
+        if (token == null || token.isBlank()) {
+            throw new IllegalArgumentException("Token tidak boleh kosong");
         }
         if (durasiMenit < DURASI_MIN_MENIT || durasiMenit > DURASI_MAKS_MENIT) {
             throw new IllegalArgumentException("Durasi harus " + DURASI_MIN_MENIT + "-" + DURASI_MAKS_MENIT + " menit");
         }
-        if (kkm < 0 || kkm > Gradable.NILAI_MAKSIMUM) {
-            throw new IllegalArgumentException("KKM harus 0-100");
+        if (kkm < 0 || kkm > 100) {
+            throw new IllegalArgumentException("KKM harus di antara 0 dan 100");
         }
         if (daftarSoal == null || daftarSoal.isEmpty()) {
             throw new IllegalArgumentException("Ujian minimal memiliki 1 soal");
         }
-        pastikanIdUnik(daftarSoal);
+        if (waktuMulai != null && waktuSelesai != null && waktuMulai.isAfter(waktuSelesai)) {
+            throw new IllegalArgumentException("Waktu mulai tidak boleh setelah waktu selesai");
+        }
+
         this.kodeUjian = kodeUjian.trim().toUpperCase();
         this.mataPelajaran = mataPelajaran.trim();
         this.token = token.trim().toUpperCase();
-        this.durasiMenit = (short) durasiMenit; // aman: rentang sudah divalidasi
+        this.durasiMenit = durasiMenit;
         this.kkm = kkm;
-        this.daftarSoal = new ArrayList<>(daftarSoal);
+        this.daftarSoal = List.copyOf(daftarSoal);
         this.bolehUlang = bolehUlang;
-    }
+        this.waktuMulai = waktuMulai;
+        this.waktuSelesai = waktuSelesai;
 
-    private static void pastikanIdUnik(List<Soal> daftarSoal) {
         Set<Integer> idTerpakai = new HashSet<>();
         for (Soal soal : daftarSoal) {
             if (!idTerpakai.add(soal.getIdSoal())) {
@@ -89,10 +105,46 @@ public class Ujian {
         return token;
     }
 
+    public LocalDateTime getWaktuMulai() {
+        return waktuMulai;
+    }
+
+    public LocalDateTime getWaktuSelesai() {
+        return waktuSelesai;
+    }
+
+    public boolean hasJadwalAkses() {
+        return waktuMulai != null || waktuSelesai != null;
+    }
+
+    public boolean isBelumMulai() {
+        return isBelumMulai(LocalDateTime.now());
+    }
+
+    public boolean isBelumMulai(LocalDateTime sekarang) {
+        return waktuMulai != null && sekarang.isBefore(waktuMulai);
+    }
+
+    public boolean isSudahBerakhir() {
+        return isSudahBerakhir(LocalDateTime.now());
+    }
+
+    public boolean isSudahBerakhir(LocalDateTime sekarang) {
+        return waktuSelesai != null && sekarang.isAfter(waktuSelesai);
+    }
+
+    public boolean isAksesDibuka() {
+        return isAksesDibuka(LocalDateTime.now());
+    }
+
+    public boolean isAksesDibuka(LocalDateTime sekarang) {
+        return !isBelumMulai(sekarang) && !isSudahBerakhir(sekarang);
+    }
+
     public Ujian denganSoalDiacak() {
         List<Soal> acak = new ArrayList<>(daftarSoal);
         Collections.shuffle(acak);
-        return new Ujian(kodeUjian, mataPelajaran, token, durasiMenit, kkm, acak, bolehUlang);
+        return new Ujian(kodeUjian, mataPelajaran, token, durasiMenit, kkm, acak, bolehUlang, waktuMulai, waktuSelesai);
     }
 
     public boolean isBolehUlang() {

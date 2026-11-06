@@ -37,19 +37,27 @@
                 <HBox spacing="10" alignment="CENTER_LEFT" styleClass="kaca" style="-fx-padding: 8 14;">
                     <VBox spacing="2">
                         <Label text="Mapel:" styleClass="teks-kecil"/>
-                        <TextField fx:id="tfMapel" prefWidth="150" promptText="Nama Mapel"/>
+                        <TextField fx:id="tfMapel" prefWidth="130" promptText="Nama Mapel"/>
                     </VBox>
                     <VBox spacing="2">
                         <Label text="Durasi (mnt):" styleClass="teks-kecil"/>
-                        <TextField fx:id="tfDurasi" prefWidth="75" promptText="30"/>
+                        <TextField fx:id="tfDurasi" prefWidth="65" promptText="30"/>
                     </VBox>
                     <VBox spacing="2">
                         <Label text="KKM:" styleClass="teks-kecil"/>
-                        <TextField fx:id="tfKkm" prefWidth="60" promptText="75"/>
+                        <TextField fx:id="tfKkm" prefWidth="55" promptText="75"/>
                     </VBox>
                     <VBox spacing="2">
                         <Label text="Token:" styleClass="teks-kecil"/>
-                        <TextField fx:id="tfToken" prefWidth="85" promptText="TOKEN6"/>
+                        <TextField fx:id="tfToken" prefWidth="75" promptText="TOKEN6"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="Buka Akses:" styleClass="teks-kecil"/>
+                        <TextField fx:id="tfAksesMulai" prefWidth="125" promptText="yyyy-MM-dd HH:mm"/>
+                    </VBox>
+                    <VBox spacing="2">
+                        <Label text="Tutup Akses:" styleClass="teks-kecil"/>
+                        <TextField fx:id="tfAksesSelesai" prefWidth="125" promptText="yyyy-MM-dd HH:mm"/>
                     </VBox>
                 </HBox>
             </HBox>

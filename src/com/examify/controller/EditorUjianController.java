@@ -9,6 +9,7 @@ import com.examify.model.SoalIsian;
 import com.examify.model.SoalPilihanGanda;
 import com.examify.model.SoalTrueFalse;
 import com.examify.model.Ujian;
+import com.examify.utils.FormatUtil;
 import com.examify.utils.StringUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +27,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -60,6 +62,8 @@ public class EditorUjianController {
     @FXML private TextField tfDurasi;
     @FXML private TextField tfKkm;
     @FXML private TextField tfToken;
+    @FXML private TextField tfAksesMulai;
+    @FXML private TextField tfAksesSelesai;
 
     @FXML private Label lblJumlahSoal;
     @FXML private ListView<DrafSoal> lvSoal;
@@ -89,6 +93,8 @@ public class EditorUjianController {
         tfDurasi.setText(String.valueOf(ujian.getDurasiMenit()));
         tfKkm.setText(ujian.getKkm() == (long) ujian.getKkm() ? String.format("%d", (long) ujian.getKkm()) : String.valueOf(ujian.getKkm()));
         tfToken.setText(ujian.getToken());
+        tfAksesMulai.setText(FormatUtil.formatInputAkses(ujian.getWaktuMulai()));
+        tfAksesSelesai.setText(FormatUtil.formatInputAkses(ujian.getWaktuSelesai()));
 
         cbJenisSoal.getItems().setAll(JenisSoal.values());
         cbJenisSoal.valueProperty().addListener((obs, lama, baru) -> {
@@ -421,7 +427,13 @@ public class EditorUjianController {
                 }
             }
 
-            Ujian ujianBaru = new Ujian(ujian.getKodeUjian(), mapel, token, durasi, kkm, hasilSoal, ujian.isBolehUlang());
+            LocalDateTime waktuMulai = FormatUtil.parseInputAkses(tfAksesMulai != null ? tfAksesMulai.getText() : null);
+            LocalDateTime waktuSelesai = FormatUtil.parseInputAkses(tfAksesSelesai != null ? tfAksesSelesai.getText() : null);
+            if (waktuMulai != null && waktuSelesai != null && waktuMulai.isAfter(waktuSelesai)) {
+                throw new IllegalArgumentException("Waktu mulai akses tidak boleh lebih lambat dari waktu tutup akses");
+            }
+
+            Ujian ujianBaru = new Ujian(ujian.getKodeUjian(), mapel, token, durasi, kkm, hasilSoal, ujian.isBolehUlang(), waktuMulai, waktuSelesai);
 
             session.getUjianService().perbaruiUjian(ujianBaru);
             session.setUjianAktif(ujianBaru);
