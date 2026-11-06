@@ -5,6 +5,7 @@ import com.examify.model.SoalIsian;
 import com.examify.model.SoalPilihanGanda;
 import com.examify.model.SoalTrueFalse;
 import com.examify.model.Ujian;
+import com.examify.utils.FormatUtil;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -41,6 +42,14 @@ public class BankSoalWriter {
                 bw.newLine();
                 if (ujian.isBolehUlang()) {
                     bw.write("ULANG=true");
+                    bw.newLine();
+                }
+                if (ujian.getWaktuMulai() != null) {
+                    bw.write("AKSES_MULAI=" + FormatUtil.formatInputAkses(ujian.getWaktuMulai()));
+                    bw.newLine();
+                }
+                if (ujian.getWaktuSelesai() != null) {
+                    bw.write("AKSES_SELESAI=" + FormatUtil.formatInputAkses(ujian.getWaktuSelesai()));
                     bw.newLine();
                 }
                 bw.write("[SOAL]");

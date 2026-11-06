@@ -119,5 +119,6 @@ KKM=50
 [SOAL]
 PG|1|Berapa panjang punya alfian|10cm;12cm;15cm;18cm|A|10
 PG|2|Berapa diameter punya alfian|3cm;4cm;5cm;6cm|A|10
+PG|3|How much has Akbar's lenght increased?|1 cm;1.25 cm;1.5 cm;2 cm|C|10
 [END]
 

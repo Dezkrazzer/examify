@@ -8,6 +8,7 @@ import com.examify.model.SoalPilihanGanda;
 import com.examify.model.SoalTrueFalse;
 import com.examify.model.Ujian;
 import com.examify.service.UjianService;
+import com.examify.utils.FormatUtil;
 import com.examify.utils.StringUtil;
 import com.examify.view.Ikon;
 import com.examify.view.IkonView;
@@ -31,18 +32,25 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class BankSoalController {
 
-    @FXML private Label lblTotalUjian;
-    @FXML private Label lblTotalSoal;
-    @FXML private Label lblTotalPeserta;
-    @FXML private TextField tfCari;
-    @FXML private FlowPane fpUjian;
-    @FXML private Label lblKosong;
+    @FXML
+    private Label lblTotalUjian;
+    @FXML
+    private Label lblTotalSoal;
+    @FXML
+    private Label lblTotalPeserta;
+    @FXML
+    private TextField tfCari;
+    @FXML
+    private FlowPane fpUjian;
+    @FXML
+    private Label lblKosong;
 
     private final AppSession session = AppSession.getInstance();
     private final UjianService ujianService = session.getUjianService();
@@ -125,7 +133,8 @@ public class BankSoalController {
         Label lblDurasi = new Label(u.getDurasiMenit() + " Menit");
         lblDurasi.getStyleClass().add("teks-kecil");
 
-        String strKkm = u.getKkm() == (long) u.getKkm() ? String.format("%d", (long) u.getKkm()) : String.valueOf(u.getKkm());
+        String strKkm = u.getKkm() == (long) u.getKkm() ? String.format("%d", (long) u.getKkm())
+                : String.valueOf(u.getKkm());
         Label lblKkm = new Label("KKM " + strKkm);
         lblKkm.getStyleClass().add("teks-kecil");
 
@@ -142,9 +151,8 @@ public class BankSoalController {
         HBox barisAksi = new HBox(8);
         barisAksi.setAlignment(Pos.CENTER_LEFT);
 
-        Button btnEdit = new Button("Kelola & Edit Soal");
+        Button btnEdit = new Button("Edit Soal");
         btnEdit.getStyleClass().add("tombol-utama");
-        btnEdit.setGraphic(new IkonView(Ikon.DOKUMEN, 14));
         HBox.setHgrow(btnEdit, Priority.ALWAYS);
         btnEdit.setMaxWidth(Double.MAX_VALUE);
         btnEdit.setOnAction(e -> {
@@ -155,18 +163,24 @@ public class BankSoalController {
 
         Button btnSetting = new Button("Pengaturan");
         btnSetting.getStyleClass().add("tombol-sekunder");
-        btnSetting.setGraphic(new IkonView(Ikon.MAIN, 14));
         btnSetting.setOnAction(e -> handleUbahPengaturan(u));
 
         Button btnHapus = new Button();
-        btnHapus.getStyleClass().add("tombol-hantu");
-        btnHapus.setGraphic(new IkonView(Ikon.KELUAR, 14));
+        btnHapus.getStyleClass().add("tombol-bahaya");
+        btnHapus.setGraphic(new IkonView(Ikon.SAMPAH, 14));
         btnHapus.setTooltip(new Tooltip("Hapus Ujian"));
         btnHapus.setOnAction(e -> handleHapusUjian(u));
 
         barisAksi.getChildren().addAll(btnEdit, btnSetting, btnHapus);
 
-        kartu.getChildren().addAll(barisAtas, lblMapel, barisInfo, lblKomposisi, barisAksi);
+        if (u.hasJadwalAkses()) {
+            Label lblAkses = new Label(
+                    "Akses: " + FormatUtil.formatRentangWaktuAkses(u.getWaktuMulai(), u.getWaktuSelesai()));
+            lblAkses.getStyleClass().add("badge");
+            kartu.getChildren().addAll(barisAtas, lblMapel, barisInfo, lblKomposisi, lblAkses, barisAksi);
+        } else {
+            kartu.getChildren().addAll(barisAtas, lblMapel, barisInfo, lblKomposisi, barisAksi);
+        }
         return kartu;
     }
 
@@ -185,9 +199,14 @@ public class BankSoalController {
 
         TextField tfMapel = new TextField(u.getMataPelajaran());
         TextField tfDurasi = new TextField(String.valueOf(u.getDurasiMenit()));
-        String strKkm = u.getKkm() == (long) u.getKkm() ? String.format("%d", (long) u.getKkm()) : String.valueOf(u.getKkm());
+        String strKkm = u.getKkm() == (long) u.getKkm() ? String.format("%d", (long) u.getKkm())
+                : String.valueOf(u.getKkm());
         TextField tfKkm = new TextField(strKkm);
         TextField tfToken = new TextField(u.getToken());
+        TextField tfAksesMulai = new TextField(FormatUtil.formatInputAkses(u.getWaktuMulai()));
+        tfAksesMulai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
+        TextField tfAksesSelesai = new TextField(FormatUtil.formatInputAkses(u.getWaktuSelesai()));
+        tfAksesSelesai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
 
         grid.add(new Label("Mata Pelajaran:"), 0, 0);
         grid.add(tfMapel, 1, 0);
@@ -197,6 +216,10 @@ public class BankSoalController {
         grid.add(tfKkm, 1, 2);
         grid.add(new Label("Token (6 karakter):"), 0, 3);
         grid.add(tfToken, 1, 3);
+        grid.add(new Label("Waktu Buka:"), 0, 4);
+        grid.add(tfAksesMulai, 1, 4);
+        grid.add(new Label("Waktu Tutup:"), 0, 5);
+        grid.add(tfAksesSelesai, 1, 5);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -210,7 +233,7 @@ public class BankSoalController {
                 durasiBaru = Integer.parseInt(tfDurasi.getText().trim());
                 kkmBaru = Double.parseDouble(tfKkm.getText().trim());
             } catch (NumberFormatException ex) {
-                DialogUtil.peringatan("Durasi dan KKM harus berupa angka!");
+                DialogUtil.peringatan("Durasi dan KKM harus angka!");
                 return;
             }
 
@@ -219,8 +242,16 @@ public class BankSoalController {
                 return;
             }
 
+            LocalDateTime mulai = FormatUtil.parseInputAkses(tfAksesMulai.getText());
+            LocalDateTime selesai = FormatUtil.parseInputAkses(tfAksesSelesai.getText());
+            if (mulai != null && selesai != null && mulai.isAfter(selesai)) {
+                DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup");
+                return;
+            }
+
             try {
-                Ujian ujianBaru = new Ujian(u.getKodeUjian(), mapelBaru, tokenBaru, durasiBaru, kkmBaru, u.getDaftarSoal(), u.isBolehUlang());
+                Ujian ujianBaru = new Ujian(u.getKodeUjian(), mapelBaru, tokenBaru, durasiBaru, kkmBaru,
+                        u.getDaftarSoal(), u.isBolehUlang(), mulai, selesai);
                 ujianService.perbaruiUjian(ujianBaru);
                 muatDaftarUjian();
                 perbaruiStatistik();
@@ -232,7 +263,8 @@ public class BankSoalController {
     }
 
     private void handleHapusUjian(Ujian u) {
-        if (DialogUtil.konfirmasi("Hapus paket ujian " + u.getKodeUjian() + " (" + u.getMataPelajaran() + ") dari Bank Soal?")) {
+        if (DialogUtil.konfirmasi(
+                "Hapus paket ujian " + u.getKodeUjian() + " (" + u.getMataPelajaran() + ") dari Bank Soal?")) {
             try {
                 ujianService.hapusUjian(u.getKodeUjian());
                 muatDaftarUjian();
@@ -263,8 +295,12 @@ public class BankSoalController {
         TextField tfMapel = new TextField("");
         TextField tfDurasi = new TextField("30");
         TextField tfKkm = new TextField("75");
-        String saranToken = ("CBT" + (int)(Math.random() * 899 + 100)).toUpperCase();
+        String saranToken = ("CBT" + (int) (Math.random() * 899 + 100)).toUpperCase();
         TextField tfToken = new TextField(saranToken);
+        TextField tfAksesMulai = new TextField("");
+        tfAksesMulai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
+        TextField tfAksesSelesai = new TextField("");
+        tfAksesSelesai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
 
         grid.add(new Label("Kode Ujian:"), 0, 0);
         grid.add(tfKode, 1, 0);
@@ -276,6 +312,10 @@ public class BankSoalController {
         grid.add(tfKkm, 1, 3);
         grid.add(new Label("Token (6 karakter):"), 0, 4);
         grid.add(tfToken, 1, 4);
+        grid.add(new Label("Waktu Buka:"), 0, 5);
+        grid.add(tfAksesMulai, 1, 5);
+        grid.add(new Label("Waktu Tutup:"), 0, 6);
+        grid.add(tfAksesSelesai, 1, 6);
 
         dialog.getDialogPane().setContent(grid);
 
@@ -304,8 +344,15 @@ public class BankSoalController {
                 return;
             }
 
+            LocalDateTime mulai = FormatUtil.parseInputAkses(tfAksesMulai.getText());
+            LocalDateTime selesai = FormatUtil.parseInputAkses(tfAksesSelesai.getText());
+            if (mulai != null && selesai != null && mulai.isAfter(selesai)) {
+                DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup");
+                return;
+            }
+
             try {
-                Ujian ujianBaru = new Ujian(kode, mapel, token, durasi, kkm, new ArrayList<>(), false);
+                Ujian ujianBaru = new Ujian(kode, mapel, token, durasi, kkm, new ArrayList<>(), false, mulai, selesai);
                 ujianService.tambahUjian(ujianBaru);
                 session.setKursusAktif(null);
                 session.setUjianAktif(ujianBaru);

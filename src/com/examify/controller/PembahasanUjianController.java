@@ -100,21 +100,6 @@ public class PembahasanUjianController {
     private void isiTabelPembahasan(List<Soal> daftarSoal) {
         TabelUtil.kolom(colNo, s -> String.valueOf(daftarSoal.indexOf(s) + 1));
         TabelUtil.kolom(colTipe, s -> s.getJenis().getLabel());
-        colTipe.setCellFactory(kolom -> new TableCell<Soal, String>() {
-            @Override
-            protected void updateItem(String teks, boolean kosong) {
-                super.updateItem(teks, kosong);
-                setText(null);
-                if (kosong || teks == null) {
-                    setGraphic(null);
-                    return;
-                }
-                Label badge = new Label(teks);
-                badge.getStyleClass().addAll("badge", "badge-netral");
-                setGraphic(badge);
-            }
-        });
-
         TabelUtil.kolom(colPertanyaan, Soal::getPertanyaan);
         TabelUtil.kolom(colKunci, s -> s.bukaKunci(StatusUjian.SELESAI));
         TabelUtil.kolom(colBobot, s -> FormatUtil.angka(s.getBobot()) + " Poin");
@@ -138,6 +123,10 @@ public class PembahasanUjianController {
 
     @FXML
     private void handleKembali() {
-        SceneRouter.pindah(Layar.PROFIL);
+        if (session.getKursusAktif() != null) {
+            SceneRouter.pindah(Layar.KURSUS_DETAIL);
+        } else {
+            SceneRouter.pindah(Layar.PROFIL);
+        }
     }
 }

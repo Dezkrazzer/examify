@@ -1,6 +1,7 @@
 package com.examify.utils;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
@@ -13,6 +14,10 @@ public final class FormatUtil {
     private static final DateTimeFormatter TANGGAL_SINGKAT = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
     private static final DateTimeFormatter TANGGAL_PANJANG =
             DateTimeFormatter.ofPattern("dd MMMM yyyy, HH:mm", Locale.forLanguageTag("id-ID"));
+    private static final DateTimeFormatter FORMAT_WAKTU_AKSES =
+            DateTimeFormatter.ofPattern("dd MMM yyyy, HH:mm", Locale.forLanguageTag("id-ID"));
+    private static final DateTimeFormatter FORMAT_INPUT_AKSES =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private FormatUtil() {
     }
@@ -78,5 +83,42 @@ public final class FormatUtil {
 
     public static String tanggalPanjang(LocalDateTime waktu) {
         return TANGGAL_PANJANG.format(waktu);
+    }
+
+    public static String formatWaktuAkses(LocalDateTime waktu) {
+        if (waktu == null) return "-";
+        return FORMAT_WAKTU_AKSES.format(waktu);
+    }
+
+    public static String formatInputAkses(LocalDateTime waktu) {
+        if (waktu == null) return "";
+        return FORMAT_INPUT_AKSES.format(waktu);
+    }
+
+    public static String formatRentangWaktuAkses(LocalDateTime mulai, LocalDateTime selesai) {
+        if (mulai == null && selesai == null) return "Bebas";
+        if (mulai != null && selesai != null) {
+            return formatWaktuAkses(mulai) + " s.d. " + formatWaktuAkses(selesai);
+        }
+        if (mulai != null) {
+            return "Mulai " + formatWaktuAkses(mulai);
+        }
+        return "Sampai " + formatWaktuAkses(selesai);
+    }
+
+    public static LocalDateTime parseInputAkses(String teks) {
+        if (teks == null || teks.trim().isEmpty()) return null;
+        String s = teks.trim();
+        try {
+            if (s.contains("T")) {
+                return LocalDateTime.parse(s);
+            } else if (s.contains(" ")) {
+                return LocalDateTime.parse(s, FORMAT_INPUT_AKSES);
+            } else {
+                return LocalDate.parse(s).atStartOfDay();
+            }
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

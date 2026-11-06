@@ -143,6 +143,25 @@
     -fx-text-fill: -teks;
 }
 .tombol-sekunder:hover { -fx-border-color: -aksen; -fx-text-fill: -aksen; }
+.tombol-bahaya {
+    -fx-background-color: -bahaya;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 9 12;
+    -fx-cursor: hand;
+}
+.tombol-bahaya:hover {
+    -fx-background-color: derive(-bahaya, -12%);
+    -fx-effect: dropshadow(gaussian, rgba(229, 72, 77, 0.4), 14, 0.1, 0, 4);
+}
+.tombol-bahaya:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+.tombol-bahaya .ikon {
+    -fx-stroke: white;
+}
 .tombol-sekunder:hover .ikon { -fx-stroke: -aksen; }
 .tombol-ragu {
     -fx-background-color: -kaca-kuat;
@@ -506,6 +525,68 @@
     -fx-text-fill: -teks-redup;
 }
 .nomor-bab-selesai { -fx-background-color: -sukses; -fx-text-fill: white; }
+.daftar-bab .item-bab-guru {
+    -fx-padding: 10 38 10 12;
+}
+.tombol-kebab-bab {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-padding: 4 6;
+    -fx-cursor: hand;
+    -fx-min-width: 28;
+    -fx-max-width: 28;
+    -fx-min-height: 28;
+    -fx-max-height: 28;
+}
+.tombol-kebab-bab:hover {
+    -fx-background-color: -garis;
+}
+.tombol-kebab-bab .ikon {
+    -fx-stroke: -teks-redup;
+    -fx-stroke-width: 3.2;
+}
+.tombol-kebab-bab:hover .ikon {
+    -fx-stroke: -aksen;
+}
+
+/* Context Menu */
+.context-menu {
+    -fx-background-color: -permukaan;
+    -fx-background-radius: 12;
+    -fx-border-color: -garis;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 6;
+    -fx-effect: dropshadow(gaussian, rgba(16, 42, 80, 0.14), 16, 0, 0, 6);
+}
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-background-radius: 8;
+    -fx-padding: 8 14;
+}
+.menu-item .label {
+    -fx-text-fill: -teks;
+    -fx-font-size: 13px;
+    -fx-font-weight: 500;
+}
+.menu-item:hover,
+.menu-item:focused {
+    -fx-background-color: -garis;
+}
+.menu-item-bahaya .label {
+    -fx-text-fill: -bahaya;
+}
+.menu-item-bahaya:hover,
+.menu-item-bahaya:focused {
+    -fx-background-color: -bahaya-latar;
+}
+.menu-item-bahaya:hover .label,
+.menu-item-bahaya:focused .label {
+    -fx-text-fill: -bahaya;
+}
+.menu-item-bahaya .ikon {
+    -fx-stroke: -bahaya;
+}
 .item-materi {
     -fx-background-color: -kaca-kuat;
     -fx-background-radius: 14;

@@ -232,6 +232,13 @@ public class CbtRoomController implements TimerListener {
         }
         try {
             kumpulkan(mode);
+            if (session.getKursusAktif() != null && session.getMateriFokus() != null && session.getSiswaAktif() != null) {
+                try {
+                    session.getProgresService().tandaiSelesai(session.getSiswaAktif(), session.getKursusAktif(), session.getMateriFokus());
+                } catch (Exception ex) {
+                    System.err.println("Gagal mencatat progres materi/kuis: " + ex.getMessage());
+                }
+            }
         } catch (IOException e) {
             DialogUtil.peringatan("Nilai tersimpan di sesi ini, tetapi rekap gagal ditulis ke file: " + e.getMessage());
         }
@@ -259,6 +266,13 @@ public class CbtRoomController implements TimerListener {
         session.hentikanTimer();
         try {
             ujianService.selesaikanPaksa(hasil);
+            if (session.getKursusAktif() != null && session.getMateriFokus() != null && session.getSiswaAktif() != null) {
+                try {
+                    session.getProgresService().tandaiSelesai(session.getSiswaAktif(), session.getKursusAktif(), session.getMateriFokus());
+                } catch (Exception ex) {
+                    System.err.println("Gagal mencatat progres materi/kuis: " + ex.getMessage());
+                }
+            }
         } catch (IOException e) {
             System.err.println("Rekap gagal ditulis saat keluar: " + e.getMessage());
         } finally {

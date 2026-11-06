@@ -13,7 +13,7 @@
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javafx.version>25.0.1</javafx.version>
+        <javafx.version>21.0.5</javafx.version>
         <junit.version>5.10.2</junit.version>
         <main.class>com.examify.app.MainApp</main.class>
     </properties>

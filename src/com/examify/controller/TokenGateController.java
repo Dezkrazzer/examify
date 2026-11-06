@@ -63,10 +63,23 @@ public class TokenGateController {
             label.setWrapText(true);
             vbAturan.getChildren().add(label);
         }
+        if (ujian.hasJadwalAkses()) {
+            Label labelAkses = new Label("Waktu Akses: " + FormatUtil.formatRentangWaktuAkses(ujian.getWaktuMulai(), ujian.getWaktuSelesai()),
+                    new IkonView(Ikon.JAM, 14));
+            labelAkses.getStyleClass().add("teks-redup");
+            labelAkses.setWrapText(true);
+            vbAturan.getChildren().add(labelAkses);
+        }
     }
 
     @FXML
     private void handleVerifikasi() {
+        if (!ujian.isAksesDibuka()) {
+            String pesan = ujianService.getPesanStatusAkses(ujian);
+            DialogUtil.peringatan(pesan != null ? pesan : "Ujian saat ini tidak dapat diakses.");
+            return;
+        }
+
         try {
             ujianService.verifikasiToken(session.getSiswaAktif(), ujian, tfToken.getText());
             session.setHasilAktif(ujianService.mulaiUjian(session.getSiswaAktif(), ujian));

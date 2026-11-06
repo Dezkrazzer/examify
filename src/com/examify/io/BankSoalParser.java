@@ -7,13 +7,18 @@ import com.examify.model.SoalIsian;
 import com.examify.model.SoalPilihanGanda;
 import com.examify.model.SoalTrueFalse;
 import com.examify.model.Ujian;
+import com.examify.utils.FormatUtil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-/** Mengubah baris teks bank_soal.txt menjadi objek model. */
+/**
+ * Parsing dan validasi baris individual bank_soal.txt.
+ * Parser ini stateless sehingga aman dipakai bersamaan.
+ */
 public class BankSoalParser {
 
     static final String KODE = "KODE";
@@ -22,22 +27,25 @@ public class BankSoalParser {
     static final String DURASI = "DURASI";
     static final String KKM = "KKM";
     static final String ULANG = "ULANG"; // opsional, bawaan false
+    static final String AKSES_MULAI = "AKSES_MULAI";
+    static final String AKSES_SELESAI = "AKSES_SELESAI";
     private static final List<String> KUNCI_WAJIB = List.of(KODE, MAPEL, TOKEN, DURASI, KKM);
-    private static final List<String> KUNCI_OPSIONAL = List.of(ULANG);
+    private static final List<String> KUNCI_OPSIONAL = List.of(ULANG, AKSES_MULAI, AKSES_SELESAI);
 
     private static final Pattern POLA_KODE = Pattern.compile("^[A-Z]{2,5}-\\d{2}$");
     private static final Pattern POLA_TOKEN = Pattern.compile("^[A-Z0-9]{6}$");
 
     /** Membaca satu baris KUNCI=NILAI ke dalam map header. */
     public void parseHeader(String baris, int noBaris, Map<String, String> header) throws FormatBankSoalException {
-        String[] kunciNilai = BarisData.pecahKunciNilai(baris);
-        if (kunciNilai == null) {
+        String[] pasang = BarisData.pecahKunciNilai(baris);
+        if (pasang == null) {
             throw new FormatBankSoalException(noBaris, baris, "header harus berformat KUNCI=NILAI");
         }
-        String kunci = kunciNilai[0];
-        String nilai = kunciNilai[1];
+        String kunci = pasang[0];
+        String nilai = pasang[1];
         if (!KUNCI_WAJIB.contains(kunci) && !KUNCI_OPSIONAL.contains(kunci)) {
-            throw new FormatBankSoalException(noBaris, baris, "kunci header tidak dikenal: " + kunci);
+            throw new FormatBankSoalException(noBaris, baris,
+                    "kunci header tidak dikenal: " + kunci + " (harus " + KUNCI_WAJIB + ")");
         }
         if (header.putIfAbsent(kunci, nilai) != null) {
             throw new FormatBankSoalException(noBaris, baris, "kunci header duplikat: " + kunci);
@@ -65,9 +73,12 @@ public class BankSoalParser {
     public Ujian buatUjian(Map<String, String> header, List<Soal> daftarSoal, int noBaris, String baris)
             throws FormatBankSoalException {
         try {
+            LocalDateTime mulai = FormatUtil.parseInputAkses(header.get(AKSES_MULAI));
+            LocalDateTime selesai = FormatUtil.parseInputAkses(header.get(AKSES_SELESAI));
             return new Ujian(header.get(KODE), header.get(MAPEL), header.get(TOKEN),
                     Integer.parseInt(header.get(DURASI)), Double.parseDouble(header.get(KKM)), daftarSoal,
-                    Boolean.TRUE.equals(BarisData.parseBoolean(header.getOrDefault(ULANG, "false"))));
+                    Boolean.TRUE.equals(BarisData.parseBoolean(header.getOrDefault(ULANG, "false"))),
+                    mulai, selesai);
         } catch (NumberFormatException e) {
             throw new FormatBankSoalException(noBaris, baris, "DURASI/KKM harus berupa angka", e);
         } catch (IllegalArgumentException e) {
