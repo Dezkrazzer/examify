@@ -103,3 +103,12 @@ TEKS|uji-01|Panduan Mengikuti Ujian|materi/uji/01-panduan.md
 UJIAN|uji-coba|Ujian Coba 1 Menit|UJI-01
 [END]
 
+[KURSUS]
+KODE=JMK48
+NAMA=JOMOKISASI
+PENGAJAR=Alfian Naufal, S.Mok
+DESKRIPSI=Pembelajaran jomok
+[BAB] Bab 1: Pendahuluan
+UJIAN|jmk48-u4079|Ujian Bab 1: Pendahuluan|JM-48
+[END]
+

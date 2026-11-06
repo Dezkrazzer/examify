@@ -1,11 +1,5 @@
 # =====================================================================
-# Examify - Bank Soal v1.0                     Encoding: UTF-8
-# Format soal:
-#   PG|id|pertanyaan|opsi1;opsi2;...;opsiN|kunci(A-E)|bobot
-#   TF|id|pernyataan|kunci(T/F)|bobot
-#   IS|id|pertanyaan|jawaban1;jawaban2;...|bobot
-# Karakter | dan ; tidak boleh dipakai di dalam teks soal.
-# Header opsional ULANG=true membuat ujian boleh dikerjakan ulang (bawaan: false).
+# Examify - Bank Soal CBT                   Encoding: UTF-8
 # =====================================================================
 
 [UJIAN]
@@ -21,7 +15,7 @@ TF|3|Bilangan 2 adalah satu-satunya bilangan prima genap.|T|10
 IS|4|Nilai dari 2 pangkat 5 adalah ...|32;TIGA PULUH DUA|10
 PG|5|Keliling persegi dengan sisi 7 cm adalah ...|14 cm;21 cm;28 cm;49 cm|C|10
 TF|6|Jumlah sudut dalam segitiga adalah 360 derajat.|F|10
-IS|7|Akar kuadrat dari 144 adalah ...|12;DUA BELAS|10
+IS|7|Akar kuadrat dari 144 adalah ...|DUA BELAS;12|10
 PG|8|Jika 3x = 21, maka nilai x adalah ...|5;6;7;8|C|10
 PG|9|Hasil dari 1/2 + 1/4 adalah ...|1/6;2/6;3/4;1|C|10
 TF|10|Bilangan 0,5 sama dengan 50 persen.|T|10
@@ -36,14 +30,14 @@ KKM=70
 [SOAL]
 PG|1|Kata baku dari "aktifitas" adalah ...|aktifitas;aktivitas;aktivitet;aktipitas|B|10
 TF|2|Kalimat efektif boleh mengandung pemborosan kata.|F|10
-IS|3|Ibu kota provinsi Jawa Tengah adalah ...|SEMARANG;KOTA SEMARANG|10
+IS|3|Ibu kota provinsi Jawa Tengah adalah ...|KOTA SEMARANG;SEMARANG|10
 PG|4|Lawan kata (antonim) dari "rajin" adalah ...|tekun;giat;malas;cermat|C|10
 PG|5|Kata baku yang tepat adalah ...|apotik;apotek;apothek;apoteek|B|10
 TF|6|Huruf kapital dipakai sebagai huruf pertama awal kalimat.|T|10
-IS|7|Sinonim dari kata "pandai" adalah ...|PINTAR;CERDAS;MAHIR|10
+IS|7|Sinonim dari kata "pandai" adalah ...|CERDAS;MAHIR;PINTAR|10
 PG|8|Kalimat yang berisi perintah diakhiri dengan tanda ...|titik;koma;seru;tanya|C|10
 TF|9|Paragraf deduktif memiliki kalimat utama di akhir paragraf.|F|10
-IS|10|Bahasa resmi negara Indonesia adalah bahasa ...|INDONESIA;BAHASA INDONESIA|10
+IS|10|Bahasa resmi negara Indonesia adalah bahasa ...|BAHASA INDONESIA;INDONESIA|10
 [END]
 
 [UJIAN]
@@ -65,7 +59,6 @@ TF|9|Magnet dapat menarik benda yang terbuat dari besi.|T|10
 PG|10|Lapisan atmosfer tempat terjadinya cuaca adalah ...|troposfer;stratosfer;mesosfer;termosfer;eksosfer|A|10
 [END]
 
-# Ujian singkat 1 menit untuk mencoba fitur auto-submit (TC-15)
 [UJIAN]
 KODE=UJI-01
 MAPEL=Uji Coba
@@ -85,7 +78,6 @@ MAPEL=Pemrograman Berorientasi Objek
 TOKEN=PBO7UT
 DURASI=30
 KKM=70
-ULANG=false
 [SOAL]
 PG|1|Kata kunci untuk membuat object dari sebuah class adalah ...|class;new;this;extends|B|10
 TF|2|Satu class hanya dapat menghasilkan satu object.|F|10
@@ -105,7 +97,6 @@ MAPEL=Pemrograman Berorientasi Objek
 TOKEN=PBO9UA
 DURASI=30
 KKM=70
-ULANG=false
 [SOAL]
 PG|1|Class yang tepat untuk menyusun string panjang di dalam perulangan adalah ...|String;StringBuilder;Scanner;Character|B|10
 TF|2|Membandingkan isi dua String sebaiknya memakai operator ==.|F|10
@@ -118,3 +109,15 @@ IS|8|Interface yang diimplementasikan untuk membuat tugas yang dijalankan sebuah
 PG|9|Method JavaFX untuk memperbarui tampilan dari thread lain adalah ...|Platform.exit;Platform.runLater;Thread.sleep;Stage.show|B|10
 TF|10|Kata kunci volatile menjamin perubahan variabel terlihat oleh thread lain.|T|10
 [END]
+
+[UJIAN]
+KODE=JM-48
+MAPEL=Ujian Bab 1: Pendahuluan
+TOKEN=JMK696
+DURASI=1
+KKM=50
+[SOAL]
+PG|1|Berapa panjang punya alfian|10cm;12cm;15cm;18cm|A|10
+PG|2|Berapa diameter punya alfian|3cm;4cm;5cm;6cm|A|10
+[END]
+

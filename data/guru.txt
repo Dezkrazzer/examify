@@ -1,3 +1,4 @@
 # NIP|NAMA|PIN|MAPEL
 19850101|Dr. Rina Kartika, M.Kom.|1234|Pemrograman Berorientasi Objek
 19870202|Bambang Sudarmono, M.Pd.|1234|Matematika
+00000001|Lazuardi Akbar Imani|1111|Uji Coba
