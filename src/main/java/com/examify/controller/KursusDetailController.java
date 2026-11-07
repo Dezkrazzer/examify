@@ -126,6 +126,7 @@ import javafx.stage.FileChooser;
 
 
 
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 
 
@@ -430,7 +431,16 @@ import javafx.scene.control.ContentDisplay;
 
 
 
+import javafx.application.Platform;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Separator;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.stage.StageStyle;
+import java.security.SecureRandom;
 
 
 
@@ -5422,7 +5432,11 @@ public class KursusDetailController {
 
 
 
-        isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        if (session.isGuru()) {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        } else {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info);
+        }
 
 
 
@@ -6142,7 +6156,11 @@ public class KursusDetailController {
 
 
 
-        isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        if (session.isGuru()) {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        } else {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info);
+        }
 
 
 
@@ -7960,6 +7978,11 @@ public class KursusDetailController {
 
         gridBaru.add(tfAksesSelesai, 1, 6);
 
+        CheckBox cbBolehUlang = new CheckBox("Izinkan siswa mengerjakan ulang ujian ini");
+        cbBolehUlang.setSelected(false);
+        gridBaru.add(new Label("Bisa Diulang:"), 0, 7);
+        gridBaru.add(cbBolehUlang, 1, 7);
+
 
 
 
@@ -8558,7 +8581,7 @@ public class KursusDetailController {
 
 
 
-                    Ujian ujianBaru = new Ujian(kode, jwb, token, durasi, kkm, List.of(sampleSoal), false, mulai,
+                    Ujian ujianBaru = new Ujian(kode, jwb, token, durasi, kkm, List.of(sampleSoal), cbBolehUlang.isSelected(), mulai,
 
 
 
@@ -9328,6 +9351,11 @@ public class KursusDetailController {
 
         grid.add(tfAksesSelesai, 1, 6);
 
+        CheckBox cbKuisBolehUlang = new CheckBox("Izinkan kuis dikerjakan ulang");
+        cbKuisBolehUlang.setSelected(false);
+        grid.add(new Label("Bisa Diulang:"), 0, 7);
+        grid.add(cbKuisBolehUlang, 1, 7);
+
 
 
 
@@ -9694,7 +9722,7 @@ public class KursusDetailController {
 
 
 
-                Ujian ujianKuis = new Ujian(kode, judul, token, durasi, kkm, List.of(sampleSoal), false, mulai,
+                Ujian ujianKuis = new Ujian(kode, judul, token, durasi, kkm, List.of(sampleSoal), cbKuisBolehUlang.isSelected(), mulai,
 
 
 
@@ -11296,7 +11324,9 @@ public class KursusDetailController {
 
 
 
-        List<Siswa> semuaSiswa = session.getAuthService().getSemuaSiswa();
+        List<Siswa> semuaSiswa = session.getAuthService().getSemuaSiswa().stream()
+                .filter(s -> session.getPendaftaranService().isTerdaftar(s, kursus))
+                .toList();
 
 
 
@@ -11937,6 +11967,224 @@ public class KursusDetailController {
 
 
     private void handleUbahKode() {
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
+
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(450);
+        kartu.setMaxWidth(470);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        // Header Modal (Bisa di-drag)
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        StackPane kotakIkon = new StackPane(new IkonView(Ikon.PENSIL, 18));
+        kotakIkon.getStyleClass().add("kotak-ikon-stat");
+        kotakIkon.setMinSize(42, 42);
+        kotakIkon.setMaxSize(42, 42);
+
+        VBox boxJudul = new VBox(2);
+        HBox barisJudulBadge = new HBox(8);
+        barisJudulBadge.setAlignment(Pos.CENTER_LEFT);
+        Label lblJudul = new Label("Ubah Kode Kursus");
+        lblJudul.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label badgeKodeLama = new Label(kursus.getKode());
+        badgeKodeLama.getStyleClass().add("badge");
+        barisJudulBadge.getChildren().addAll(lblJudul, badgeKodeLama);
+
+        Label lblSub = new Label("Perbarui kode akses kursus '" + kursus.getNama() + "'.");
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(barisJudulBadge, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setTooltip(new Tooltip("Tutup (ESC)"));
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+
+        barisHeader.getChildren().addAll(kotakIkon, boxJudul, btnTutup);
+
+        // Info Kode Saat Ini + Tombol Salin
+        HBox kotakKodeSaatIni = new HBox(12);
+        kotakKodeSaatIni.getStyleClass().add("modal-kotak-jadwal");
+        kotakKodeSaatIni.setAlignment(Pos.CENTER_LEFT);
+
+        Node polaThumb = PolaKursus.buat(kursus.getKode(), 40, 40, 10);
+
+        VBox infoSaatIni = new VBox(2);
+        Label lblKetSaatIni = new Label("Kode Akses Saat Ini");
+        lblKetSaatIni.getStyleClass().add("teks-redup");
+        lblKetSaatIni.setStyle("-fx-font-size: 11.5px;");
+        Label lblNilaiSaatIni = new Label(kursus.getKode());
+        lblNilaiSaatIni.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold; -fx-font-size: 15px;");
+        infoSaatIni.getChildren().addAll(lblKetSaatIni, lblNilaiSaatIni);
+        HBox.setHgrow(infoSaatIni, Priority.ALWAYS);
+
+        Button btnSalin = new Button("Salin");
+        btnSalin.setGraphic(new IkonView(Ikon.SALIN, 13));
+        btnSalin.getStyleClass().add("tombol-sekunder");
+        btnSalin.setTooltip(new Tooltip("Salin kode akses saat ini"));
+        btnSalin.setOnAction(e -> {
+            ClipboardContent cc = new ClipboardContent();
+            cc.putString(kursus.getKode());
+            Clipboard.getSystemClipboard().setContent(cc);
+            btnSalin.setText("Tersalin!");
+        });
+
+        kotakKodeSaatIni.getChildren().addAll(polaThumb, infoSaatIni, btnSalin);
+
+        // Input Kode Baru
+        VBox boxInput = new VBox(6);
+        Label lblField = new Label("Kode Baru");
+        lblField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+
+        TextField tfKodeBaru = new TextField(kursus.getKode());
+        tfKodeBaru.setPromptText("Masukkan kode akses baru...");
+        tfKodeBaru.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold; -fx-font-size: 14px;");
+        HBox.setHgrow(tfKodeBaru, Priority.ALWAYS);
+
+        Button btnAcak = new Button("Acak");
+        btnAcak.setGraphic(new IkonView(Ikon.ACAK, 14));
+        btnAcak.getStyleClass().add("tombol-sekunder");
+        btnAcak.setTooltip(new Tooltip("Buat kode acak 6 karakter"));
+        btnAcak.setOnAction(e -> tfKodeBaru.setText(hasilkanKodeKursusAcak()));
+
+        HBox barisInput = new HBox(8, tfKodeBaru, btnAcak);
+        barisInput.setAlignment(Pos.CENTER_LEFT);
+
+        Label lblCatatan = new Label("Huruf besar dan kecil berpengaruh (case-sensitive). Siswa baru wajib memasukkan kode ini.");
+        lblCatatan.getStyleClass().add("teks-redup");
+        lblCatatan.setStyle("-fx-font-size: 11.5px;");
+        lblCatatan.setWrapText(true);
+
+        Label lblGalat = new Label();
+        lblGalat.setWrapText(true);
+        lblGalat.setMaxWidth(Double.MAX_VALUE);
+        lblGalat.setStyle("-fx-text-fill: -bahaya; -fx-background-color: rgba(239, 68, 68, 0.1); "
+                + "-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblGalat.setVisible(false);
+        lblGalat.setManaged(false);
+
+        tfKodeBaru.textProperty().addListener((obs, lama, baru) -> {
+            if (lblGalat.isVisible()) {
+                lblGalat.setVisible(false);
+                lblGalat.setManaged(false);
+            }
+        });
+
+        boxInput.getChildren().addAll(lblField, barisInput, lblCatatan, lblGalat);
+
+        // Footer Tombol
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+
+        Button btnSimpan = new Button("Simpan Kode");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setDefaultButton(true);
+        btnSimpan.setOnAction(e -> {
+            String kodeBaru = tfKodeBaru.getText() != null ? tfKodeBaru.getText().trim() : "";
+            if (kodeBaru.isEmpty()) {
+                lblGalat.setText("Kode kursus tidak boleh kosong.");
+                lblGalat.setVisible(true);
+                lblGalat.setManaged(true);
+                tfKodeBaru.requestFocus();
+                return;
+            }
+            if (kodeBaru.equals(kursus.getKode())) {
+                dialog.setResult(Boolean.FALSE);
+                dialog.close();
+                return;
+            }
+            try {
+                String kodeLama = kursus.getKode();
+                Kursus baru = kursusService.ubahKodeKursus(kursus, kodeBaru);
+                session.getPendaftaranService().perbaruiKodeKursus(kodeLama, baru.getKode());
+                this.kursus = baru;
+                session.setKursusAktif(baru);
+                lblKode.setText(baru.getKode());
+                spPola.getChildren().setAll(PolaKursus.buat(baru.getKode(), 84, 84, 20));
+                muatTabOrang();
+                dialog.setResult(Boolean.TRUE);
+                dialog.close();
+                DialogUtil.info("Kode kursus berhasil diubah menjadi: " + baru.getKode());
+            } catch (Exception ex) {
+                lblGalat.setText(ex.getMessage() != null ? ex.getMessage() : "Gagal mengubah kode kursus.");
+                lblGalat.setVisible(true);
+                lblGalat.setManaged(true);
+                tfKodeBaru.requestFocus();
+                tfKodeBaru.selectAll();
+            }
+        });
+
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(barisHeader, new Separator(), kotakKodeSaatIni, boxInput, new Separator(), barisTombol);
+        pane.setContent(kartu);
+
+        Platform.runLater(() -> {
+            tfKodeBaru.requestFocus();
+            tfKodeBaru.selectAll();
+        });
+        dialog.showAndWait();
+    }
+
+    private static final String KARAKTER_KODE_KURSUS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    private static final SecureRandom RANDOM_KODE_KURSUS = new SecureRandom();
+
+    private static String hasilkanKodeKursusAcak() {
+        StringBuilder sb = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            sb.append(KARAKTER_KODE_KURSUS.charAt(RANDOM_KODE_KURSUS.nextInt(KARAKTER_KODE_KURSUS.length())));
+        }
+        return sb.toString();
+    }
+
+    @SuppressWarnings("unused")
+    private void handleUbahKodeLama() {
 
 
 
@@ -12072,7 +12320,9 @@ public class KursusDetailController {
 
 
 
+                String kodeLama = kursus.getKode();
                 Kursus baru = kursusService.ubahKodeKursus(kursus, kodeBaru);
+                session.getPendaftaranService().perbaruiKodeKursus(kodeLama, baru.getKode());
 
 
 

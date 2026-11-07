@@ -109,7 +109,20 @@ public class ProfilController {
     }
 
     private void isiProgresKursus() {
-        for (Kursus kursus : session.getKursusService().getDaftarKursus()) {
+        vbProgresKursus.getChildren().clear();
+        List<Kursus> kursusDiikuti = session.getKursusService().getDaftarKursus().stream()
+                .filter(k -> session.getPendaftaranService().isTerdaftar(siswa, k))
+                .toList();
+
+        if (kursusDiikuti.isEmpty()) {
+            Label lblKosong = new Label("Belum ada kursus yang diikuti. Masukkan kode kursus pada menu Kursus Saya untuk mulai belajar.");
+            lblKosong.getStyleClass().add("teks-redup");
+            lblKosong.setWrapText(true);
+            vbProgresKursus.getChildren().add(lblKosong);
+            return;
+        }
+
+        for (Kursus kursus : kursusDiikuti) {
             double progres = progresService.getProgres(siswa, kursus);
             Label nama = new Label(kursus.getNama());
             nama.getStyleClass().add("judul-kartu");

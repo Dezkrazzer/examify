@@ -346,7 +346,7 @@ public class KursusService {
         if (kodeBaru == null || kodeBaru.trim().isEmpty()) {
             throw new IllegalArgumentException("Kode kursus tidak boleh kosong");
         }
-        String kodeBersih = kodeBaru.trim().toUpperCase();
+        String kodeBersih = kodeBaru.trim();
         if (!kodeBersih.equals(kursusLama.getKode()) && katalog.containsKey(kodeBersih)) {
             throw new IllegalArgumentException("Kode kursus sudah digunakan: " + kodeBersih);
         }

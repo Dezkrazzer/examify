@@ -100,6 +100,10 @@ class TugasDanPendaftaranTest {
         PendaftaranKursusService serviceBaru = new PendaftaranKursusService(fileDaftar, null);
         assertTrue(serviceBaru.isTerdaftar(siswaKelasA, kursus), "Status terdaftar harus persisten ke file");
         assertFalse(serviceBaru.isTerdaftar(siswaKelasB, kursus), "Siswa B belum pernah mendaftar");
+        Kursus kursusKodeBaru = kursus.denganKode("BIN2026");
+        serviceBaru.perbaruiKodeKursus("BIN", "BIN2026");
+        assertTrue(serviceBaru.isTerdaftar(siswaKelasA, kursusKodeBaru), "Siswa A tetap terdaftar setelah kode kursus diubah");
+        assertFalse(serviceBaru.isTerdaftar(siswaKelasB, kursusKodeBaru), "Siswa B tetap belum terdaftar");
     }
 
     @Test
