@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -27,6 +28,7 @@ public final class SceneRouter {
 
     private static final String SHELL_FXML = Layar.FOLDER_FXML + "shell.fxml";
     private static final String THEME_CSS = "/com/examify/css/theme.css";
+    private static final String LOGO = "/com/examify/img/examifylogo.png";
     private static final String DARK_CSS = "/com/examify/css/dark.css";
     private static final double LEBAR_AWAL = 1240;
     private static final double TINGGI_AWAL = 800;
@@ -48,6 +50,8 @@ public final class SceneRouter {
         scene.getStylesheets().add(sumber(THEME_CSS).toExternalForm());
         temaGelap.addListener((obs, lama, gelap) -> terapkanTema(gelap));
         stage.setScene(scene);
+        stage.setTitle(AppConfig.NAMA_APLIKASI);
+        stage.getIcons().add(new Image(sumber(LOGO).toExternalForm()));
         stage.setMinWidth(1000);
         stage.setMinHeight(680);
     }
@@ -63,7 +67,6 @@ public final class SceneRouter {
             scene.setRoot(halaman);
         }
         layarAktif.set(layar);
-        stage.setTitle(AppConfig.NAMA_APLIKASI + " - " + layar.getJudul());
         AnimasiUtil.masuk(halaman);
     }
 
