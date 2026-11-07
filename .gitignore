@@ -31,3 +31,4 @@ output/
 
 # VS Code build output
 bin/
+.vscode

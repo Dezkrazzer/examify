@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -64,6 +65,7 @@ public class EditorUjianController {
     @FXML private TextField tfToken;
     @FXML private TextField tfAksesMulai;
     @FXML private TextField tfAksesSelesai;
+    @FXML private CheckBox cbBolehUlang;
 
     @FXML private Label lblJumlahSoal;
     @FXML private ListView<DrafSoal> lvSoal;
@@ -95,6 +97,9 @@ public class EditorUjianController {
         tfToken.setText(ujian.getToken());
         tfAksesMulai.setText(FormatUtil.formatInputAkses(ujian.getWaktuMulai()));
         tfAksesSelesai.setText(FormatUtil.formatInputAkses(ujian.getWaktuSelesai()));
+        if (cbBolehUlang != null) {
+            cbBolehUlang.setSelected(ujian.isBolehUlang());
+        }
 
         cbJenisSoal.getItems().setAll(JenisSoal.values());
         cbJenisSoal.valueProperty().addListener((obs, lama, baru) -> {
@@ -433,7 +438,8 @@ public class EditorUjianController {
                 throw new IllegalArgumentException("Waktu mulai akses tidak boleh lebih lambat dari waktu tutup akses");
             }
 
-            Ujian ujianBaru = new Ujian(ujian.getKodeUjian(), mapel, token, durasi, kkm, hasilSoal, ujian.isBolehUlang(), waktuMulai, waktuSelesai);
+            boolean bolehUlang = cbBolehUlang != null ? cbBolehUlang.isSelected() : ujian.isBolehUlang();
+            Ujian ujianBaru = new Ujian(ujian.getKodeUjian(), mapel, token, durasi, kkm, hasilSoal, bolehUlang, waktuMulai, waktuSelesai);
 
             session.getUjianService().perbaruiUjian(ujianBaru);
             session.setUjianAktif(ujianBaru);

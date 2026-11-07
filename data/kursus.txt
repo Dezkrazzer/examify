@@ -78,6 +78,7 @@ TEKS|bin-02|Ciri Kalimat Efektif|materi/bahasaindo/02-kalimat-efektif.md
 [BAB] Evaluasi
 UJIAN|bin-uji|Ujian Bahasa Indonesia|BIN-01
 [BAB] Kalimat Majemuk
+TEKS|bin-m62470|Kalimat Majemok|materi/bin/bin-m62470.md
 [END]
 
 [KURSUS]
