@@ -43,7 +43,7 @@ mvnw.cmd javafx:run        # Command Prompt / PowerShell
 ### Dari VS Code
 
 Pasang **Extension Pack for Java**. VS Code otomatis membaca `pom.xml`, mengunduh JavaFX, dan
-memakai folder `src/` dan `test/` apa adanya. Jalankan lewat menu *Run and Debug* →
+memakai layout Maven standar (`src/main/java`, `src/test/java`). Jalankan lewat menu *Run and Debug* →
 **Examify** (konfigurasi di `.vscode/launch.json`, sudah menyertakan `-ea` agar assertion aktif).
 
 ## Akun, kursus & token contoh
@@ -73,27 +73,34 @@ lengkap dengan UTS dan UAS.
 
 ```
 examify/
-├── pom.xml              konfigurasi Maven (memakai layout VS Code: src/ & test/)
-├── mvnw, mvnw.cmd       Maven Wrapper
-├── data/                input: siswa.txt, bank_soal.txt, kursus.txt, materi/ (*.md, *.pdf)
-├── output/              dibuat otomatis: rekap_nilai.txt, progres_belajar.txt, sertifikat/
-├── src/
-│   ├── module-info.java
-│   └── com/examify/
-│       ├── app/         MainApp, SceneRouter (shell + tema), Layar, AppSession
-│       ├── controller/  satu controller per layar FXML
-│       ├── view/        komponen UI: AnimasiUtil, LatarAnimasi, IkonView, KartuKursus, MarkdownView, ...
-│       ├── service/     Auth, Ujian, Rekap, Sertifikat, Kursus, ProgresBelajar
-│       ├── model/       Soal & Materi (+subclass), Ujian, Kursus, Bab, Siswa, HasilUjian, record, enum
-│       ├── io/          DataReader<T>, PembacaBaris<T>, PenulisBaris<T>, reader & writer file
-│       ├── thread/      UjianTimer (Runnable) & TimerListener
-│       ├── exception/   exception kustom (checked)
-│       ├── utils/       AppConfig, StringUtil, FormatUtil, MarkdownParser
-│       ├── fxml/        tampilan setiap layar
-│       ├── css/         theme.css (terang) & dark.css (gelap)
-│       └── font/        Poppins (SIL Open Font License)
-└── test/com/examify/    unit test JUnit 5
+├── pom.xml                  konfigurasi Maven (layout standar)
+├── mvnw, mvnw.cmd           Maven Wrapper
+├── data/                    data runtime (input): siswa, guru, bank_soal, kursus, materi/
+├── output/                  data runtime (hasil): rekap_nilai, progres_belajar, sertifikat/
+└── src/
+    ├── main/
+    │   ├── java/
+    │   │   ├── module-info.java
+    │   │   └── com/examify/
+    │   │       ├── app/         MainApp, SceneRouter (shell + tema), Layar, AppSession
+    │   │       ├── controller/  satu controller per layar FXML
+    │   │       ├── view/        komponen UI: AnimasiUtil, LatarAnimasi, IkonView, MarkdownView, ...
+    │   │       ├── service/     logika bisnis (Auth, Ujian, Rekap, Kursus, ProgresBelajar, ...)
+    │   │       ├── model/       entitas domain, record, enum
+    │   │       ├── io/          reader & writer file teks
+    │   │       ├── thread/      UjianTimer (Runnable) & TimerListener
+    │   │       ├── exception/   exception kustom (checked)
+    │   │       └── utils/       AppConfig, StringUtil, FormatUtil, MarkdownParser, ...
+    │   └── resources/com/examify/
+    │       ├── fxml/            tampilan setiap layar
+    │       ├── css/             theme.css (terang) & dark.css (gelap)
+    │       ├── font/            Poppins (SIL Open Font License)
+    │       └── img/             examifylogo.png (logo & ikon jendela)
+    └── test/java/com/examify/   unit test JUnit 5
 ```
+
+`data/` dan `output/` sengaja berada di luar `src/`: keduanya dibaca dan ditulis saat aplikasi
+berjalan, bukan bagian dari kode sumber.
 
 ## Format data
 
