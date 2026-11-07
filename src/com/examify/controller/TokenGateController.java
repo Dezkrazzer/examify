@@ -55,8 +55,7 @@ public class TokenGateController {
         List<String> aturan = List.of(
                 "Waktu mulai dihitung sejak token diterima.",
                 "Jawaban tersimpan otomatis setiap kali dipilih atau diketik.",
-                "Saat waktu habis, jawaban dikumpulkan otomatis.",
-                ujian.isBolehUlang() ? "Ujian ini boleh dikerjakan ulang." : "Ujian ini hanya dapat dikerjakan satu kali.");
+                "Saat waktu habis, jawaban dikumpulkan otomatis.");
         for (String teks : aturan) {
             Label label = new Label(teks, new IkonView(Ikon.CENTANG, 14));
             label.getStyleClass().add("teks-redup");

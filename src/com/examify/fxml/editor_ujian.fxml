@@ -59,6 +59,10 @@
                         <Label text="Tutup Akses:" styleClass="teks-kecil"/>
                         <TextField fx:id="tfAksesSelesai" prefWidth="125" promptText="yyyy-MM-dd HH:mm"/>
                     </VBox>
+                    <VBox spacing="2" alignment="CENTER_LEFT">
+                        <Label text="Bisa Diulang:" styleClass="teks-kecil"/>
+                        <CheckBox fx:id="cbBolehUlang" text="Izinkan" style="-fx-font-size: 11.5px; -fx-padding: 4 0;"/>
+                    </VBox>
                 </HBox>
             </HBox>
         </VBox>

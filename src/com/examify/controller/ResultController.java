@@ -72,8 +72,7 @@ public class ResultController {
         lblStatus.setText(lulus ? "Selamat, kamu lulus!" : "Belum lulus kali ini");
         lblStatus.getStyleClass().add(lulus ? "lulus" : "tidak-lulus");
         lblPesan.setText("KKM ujian ini " + FormatUtil.angka(hasil.getUjian().getKkm()) + ". "
-                + (lulus ? "Sertifikat sudah bisa diunduh."
-                : hasil.getUjian().isBolehUlang() ? "Ujian ini boleh dikerjakan ulang." : "Pelajari lagi materinya, ya."));
+                + (lulus ? "Sertifikat sudah bisa diunduh." : "Pelajari lagi materinya, ya."));
     }
 
     private void siapkanPembahasan() {

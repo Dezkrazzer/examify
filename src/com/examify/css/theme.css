@@ -850,5 +850,67 @@
     -fx-background-color: -kaca-kuat; -fx-text-fill: -teks; -fx-border-color: -garis;
 }
 
+.modal-kartu {
+    -fx-background-color: -permukaan;
+    -fx-background-radius: 20;
+    -fx-border-color: -garis;
+    -fx-border-radius: 20;
+    -fx-border-width: 1.2;
+    -fx-padding: 24;
+}
+
+.modal-kotak-jadwal {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 14;
+    -fx-border-color: -garis;
+    -fx-border-radius: 14;
+    -fx-padding: 12 16;
+}
+
+.chip-pilihan {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 999;
+    -fx-border-color: -garis;
+    -fx-border-radius: 999;
+    -fx-font-size: 11px;
+    -fx-padding: 3 8;
+    -fx-cursor: hand;
+    -fx-text-fill: -teks-redup;
+}
+.chip-pilihan:hover {
+    -fx-background-color: rgba(26, 163, 232, 0.12);
+    -fx-border-color: -aksen;
+    -fx-text-fill: -aksen;
+}
+
+.date-picker {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 12;
+    -fx-border-color: -garis;
+    -fx-border-radius: 12;
+}
+.date-picker > .text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-padding: 8 10;
+}
+.date-picker > .arrow-button {
+    -fx-background-color: transparent;
+}
+.date-picker > .arrow-button > .arrow {
+    -fx-background-color: -teks-redup;
+}
+.date-picker-popup {
+    -fx-background-color: -permukaan;
+    -fx-background-radius: 14;
+    -fx-border-color: -garis;
+    -fx-border-radius: 14;
+    -fx-effect: dropshadow(gaussian, -bayangan, 16, 0.15, 0, 4);
+}
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: transparent;
+}
+
 /* ---------- Tooltip ---------- */
 .tooltip { -fx-background-color: #0f1b2e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 12px; }

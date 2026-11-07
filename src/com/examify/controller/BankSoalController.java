@@ -28,11 +28,28 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.collections.FXCollections;
+import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Separator;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -116,7 +133,11 @@ public class BankSoalController {
             btnToken.setText("Tersalin!");
         });
 
-        barisAtas.getChildren().addAll(lblKode, spacer, btnToken);
+        Label badgeUlang = new Label(u.isBolehUlang() ? "Bisa Diulang" : "1x Kerjakan");
+        badgeUlang.getStyleClass().add(u.isBolehUlang() ? "badge" : "badge-netral");
+        badgeUlang.setStyle("-fx-font-size: 11px; -fx-padding: 2 8;");
+
+        barisAtas.getChildren().addAll(lblKode, badgeUlang, spacer, btnToken);
 
         // Judul Mata Pelajaran
         Label lblMapel = new Label(u.getMataPelajaran());
@@ -184,47 +205,296 @@ public class BankSoalController {
         return kartu;
     }
 
+    /**
+     * Kontrol pemilih waktu akses (Tanggal + Jam + Menit) yang terstruktur dan mudah digunakan guru.
+     */
+    private static class KontrolWaktuAkses {
+        final DatePicker dpTanggal;
+        final ComboBox<String> cbJam;
+        final ComboBox<String> cbMenit;
+        final Button btnReset;
+
+        KontrolWaktuAkses(LocalDateTime waktuAwal) {
+            dpTanggal = new DatePicker();
+            dpTanggal.setPromptText("Pilih tanggal...");
+            dpTanggal.setPrefWidth(160);
+
+            List<String> listJam = new ArrayList<>();
+            for (int i = 0; i < 24; i++) {
+                listJam.add(String.format("%02d", i));
+            }
+            cbJam = new ComboBox<>(FXCollections.observableArrayList(listJam));
+            cbJam.setPromptText("Jam");
+            cbJam.setPrefWidth(72);
+
+            List<String> listMenit = new ArrayList<>();
+            for (int i = 0; i < 60; i += 5) {
+                listMenit.add(String.format("%02d", i));
+            }
+            cbMenit = new ComboBox<>(FXCollections.observableArrayList(listMenit));
+            cbMenit.setPromptText("Mnt");
+            cbMenit.setPrefWidth(72);
+
+            btnReset = new Button();
+            btnReset.setGraphic(new IkonView(Ikon.SILANG, 12));
+            btnReset.getStyleClass().add("tombol-ikon");
+            btnReset.setTooltip(new Tooltip("Kosongkan jadwal"));
+            btnReset.setOnAction(e -> {
+                dpTanggal.setValue(null);
+                cbJam.setValue(null);
+                cbMenit.setValue(null);
+            });
+
+            if (waktuAwal != null) {
+                dpTanggal.setValue(waktuAwal.toLocalDate());
+                cbJam.setValue(String.format("%02d", waktuAwal.getHour()));
+                int m = waktuAwal.getMinute();
+                String strM = String.format("%02d", m);
+                if (!cbMenit.getItems().contains(strM)) {
+                    cbMenit.getItems().add(strM);
+                    cbMenit.getItems().sort(String::compareTo);
+                }
+                cbMenit.setValue(strM);
+            }
+        }
+
+        HBox buatTampilan() {
+            Label lblPemisah = new Label(":");
+            lblPemisah.setStyle("-fx-font-weight: bold; -fx-text-fill: -teks-redup;");
+            HBox baris = new HBox(6, dpTanggal, cbJam, lblPemisah, cbMenit, btnReset);
+            baris.setAlignment(Pos.CENTER_LEFT);
+            return baris;
+        }
+
+        LocalDateTime getWaktu(boolean isWaktuTutup) {
+            LocalDate tgl = dpTanggal.getValue();
+            if (tgl == null) return null;
+            int jam = isWaktuTutup ? 23 : 0;
+            if (cbJam.getValue() != null && !cbJam.getValue().isBlank()) {
+                try { jam = Integer.parseInt(cbJam.getValue()); } catch (NumberFormatException ignored) {}
+            }
+            int menit = isWaktuTutup ? 59 : 0;
+            if (cbMenit.getValue() != null && !cbMenit.getValue().isBlank()) {
+                try { menit = Integer.parseInt(cbMenit.getValue()); } catch (NumberFormatException ignored) {}
+            }
+            return LocalDateTime.of(tgl, LocalTime.of(jam, menit));
+        }
+    }
+
+    private static final String KARAKTER_TOKEN = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    private static final SecureRandom RANDOM_TOKEN = new SecureRandom();
+
+    private static String hasilkanTokenAcak() {
+        StringBuilder sb = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            sb.append(KARAKTER_TOKEN.charAt(RANDOM_TOKEN.nextInt(KARAKTER_TOKEN.length())));
+        }
+        return sb.toString();
+    }
+
+    private static HBox buatBarisPill(TextField targetField, String... pilihan) {
+        HBox baris = new HBox(6);
+        baris.setAlignment(Pos.CENTER_LEFT);
+        for (String p : pilihan) {
+            Button pill = new Button(p);
+            pill.getStyleClass().add("chip-pilihan");
+            String nilai = p.replaceAll("[^0-9]", "");
+            pill.setOnAction(e -> targetField.setText(nilai));
+            baris.getChildren().add(pill);
+        }
+        return baris;
+    }
+
     private void handleUbahPengaturan(Ujian u) {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Pengaturan Ujian");
-        dialog.setHeaderText("Ubah Pengaturan: " + u.getKodeUjian());
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
 
-        ButtonType btnSimpan = new ButtonType("Simpan", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(btnSimpan, ButtonType.CANCEL);
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
 
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(8);
-        grid.setPadding(new Insets(10, 10, 10, 10));
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
 
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(540);
+        kartu.setMaxWidth(560);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        // Header Modal (Bisa di-drag)
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        StackPane ikonBox = new StackPane(new IkonView(Ikon.PENGATURAN, 20));
+        ikonBox.setStyle("-fx-background-color: rgba(26, 163, 232, 0.14); -fx-background-radius: 999; -fx-padding: 10;");
+
+        VBox vbJudul = new VBox(2);
+        HBox hbJudulAtas = new HBox(8);
+        hbJudulAtas.setAlignment(Pos.CENTER_LEFT);
+        Label lblJudul = new Label("Pengaturan Ujian");
+        lblJudul.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: -teks;");
+        Label badgeKode = new Label(u.getKodeUjian());
+        badgeKode.getStyleClass().add("badge");
+        hbJudulAtas.getChildren().addAll(lblJudul, badgeKode);
+
+        Label lblSub = new Label("Ubah durasi, KKM, token acak, dan jadwal akses ujian CBT");
+        lblSub.setStyle("-fx-font-size: 12px; -fx-text-fill: -teks-redup;");
+        vbJudul.getChildren().addAll(hbJudulAtas, lblSub);
+
+        Region spacerHeader = new Region();
+        HBox.setHgrow(spacerHeader, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 13));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setOnAction(e -> dialog.close());
+
+        barisHeader.getChildren().addAll(ikonBox, vbJudul, spacerHeader, btnTutup);
+
+        Separator sepAtas = new Separator();
+        sepAtas.setStyle("-fx-opacity: 0.4;");
+
+        // Form Fields
+        // 1. Mata Pelajaran
+        VBox vbMapel = new VBox(6);
+        Label lblMapel = new Label("Mata Pelajaran");
+        lblMapel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         TextField tfMapel = new TextField(u.getMataPelajaran());
+        tfMapel.setPromptText("cth. Bahasa Indonesia");
+        vbMapel.getChildren().addAll(lblMapel, tfMapel);
+
+        // 2. Durasi & KKM
+        HBox hbDurasiKkm = new HBox(14);
+
+        VBox vbDurasi = new VBox(6);
+        HBox.setHgrow(vbDurasi, Priority.ALWAYS);
+        Label lblDurasi = new Label("Durasi Ujian (menit)");
+        lblDurasi.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         TextField tfDurasi = new TextField(String.valueOf(u.getDurasiMenit()));
+        tfDurasi.setPromptText("Menit");
+        HBox pillsDurasi = buatBarisPill(tfDurasi, "15m", "30m", "45m", "60m", "90m", "120m");
+        vbDurasi.getChildren().addAll(lblDurasi, tfDurasi, pillsDurasi);
+
+        VBox vbKkm = new VBox(6);
+        HBox.setHgrow(vbKkm, Priority.ALWAYS);
+        Label lblKkm = new Label("KKM Kelulusan");
+        lblKkm.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         String strKkm = u.getKkm() == (long) u.getKkm() ? String.format("%d", (long) u.getKkm())
                 : String.valueOf(u.getKkm());
         TextField tfKkm = new TextField(strKkm);
+        tfKkm.setPromptText("Nilai KKM");
+        HBox pillsKkm = buatBarisPill(tfKkm, "70", "75", "80", "85");
+        vbKkm.getChildren().addAll(lblKkm, tfKkm, pillsKkm);
+
+        hbDurasiKkm.getChildren().addAll(vbDurasi, vbKkm);
+
+        // 3. Token Ujian
+        VBox vbToken = new VBox(6);
+        Label lblToken = new Label("Token Akses Ujian (6 Karakter)");
+        lblToken.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         TextField tfToken = new TextField(u.getToken());
-        TextField tfAksesMulai = new TextField(FormatUtil.formatInputAkses(u.getWaktuMulai()));
-        tfAksesMulai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
-        TextField tfAksesSelesai = new TextField(FormatUtil.formatInputAkses(u.getWaktuSelesai()));
-        tfAksesSelesai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
+        tfToken.setPromptText("TOKEN");
+        tfToken.setTextFormatter(new TextFormatter<String>(change -> {
+            change.setText(change.getText().toUpperCase());
+            String newText = change.getControlNewText();
+            return (newText.length() <= 6) ? change : null;
+        }));
+        tfToken.setStyle("-fx-font-family: monospace; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: center;");
+        HBox.setHgrow(tfToken, Priority.ALWAYS);
 
-        grid.add(new Label("Mata Pelajaran:"), 0, 0);
-        grid.add(tfMapel, 1, 0);
-        grid.add(new Label("Durasi (menit):"), 0, 1);
-        grid.add(tfDurasi, 1, 1);
-        grid.add(new Label("KKM:"), 0, 2);
-        grid.add(tfKkm, 1, 2);
-        grid.add(new Label("Token (6 karakter):"), 0, 3);
-        grid.add(tfToken, 1, 3);
-        grid.add(new Label("Waktu Buka:"), 0, 4);
-        grid.add(tfAksesMulai, 1, 4);
-        grid.add(new Label("Waktu Tutup:"), 0, 5);
-        grid.add(tfAksesSelesai, 1, 5);
+        Button btnAcak = new Button("Acak Token");
+        btnAcak.setGraphic(new IkonView(Ikon.ACAK, 14));
+        btnAcak.getStyleClass().add("tombol-sekunder");
+        btnAcak.setOnAction(e -> tfToken.setText(hasilkanTokenAcak()));
 
-        dialog.getDialogPane().setContent(grid);
+        HBox hbToken = new HBox(10, tfToken, btnAcak);
+        hbToken.setAlignment(Pos.CENTER_LEFT);
+        vbToken.getChildren().addAll(lblToken, hbToken);
 
-        Optional<ButtonType> res = dialog.showAndWait();
-        if (res.isPresent() && res.get() == btnSimpan) {
+        // 4. Jadwal Akses CBT
+        VBox boxJadwal = new VBox(10);
+        boxJadwal.getStyleClass().add("modal-kotak-jadwal");
+
+        HBox hbJadwalHead = new HBox(8);
+        hbJadwalHead.setAlignment(Pos.CENTER_LEFT);
+        Label lblJadwalJudul = new Label("Jadwal Akses CBT (Opsional)");
+        lblJadwalJudul.setStyle("-fx-font-size: 12.5px; -fx-font-weight: bold; -fx-text-fill: -teks;");
+        hbJadwalHead.getChildren().addAll(new IkonView(Ikon.KALENDER, 15), lblJadwalJudul);
+
+        Region spJadwal = new Region();
+        HBox.setHgrow(spJadwal, Priority.ALWAYS);
+        Label lblKetJadwal = new Label("Kosongkan jika bebas akses");
+        lblKetJadwal.setStyle("-fx-font-size: 11px; -fx-text-fill: -teks-redup;");
+        hbJadwalHead.getChildren().addAll(spJadwal, lblKetJadwal);
+
+        KontrolWaktuAkses kontrolMulai = new KontrolWaktuAkses(u.getWaktuMulai());
+        KontrolWaktuAkses kontrolSelesai = new KontrolWaktuAkses(u.getWaktuSelesai());
+
+        HBox barisMulai = new HBox(10);
+        barisMulai.setAlignment(Pos.CENTER_LEFT);
+        Label lblMulai = new Label("Waktu Buka:");
+        lblMulai.setPrefWidth(90);
+        lblMulai.setStyle("-fx-font-size: 12px; -fx-text-fill: -teks-redup;");
+        barisMulai.getChildren().addAll(lblMulai, kontrolMulai.buatTampilan());
+
+        HBox barisSelesai = new HBox(10);
+        barisSelesai.setAlignment(Pos.CENTER_LEFT);
+        Label lblSelesai = new Label("Waktu Tutup:");
+        lblSelesai.setPrefWidth(90);
+        lblSelesai.setStyle("-fx-font-size: 12px; -fx-text-fill: -teks-redup;");
+        barisSelesai.getChildren().addAll(lblSelesai, kontrolSelesai.buatTampilan());
+
+        boxJadwal.getChildren().addAll(hbJadwalHead, barisMulai, barisSelesai);
+
+        // 5. Pengaturan Ulang Ujian (Default: Tidak)
+        VBox vbUlang = new VBox(4);
+        vbUlang.getStyleClass().add("modal-kotak-jadwal");
+        CheckBox cbBolehUlang = new CheckBox("Izinkan Ujian Dikerjakan Ulang");
+        cbBolehUlang.setSelected(u.isBolehUlang());
+        cbBolehUlang.setStyle("-fx-font-weight: bold; -fx-text-fill: -teks;");
+        Label lblKetUlang = new Label("Jika tidak dicentang (default), siswa hanya dapat mengerjakan ujian ini satu kali.");
+        lblKetUlang.setStyle("-fx-font-size: 11px; -fx-text-fill: -teks-redup;");
+        vbUlang.getChildren().addAll(cbBolehUlang, lblKetUlang);
+
+        VBox formContainer = new VBox(14, vbMapel, hbDurasiKkm, vbToken, boxJadwal, vbUlang);
+
+        Separator sepBawah = new Separator();
+        sepBawah.setStyle("-fx-opacity: 0.4;");
+
+        // Footer Action Buttons
+        HBox barisFooter = new HBox(10);
+        barisFooter.setAlignment(Pos.CENTER_RIGHT);
+
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setOnAction(e -> dialog.close());
+
+        Button btnSimpan = new Button("Simpan Perubahan");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setOnAction(e -> {
             String mapelBaru = tfMapel.getText().trim();
             String tokenBaru = tfToken.getText().trim().toUpperCase();
             int durasiBaru;
@@ -232,34 +502,52 @@ public class BankSoalController {
             try {
                 durasiBaru = Integer.parseInt(tfDurasi.getText().trim());
                 kkmBaru = Double.parseDouble(tfKkm.getText().trim());
+                if (durasiBaru <= 0 || kkmBaru < 0 || kkmBaru > 100) {
+                    DialogUtil.peringatan("Durasi harus lebih dari 0 dan KKM antara 0 - 100.");
+                    return;
+                }
             } catch (NumberFormatException ex) {
-                DialogUtil.peringatan("Durasi dan KKM harus angka!");
+                DialogUtil.peringatan("Durasi dan KKM harus berupa angka yang valid!");
                 return;
             }
 
-            if (StringUtil.isKosong(mapelBaru) || tokenBaru.length() != 6) {
-                DialogUtil.peringatan("Mata pelajaran tidak boleh kosong dan token harus 6 karakter.");
+            if (StringUtil.isKosong(mapelBaru)) {
+                DialogUtil.peringatan("Mata pelajaran tidak boleh kosong.");
                 return;
             }
 
-            LocalDateTime mulai = FormatUtil.parseInputAkses(tfAksesMulai.getText());
-            LocalDateTime selesai = FormatUtil.parseInputAkses(tfAksesSelesai.getText());
+            if (tokenBaru.length() != 6) {
+                DialogUtil.peringatan("Token ujian harus terdiri dari 6 karakter.");
+                return;
+            }
+
+            LocalDateTime mulai = kontrolMulai.getWaktu(false);
+            LocalDateTime selesai = kontrolSelesai.getWaktu(true);
             if (mulai != null && selesai != null && mulai.isAfter(selesai)) {
-                DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup");
+                DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup!");
                 return;
             }
 
             try {
+                boolean bolehUlangBaru = cbBolehUlang.isSelected();
                 Ujian ujianBaru = new Ujian(u.getKodeUjian(), mapelBaru, tokenBaru, durasiBaru, kkmBaru,
-                        u.getDaftarSoal(), u.isBolehUlang(), mulai, selesai);
+                        u.getDaftarSoal(), bolehUlangBaru, mulai, selesai);
                 ujianService.perbaruiUjian(ujianBaru);
                 muatDaftarUjian();
                 perbaruiStatistik();
+                dialog.close();
                 DialogUtil.info("Pengaturan ujian " + u.getKodeUjian() + " berhasil diperbarui.");
             } catch (IOException ex) {
                 DialogUtil.peringatan("Gagal menyimpan perubahan: " + ex.getMessage());
             }
-        }
+        });
+
+        barisFooter.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(barisHeader, sepAtas, formContainer, sepBawah, barisFooter);
+        pane.setContent(kartu);
+
+        dialog.showAndWait();
     }
 
     private void handleHapusUjian(Ujian u) {
@@ -278,49 +566,207 @@ public class BankSoalController {
 
     @FXML
     private void handleTambahUjianBaru() {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle("Buat Paket Ujian Baru");
-        dialog.setHeaderText("Tambahkan paket ujian CBT baru ke Bank Soal");
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
 
-        ButtonType btnLanjut = new ButtonType("Buat & Rancang Soal", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(btnLanjut, ButtonType.CANCEL);
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
 
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(8);
-        grid.setPadding(new Insets(10, 10, 10, 10));
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
 
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(540);
+        kartu.setMaxWidth(560);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        // Header Modal (Bisa di-drag)
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        StackPane ikonBox = new StackPane(new IkonView(Ikon.UJIAN, 20));
+        ikonBox.setStyle("-fx-background-color: rgba(26, 163, 232, 0.14); -fx-background-radius: 999; -fx-padding: 10;");
+
+        VBox vbJudul = new VBox(2);
+        Label lblJudul = new Label("Buat Paket Ujian Baru");
+        lblJudul.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: -teks;");
+        Label lblSub = new Label("Tambahkan paket ujian CBT baru ke Bank Soal");
+        lblSub.setStyle("-fx-font-size: 12px; -fx-text-fill: -teks-redup;");
+        vbJudul.getChildren().addAll(lblJudul, lblSub);
+
+        Region spacerHeader = new Region();
+        HBox.setHgrow(spacerHeader, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 13));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setOnAction(e -> dialog.close());
+
+        barisHeader.getChildren().addAll(ikonBox, vbJudul, spacerHeader, btnTutup);
+
+        Separator sepAtas = new Separator();
+        sepAtas.setStyle("-fx-opacity: 0.4;");
+
+        // Form Fields
+        // 1. Kode Ujian & Mata Pelajaran (Side by side)
+        HBox hbKodeMapel = new HBox(14);
+
+        VBox vbKode = new VBox(6);
+        vbKode.setPrefWidth(160);
+        Label lblKode = new Label("Kode Ujian");
+        lblKode.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         String saranKode = "UJI-0" + (ujianService.getJumlahUjian() + 1);
         TextField tfKode = new TextField(saranKode);
+        tfKode.setPromptText("cth. UJI-08");
+        tfKode.setTextFormatter(new TextFormatter<String>(change -> {
+            change.setText(change.getText().toUpperCase());
+            String newText = change.getControlNewText();
+            return (newText.length() <= 10) ? change : null;
+        }));
+        tfKode.setStyle("-fx-font-weight: bold;");
+        vbKode.getChildren().addAll(lblKode, tfKode);
+
+        VBox vbMapel = new VBox(6);
+        HBox.setHgrow(vbMapel, Priority.ALWAYS);
+        Label lblMapel = new Label("Mata Pelajaran");
+        lblMapel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         TextField tfMapel = new TextField("");
+        tfMapel.setPromptText("cth. Matematika, Fisika...");
+        vbMapel.getChildren().addAll(lblMapel, tfMapel);
+
+        hbKodeMapel.getChildren().addAll(vbKode, vbMapel);
+
+        // 2. Durasi & KKM
+        HBox hbDurasiKkm = new HBox(14);
+
+        VBox vbDurasi = new VBox(6);
+        HBox.setHgrow(vbDurasi, Priority.ALWAYS);
+        Label lblDurasi = new Label("Durasi Ujian (menit)");
+        lblDurasi.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         TextField tfDurasi = new TextField("30");
+        tfDurasi.setPromptText("Menit");
+        HBox pillsDurasi = buatBarisPill(tfDurasi, "15m", "30m", "45m", "60m", "90m", "120m");
+        vbDurasi.getChildren().addAll(lblDurasi, tfDurasi, pillsDurasi);
+
+        VBox vbKkm = new VBox(6);
+        HBox.setHgrow(vbKkm, Priority.ALWAYS);
+        Label lblKkm = new Label("KKM Kelulusan");
+        lblKkm.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
         TextField tfKkm = new TextField("75");
-        String saranToken = ("CBT" + (int) (Math.random() * 899 + 100)).toUpperCase();
-        TextField tfToken = new TextField(saranToken);
-        TextField tfAksesMulai = new TextField("");
-        tfAksesMulai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
-        TextField tfAksesSelesai = new TextField("");
-        tfAksesSelesai.setPromptText("yyyy-MM-dd HH:mm (opsional)");
+        tfKkm.setPromptText("Nilai KKM");
+        HBox pillsKkm = buatBarisPill(tfKkm, "70", "75", "80", "85");
+        vbKkm.getChildren().addAll(lblKkm, tfKkm, pillsKkm);
 
-        grid.add(new Label("Kode Ujian:"), 0, 0);
-        grid.add(tfKode, 1, 0);
-        grid.add(new Label("Mata Pelajaran:"), 0, 1);
-        grid.add(tfMapel, 1, 1);
-        grid.add(new Label("Durasi (menit):"), 0, 2);
-        grid.add(tfDurasi, 1, 2);
-        grid.add(new Label("KKM:"), 0, 3);
-        grid.add(tfKkm, 1, 3);
-        grid.add(new Label("Token (6 karakter):"), 0, 4);
-        grid.add(tfToken, 1, 4);
-        grid.add(new Label("Waktu Buka:"), 0, 5);
-        grid.add(tfAksesMulai, 1, 5);
-        grid.add(new Label("Waktu Tutup:"), 0, 6);
-        grid.add(tfAksesSelesai, 1, 6);
+        hbDurasiKkm.getChildren().addAll(vbDurasi, vbKkm);
 
-        dialog.getDialogPane().setContent(grid);
+        // 3. Token Ujian
+        VBox vbToken = new VBox(6);
+        Label lblToken = new Label("Token Akses Ujian (6 Karakter)");
+        lblToken.setStyle("-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: -teks-redup;");
+        TextField tfToken = new TextField(hasilkanTokenAcak());
+        tfToken.setPromptText("TOKEN");
+        tfToken.setTextFormatter(new TextFormatter<String>(change -> {
+            change.setText(change.getText().toUpperCase());
+            String newText = change.getControlNewText();
+            return (newText.length() <= 6) ? change : null;
+        }));
+        tfToken.setStyle("-fx-font-family: monospace; -fx-font-size: 14px; -fx-font-weight: bold; -fx-alignment: center;");
+        HBox.setHgrow(tfToken, Priority.ALWAYS);
 
-        Optional<ButtonType> res = dialog.showAndWait();
-        if (res.isPresent() && res.get() == btnLanjut) {
+        Button btnAcak = new Button("Acak Token");
+        btnAcak.setGraphic(new IkonView(Ikon.ACAK, 14));
+        btnAcak.getStyleClass().add("tombol-sekunder");
+        btnAcak.setOnAction(e -> tfToken.setText(hasilkanTokenAcak()));
+
+        HBox hbToken = new HBox(10, tfToken, btnAcak);
+        hbToken.setAlignment(Pos.CENTER_LEFT);
+        vbToken.getChildren().addAll(lblToken, hbToken);
+
+        // 4. Jadwal Akses CBT
+        VBox boxJadwal = new VBox(10);
+        boxJadwal.getStyleClass().add("modal-kotak-jadwal");
+
+        HBox hbJadwalHead = new HBox(8);
+        hbJadwalHead.setAlignment(Pos.CENTER_LEFT);
+        Label lblJadwalJudul = new Label("Jadwal Akses CBT (Opsional)");
+        lblJadwalJudul.setStyle("-fx-font-size: 12.5px; -fx-font-weight: bold; -fx-text-fill: -teks;");
+        hbJadwalHead.getChildren().addAll(new IkonView(Ikon.KALENDER, 15), lblJadwalJudul);
+
+        Region spJadwal = new Region();
+        HBox.setHgrow(spJadwal, Priority.ALWAYS);
+        Label lblKetJadwal = new Label("Kosongkan jika bebas akses");
+        lblKetJadwal.setStyle("-fx-font-size: 11px; -fx-text-fill: -teks-redup;");
+        hbJadwalHead.getChildren().addAll(spJadwal, lblKetJadwal);
+
+        KontrolWaktuAkses kontrolMulai = new KontrolWaktuAkses(null);
+        KontrolWaktuAkses kontrolSelesai = new KontrolWaktuAkses(null);
+
+        HBox barisMulai = new HBox(10);
+        barisMulai.setAlignment(Pos.CENTER_LEFT);
+        Label lblMulai = new Label("Waktu Buka:");
+        lblMulai.setPrefWidth(90);
+        lblMulai.setStyle("-fx-font-size: 12px; -fx-text-fill: -teks-redup;");
+        barisMulai.getChildren().addAll(lblMulai, kontrolMulai.buatTampilan());
+
+        HBox barisSelesai = new HBox(10);
+        barisSelesai.setAlignment(Pos.CENTER_LEFT);
+        Label lblSelesai = new Label("Waktu Tutup:");
+        lblSelesai.setPrefWidth(90);
+        lblSelesai.setStyle("-fx-font-size: 12px; -fx-text-fill: -teks-redup;");
+        barisSelesai.getChildren().addAll(lblSelesai, kontrolSelesai.buatTampilan());
+
+        boxJadwal.getChildren().addAll(hbJadwalHead, barisMulai, barisSelesai);
+
+        // 5. Pengaturan Ulang Ujian (Default: Tidak)
+        VBox vbUlang = new VBox(4);
+        vbUlang.getStyleClass().add("modal-kotak-jadwal");
+        CheckBox cbBolehUlang = new CheckBox("Izinkan Ujian Dikerjakan Ulang");
+        cbBolehUlang.setSelected(false); // DEFAULT TIDAK
+        cbBolehUlang.setStyle("-fx-font-weight: bold; -fx-text-fill: -teks;");
+        Label lblKetUlang = new Label("Bawaan: Tidak (Siswa hanya dapat mengerjakan ujian ini satu kali).");
+        lblKetUlang.setStyle("-fx-font-size: 11px; -fx-text-fill: -teks-redup;");
+        vbUlang.getChildren().addAll(cbBolehUlang, lblKetUlang);
+
+        VBox formContainer = new VBox(14, hbKodeMapel, hbDurasiKkm, vbToken, boxJadwal, vbUlang);
+
+        Separator sepBawah = new Separator();
+        sepBawah.setStyle("-fx-opacity: 0.4;");
+
+        // Footer Action Buttons
+        HBox barisFooter = new HBox(10);
+        barisFooter.setAlignment(Pos.CENTER_RIGHT);
+
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setOnAction(e -> dialog.close());
+
+        Button btnLanjut = new Button("Buat & Rancang Soal →");
+        btnLanjut.getStyleClass().add("tombol-utama");
+        btnLanjut.setOnAction(e -> {
             String kode = tfKode.getText().trim().toUpperCase();
             String mapel = tfMapel.getText().trim();
             String token = tfToken.getText().trim().toUpperCase();
@@ -329,13 +775,17 @@ public class BankSoalController {
             try {
                 durasi = Integer.parseInt(tfDurasi.getText().trim());
                 kkm = Double.parseDouble(tfKkm.getText().trim());
-            } catch (NumberFormatException e) {
-                DialogUtil.peringatan("Durasi dan KKM harus berupa angka!");
+                if (durasi <= 0 || kkm < 0 || kkm > 100) {
+                    DialogUtil.peringatan("Durasi harus lebih dari 0 dan KKM antara 0 - 100.");
+                    return;
+                }
+            } catch (NumberFormatException ex) {
+                DialogUtil.peringatan("Durasi dan KKM harus berupa angka yang valid!");
                 return;
             }
 
             if (StringUtil.isKosong(kode) || StringUtil.isKosong(mapel) || token.length() != 6) {
-                DialogUtil.peringatan("Semua field wajib diisi dan token harus 6 karakter!");
+                DialogUtil.peringatan("Kode, mata pelajaran wajib diisi dan token harus 6 karakter!");
                 return;
             }
 
@@ -344,22 +794,31 @@ public class BankSoalController {
                 return;
             }
 
-            LocalDateTime mulai = FormatUtil.parseInputAkses(tfAksesMulai.getText());
-            LocalDateTime selesai = FormatUtil.parseInputAkses(tfAksesSelesai.getText());
+            LocalDateTime mulai = kontrolMulai.getWaktu(false);
+            LocalDateTime selesai = kontrolSelesai.getWaktu(true);
             if (mulai != null && selesai != null && mulai.isAfter(selesai)) {
-                DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup");
+                DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup!");
                 return;
             }
 
             try {
-                Ujian ujianBaru = new Ujian(kode, mapel, token, durasi, kkm, new ArrayList<>(), false, mulai, selesai);
+                boolean bolehUlang = cbBolehUlang.isSelected();
+                Ujian ujianBaru = new Ujian(kode, mapel, token, durasi, kkm, new ArrayList<>(), bolehUlang, mulai, selesai);
                 ujianService.tambahUjian(ujianBaru);
                 session.setKursusAktif(null);
                 session.setUjianAktif(ujianBaru);
+                dialog.close();
                 SceneRouter.pindah(Layar.EDITOR_UJIAN);
-            } catch (IOException e) {
-                DialogUtil.peringatan("Gagal membuat ujian baru: " + e.getMessage());
+            } catch (IOException ex) {
+                DialogUtil.peringatan("Gagal membuat ujian baru: " + ex.getMessage());
             }
-        }
+        });
+
+        barisFooter.getChildren().addAll(btnBatal, btnLanjut);
+
+        kartu.getChildren().addAll(barisHeader, sepAtas, formContainer, sepBawah, barisFooter);
+        pane.setContent(kartu);
+
+        dialog.showAndWait();
     }
 }
