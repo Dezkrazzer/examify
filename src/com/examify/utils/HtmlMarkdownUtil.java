@@ -43,11 +43,15 @@ public final class HtmlMarkdownUtil {
             konten = mBody.group(1);
         }
 
-        // Tangani span dengan style CSS (font-weight, font-style, text-decoration)
+        // Konversi tag font color lama menjadi span style color
+        konten = konten.replaceAll("(?is)<font\\s+color=[\"\']([^\"\']*)?[\"\']>(.*?)</font>", "<span style=\"color: $1;\">$2</span>");
+
+        // Tangani span dengan style CSS (font-weight, font-style, text-decoration, color, background-color)
         Matcher mSpan = POLA_SPAN_STYLE.matcher(konten);
         StringBuilder sbSpan = new StringBuilder();
         while (mSpan.find()) {
-            String style = mSpan.group(1).toLowerCase();
+            String rawStyle = mSpan.group(1);
+            String style = rawStyle.toLowerCase();
             String isi = mSpan.group(2);
             if (style.contains("font-weight: bold") || style.contains("font-weight: 700")) {
                 isi = "<b>" + isi + "</b>";
@@ -57,6 +61,9 @@ public final class HtmlMarkdownUtil {
             }
             if (style.contains("text-decoration: underline")) {
                 isi = "<u>" + isi + "</u>";
+            }
+            if (style.contains("color:") || style.contains("background-color:")) {
+                isi = "<span style=\"" + rawStyle.trim() + "\">" + isi + "</span>";
             }
             mSpan.appendReplacement(sbSpan, Matcher.quoteReplacement(isi));
         }
@@ -144,14 +151,18 @@ public final class HtmlMarkdownUtil {
     }
 
     private static String bersihkanTagLain(String teks) {
-        // Jangan bersihkan tag <u>, </u>, <center>, </center>, <div align="right">, </div>
+        // Jangan bersihkan tag <u>, </u>, <center>, </center>, <div align="right">, </div>,
+        // serta <span style="...">, </span>, <mark...>, </mark>, <font...>, </font>
         Matcher m = POLA_TAG_SISA.matcher(teks);
         StringBuilder sb = new StringBuilder();
         while (m.find()) {
             String tag = m.group(0).toLowerCase();
             if (tag.equals("<u>") || tag.equals("</u>")
                     || tag.equals("<center>") || tag.equals("</center>")
-                    || tag.startsWith("<div align=\"right\"") || tag.equals("</div>")) {
+                    || tag.startsWith("<div align=\"right\"") || tag.equals("</div>")
+                    || tag.startsWith("<span style=") || tag.equals("</span>")
+                    || tag.startsWith("<mark") || tag.equals("</mark>")
+                    || tag.startsWith("<font") || tag.equals("</font>")) {
                 m.appendReplacement(sb, Matcher.quoteReplacement(m.group(0)));
             } else {
                 m.appendReplacement(sb, "");
