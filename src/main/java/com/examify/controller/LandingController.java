@@ -45,10 +45,6 @@ public class LandingController {
     @FXML private Label lblKursusUnggulan;
     @FXML private Label lblKursusUnggulanInfo;
     @FXML private Label lblMateriHero;
-    @FXML private Label lblStatKursus;
-    @FXML private Label lblStatMateri;
-    @FXML private Label lblStatUjian;
-    @FXML private Label lblStatPeserta;
 
     private final AppSession session = AppSession.getInstance();
     private final KursusService kursusService = session.getKursusService();
@@ -58,7 +54,6 @@ public class LandingController {
         TemaUtil.pasang(btnTema, false);
         lblSemester.setText(teksSemester(LocalDate.now()) + " sedang berlangsung");
         isiHero();
-        isiStatistik();
         tampilkanKursus(kursusService.cari(""));
         tfCari.textProperty().addListener((obs, lama, kata) -> tampilkanKursus(kursusService.cari(kata)));
         tfCari.setOnAction(e -> handleKeKursus());
@@ -82,12 +77,6 @@ public class LandingController {
         AnimasiUtil.hitungNaik(lblMateriHero, kursusService.getJumlahMateri(), DURASI_HITUNG);
     }
 
-    private void isiStatistik() {
-        AnimasiUtil.hitungNaik(lblStatKursus, kursusService.getDaftarKursus().size(), DURASI_HITUNG);
-        AnimasiUtil.hitungNaik(lblStatMateri, kursusService.getJumlahMateri(), DURASI_HITUNG);
-        AnimasiUtil.hitungNaik(lblStatUjian, session.getUjianService().getJumlahUjian(), DURASI_HITUNG);
-        AnimasiUtil.hitungNaik(lblStatPeserta, session.getRekapService().getJumlahPeserta(), DURASI_HITUNG);
-    }
 
     private void tampilkanKursus(List<Kursus> daftar) {
         List<KartuKursus> kartu = daftar.stream().map(this::buatKartu).toList();

@@ -13,7 +13,8 @@
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <javafx.version>21.0.5</javafx.version>
+        <!-- JavaFX 25+: javafx.web tidak lagi butuh modul jdk.jsobject yang sudah dihapus dari JDK baru -->
+        <javafx.version>25.0.1</javafx.version>
         <junit.version>5.10.2</junit.version>
         <main.class>com.examify.app.MainApp</main.class>
     </properties>
@@ -43,18 +44,7 @@
     </dependencies>
 
     <build>
-        <!-- Layout VS Code: kode di src/, test di test/, FXML & CSS ikut di src/ -->
-        <sourceDirectory>src</sourceDirectory>
-        <testSourceDirectory>test</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>src</directory>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
-            </resource>
-        </resources>
-
+        <!-- Layout Maven standar: src/main/java, src/main/resources, src/test/java -->
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
