@@ -68,10 +68,64 @@ public final class MarkdownView {
             }
         }
 
+        double ukuranFont = switch (kelas) {
+            case "md-h1" -> 27.0;
+            case "md-h2" -> 19.0;
+            case "md-h3" -> 16.0;
+            default -> 14.5;
+        };
+
         for (Potongan p : MarkdownParser.parseInline(teksBersih)) {
-            Text t = new Text(p.teks());
-            t.getStyleClass().addAll("md-teks", "md-" + p.gaya().name().toLowerCase());
-            flow.getChildren().add(t);
+            String teksPotongan = p.teks();
+            if (teksPotongan == null || teksPotongan.isEmpty()) continue;
+
+            String warnaLatar = p.warnaLatar();
+            String warnaTeks = p.warnaTeks();
+            boolean hasBg = warnaLatar != null && !warnaLatar.isEmpty() && !warnaLatar.equalsIgnoreCase("transparent");
+
+            if (hasBg) {
+                // Teks dengan warna sorotan / stabilo (background-color)
+                String[] tokens = teksPotongan.split("(?<=\\s)|(?=\\s)");
+                for (String token : tokens) {
+                    if (token.isBlank()) {
+                        Text sp = new Text(token);
+                        sp.getStyleClass().add("md-teks");
+                        sp.setStyle("-fx-font-size: " + ukuranFont + "px;");
+                        flow.getChildren().add(sp);
+                    } else {
+                        Label lbl = new Label(token);
+                        lbl.getStyleClass().add("md-highlight");
+                        StringBuilder style = new StringBuilder();
+                        style.append("-fx-background-color: ").append(warnaLatar).append("; ");
+                        style.append("-fx-background-radius: 3px; ");
+                        style.append("-fx-padding: 1 3; ");
+                        style.append("-fx-font-size: ").append(ukuranFont).append("px; ");
+                        if (warnaTeks != null && !warnaTeks.isEmpty()) {
+                            style.append("-fx-text-fill: ").append(warnaTeks).append("; ");
+                        } else {
+                            style.append("-fx-text-fill: #0f172a; ");
+                        }
+                        if (p.gaya() == MarkdownParser.GayaTeks.TEBAL) {
+                            style.append("-fx-font-weight: bold; ");
+                        } else if (p.gaya() == MarkdownParser.GayaTeks.MIRING) {
+                            style.append("-fx-font-style: italic; ");
+                        } else if (p.gaya() == MarkdownParser.GayaTeks.GARIS_BAWAH) {
+                            style.append("-fx-underline: true; ");
+                        } else if (p.gaya() == MarkdownParser.GayaTeks.KODE) {
+                            style.append("-fx-font-family: 'Consolas', monospace; ");
+                        }
+                        lbl.setStyle(style.toString());
+                        flow.getChildren().add(lbl);
+                    }
+                }
+            } else {
+                Text t = new Text(teksPotongan);
+                t.getStyleClass().addAll("md-teks", "md-" + p.gaya().name().toLowerCase());
+                if (warnaTeks != null && !warnaTeks.isEmpty()) {
+                    t.setStyle("-fx-fill: " + warnaTeks + ";");
+                }
+                flow.getChildren().add(t);
+            }
         }
         return flow;
     }

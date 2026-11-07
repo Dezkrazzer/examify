@@ -44,6 +44,22 @@ class HtmlMarkdownUtilTest {
     }
 
     @Test
+    void testHtmlToMarkdown_PreserveColorAndHighlight() {
+        String html = "<p>Teks <span style=\"color: #e53935;\">merah</span> dan <span style=\"background-color: #ffff00;\">stabilo kuning</span> serta <mark style=\"background-color: #00ff00;\">hijau</mark>.</p>";
+        String md = HtmlMarkdownUtil.htmlToMarkdown(html);
+        assertTrue(md.contains("<span style=\"color: #e53935;\">merah</span>"));
+        assertTrue(md.contains("<span style=\"background-color: #ffff00;\">stabilo kuning</span>"));
+        assertTrue(md.contains("<mark style=\"background-color: #00ff00;\">hijau</mark>"));
+    }
+
+    @Test
+    void testHtmlToMarkdown_FontTagColorConversion() {
+        String html = "<p>Teks <font color=\"#1e88e5\">biru</font>.</p>";
+        String md = HtmlMarkdownUtil.htmlToMarkdown(html);
+        assertTrue(md.contains("<span style=\"color: #1e88e5;\">biru</span>"));
+    }
+
+    @Test
     void testMarkdownToHtml_Center() {
         String md = "<center>Judul Tengah</center>";
         String html = HtmlMarkdownUtil.markdownToHtml(md);

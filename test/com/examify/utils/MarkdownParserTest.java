@@ -66,4 +66,24 @@ class MarkdownParserTest {
     void teksTanpaFormatMenjadiSatuPotongan() {
         assertEquals(List.of(new Potongan("biasa saja", GayaTeks.BIASA)), MarkdownParser.parseInline("biasa saja"));
     }
+
+    @Test
+    void inlineSpanHighlightDanFontColor() {
+        String input = "<span style=\"background-color: rgb(0, 229, 255);\">Tuliskan materi pembelajaran</span>";
+        List<Potongan> hasil = MarkdownParser.parseInline(input);
+        assertEquals(1, hasil.size());
+        assertEquals("Tuliskan materi pembelajaran", hasil.get(0).teks());
+        assertEquals("rgb(0, 229, 255)", hasil.get(0).warnaLatar());
+    }
+
+    @Test
+    void inlineSpanColorDanMark() {
+        String input = "Ini <span style=\"color: #e53935;\">merah</span> dan <mark>kuning</mark>";
+        List<Potongan> hasil = MarkdownParser.parseInline(input);
+        assertEquals(4, hasil.size());
+        assertEquals(new Potongan("Ini ", GayaTeks.BIASA), hasil.get(0));
+        assertEquals(new Potongan("merah", GayaTeks.BIASA, "#e53935", null), hasil.get(1));
+        assertEquals(new Potongan(" dan ", GayaTeks.BIASA), hasil.get(2));
+        assertEquals(new Potongan("kuning", GayaTeks.BIASA, null, "#ffff00"), hasil.get(3));
+    }
 }

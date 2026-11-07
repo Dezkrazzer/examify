@@ -493,6 +493,97 @@
     -fx-min-height: 48;
     -fx-max-height: 48;
 }
+
+/* Ribbon Menu Button (seperti Atur Huruf Besar / Huruf Kecil Aa) */
+.ribbon-menu-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 4 6;
+    -fx-font-size: 13px;
+    -fx-text-fill: -teks;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+.ribbon-menu-btn:hover {
+    -fx-background-color: -garis;
+}
+.ribbon-menu-btn:showing {
+    -fx-background-color: rgba(26, 163, 232, 0.2);
+}
+.ribbon-menu-btn .arrow-button {
+    -fx-padding: 0 0 0 2;
+}
+.ribbon-menu-btn .arrow {
+    -fx-background-color: -teks-redup;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z";
+    -fx-scale-shape: false;
+}
+
+/* Ribbon SplitMenuButton (Stabilo & Font Color) */
+.ribbon-split-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+.ribbon-split-btn:hover {
+    -fx-background-color: -garis;
+}
+.ribbon-split-btn:showing {
+    -fx-background-color: rgba(26, 163, 232, 0.2);
+}
+.ribbon-split-btn > .action-button {
+    -fx-background-color: transparent;
+    -fx-padding: 4 5;
+    -fx-background-radius: 6 0 0 6;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+.ribbon-split-btn > .action-button:hover {
+    -fx-background-color: rgba(26, 163, 232, 0.15);
+}
+.ribbon-split-btn > .arrow-button {
+    -fx-background-color: transparent;
+    -fx-padding: 4 4;
+    -fx-background-radius: 0 6 6 0;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+.ribbon-split-btn > .arrow-button:hover {
+    -fx-background-color: rgba(26, 163, 232, 0.15);
+}
+.ribbon-split-btn > .arrow-button > .arrow {
+    -fx-background-color: -teks-redup;
+    -fx-shape: "M 0 0 L 4 4 L 8 0 Z";
+    -fx-scale-shape: false;
+}
+
+.color-bar-indicator {
+    -fx-min-width: 16px;
+    -fx-pref-width: 16px;
+    -fx-max-width: 16px;
+    -fx-min-height: 3px;
+    -fx-pref-height: 3px;
+    -fx-max-height: 3px;
+    -fx-background-radius: 1px;
+}
+
+.menu-color-swatch {
+    -fx-min-width: 13px;
+    -fx-pref-width: 13px;
+    -fx-max-width: 13px;
+    -fx-min-height: 13px;
+    -fx-pref-height: 13px;
+    -fx-max-height: 13px;
+    -fx-background-radius: 3px;
+    -fx-border-color: rgba(0, 0, 0, 0.2);
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+}
 .tombol-aksen-lembut {
     -fx-background-color: rgba(26, 163, 232, 0.14);
     -fx-text-fill: -aksen;

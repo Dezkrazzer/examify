@@ -25,7 +25,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.SplitMenuButton;
+import javafx.scene.paint.Color;
+import java.util.Optional;
 import javafx.scene.control.IndexRange;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -77,6 +85,11 @@ public class EditorMateriController {
     @FXML private Button btnBold;
     @FXML private Button btnItalic;
     @FXML private Button btnUnderline;
+    @FXML private MenuButton mbChangeCase;
+    @FXML private SplitMenuButton smbHighlightColor;
+    @FXML private SplitMenuButton smbFontColor;
+    @FXML private Region barHighlightColor;
+    @FXML private Region barFontColor;
     @FXML private Button btnAlignLeft;
     @FXML private Button btnAlignCenter;
     @FXML private Button btnAlignRight;
@@ -118,6 +131,8 @@ public class EditorMateriController {
 
     private final List<DrafSlide> daftarSlide = new ArrayList<>();
     private int slideAktifIndex = 0;
+    private String warnaHighlightAktif = "#FFE600";
+    private String warnaFontAktif = "#E53935";
     private boolean sedangMemuatForm = false;
 
     // Komponen teks yang sedang aktif/fokus di dalam kanvas editor
@@ -936,6 +951,348 @@ public class EditorMateriController {
             sinkronkanBlokHtml(htmlEditorFokusAktif, blokFokusAktif);
         } else if (inputFokusAktif != null) {
             formatTeksTerpilih("<u>", "</u>");
+        }
+    }
+
+    // ------------------------------------------------------------------ Atur Huruf Besar / Huruf Kecil (Aa)
+    @FXML
+    private void handleSentenceCase() {
+        terapkanKapitalisasi("SENTENCE");
+    }
+
+    @FXML
+    private void handleLowerCase() {
+        terapkanKapitalisasi("LOWERCASE");
+    }
+
+    @FXML
+    private void handleUpperCase() {
+        terapkanKapitalisasi("UPPERCASE");
+    }
+
+    @FXML
+    private void handleTitleCase() {
+        terapkanKapitalisasi("TITLE_CASE");
+    }
+
+    private void terapkanKapitalisasi(String mode) {
+        simpanRiwayatUndo();
+
+        if (htmlEditorFokusAktif != null) {
+            WebView wv = temukanWebView(htmlEditorFokusAktif);
+            if (wv != null) {
+                String js = """
+                    (function() {
+                        var sel = window.getSelection();
+                        if (!sel || sel.rangeCount === 0) return;
+                        if (sel.isCollapsed) {
+                            sel.modify('move', 'backward', 'word');
+                            sel.modify('extend', 'forward', 'word');
+                        }
+                        var text = sel.toString();
+                        if (!text) return;
+                        var mode = '%s';
+                        var converted = text;
+                        if (mode === 'UPPERCASE') {
+                            converted = text.toUpperCase();
+                        } else if (mode === 'LOWERCASE') {
+                            converted = text.toLowerCase();
+                        } else if (mode === 'SENTENCE') {
+                            converted = text.toLowerCase().replace(/(^\\s*|[.?!]\\s*)([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
+                        } else if (mode === 'TITLE_CASE') {
+                            converted = text.toLowerCase().replace(/(^|[^a-zA-Z0-9])([a-z])/g, function(m, p1, p2) { return p1 + p2.toUpperCase(); });
+                        }
+                        document.execCommand('insertText', false, converted);
+                    })();
+                """.formatted(mode);
+                try {
+                    wv.getEngine().executeScript(js);
+                    sinkronkanBlokHtml(htmlEditorFokusAktif, blokFokusAktif);
+                } catch (Exception ignored) {}
+            }
+            return;
+        }
+
+        if (inputFokusAktif != null) {
+            String fullText = inputFokusAktif.getText();
+            if (fullText == null) fullText = "";
+
+            IndexRange sel = inputFokusAktif.getSelection();
+            int start = sel != null ? Math.min(sel.getStart(), sel.getEnd()) : 0;
+            int end = sel != null ? Math.max(sel.getStart(), sel.getEnd()) : 0;
+
+            if (start == end && seleksiTerakhir != null && seleksiTerakhir.getLength() > 0) {
+                start = Math.min(seleksiTerakhir.getStart(), seleksiTerakhir.getEnd());
+                end = Math.max(seleksiTerakhir.getStart(), seleksiTerakhir.getEnd());
+            }
+
+            if (start < end && end <= fullText.length()) {
+                String terpilih = fullText.substring(start, end);
+                String hasil = konversiTeksKapitalisasi(terpilih, mode);
+                inputFokusAktif.replaceText(start, end, hasil);
+                inputFokusAktif.selectRange(start, start + hasil.length());
+                seleksiTerakhir = new IndexRange(start, start + hasil.length());
+            } else if (!fullText.isEmpty()) {
+                String hasil = konversiTeksKapitalisasi(fullText, mode);
+                inputFokusAktif.setText(hasil);
+                if (blokFokusAktif != null) {
+                    blokFokusAktif.setIsi(hasil);
+                }
+            }
+            inputFokusAktif.requestFocus();
+        }
+    }
+
+    private String konversiTeksKapitalisasi(String text, String mode) {
+        if (text == null || text.isEmpty()) return "";
+        return switch (mode) {
+            case "UPPERCASE" -> text.toUpperCase();
+            case "LOWERCASE" -> text.toLowerCase();
+            case "SENTENCE" -> {
+                char[] chars = text.toLowerCase().toCharArray();
+                boolean capitalNext = true;
+                for (int i = 0; i < chars.length; i++) {
+                    char c = chars[i];
+                    if (Character.isLetter(c)) {
+                        if (capitalNext) {
+                            chars[i] = Character.toUpperCase(c);
+                            capitalNext = false;
+                        }
+                    } else if (c == '.' || c == '?' || c == '!' || c == '\n') {
+                        capitalNext = true;
+                    }
+                }
+                yield new String(chars);
+            }
+            case "TITLE_CASE" -> {
+                char[] chars = text.toLowerCase().toCharArray();
+                boolean capitalNext = true;
+                for (int i = 0; i < chars.length; i++) {
+                    char c = chars[i];
+                    if (Character.isLetter(c)) {
+                        if (capitalNext) {
+                            chars[i] = Character.toUpperCase(c);
+                            capitalNext = false;
+                        }
+                    } else if (Character.isWhitespace(c) || c == '-' || c == '/' || c == '(' || c == '"' || c == '\'') {
+                        capitalNext = true;
+                    }
+                }
+                yield new String(chars);
+            }
+            default -> text;
+        };
+    }
+
+    // ------------------------------------------------------------------ Text Highlight Color (Stabilo)
+    @FXML
+    private void handleHighlightColorDefault() {
+        terapkanHighlightColor(warnaHighlightAktif);
+    }
+
+    @FXML
+    private void handleHighlightYellow() {
+        pilihWarnaHighlight("#FFE600");
+    }
+
+    @FXML
+    private void handleHighlightGreen() {
+        pilihWarnaHighlight("#00E676");
+    }
+
+    @FXML
+    private void handleHighlightCyan() {
+        pilihWarnaHighlight("#00E5FF");
+    }
+
+    @FXML
+    private void handleHighlightPink() {
+        pilihWarnaHighlight("#FF4081");
+    }
+
+    @FXML
+    private void handleHighlightOrange() {
+        pilihWarnaHighlight("#FF9100");
+    }
+
+    @FXML
+    private void handleHighlightNone() {
+        pilihWarnaHighlight("none");
+    }
+
+    private void pilihWarnaHighlight(String hexColor) {
+        warnaHighlightAktif = hexColor;
+        perbaruiBarHighlight(hexColor);
+        terapkanHighlightColor(hexColor);
+    }
+
+    private void perbaruiBarHighlight(String hexColor) {
+        if (barHighlightColor != null) {
+            if (hexColor == null || hexColor.equalsIgnoreCase("none") || hexColor.equalsIgnoreCase("transparent")) {
+                barHighlightColor.setStyle("-fx-background-color: transparent; -fx-border-color: -teks-redup; -fx-border-width: 1px;");
+            } else {
+                barHighlightColor.setStyle("-fx-background-color: " + hexColor + ";");
+            }
+        }
+    }
+
+    private void terapkanHighlightColor(String hexColor) {
+        simpanRiwayatUndo();
+
+        if (htmlEditorFokusAktif != null) {
+            WebView wv = temukanWebView(htmlEditorFokusAktif);
+            if (wv != null) {
+                String js;
+                if (hexColor == null || hexColor.equalsIgnoreCase("none") || hexColor.equalsIgnoreCase("transparent")) {
+                    js = """
+                        (function() {
+                            var sel = window.getSelection();
+                            if (!sel || sel.rangeCount === 0) return;
+                            if (sel.isCollapsed) {
+                                sel.modify('move', 'backward', 'word');
+                                sel.modify('extend', 'forward', 'word');
+                            }
+                            document.execCommand('styleWithCSS', false, true);
+                            document.execCommand('hiliteColor', false, 'transparent');
+                        })();
+                    """;
+                } else {
+                    js = """
+                        (function() {
+                            var sel = window.getSelection();
+                            if (!sel || sel.rangeCount === 0) return;
+                            if (sel.isCollapsed) {
+                                sel.modify('move', 'backward', 'word');
+                                sel.modify('extend', 'forward', 'word');
+                            }
+                            document.execCommand('styleWithCSS', false, true);
+                            document.execCommand('hiliteColor', false, '%s');
+                        })();
+                    """.formatted(hexColor);
+                }
+                try {
+                    wv.getEngine().executeScript(js);
+                    sinkronkanBlokHtml(htmlEditorFokusAktif, blokFokusAktif);
+                } catch (Exception ignored) {}
+            }
+            return;
+        }
+
+        if (inputFokusAktif != null) {
+            if (hexColor == null || hexColor.equalsIgnoreCase("none") || hexColor.equalsIgnoreCase("transparent")) {
+                String selText = inputFokusAktif.getSelectedText();
+                if (selText.startsWith("<mark") && selText.endsWith("</mark>")) {
+                    formatTeksTerpilih("<mark>", "</mark>");
+                }
+            } else {
+                formatTeksTerpilih("<mark style=\"background-color: " + hexColor + ";\">", "</mark>");
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------ Font Color (Warna Font)
+    @FXML
+    private void handleFontColorDefault() {
+        terapkanFontColor(warnaFontAktif);
+    }
+
+    @FXML
+    private void handleFontBlack() {
+        pilihWarnaFont("#1E293B");
+    }
+
+    @FXML
+    private void handleFontRed() {
+        pilihWarnaFont("#E53935");
+    }
+
+    @FXML
+    private void handleFontBlue() {
+        pilihWarnaFont("#1E88E5");
+    }
+
+    @FXML
+    private void handleFontGreen() {
+        pilihWarnaFont("#43A047");
+    }
+
+    @FXML
+    private void handleFontOrange() {
+        pilihWarnaFont("#FB8C00");
+    }
+
+    @FXML
+    private void handleFontPurple() {
+        pilihWarnaFont("#8E24AA");
+    }
+
+    @FXML
+    private void handleFontGray() {
+        pilihWarnaFont("#757575");
+    }
+
+    @FXML
+    private void handleFontCustomColor() {
+        ColorPicker picker = new ColorPicker(Color.web(warnaFontAktif.startsWith("#") ? warnaFontAktif : "#E53935"));
+        Dialog<Color> dialog = new Dialog<>();
+        dialog.setTitle("Pilih Warna Teks");
+        dialog.setHeaderText("Pilih warna khusus untuk teks pembelajaran:");
+        DialogPane pane = dialog.getDialogPane();
+        pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        VBox box = new VBox(12, picker);
+        box.setPadding(new Insets(16));
+        pane.setContent(box);
+        dialog.setResultConverter(btn -> btn == ButtonType.OK ? picker.getValue() : null);
+        Optional<Color> hasil = dialog.showAndWait();
+        hasil.ifPresent(c -> {
+            String hex = String.format("#%02X%02X%02X",
+                    (int) Math.round(c.getRed() * 255),
+                    (int) Math.round(c.getGreen() * 255),
+                    (int) Math.round(c.getBlue() * 255));
+            pilihWarnaFont(hex);
+        });
+    }
+
+    private void pilihWarnaFont(String hexColor) {
+        warnaFontAktif = hexColor;
+        perbaruiBarFont(hexColor);
+        terapkanFontColor(hexColor);
+    }
+
+    private void perbaruiBarFont(String hexColor) {
+        if (barFontColor != null) {
+            barFontColor.setStyle("-fx-background-color: " + hexColor + ";");
+        }
+    }
+
+    private void terapkanFontColor(String hexColor) {
+        simpanRiwayatUndo();
+
+        if (htmlEditorFokusAktif != null) {
+            WebView wv = temukanWebView(htmlEditorFokusAktif);
+            if (wv != null) {
+                String js = """
+                    (function() {
+                        var sel = window.getSelection();
+                        if (!sel || sel.rangeCount === 0) return;
+                        if (sel.isCollapsed) {
+                            sel.modify('move', 'backward', 'word');
+                            sel.modify('extend', 'forward', 'word');
+                        }
+                        document.execCommand('styleWithCSS', false, true);
+                        document.execCommand('foreColor', false, '%s');
+                    })();
+                """.formatted(hexColor);
+                try {
+                    wv.getEngine().executeScript(js);
+                    sinkronkanBlokHtml(htmlEditorFokusAktif, blokFokusAktif);
+                } catch (Exception ignored) {}
+            }
+            return;
+        }
+
+        if (inputFokusAktif != null) {
+            formatTeksTerpilih("<span style=\"color: " + hexColor + ";\">", "</span>");
         }
     }
 

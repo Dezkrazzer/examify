@@ -5,6 +5,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -74,7 +78,7 @@
 
                         <Region styleClass="ribbon-separator"/>
 
-                        <!-- Grup Font: Bold, Italic, Underline -->
+                        <!-- Grup Font: Bold, Italic, Underline, Change Case, Highlight Color, Font Color -->
                         <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
                             <HBox spacing="4" alignment="CENTER">
                                 <Button fx:id="btnBold" text="B" styleClass="ribbon-btn, ribbon-btn-icon-only"
@@ -92,6 +96,86 @@
                                         onAction="#handleUnderline" focusTraversable="false">
                                     <tooltip><Tooltip text="Garis Bawah / Underline (Ctrl+U)"/></tooltip>
                                 </Button>
+
+                                <!-- Atur Huruf Besar / Huruf Kecil (Aa ▾) -->
+                                <MenuButton fx:id="mbChangeCase" text="Aa" styleClass="ribbon-menu-btn"
+                                            focusTraversable="false" style="-fx-font-weight: bold; -fx-font-size: 13px;">
+                                    <tooltip><Tooltip text="Ubah Huruf Besar / Huruf Kecil (Change Case)"/></tooltip>
+                                    <items>
+                                        <MenuItem text="Huruf pertama besar (Sentence case)" onAction="#handleSentenceCase"/>
+                                        <MenuItem text="huruf kecil semua (lowercase)" onAction="#handleLowerCase"/>
+                                        <MenuItem text="HURUF BESAR SEMUA (UPPERCASE)" onAction="#handleUpperCase"/>
+                                        <MenuItem text="Kapital Setiap Kata (Capitalize Each Word)" onAction="#handleTitleCase"/>
+                                    </items>
+                                </MenuButton>
+
+                                <!-- Text Highlight Color (Stabilo) -->
+                                <SplitMenuButton fx:id="smbHighlightColor" styleClass="ribbon-split-btn"
+                                                 onAction="#handleHighlightColorDefault" focusTraversable="false">
+                                    <tooltip><Tooltip text="Warna Sorotan Teks (Text Highlight Color)"/></tooltip>
+                                    <graphic>
+                                        <VBox alignment="CENTER" spacing="2">
+                                            <IkonView ikon="STABILO" ukuran="14"/>
+                                            <Region fx:id="barHighlightColor" styleClass="color-bar-indicator" style="-fx-background-color: #FFE600;"/>
+                                        </VBox>
+                                    </graphic>
+                                    <items>
+                                        <MenuItem text="Kuning Cerah" onAction="#handleHighlightYellow">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #FFE600;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Hijau Terang" onAction="#handleHighlightGreen">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #00E676;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Biru Muda" onAction="#handleHighlightCyan">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #00E5FF;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Merah Muda (Pink)" onAction="#handleHighlightPink">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #FF4081;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Oranye" onAction="#handleHighlightOrange">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #FF9100;"/></graphic>
+                                        </MenuItem>
+                                        <SeparatorMenuItem/>
+                                        <MenuItem text="Tanpa Warna (Hapus Sorotan)" onAction="#handleHighlightNone"/>
+                                    </items>
+                                </SplitMenuButton>
+
+                                <!-- Font Color (Warna Font) -->
+                                <SplitMenuButton fx:id="smbFontColor" styleClass="ribbon-split-btn"
+                                                 onAction="#handleFontColorDefault" focusTraversable="false">
+                                    <tooltip><Tooltip text="Warna Teks (Font Color)"/></tooltip>
+                                    <graphic>
+                                        <VBox alignment="CENTER" spacing="2">
+                                            <Label text="A" style="-fx-font-weight: bold; -fx-font-size: 13.5px; -fx-padding: 0;"/>
+                                            <Region fx:id="barFontColor" styleClass="color-bar-indicator" style="-fx-background-color: #E53935;"/>
+                                        </VBox>
+                                    </graphic>
+                                    <items>
+                                        <MenuItem text="Hitam (Standar)" onAction="#handleFontBlack">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #1E293B;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Merah" onAction="#handleFontRed">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #E53935;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Biru" onAction="#handleFontBlue">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #1E88E5;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Hijau" onAction="#handleFontGreen">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #43A047;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Oranye" onAction="#handleFontOrange">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #FB8C00;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Ungu" onAction="#handleFontPurple">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #8E24AA;"/></graphic>
+                                        </MenuItem>
+                                        <MenuItem text="Abu-abu" onAction="#handleFontGray">
+                                            <graphic><Region styleClass="menu-color-swatch" style="-fx-background-color: #757575;"/></graphic>
+                                        </MenuItem>
+                                        <SeparatorMenuItem/>
+                                        <MenuItem text="Pilih Warna Lainnya..." onAction="#handleFontCustomColor"/>
+                                    </items>
+                                </SplitMenuButton>
                             </HBox>
                             <Label text="Font" styleClass="ribbon-group-label"/>
                         </VBox>
