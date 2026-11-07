@@ -241,7 +241,7 @@
     -fx-border-color: transparent transparent -garis transparent;
     -fx-padding: 14 48;
 }
-.nav-link { -fx-background-color: transparent; -fx-text-fill: -teks; -fx-font-weight: 600; -fx-padding: 8 12; }
+.nav-link { -fx-background-color: transparent; -fx-text-fill: -primer; -fx-font-weight: bold; -fx-font-size: 14.5px; -fx-padding: 8 14; }
 .nav-link:hover { -fx-text-fill: -aksen; }
 
 /* ---------- Hero ---------- */
@@ -253,10 +253,6 @@
 .angka-sorot { -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: -sorot; }
 .label-kecil-kapital { -fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: -aksen; }
 
-.strip-statistik { -fx-background-color: linear-gradient(to right, #0b3d66, #142a57); -fx-padding: 34 48; }
-.strip-statistik .label { -fx-text-fill: rgba(255,255,255,0.75); }
-.strip-statistik .angka-statistik { -fx-font-size: 34px; -fx-font-weight: bold; -fx-text-fill: white; }
-.sel-statistik { -fx-border-color: transparent transparent transparent rgba(255,255,255,0.25); -fx-border-width: 0 0 0 2; -fx-padding: 0 0 0 20; }
 
 .kartu-fitur { -fx-padding: 22; }
 .ikon-fitur {
