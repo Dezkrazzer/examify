@@ -910,3 +910,136 @@
 
 /* ---------- Tooltip ---------- */
 .tooltip { -fx-background-color: #0f1b2e; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 12px; }
+
+
+/* ---------- Kalender Akademik Siswa ---------- */
+.root {
+    -kal-tugas-latar: rgba(26, 163, 232, 0.14);
+    -kal-tugas-teks: #0969a6;
+    -kal-ujian-latar: rgba(245, 158, 11, 0.16);
+    -kal-ujian-teks: #b45309;
+    -kal-kuis-latar: rgba(109, 92, 255, 0.14);
+    -kal-kuis-teks: #4f3fd4;
+    -kal-selesai-latar: rgba(22, 163, 74, 0.14);
+    -kal-selesai-teks: #15803d;
+}
+
+.kalender-header-hari {
+    -fx-font-size: 11.5px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -teks-redup;
+    -fx-padding: 6 4;
+}
+
+.kalender-sel {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 12;
+    -fx-border-color: -garis;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-padding: 7 8;
+    -fx-cursor: hand;
+}
+.kalender-sel:hover {
+    -fx-border-color: -aksen;
+}
+.kalender-sel-luar {
+    -fx-background-color: transparent;
+    -fx-opacity: 0.48;
+}
+.kalender-sel-hari-ini {
+    -fx-border-color: -aksen;
+    -fx-border-width: 1.5;
+}
+.kalender-sel-terpilih {
+    -fx-background-color: rgba(26, 163, 232, 0.12);
+    -fx-border-color: -aksen;
+    -fx-border-width: 2;
+}
+
+.kalender-nomor-tgl {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -teks;
+    -fx-padding: 2 7;
+    -fx-background-radius: 999;
+}
+.kalender-nomor-hari-ini {
+    -fx-background-color: -gradien-aksen;
+    -fx-text-fill: white;
+}
+
+.kalender-chip {
+    -fx-background-radius: 6;
+    -fx-padding: 2 6;
+    -fx-font-size: 10.5px;
+    -fx-font-weight: 600;
+}
+.kalender-chip-tugas {
+    -fx-background-color: -kal-tugas-latar;
+    -fx-text-fill: -kal-tugas-teks;
+}
+.kalender-chip-ujian {
+    -fx-background-color: -kal-ujian-latar;
+    -fx-text-fill: -kal-ujian-teks;
+}
+.kalender-chip-kuis {
+    -fx-background-color: -kal-kuis-latar;
+    -fx-text-fill: -kal-kuis-teks;
+}
+.kalender-chip-selesai {
+    -fx-background-color: -kal-selesai-latar;
+    -fx-text-fill: -kal-selesai-teks;
+}
+
+.tombol-nav-kalender {
+    -fx-background-color: -kaca-kuat;
+    -fx-border-color: -garis;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+    -fx-padding: 6 12;
+    -fx-min-width: 34;
+    -fx-min-height: 34;
+    -fx-text-fill: -teks;
+    -fx-font-weight: bold;
+    -fx-font-size: 12.5px;
+    -fx-cursor: hand;
+}
+.tombol-nav-kalender:hover {
+    -fx-border-color: -aksen;
+    -fx-text-fill: -aksen;
+}
+.tombol-nav-kalender:hover .ikon {
+    -fx-stroke: -aksen;
+}
+
+.kartu-agenda {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 16;
+    -fx-border-color: -garis;
+    -fx-border-radius: 16;
+    -fx-border-width: 1;
+    -fx-padding: 14 18;
+}
+.kartu-agenda:hover {
+    -fx-border-color: -aksen;
+}
+
+.garis-agenda {
+    -fx-min-width: 4;
+    -fx-max-width: 4;
+    -fx-background-radius: 999;
+}
+.garis-agenda-tugas { -fx-background-color: -aksen; }
+.garis-agenda-ujian { -fx-background-color: -ragu; }
+.garis-agenda-kuis { -fx-background-color: -aksen-2; }
+.garis-agenda-selesai { -fx-background-color: -sukses; }
+
+.kotak-kosong-kalender {
+    -fx-background-color: -kaca-kuat;
+    -fx-background-radius: 16;
+    -fx-border-color: -garis;
+    -fx-border-radius: 16;
+    -fx-border-style: segments(6, 5);
+    -fx-padding: 36 28;
+}
