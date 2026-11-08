@@ -30,6 +30,7 @@
                 <Button text="Beranda" styleClass="nav-link" onAction="#handleKeAtas"/>
                 <Button text="Fitur" styleClass="nav-link" onAction="#handleKeFitur"/>
                 <Button text="Kursus" styleClass="nav-link" onAction="#handleKeKursus"/>
+                <Button text="Tim" styleClass="nav-link" onAction="#handleKeTim"/>
                 <Button fx:id="btnTema" styleClass="tombol-ikon"/>
                 <Button text="Masuk" styleClass="tombol-utama" onAction="#handleMasuk">
                     <graphic><IkonView ikon="PROFIL" ukuran="16"/></graphic>
@@ -133,12 +134,25 @@
                     </VBox>
 
                     <!-- ===== Kursus ===== -->
-                    <VBox fx:id="vbKursus" spacing="18">
+                    <VBox fx:id="vbKursus" spacing="6" alignment="TOP_CENTER">
                         <padding><Insets top="40" right="64" bottom="56" left="64"/></padding>
                         <Label text="Jelajahi kursus" styleClass="judul-halaman"/>
-                        <FlowPane fx:id="fpKursus" hgap="20" vgap="20"/>
+                        <Label text="Tempat untuk belajar dan mengembangkan keterampilan." styleClass="teks-redup"/>
+                        <FlowPane fx:id="fpKursus" hgap="20" vgap="20">
+                            <VBox.margin><Insets top="12"/></VBox.margin>
+                        </FlowPane>
                         <Label fx:id="lblKosong" styleClass="teks-redup" text="Tidak ada kursus yang cocok dengan pencarian."
                                visible="false" managed="false"/>
+                    </VBox>
+
+                    <!-- ===== Tim (anggota kelompok) ===== -->
+                    <VBox fx:id="vbTim" spacing="6" alignment="TOP_CENTER">
+                        <padding><Insets top="8" right="64" bottom="64" left="64"/></padding>
+                        <Label text="Tim di balik Examify" styleClass="judul-halaman"/>
+                        <Label text="Anggota kelompok yang merancang dan membangun aplikasi ini." styleClass="teks-redup"/>
+                        <FlowPane fx:id="fpTim" hgap="20" vgap="20">
+                            <VBox.margin><Insets top="12"/></VBox.margin>
+                        </FlowPane>
                     </VBox>
 
                     <HBox styleClass="footer-landing" alignment="CENTER_LEFT">

@@ -1,17 +1,15 @@
-# Compiled class file
+# ===== Build output =====
+target/
+bin/
+out/
 *.class
 
-# Log file
-*.log
+# ===== Output aplikasi saat dijalankan =====
+output/
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
+# ===== Package & arsip =====
 *.jar
+!.mvn/wrapper/maven-wrapper.jar
 *.war
 *.nar
 *.ear
@@ -19,16 +17,23 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# ===== Log & crash JVM =====
+*.log
 hs_err_pid*
 replay_pid*
 
-# Maven
-target/
+# ===== IDE & editor =====
+.vscode/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+nbproject/
+*.ctxt
+.mtj.tmp/
 
-# Output aplikasi
-output/
-
-# VS Code build output
-bin/
-.vscode
+# ===== OS =====
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -294,6 +294,26 @@
 .kartu-kursus { -fx-padding: 12 12 16 12; -fx-cursor: hand; }
 .kartu-kursus:hover { -fx-border-color: -aksen; }
 
+/* ---------- Kartu anggota tim (landing) ---------- */
+.kartu-anggota { -fx-padding: 28 20 24 20; }
+.kartu-anggota:hover { -fx-border-color: -aksen; }
+.bingkai-foto-anggota {
+    -fx-background-color: -gradien-aksen;
+    -fx-background-radius: 999;
+    -fx-effect: dropshadow(gaussian, rgba(26, 163, 232, 0.35), 18, 0, 0, 6);
+}
+.avatar-anggota { -fx-font-size: 34px; -fx-border-color: -kaca-garis; -fx-border-width: 3; -fx-border-radius: 999; }
+.badge-nim {
+    -fx-background-color: rgba(26, 163, 232, 0.14);
+    -fx-text-fill: -aksen;
+    -fx-background-radius: 999;
+    -fx-padding: 3 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.tombol-sosial:hover { -fx-border-color: -aksen; }
+.tombol-sosial:disabled { -fx-opacity: 0.35; }
+
 /* ---------- Tab navigasi kursus (Materi & Orang) ---------- */
 .tab-nav-bar {
     -fx-background-color: -kaca-kuat;

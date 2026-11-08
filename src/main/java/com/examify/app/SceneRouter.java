@@ -7,6 +7,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import com.examify.view.GulirHalus;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -49,6 +50,7 @@ public final class SceneRouter {
         scene = new Scene(new Pane(), LEBAR_AWAL, TINGGI_AWAL);
         scene.getStylesheets().add(sumber(THEME_CSS).toExternalForm());
         temaGelap.addListener((obs, lama, gelap) -> terapkanTema(gelap));
+        GulirHalus.pasang(scene);
         stage.setScene(scene);
         stage.setTitle(AppConfig.NAMA_APLIKASI);
         stage.getIcons().add(new Image(sumber(LOGO).toExternalForm()));
