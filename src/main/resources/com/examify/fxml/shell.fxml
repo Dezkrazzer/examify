@@ -32,6 +32,10 @@
                               onAction="#handleKursus">
                     <graphic><IkonView ikon="BUKU" ukuran="18"/></graphic>
                 </ToggleButton>
+                <ToggleButton fx:id="tbKalender" text="Kalender" styleClass="nav-item" maxWidth="Infinity"
+                              onAction="#handleKalender">
+                    <graphic><IkonView ikon="KALENDER" ukuran="18"/></graphic>
+                </ToggleButton>
                 <ToggleButton fx:id="tbBankSoal" text="Bank Soal" styleClass="nav-item" maxWidth="Infinity"
                               onAction="#handleBankSoal">
                     <graphic><IkonView ikon="UJIAN" ukuran="18"/></graphic>

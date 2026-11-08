@@ -249,6 +249,13 @@ public class EditorMateriController {
     private void perbaruiTampilan() {
         renderSlideThumbnails();
         renderKanvasSlide();
+        if (boxModePratinjau != null && boxModePratinjau.isVisible()) {
+            renderPratinjauSiswa();
+        }
+        perbaruiStatistik();
+        if (true) return;
+        renderSlideThumbnails();
+        renderKanvasSlide();
         perbaruiStatistik();
     }
 
@@ -358,6 +365,12 @@ public class EditorMateriController {
             kartu.setOnMouseClicked(e -> {
                 sinkronkanSemuaEditor();
                 slideAktifIndex = index;
+                renderSlideThumbnails();
+                renderKanvasSlide();
+                if (boxModePratinjau != null && boxModePratinjau.isVisible()) {
+                    renderPratinjauSiswa();
+                }
+                if (true) return;
                 renderSlideThumbnails();
                 renderKanvasSlide();
             });
@@ -696,6 +709,9 @@ public class EditorMateriController {
     }
 
     private void sinkronkanSemuaEditor() {
+        if (boxModeEdit != null && !boxModeEdit.isVisible()) {
+            return;
+        }
         for (Runnable r : daftarSinkronisasi) {
             try {
                 r.run();
@@ -1488,6 +1504,14 @@ public class EditorMateriController {
         boxModeEdit.setManaged(true);
         boxModePratinjau.setVisible(false);
         boxModePratinjau.setManaged(false);
+        renderSlideThumbnails();
+        renderKanvasSlide();
+        if (true) return;
+        tbModeEdit.setSelected(true);
+        boxModeEdit.setVisible(true);
+        boxModeEdit.setManaged(true);
+        boxModePratinjau.setVisible(false);
+        boxModePratinjau.setManaged(false);
     }
 
     @FXML
@@ -1502,6 +1526,42 @@ public class EditorMateriController {
     }
 
     private void renderPratinjauSiswa() {
+        if (daftarSlide.isEmpty()) return;
+        if (slideAktifIndex >= daftarSlide.size()) {
+            slideAktifIndex = 0;
+        }
+
+        hbPratinjauSegmen.getChildren().clear();
+        for (int i = 0; i < daftarSlide.size(); i++) {
+            final int idx = i;
+            Region segmen = new Region();
+            segmen.setStyle("-fx-background-radius: 4; -fx-min-height: 6px; -fx-max-height: 6px; -fx-cursor: hand; "
+                    + "-fx-background-color: " + (i <= slideAktifIndex ? "-aksen" : "-garis") + ";");
+            segmen.setOnMouseClicked(e -> {
+                slideAktifIndex = idx;
+                renderSlideThumbnails();
+                renderKanvasSlide();
+                renderPratinjauSiswa();
+            });
+            HBox.setHgrow(segmen, Priority.ALWAYS);
+            hbPratinjauSegmen.getChildren().add(segmen);
+        }
+
+        lblPratinjauNomor.setText("Halaman " + (slideAktifIndex + 1) + " dari " + daftarSlide.size());
+        btnPrevSlide.setDisable(slideAktifIndex == 0);
+        btnNextSlide.setText(slideAktifIndex == daftarSlide.size() - 1 ? "Selesai & Paham" : "Halaman Berikutnya");
+
+        DrafSlide slide = daftarSlide.get(slideAktifIndex);
+        String md = SlideMarkdownConverter.toMarkdown(List.of(slide));
+
+        vbPratinjauKonten.getChildren().clear();
+        Label lblSubjudul = new Label((slide.getJudulSlide().isEmpty() ? ("Bagian " + (slideAktifIndex + 1)) : slide.getJudulSlide()).toUpperCase());
+        lblSubjudul.getStyleClass().add("label-kecil-kapital");
+        vbPratinjauKonten.getChildren().addAll(lblSubjudul, MarkdownView.render(md));
+    }
+
+    @SuppressWarnings("unused")
+    private void renderPratinjauSiswaLama() {
         if (daftarSlide.isEmpty()) return;
 
         hbPratinjauSegmen.getChildren().clear();
@@ -1530,12 +1590,28 @@ public class EditorMateriController {
     private void handlePrevPratinjau() {
         if (slideAktifIndex > 0) {
             slideAktifIndex--;
+            renderSlideThumbnails();
+            renderKanvasSlide();
+            renderPratinjauSiswa();
+        }
+        if (true) return;
+        if (slideAktifIndex > 0) {
+            slideAktifIndex--;
             renderPratinjauSiswa();
         }
     }
 
     @FXML
     private void handleNextPratinjau() {
+        if (slideAktifIndex < daftarSlide.size() - 1) {
+            slideAktifIndex++;
+            renderSlideThumbnails();
+            renderKanvasSlide();
+            renderPratinjauSiswa();
+        } else {
+            DialogUtil.info("Ini adalah halaman slide terakhir. Simulasi selesai!");
+        }
+        if (true) return;
         if (slideAktifIndex < daftarSlide.size() - 1) {
             slideAktifIndex++;
             renderPratinjauSiswa();

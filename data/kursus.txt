@@ -77,7 +77,6 @@ TEKS|bin-01|Mengenal Kata Baku|materi/bahasaindo/01-kata-baku.md
 TEKS|bin-02|Ciri Kalimat Efektif|materi/bahasaindo/02-kalimat-efektif.md
 [BAB] Evaluasi
 UJIAN|bin-uji|Ujian Bahasa Indonesia|BIN-01
-[BAB] Kalimat Majemuk
 [END]
 
 [KURSUS]
@@ -109,5 +108,5 @@ NAMA=JOMOKISASI
 PENGAJAR=Alfian Naufal, S.Mok
 DESKRIPSI=Pembelajaran jomok
 [BAB] Bab 1: Pendahuluan
+TUGAS|tgs-59176|Sejarah Suki|2026-11-15 23:59|Semua Kelas|jelaskan sejarah suki
 [END]
-

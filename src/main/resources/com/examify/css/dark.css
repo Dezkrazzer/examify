@@ -17,6 +17,15 @@
     -blob-2: #5b3fd6;
     -blob-3: #0f8f7a;
 
+    -kal-tugas-latar: rgba(56, 182, 255, 0.18);
+    -kal-tugas-teks: #7dd3fc;
+    -kal-ujian-latar: rgba(245, 158, 11, 0.20);
+    -kal-ujian-teks: #fcd34d;
+    -kal-kuis-latar: rgba(139, 123, 255, 0.20);
+    -kal-kuis-teks: #c4b5fd;
+    -kal-selesai-latar: rgba(34, 197, 94, 0.18);
+    -kal-selesai-teks: #86efac;
+
     -fx-base: #1b2742;
     -fx-control-inner-background: #131d33;
 }

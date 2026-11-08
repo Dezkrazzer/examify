@@ -15,6 +15,7 @@ package com.examify.controller;
 
 
 import com.examify.app.AppSession;
+import com.examify.view.PemilihTanggalWaktu;
 
 
 
@@ -126,6 +127,7 @@ import javafx.stage.FileChooser;
 
 
 
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 
 
@@ -430,7 +432,16 @@ import javafx.scene.control.ContentDisplay;
 
 
 
+import javafx.application.Platform;
 import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.Separator;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
+import javafx.stage.StageStyle;
+import java.security.SecureRandom;
 
 
 
@@ -5422,7 +5433,11 @@ public class KursusDetailController {
 
 
 
-        isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        if (session.isGuru()) {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        } else {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info);
+        }
 
 
 
@@ -6142,7 +6157,11 @@ public class KursusDetailController {
 
 
 
-        isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        if (session.isGuru()) {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info, aturan);
+        } else {
+            isi.getChildren().addAll(tombolKembaliKeBab(materi), kepala, info);
+        }
 
 
 
@@ -6863,6 +6882,111 @@ public class KursusDetailController {
 
 
     private void handleTambahBab() {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
+
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(430);
+        kartu.setMaxWidth(450);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        VBox boxJudul = new VBox(2);
+        Label lblJudul = new Label("Tambah Bab Baru");
+        lblJudul.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label lblSub = new Label("Masukkan judul bab baru untuk kursus " + kursus.getNama());
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(lblJudul, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(null);
+            dialog.close();
+        });
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
+
+        VBox boxInput = new VBox(6);
+        Label lblField = new Label("Judul Bab");
+        lblField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextField tfJudul = new TextField("Bab " + (kursus.getDaftarBab().size() + 1));
+        tfJudul.setPromptText("Contoh: Bab 1 - Kata Baku");
+        boxInput.getChildren().addAll(lblField, tfJudul);
+
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(null);
+            dialog.close();
+        });
+        Button btnSimpan = new Button("Simpan Bab");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setDefaultButton(true);
+        btnSimpan.setOnAction(e -> {
+            String teks = tfJudul.getText() != null ? tfJudul.getText().trim() : "";
+            if (!StringUtil.isKosong(teks)) {
+                dialog.setResult(teks);
+                dialog.close();
+            }
+        });
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(barisHeader, new Separator(), boxInput, new Separator(), barisTombol);
+        pane.setContent(kartu);
+        Platform.runLater(() -> {
+            tfJudul.requestFocus();
+            tfJudul.selectAll();
+        });
+
+        dialog.showAndWait().ifPresent(judul -> {
+            if (StringUtil.isKosong(judul)) return;
+            List<Bab> daftar = new ArrayList<>(kursus.getDaftarBab());
+            Bab babBaru = new Bab(daftar.size() + 1, judul.trim(), List.of());
+            daftar.add(babBaru);
+            simpanKursus(kursus.denganDaftarBab(daftar));
+            tampilkanBab(babBaru);
+        });
+    }
+
+    @SuppressWarnings("unused")
+    private void handleTambahBabLama() {
 
 
 
@@ -7063,6 +7187,119 @@ public class KursusDetailController {
 
 
     private void handleUbahJudulBab(Bab bab) {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
+
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(430);
+        kartu.setMaxWidth(450);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        VBox boxJudul = new VBox(2);
+        Label lblJudul = new Label("Ubah Judul Bab " + bab.getNomor());
+        lblJudul.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label lblSub = new Label("Perbarui judul bab pada kursus " + kursus.getNama());
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(lblJudul, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(null);
+            dialog.close();
+        });
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
+
+        VBox boxInput = new VBox(6);
+        Label lblField = new Label("Judul Bab");
+        lblField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextField tfJudul = new TextField(bab.getJudul());
+        boxInput.getChildren().addAll(lblField, tfJudul);
+
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(null);
+            dialog.close();
+        });
+        Button btnSimpan = new Button("Simpan Perubahan");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setDefaultButton(true);
+        btnSimpan.setOnAction(e -> {
+            String teks = tfJudul.getText() != null ? tfJudul.getText().trim() : "";
+            if (!StringUtil.isKosong(teks)) {
+                dialog.setResult(teks);
+                dialog.close();
+            }
+        });
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(barisHeader, new Separator(), boxInput, new Separator(), barisTombol);
+        pane.setContent(kartu);
+        Platform.runLater(() -> {
+            tfJudul.requestFocus();
+            tfJudul.selectAll();
+        });
+
+        dialog.showAndWait().ifPresent(judulBaru -> {
+            if (StringUtil.isKosong(judulBaru)) return;
+            List<Bab> daftar = new ArrayList<>();
+            Bab babTerpilih = null;
+            for (Bab b : kursus.getDaftarBab()) {
+                if (b.getNomor() == bab.getNomor()) {
+                    babTerpilih = new Bab(b.getNomor(), judulBaru.trim(), b.getDaftarMateri());
+                    daftar.add(babTerpilih);
+                } else {
+                    daftar.add(b);
+                }
+            }
+            simpanKursus(kursus.denganDaftarBab(daftar));
+            if (babTerpilih != null) {
+                tampilkanBab(babTerpilih);
+            }
+        });
+    }
+
+    @SuppressWarnings("unused")
+    private void handleUbahJudulBabLama(Bab bab) {
 
 
 
@@ -7583,6 +7820,254 @@ public class KursusDetailController {
 
 
     private void handleTambahUjian(Bab babDefault) {
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
+
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(520);
+        kartu.setMaxWidth(540);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        VBox boxJudul = new VBox(2);
+        HBox barisJudulBadge = new HBox(8);
+        barisJudulBadge.setAlignment(Pos.CENTER_LEFT);
+        Label lblJudulModal = new Label("Tambah Ujian");
+        lblJudulModal.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label badgeBab = new Label("Bab " + babDefault.getNomor());
+        badgeBab.getStyleClass().add("badge");
+        barisJudulBadge.getChildren().addAll(lblJudulModal, badgeBab);
+
+        Label lblSub = new Label("Tambahkan ujian CBT ke " + babDefault.getJudul());
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(barisJudulBadge, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
+
+        RadioButton rbBaru = new RadioButton("Buat Ujian Baru & Langsung Rancang Soal");
+        rbBaru.setStyle("-fx-font-weight: bold;");
+        RadioButton rbPilih = new RadioButton("Pilih Ujian yang Sudah Ada di Bank Soal");
+        rbPilih.setStyle("-fx-font-weight: bold;");
+        ToggleGroup tg = new ToggleGroup();
+        rbBaru.setToggleGroup(tg);
+        rbPilih.setToggleGroup(tg);
+        rbBaru.setSelected(true);
+
+        String saranKode = kursus.getKode().toUpperCase() + "-0" + (session.getUjianService().getJumlahUjian() + 1);
+        TextField tfKode = new TextField(saranKode);
+        TextField tfJudul = new TextField("Ujian " + babDefault.getJudul());
+        TextField tfDurasi = new TextField("30");
+        TextField tfKkm = new TextField("75");
+        String saranToken = hasilkanKodeKursusAcak();
+        TextField tfToken = new TextField(saranToken);
+        tfToken.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold;");
+
+        HBox barisKodeJudul = new HBox(12);
+        VBox vbKode = new VBox(5, new Label("Kode Ujian"), tfKode);
+        vbKode.setPrefWidth(150);
+        VBox vbJudulUjian = new VBox(5, new Label("Judul Ujian"), tfJudul);
+        HBox.setHgrow(vbJudulUjian, Priority.ALWAYS);
+        barisKodeJudul.getChildren().addAll(vbKode, vbJudulUjian);
+
+        HBox barisDurasiKkmToken = new HBox(12);
+        VBox vbDurasi = new VBox(5, new Label("Durasi (menit)"), tfDurasi);
+        HBox.setHgrow(vbDurasi, Priority.ALWAYS);
+        VBox vbKkm = new VBox(5, new Label("KKM"), tfKkm);
+        HBox.setHgrow(vbKkm, Priority.ALWAYS);
+        VBox vbToken = new VBox(5, new Label("Token (6 karakter)"), tfToken);
+        HBox.setHgrow(vbToken, Priority.ALWAYS);
+        barisDurasiKkmToken.getChildren().addAll(vbDurasi, vbKkm, vbToken);
+
+        VBox boxJadwal = new VBox(8);
+        boxJadwal.getStyleClass().add("modal-kotak-jadwal");
+        Label lblJadwal = new Label("Jadwal Akses CBT (Opsional)");
+        lblJadwal.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        PemilihTanggalWaktu pemilihMulai = new PemilihTanggalWaktu(null, true);
+        PemilihTanggalWaktu pemilihSelesai = new PemilihTanggalWaktu(null, true);
+        VBox vbMulai = new VBox(4, new Label("Waktu Buka"), pemilihMulai);
+        VBox vbSelesai = new VBox(4, new Label("Waktu Tutup"), pemilihSelesai);
+        boxJadwal.getChildren().addAll(lblJadwal, vbMulai, vbSelesai);
+
+        CheckBox cbBolehUlang = new CheckBox("Izinkan siswa mengerjakan ulang ujian ini");
+        cbBolehUlang.setSelected(false);
+
+        VBox formBaru = new VBox(12, barisKodeJudul, barisDurasiKkmToken, boxJadwal, cbBolehUlang);
+
+        VBox boxPilih = new VBox(8);
+        ComboBox<String> cbUjian = new ComboBox<>();
+        cbUjian.setMaxWidth(Double.MAX_VALUE);
+        List<Ujian> semuaUjian = session.getUjianService().getDaftarUjian();
+        for (Ujian u : semuaUjian) {
+            cbUjian.getItems().add(u.getKodeUjian() + " - " + u.getMataPelajaran());
+        }
+        if (!cbUjian.getItems().isEmpty()) {
+            cbUjian.getSelectionModel().select(0);
+        }
+        TextField tfJudulPilih = new TextField("Ujian " + babDefault.getJudul());
+        boxPilih.getChildren().addAll(new Label("Judul di Kursus"), tfJudulPilih, new Label("Pilih Ujian CBT"), cbUjian);
+        boxPilih.setVisible(false);
+        boxPilih.setManaged(false);
+
+        tg.selectedToggleProperty().addListener((obs, lama, terpilih) -> {
+            boolean modeBaru = terpilih == rbBaru;
+            formBaru.setVisible(modeBaru);
+            formBaru.setManaged(modeBaru);
+            boxPilih.setVisible(!modeBaru);
+            boxPilih.setManaged(!modeBaru);
+            if (dialog.getDialogPane().getScene() != null && dialog.getDialogPane().getScene().getWindow() != null) {
+                dialog.getDialogPane().getScene().getWindow().sizeToScene();
+            }
+        });
+
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+        Button btnSimpan = new Button("Lanjutkan");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setDefaultButton(true);
+        btnSimpan.setOnAction(e -> {
+            Bab babTarget = babDefault;
+            if (rbBaru.isSelected()) {
+                String kode = tfKode.getText().trim().toUpperCase();
+                String jwb = tfJudul.getText().trim();
+                String token = tfToken.getText().trim().toUpperCase();
+                int durasi;
+                double kkm;
+                try {
+                    durasi = Integer.parseInt(tfDurasi.getText().trim());
+                    kkm = Double.parseDouble(tfKkm.getText().trim());
+                } catch (NumberFormatException ex) {
+                    DialogUtil.peringatan("Durasi dan KKM harus berupa angka");
+                    return;
+                }
+                if (StringUtil.isKosong(kode) || StringUtil.isKosong(jwb) || StringUtil.isKosong(token)) {
+                    DialogUtil.peringatan("Kode, Judul, dan Token wajib diisi");
+                    return;
+                }
+                if (!kode.matches("^[A-Z]{2,5}-\\d{2}$")) {
+                    DialogUtil.peringatan("Format Kode Ujian harus 2-5 huruf diikuti '-' dan 2 angka (contoh: " + saranKode + ")");
+                    return;
+                }
+                if (token.length() != 6 || !token.matches("^[A-Z0-9]{6}$")) {
+                    DialogUtil.peringatan("Token ujian harus tepat 6 huruf/angka");
+                    return;
+                }
+                if (session.getUjianService().cariUjian(kode).isPresent()) {
+                    DialogUtil.peringatan("Kode ujian sudah terpakai: " + kode);
+                    return;
+                }
+                LocalDateTime mulai = pemilihMulai.getWaktu();
+                LocalDateTime selesai = pemilihSelesai.getWaktu();
+                if (mulai != null && selesai != null && mulai.isAfter(selesai)) {
+                    DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup");
+                    return;
+                }
+                try {
+                    Soal sampleSoal = new SoalPilihanGanda(1, "Pertanyaan nomor 1 untuk " + jwb + "...", 10.0,
+                            List.of("Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D"), 'A');
+                    Ujian ujianBaru = new Ujian(kode, jwb, token, durasi, kkm, List.of(sampleSoal), cbBolehUlang.isSelected(), mulai, selesai);
+                    session.getUjianService().tambahUjian(ujianBaru);
+                    String idMateri = (kursus.getKode().toLowerCase() + "-u" + (System.currentTimeMillis() % 10000));
+                    MateriUjian mu = new MateriUjian(idMateri, jwb, kode);
+                    List<Bab> daftarBab = new ArrayList<>();
+                    for (Bab b : kursus.getDaftarBab()) {
+                        if (b.getNomor() == babTarget.getNomor()) {
+                            List<Materi> materiBaru = new ArrayList<>(b.getDaftarMateri());
+                            materiBaru.add(mu);
+                            daftarBab.add(new Bab(b.getNomor(), b.getJudul(), materiBaru));
+                        } else {
+                            daftarBab.add(b);
+                        }
+                    }
+                    simpanKursus(kursus.denganDaftarBab(daftarBab));
+                    dialog.setResult(Boolean.TRUE);
+                    dialog.close();
+                    session.setUjianAktif(ujianBaru);
+                    session.setMateriFokus(mu);
+                    SceneRouter.pindah(Layar.EDITOR_UJIAN);
+                } catch (Exception ex) {
+                    DialogUtil.peringatan("Gagal membuat ujian baru: " + ex.getMessage());
+                }
+            } else {
+                String jwb = tfJudulPilih.getText().trim();
+                String terpilih = cbUjian.getValue();
+                if (StringUtil.isKosong(jwb) || terpilih == null) return;
+                String kodeUjian = terpilih.split(" - ")[0].trim();
+                String idMateri = (kursus.getKode().toLowerCase() + "-u" + (System.currentTimeMillis() % 10000));
+                MateriUjian mu = new MateriUjian(idMateri, jwb, kodeUjian);
+                List<Bab> daftarBab = new ArrayList<>();
+                for (Bab b : kursus.getDaftarBab()) {
+                    if (b.getNomor() == babTarget.getNomor()) {
+                        List<Materi> materiBaru = new ArrayList<>(b.getDaftarMateri());
+                        materiBaru.add(mu);
+                        daftarBab.add(new Bab(b.getNomor(), b.getJudul(), materiBaru));
+                    } else {
+                        daftarBab.add(b);
+                    }
+                }
+                simpanKursus(kursus.denganDaftarBab(daftarBab));
+                dialog.setResult(Boolean.TRUE);
+                dialog.close();
+                tampilkanBab(kursus.getDaftarBab().get(babTarget.getNomor() - 1));
+            }
+        });
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        VBox content = new VBox(12, rbBaru, formBaru, rbPilih, boxPilih);
+        kartu.getChildren().addAll(barisHeader, new Separator(), content, new Separator(), barisTombol);
+        pane.setContent(kartu);
+
+        dialog.showAndWait();
+    }
+
+    @SuppressWarnings("unused")
+    private void handleTambahUjianLama(Bab babDefault) {
 
 
 
@@ -7959,6 +8444,11 @@ public class KursusDetailController {
 
 
         gridBaru.add(tfAksesSelesai, 1, 6);
+
+        CheckBox cbBolehUlang = new CheckBox("Izinkan siswa mengerjakan ulang ujian ini");
+        cbBolehUlang.setSelected(false);
+        gridBaru.add(new Label("Bisa Diulang:"), 0, 7);
+        gridBaru.add(cbBolehUlang, 1, 7);
 
 
 
@@ -8558,7 +9048,7 @@ public class KursusDetailController {
 
 
 
-                    Ujian ujianBaru = new Ujian(kode, jwb, token, durasi, kkm, List.of(sampleSoal), false, mulai,
+                    Ujian ujianBaru = new Ujian(kode, jwb, token, durasi, kkm, List.of(sampleSoal), cbBolehUlang.isSelected(), mulai,
 
 
 
@@ -8975,6 +9465,200 @@ public class KursusDetailController {
 
 
     private void handleBuatKuisBab(Bab babTarget) {
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
+
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(520);
+        kartu.setMaxWidth(540);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        VBox boxJudul = new VBox(2);
+        HBox barisJudulBadge = new HBox(8);
+        barisJudulBadge.setAlignment(Pos.CENTER_LEFT);
+        Label lblJudulModal = new Label("Buat Kuis Bab");
+        lblJudulModal.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label badgeBab = new Label("Bab " + babTarget.getNomor());
+        badgeBab.getStyleClass().add("badge");
+        barisJudulBadge.getChildren().addAll(lblJudulModal, badgeBab);
+
+        Label lblSub = new Label("Buat kuis pemahaman baru di " + babTarget.getJudul());
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(barisJudulBadge, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
+
+        int counter = 1;
+        String kodeKuis = "QZ-" + String.format("%02d", counter);
+        while (session.getUjianService().cariUjian(kodeKuis).isPresent()) {
+            counter++;
+            kodeKuis = "QZ-" + String.format("%02d", counter);
+        }
+
+        TextField tfKode = new TextField(kodeKuis);
+        TextField tfJudul = new TextField("Kuis " + babTarget.getJudul());
+        TextField tfDurasi = new TextField("15");
+        TextField tfKkm = new TextField("70");
+        String saranToken = ("QZ" + (int) (Math.random() * 8999 + 1000)).toUpperCase();
+        TextField tfToken = new TextField(saranToken);
+        tfToken.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold;");
+
+        HBox barisKodeJudul = new HBox(12);
+        VBox vbKode = new VBox(5, new Label("Kode Kuis"), tfKode);
+        vbKode.setPrefWidth(150);
+        VBox vbJudulKuis = new VBox(5, new Label("Judul Kuis"), tfJudul);
+        HBox.setHgrow(vbJudulKuis, Priority.ALWAYS);
+        barisKodeJudul.getChildren().addAll(vbKode, vbJudulKuis);
+
+        HBox barisDurasiKkmToken = new HBox(12);
+        VBox vbDurasi = new VBox(5, new Label("Durasi (menit)"), tfDurasi);
+        HBox.setHgrow(vbDurasi, Priority.ALWAYS);
+        VBox vbKkm = new VBox(5, new Label("KKM"), tfKkm);
+        HBox.setHgrow(vbKkm, Priority.ALWAYS);
+        VBox vbToken = new VBox(5, new Label("Token Akses"), tfToken);
+        HBox.setHgrow(vbToken, Priority.ALWAYS);
+        barisDurasiKkmToken.getChildren().addAll(vbDurasi, vbKkm, vbToken);
+
+        VBox boxJadwal = new VBox(8);
+        boxJadwal.getStyleClass().add("modal-kotak-jadwal");
+        Label lblJadwal = new Label("Jadwal Akses Kuis (Opsional)");
+        lblJadwal.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        PemilihTanggalWaktu pemilihMulai = new PemilihTanggalWaktu(null, true);
+        PemilihTanggalWaktu pemilihSelesai = new PemilihTanggalWaktu(null, true);
+        VBox vbMulai = new VBox(4, new Label("Waktu Buka"), pemilihMulai);
+        VBox vbSelesai = new VBox(4, new Label("Waktu Tutup"), pemilihSelesai);
+        boxJadwal.getChildren().addAll(lblJadwal, vbMulai, vbSelesai);
+
+        CheckBox cbKuisBolehUlang = new CheckBox("Izinkan kuis dikerjakan ulang");
+        cbKuisBolehUlang.setSelected(false);
+
+        VBox formBox = new VBox(12, barisKodeJudul, barisDurasiKkmToken, boxJadwal, cbKuisBolehUlang);
+
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+        Button btnSimpan = new Button("Buat & Rancang Soal Kuis");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setDefaultButton(true);
+        btnSimpan.setOnAction(e -> {
+            String kode = tfKode.getText().trim().toUpperCase();
+            String judul = tfJudul.getText().trim();
+            String token = tfToken.getText().trim().toUpperCase();
+            int durasi;
+            double kkm;
+            try {
+                durasi = Integer.parseInt(tfDurasi.getText().trim());
+                kkm = Double.parseDouble(tfKkm.getText().trim());
+            } catch (NumberFormatException ex) {
+                DialogUtil.peringatan("Durasi dan KKM harus berupa angka");
+                return;
+            }
+            if (StringUtil.isKosong(kode) || StringUtil.isKosong(judul) || StringUtil.isKosong(token)) {
+                DialogUtil.peringatan("Kode, Judul, dan Token wajib diisi");
+                return;
+            }
+            if (!kode.matches("^[A-Z]{2,5}-\\d{2}$")) {
+                DialogUtil.peringatan("Format Kode Kuis harus 2-5 huruf diikuti '-' dan 2 angka (contoh: QZ-01)");
+                return;
+            }
+            if (token.length() != 6 || !token.matches("^[A-Z0-9]{6}$")) {
+                DialogUtil.peringatan("Token kuis harus tepat 6 huruf/angka");
+                return;
+            }
+            if (session.getUjianService().cariUjian(kode).isPresent()) {
+                DialogUtil.peringatan("Kode kuis sudah terpakai: " + kode);
+                return;
+            }
+            LocalDateTime mulai = pemilihMulai.getWaktu();
+            LocalDateTime selesai = pemilihSelesai.getWaktu();
+            if (mulai != null && selesai != null && mulai.isAfter(selesai)) {
+                DialogUtil.peringatan("Waktu buka akses tidak boleh setelah waktu tutup");
+                return;
+            }
+            try {
+                Soal sampleSoal = new SoalPilihanGanda(1, "Pertanyaan nomor 1 untuk " + judul + "...", 10.0,
+                        List.of("Pilihan A", "Pilihan B", "Pilihan C", "Pilihan D"), 'A');
+                Ujian ujianKuis = new Ujian(kode, judul, token, durasi, kkm, List.of(sampleSoal), cbKuisBolehUlang.isSelected(), mulai, selesai);
+                session.getUjianService().tambahUjian(ujianKuis);
+                String idMateri = (kursus.getKode().toLowerCase() + "-qz" + (System.currentTimeMillis() % 10000));
+                MateriQuiz mq = new MateriQuiz(idMateri, judul, kode);
+                List<Bab> daftarBab = new ArrayList<>();
+                for (Bab b : kursus.getDaftarBab()) {
+                    if (b.getNomor() == babTarget.getNomor()) {
+                        List<Materi> materiBaru = new ArrayList<>(b.getDaftarMateri());
+                        materiBaru.add(mq);
+                        daftarBab.add(new Bab(b.getNomor(), b.getJudul(), materiBaru));
+                    } else {
+                        daftarBab.add(b);
+                    }
+                }
+                simpanKursus(kursus.denganDaftarBab(daftarBab));
+                dialog.setResult(Boolean.TRUE);
+                dialog.close();
+                session.setUjianAktif(ujianKuis);
+                session.setMateriFokus(mq);
+                SceneRouter.pindah(Layar.EDITOR_UJIAN);
+            } catch (Exception ex) {
+                DialogUtil.peringatan("Gagal membuat kuis baru: " + ex.getMessage());
+            }
+        });
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(barisHeader, new Separator(), formBox, new Separator(), barisTombol);
+        pane.setContent(kartu);
+
+        dialog.showAndWait();
+    }
+
+    @SuppressWarnings("unused")
+    private void handleBuatKuisBabLama(Bab babTarget) {
 
 
 
@@ -9327,6 +10011,11 @@ public class KursusDetailController {
 
 
         grid.add(tfAksesSelesai, 1, 6);
+
+        CheckBox cbKuisBolehUlang = new CheckBox("Izinkan kuis dikerjakan ulang");
+        cbKuisBolehUlang.setSelected(false);
+        grid.add(new Label("Bisa Diulang:"), 0, 7);
+        grid.add(cbKuisBolehUlang, 1, 7);
 
 
 
@@ -9694,7 +10383,7 @@ public class KursusDetailController {
 
 
 
-                Ujian ujianKuis = new Ujian(kode, judul, token, durasi, kkm, List.of(sampleSoal), false, mulai,
+                Ujian ujianKuis = new Ujian(kode, judul, token, durasi, kkm, List.of(sampleSoal), cbKuisBolehUlang.isSelected(), mulai,
 
 
 
@@ -11296,7 +11985,9 @@ public class KursusDetailController {
 
 
 
-        List<Siswa> semuaSiswa = session.getAuthService().getSemuaSiswa();
+        List<Siswa> semuaSiswa = session.getAuthService().getSemuaSiswa().stream()
+                .filter(s -> session.getPendaftaranService().isTerdaftar(s, kursus))
+                .toList();
 
 
 
@@ -11937,6 +12628,222 @@ public class KursusDetailController {
 
 
     private void handleUbahKode() {
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
+
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(450);
+        kartu.setMaxWidth(470);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        // Header Modal (Bisa di-drag)
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        StackPane kotakIkon = new StackPane(new IkonView(Ikon.PENSIL, 18));
+        kotakIkon.getStyleClass().add("kotak-ikon-stat");
+        kotakIkon.setMinSize(42, 42);
+        kotakIkon.setMaxSize(42, 42);
+
+        VBox boxJudul = new VBox(2);
+        HBox barisJudulBadge = new HBox(8);
+        barisJudulBadge.setAlignment(Pos.CENTER_LEFT);
+        Label lblJudul = new Label("Ubah Kode Kursus");
+        lblJudul.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label badgeKodeLama = new Label(kursus.getKode());
+        badgeKodeLama.getStyleClass().add("badge");
+        barisJudulBadge.getChildren().addAll(lblJudul, badgeKodeLama);
+
+        Label lblSub = new Label("Perbarui kode akses kursus '" + kursus.getNama() + "'.");
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(barisJudulBadge, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setTooltip(new Tooltip("Tutup (ESC)"));
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
+
+        // Info Kode Saat Ini + Tombol Salin
+        HBox kotakKodeSaatIni = new HBox(12);
+        kotakKodeSaatIni.getStyleClass().add("modal-kotak-jadwal");
+        kotakKodeSaatIni.setAlignment(Pos.CENTER_LEFT);
+
+        Node polaThumb = PolaKursus.buat(kursus.getKode(), 40, 40, 10);
+
+        VBox infoSaatIni = new VBox(2);
+        Label lblKetSaatIni = new Label("Kode Akses Saat Ini");
+        lblKetSaatIni.getStyleClass().add("teks-redup");
+        lblKetSaatIni.setStyle("-fx-font-size: 11.5px;");
+        Label lblNilaiSaatIni = new Label(kursus.getKode());
+        lblNilaiSaatIni.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold; -fx-font-size: 15px;");
+        infoSaatIni.getChildren().addAll(lblKetSaatIni, lblNilaiSaatIni);
+        HBox.setHgrow(infoSaatIni, Priority.ALWAYS);
+
+        Button btnSalin = new Button("Salin");
+        btnSalin.getStyleClass().add("tombol-sekunder");
+        btnSalin.setTooltip(new Tooltip("Salin kode akses saat ini"));
+        btnSalin.setOnAction(e -> {
+            ClipboardContent cc = new ClipboardContent();
+            cc.putString(kursus.getKode());
+            Clipboard.getSystemClipboard().setContent(cc);
+            btnSalin.setText("Tersalin!");
+        });
+
+        kotakKodeSaatIni.getChildren().addAll(polaThumb, infoSaatIni, btnSalin);
+
+        // Input Kode Baru
+        VBox boxInput = new VBox(6);
+        Label lblField = new Label("Kode Baru");
+        lblField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+
+        TextField tfKodeBaru = new TextField(kursus.getKode());
+        tfKodeBaru.setPromptText("Masukkan kode akses baru...");
+        tfKodeBaru.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold; -fx-font-size: 14px;");
+        HBox.setHgrow(tfKodeBaru, Priority.ALWAYS);
+
+        Button btnAcak = new Button("Acak");
+        btnAcak.getStyleClass().add("tombol-sekunder");
+        btnAcak.setTooltip(new Tooltip("Buat kode acak 6 karakter"));
+        btnAcak.setOnAction(e -> tfKodeBaru.setText(hasilkanKodeKursusAcak()));
+
+        HBox barisInput = new HBox(8, tfKodeBaru, btnAcak);
+        barisInput.setAlignment(Pos.CENTER_LEFT);
+
+        Label lblCatatan = new Label("Huruf besar dan kecil berpengaruh (case-sensitive). Siswa baru wajib memasukkan kode ini.");
+        lblCatatan.getStyleClass().add("teks-redup");
+        lblCatatan.setStyle("-fx-font-size: 11.5px;");
+        lblCatatan.setWrapText(true);
+
+        Label lblGalat = new Label();
+        lblGalat.setWrapText(true);
+        lblGalat.setMaxWidth(Double.MAX_VALUE);
+        lblGalat.setStyle("-fx-text-fill: -bahaya; -fx-background-color: rgba(239, 68, 68, 0.1); "
+                + "-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblGalat.setVisible(false);
+        lblGalat.setManaged(false);
+
+        tfKodeBaru.textProperty().addListener((obs, lama, baru) -> {
+            if (lblGalat.isVisible()) {
+                lblGalat.setVisible(false);
+                lblGalat.setManaged(false);
+            }
+        });
+
+        boxInput.getChildren().addAll(lblField, barisInput, lblCatatan, lblGalat);
+
+        // Footer Tombol
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+
+        Button btnSimpan = new Button("Simpan Kode");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setDefaultButton(true);
+        btnSimpan.setOnAction(e -> {
+            String kodeBaru = tfKodeBaru.getText() != null ? tfKodeBaru.getText().trim() : "";
+            if (kodeBaru.isEmpty()) {
+                lblGalat.setText("Kode kursus tidak boleh kosong.");
+                lblGalat.setVisible(true);
+                lblGalat.setManaged(true);
+                tfKodeBaru.requestFocus();
+                return;
+            }
+            if (kodeBaru.equals(kursus.getKode())) {
+                dialog.setResult(Boolean.FALSE);
+                dialog.close();
+                return;
+            }
+            try {
+                String kodeLama = kursus.getKode();
+                Kursus baru = kursusService.ubahKodeKursus(kursus, kodeBaru);
+                session.getPendaftaranService().perbaruiKodeKursus(kodeLama, baru.getKode());
+                this.kursus = baru;
+                session.setKursusAktif(baru);
+                lblKode.setText(baru.getKode());
+                spPola.getChildren().setAll(PolaKursus.buat(baru.getKode(), 84, 84, 20));
+                muatTabOrang();
+                dialog.setResult(Boolean.TRUE);
+                dialog.close();
+                DialogUtil.info("Kode kursus berhasil diubah menjadi: " + baru.getKode());
+            } catch (Exception ex) {
+                lblGalat.setText(ex.getMessage() != null ? ex.getMessage() : "Gagal mengubah kode kursus.");
+                lblGalat.setVisible(true);
+                lblGalat.setManaged(true);
+                tfKodeBaru.requestFocus();
+                tfKodeBaru.selectAll();
+            }
+        });
+
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(barisHeader, new Separator(), kotakKodeSaatIni, boxInput, new Separator(), barisTombol);
+        pane.setContent(kartu);
+
+        Platform.runLater(() -> {
+            tfKodeBaru.requestFocus();
+            tfKodeBaru.selectAll();
+        });
+        dialog.showAndWait();
+    }
+
+    private static final String KARAKTER_KODE_KURSUS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+    private static final SecureRandom RANDOM_KODE_KURSUS = new SecureRandom();
+
+    private static String hasilkanKodeKursusAcak() {
+        StringBuilder sb = new StringBuilder(6);
+        for (int i = 0; i < 6; i++) {
+            sb.append(KARAKTER_KODE_KURSUS.charAt(RANDOM_KODE_KURSUS.nextInt(KARAKTER_KODE_KURSUS.length())));
+        }
+        return sb.toString();
+    }
+
+    @SuppressWarnings("unused")
+    private void handleUbahKodeLama() {
 
 
 
@@ -12072,7 +12979,9 @@ public class KursusDetailController {
 
 
 
+                String kodeLama = kursus.getKode();
                 Kursus baru = kursusService.ubahKodeKursus(kursus, kodeBaru);
+                session.getPendaftaranService().perbaruiKodeKursus(kodeLama, baru.getKode());
 
 
 
@@ -12237,6 +13146,234 @@ public class KursusDetailController {
 
 
     private void handleEditTugas(Bab bab, MateriTugas tugasEdit) {
+        Dialog<MateriTugas> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
+
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
+            }
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
+        });
+
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(520);
+        kartu.setMaxWidth(540);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        // 1. Header Modal tanpa ikon dekoratif
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        VBox boxJudul = new VBox(2);
+        HBox barisJudulBadge = new HBox(8);
+        barisJudulBadge.setAlignment(Pos.CENTER_LEFT);
+        Label lblJudulModal = new Label(tugasEdit == null ? "Tambah Tugas Baru" : "Edit Tugas");
+        lblJudulModal.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label badgeBab = new Label("Bab " + bab.getNomor());
+        badgeBab.getStyleClass().add("badge");
+        barisJudulBadge.getChildren().addAll(lblJudulModal, badgeBab);
+
+        Label lblSub = new Label(tugasEdit == null
+                ? ("Buat penugasan siswa untuk " + bab.getJudul() + " · " + kursus.getNama())
+                : ("Perbarui detail tugas pada " + bab.getJudul()));
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(barisJudulBadge, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setTooltip(new Tooltip("Tutup (ESC)"));
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(null);
+            dialog.close();
+        });
+
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
+
+        // 2. Judul Tugas & Target Kelas (tanpa chip pintasan)
+        VBox boxJudulTugas = new VBox(6);
+        Label lblJudulField = new Label("Judul Tugas");
+        lblJudulField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextField tfJudul = new TextField(tugasEdit != null ? tugasEdit.getJudul() : "");
+        tfJudul.setPromptText("Contoh: Tugas 1 - Analisis Kata Baku dalam Artikel");
+        boxJudulTugas.getChildren().addAll(lblJudulField, tfJudul);
+
+        VBox boxTargetKelas = new VBox(6);
+        HBox headerKelas = new HBox(8);
+        headerKelas.setAlignment(Pos.CENTER_LEFT);
+        Label lblKelasField = new Label("Target Kelas");
+        lblKelasField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        Label lblInfoKelas = new Label("· Pilih kelas yang dapat mengakses dan mengumpulkan tugas");
+        lblInfoKelas.getStyleClass().add("teks-redup");
+        lblInfoKelas.setStyle("-fx-font-size: 11.5px;");
+        headerKelas.getChildren().addAll(lblKelasField, lblInfoKelas);
+
+        ComboBox<String> cbKelas = new ComboBox<>();
+        cbKelas.getItems().add("Semua Kelas");
+        List<String> daftarKelasSiswa = session.getAuthService().getSemuaSiswa().stream()
+                .map(Siswa::getKelas)
+                .filter(k -> k != null && !k.isBlank())
+                .distinct()
+                .sorted()
+                .toList();
+        cbKelas.getItems().addAll(daftarKelasSiswa);
+        cbKelas.setEditable(true);
+        cbKelas.setMaxWidth(Double.MAX_VALUE);
+        cbKelas.setValue(tugasEdit != null ? tugasEdit.getTargetKelas() : "Semua Kelas");
+
+        boxTargetKelas.getChildren().addAll(headerKelas, cbKelas);
+
+        // 3. Batas Waktu Pengumpulan (Deadline) terpadu dalam satu pemilih Tanggal & Waktu tanpa ikon/chip
+        VBox kotakDeadline = new VBox(8);
+        kotakDeadline.getStyleClass().add("modal-kotak-jadwal");
+
+        Label lblDeadlineJudul = new Label("Batas Waktu Pengumpulan (Deadline)");
+        lblDeadlineJudul.setStyle("-fx-font-weight: bold; -fx-font-size: 13px;");
+
+        LocalDateTime deadlineAwal = (tugasEdit != null && tugasEdit.getDeadline() != null)
+                ? tugasEdit.getDeadline()
+                : LocalDateTime.of(LocalDate.now().plusDays(7), LocalTime.of(23, 59));
+
+        PemilihTanggalWaktu pemilihDeadline = new PemilihTanggalWaktu(deadlineAwal, false);
+
+        kotakDeadline.getChildren().addAll(lblDeadlineJudul, pemilihDeadline);
+
+        // 4. Deskripsi / Instruksi Tugas
+        VBox boxDeskripsi = new VBox(6);
+        Label lblDeskripsiField = new Label("Deskripsi & Petunjuk Pengerjaan");
+        lblDeskripsiField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextArea taDeskripsi = new TextArea(tugasEdit != null ? tugasEdit.getDeskripsi() : "");
+        taDeskripsi.setPromptText("Tuliskan petunjuk pengerjaan tugas, format berkas yang diminta (.pdf/.docx), atau kriteria penilaian...");
+        taDeskripsi.setPrefRowCount(4);
+        taDeskripsi.setWrapText(true);
+        boxDeskripsi.getChildren().addAll(lblDeskripsiField, taDeskripsi);
+
+        // Pesan Validasi Inline
+        Label lblGalat = new Label();
+        lblGalat.setWrapText(true);
+        lblGalat.setMaxWidth(Double.MAX_VALUE);
+        lblGalat.setStyle("-fx-text-fill: -bahaya; -fx-background-color: rgba(239, 68, 68, 0.1); "
+                + "-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblGalat.setVisible(false);
+        lblGalat.setManaged(false);
+
+        tfJudul.textProperty().addListener((obs, lama, baru) -> {
+            if (lblGalat.isVisible()) {
+                lblGalat.setVisible(false);
+                lblGalat.setManaged(false);
+            }
+        });
+
+        // 5. Footer Tombol Aksi
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(null);
+            dialog.close();
+        });
+
+        Button btnSimpan = new Button(tugasEdit == null ? "Simpan Tugas" : "Simpan Perubahan");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setOnAction(e -> {
+            String judul = tfJudul.getText() != null ? tfJudul.getText().trim() : "";
+            if (judul.isEmpty()) {
+                lblGalat.setText("Judul tugas wajib diisi terlebih dahulu.");
+                lblGalat.setVisible(true);
+                lblGalat.setManaged(true);
+                tfJudul.requestFocus();
+                return;
+            }
+            LocalDateTime deadline = pemilihDeadline.getWaktu() != null
+                    ? pemilihDeadline.getWaktu()
+                    : LocalDateTime.of(LocalDate.now().plusDays(7), LocalTime.of(23, 59));
+            String targetKelas = cbKelas.getEditor() != null && !cbKelas.getEditor().getText().isBlank()
+                    ? cbKelas.getEditor().getText().trim()
+                    : cbKelas.getValue();
+            if (targetKelas == null || targetKelas.isBlank()) {
+                targetKelas = "Semua Kelas";
+            }
+            String deskripsi = taDeskripsi.getText() != null ? taDeskripsi.getText().trim() : "";
+            String id = tugasEdit != null ? tugasEdit.getIdMateri() : "tgs-" + (System.currentTimeMillis() % 100000);
+
+            dialog.setResult(new MateriTugas(id, judul, deadline, targetKelas, deskripsi));
+            dialog.close();
+        });
+
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(
+                barisHeader,
+                new Separator(),
+                boxJudulTugas,
+                boxTargetKelas,
+                kotakDeadline,
+                boxDeskripsi,
+                lblGalat,
+                new Separator(),
+                barisTombol
+        );
+        pane.setContent(kartu);
+
+        Platform.runLater(tfJudul::requestFocus);
+
+        Optional<MateriTugas> hasil = dialog.showAndWait();
+        hasil.ifPresent(tugasBaru -> {
+            List<Bab> daftarBabBaru = new ArrayList<>();
+            for (Bab b : kursus.getDaftarBab()) {
+                if (b.getNomor() == bab.getNomor()) {
+                    List<Materi> materiBaru = new ArrayList<>(b.getDaftarMateri());
+                    if (tugasEdit != null) {
+                        int idx = materiBaru.indexOf(tugasEdit);
+                        if (idx >= 0) {
+                            materiBaru.set(idx, tugasBaru);
+                        } else {
+                            materiBaru.add(tugasBaru);
+                        }
+                    } else {
+                        materiBaru.add(tugasBaru);
+                    }
+                    daftarBabBaru.add(new Bab(b.getNomor(), b.getJudul(), materiBaru));
+                } else {
+                    daftarBabBaru.add(b);
+                }
+            }
+            simpanKursus(kursus.denganDaftarBab(daftarBabBaru));
+            tampilkanBab(kursus.getDaftarBab().get(bab.getNomor() - 1));
+        });
+    }
+
+    @SuppressWarnings("unused")
+    private void handleEditTugasLama(Bab bab, MateriTugas tugasEdit) {
 
 
 
