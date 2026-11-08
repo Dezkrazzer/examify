@@ -9,6 +9,7 @@ public enum Layar {
     LOGIN("login.fxml", "Masuk", false),
     KURSUS_SAYA("kursus_saya.fxml", "Kursus Saya", true),
     KURSUS_DETAIL("kursus_detail.fxml", "Kursus", true),
+    KALENDER("kalender.fxml", "Kalender", true),
     PROFIL("profil.fxml", "Profil", true),
     TOKEN_GATE("token_gate.fxml", "Token Ujian", false),
     CBT_ROOM("cbt_room.fxml", "Ruang Ujian", false),

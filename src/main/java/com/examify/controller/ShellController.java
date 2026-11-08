@@ -20,6 +20,7 @@ public class ShellController {
 
     @FXML private StackPane spKonten;
     @FXML private ToggleButton tbKursus;
+    @FXML private ToggleButton tbKalender;
     @FXML private ToggleButton tbBankSoal;
     @FXML private ToggleButton tbSiswa;
     @FXML private ToggleButton tbProfil;
@@ -38,6 +39,7 @@ public class ShellController {
 
         ToggleGroup grup = new ToggleGroup();
         tbKursus.setToggleGroup(grup);
+        tbKalender.setToggleGroup(grup);
         tbBankSoal.setToggleGroup(grup);
         tbSiswa.setToggleGroup(grup);
         tbProfil.setToggleGroup(grup);
@@ -48,6 +50,8 @@ public class ShellController {
             lblAvatar.setText(FormatUtil.inisial(guru.getNama()));
             lblNama.setText(guru.getNama());
             lblNis.setText("Guru • NIP " + guru.getNip());
+            tbKalender.setVisible(true);
+            tbKalender.setManaged(true);
             tbBankSoal.setVisible(true);
             tbBankSoal.setManaged(true);
             tbSiswa.setVisible(true);
@@ -59,6 +63,8 @@ public class ShellController {
             lblAvatar.setText(FormatUtil.inisial(siswa.getNama()));
             lblNama.setText(siswa.getNama());
             lblNis.setText(siswa.getNis() + " - " + siswa.getKelas());
+            tbKalender.setVisible(true);
+            tbKalender.setManaged(true);
             tbBankSoal.setVisible(false);
             tbBankSoal.setManaged(false);
             tbSiswa.setVisible(false);
@@ -70,6 +76,7 @@ public class ShellController {
 
     private void sorotMenu(Layar layar) {
         tbKursus.setSelected(layar == Layar.KURSUS_SAYA || layar == Layar.KURSUS_DETAIL);
+        tbKalender.setSelected(layar == Layar.KALENDER);
         tbBankSoal.setSelected(layar == Layar.BANK_SOAL || layar == Layar.EDITOR_UJIAN);
         tbSiswa.setSelected(layar == Layar.GURU_SISWA || layar == Layar.GURU_DETAIL_SISWA);
         tbProfil.setSelected(layar == Layar.PROFIL || layar == Layar.PEMBAHASAN_UJIAN);
@@ -78,6 +85,11 @@ public class ShellController {
     @FXML
     private void handleKursus() {
         SceneRouter.pindah(Layar.KURSUS_SAYA);
+    }
+
+    @FXML
+    private void handleKalender() {
+        SceneRouter.pindah(Layar.KALENDER);
     }
 
     @FXML

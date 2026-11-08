@@ -13,41 +13,36 @@ import com.examify.view.Ikon;
 import com.examify.view.IkonView;
 import com.examify.view.KartuKursus;
 import com.examify.view.PolaKursus;
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-
-import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 public class KursusSayaController {
 
@@ -235,7 +230,7 @@ public class KursusSayaController {
         kartu.setMaxWidth(460);
         kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
 
-        // Header Modal (Bisa di-drag)
+        // Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
 
@@ -248,11 +243,6 @@ public class KursusSayaController {
             dialog.setX(e.getScreenX() + dragOffset[0]);
             dialog.setY(e.getScreenY() + dragOffset[1]);
         });
-
-        StackPane kotakIkon = new StackPane(new IkonView(Ikon.GEMBOK, 20));
-        kotakIkon.getStyleClass().add("kotak-ikon-stat");
-        kotakIkon.setMinSize(42, 42);
-        kotakIkon.setMaxSize(42, 42);
 
         VBox boxJudul = new VBox(2);
         Label lblJudul = new Label("Masukkan Kode Kursus");
@@ -272,7 +262,7 @@ public class KursusSayaController {
             dialog.close();
         });
 
-        barisHeader.getChildren().addAll(kotakIkon, boxJudul, btnTutup);
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
 
         // Info Kursus Tujuan
         HBox kotakKursus = new HBox(12);
@@ -416,7 +406,7 @@ public class KursusSayaController {
         kartu.setMaxWidth(450);
         kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
 
-        // Header Modal (Bisa di-drag)
+        // Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
 
@@ -429,11 +419,6 @@ public class KursusSayaController {
             dialog.setX(e.getScreenX() + dragOffset[0]);
             dialog.setY(e.getScreenY() + dragOffset[1]);
         });
-
-        StackPane kotakIkon = new StackPane(new IkonView(Ikon.GEMBOK, 20));
-        kotakIkon.getStyleClass().add("kotak-ikon-stat");
-        kotakIkon.setMinSize(42, 42);
-        kotakIkon.setMaxSize(42, 42);
 
         VBox boxJudul = new VBox(2);
         Label lblJudul = new Label("Masuk lewat Kode");
@@ -453,7 +438,7 @@ public class KursusSayaController {
             dialog.close();
         });
 
-        barisHeader.getChildren().addAll(kotakIkon, boxJudul, btnTutup);
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
 
         VBox boxInput = new VBox(6);
         Label lblField = new Label("Kode Kursus");
@@ -540,65 +525,165 @@ public class KursusSayaController {
     }
 
     private void tampilkanDialogBuatKursus() {
-        Dialog<Kursus> dialog = new Dialog<>();
-        dialog.setTitle("Buat Kursus Baru");
-        dialog.setHeaderText("Lengkapi informasi kursus baru yang ingin Anda buat:");
+        Dialog<Boolean> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
+        dialog.initStyle(StageStyle.TRANSPARENT);
 
-        ButtonType btnSimpan = new ButtonType("Buat Kursus", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(btnSimpan, ButtonType.CANCEL);
-
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-
-        TextField tfKode = new TextField();
-        tfKode.setPromptText("Contoh: WEB");
-        TextField tfNama = new TextField();
-        tfNama.setPromptText("Contoh: Pemrograman Web");
-        TextField tfPengajar = new TextField(session.getNamaPengguna());
-        TextField tfDeskripsi = new TextField();
-        tfDeskripsi.setPromptText("Deskripsi singkat kursus");
-
-        grid.add(new Label("Kode Kursus:"), 0, 0);
-        grid.add(tfKode, 1, 0);
-        grid.add(new Label("Nama Kursus:"), 0, 1);
-        grid.add(tfNama, 1, 1);
-        grid.add(new Label("Pengajar:"), 0, 2);
-        grid.add(tfPengajar, 1, 2);
-        grid.add(new Label("Deskripsi:"), 0, 3);
-        grid.add(tfDeskripsi, 1, 3);
-
-        dialog.getDialogPane().setContent(grid);
-
-        dialog.setResultConverter(dialogButton -> {
-            if (dialogButton == btnSimpan) {
-                String kode = tfKode.getText().trim();
-                String nama = tfNama.getText().trim();
-                String pengajar = tfPengajar.getText().trim();
-                String deskripsi = tfDeskripsi.getText().trim();
-
-                if (StringUtil.isKosong(kode) || StringUtil.isKosong(nama)) {
-                    DialogUtil.peringatan("Kode dan nama kursus wajib diisi!");
-                    return null;
-                }
-                Bab babAwal = new Bab(1, "Bab 1: Pendahuluan", List.of());
-                return new Kursus(kode, nama, pengajar, deskripsi, List.of(babAwal));
+        DialogPane pane = new DialogPane() {
+            @Override
+            protected Node createButtonBar() {
+                return null;
             }
-            return null;
+        };
+        pane.setBackground(Background.EMPTY);
+        pane.setStyle("-fx-background-color: transparent;");
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
+        pane.getButtonTypes().add(ButtonType.CLOSE);
+        dialog.setDialogPane(pane);
+
+        dialog.setOnShown(e -> {
+            if (pane.getScene() != null) {
+                pane.getScene().setFill(Color.TRANSPARENT);
+            }
         });
 
-        Optional<Kursus> result = dialog.showAndWait();
-        result.ifPresent(kursusBaru -> {
+        VBox kartu = new VBox(16);
+        kartu.getStyleClass().add("modal-kartu");
+        kartu.setPrefWidth(480);
+        kartu.setMaxWidth(500);
+        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+
+        // Header Modal tanpa ikon dekoratif
+        HBox barisHeader = new HBox(12);
+        barisHeader.setAlignment(Pos.CENTER_LEFT);
+
+        final double[] dragOffset = new double[2];
+        barisHeader.setOnMousePressed(e -> {
+            dragOffset[0] = dialog.getX() - e.getScreenX();
+            dragOffset[1] = dialog.getY() - e.getScreenY();
+        });
+        barisHeader.setOnMouseDragged(e -> {
+            dialog.setX(e.getScreenX() + dragOffset[0]);
+            dialog.setY(e.getScreenY() + dragOffset[1]);
+        });
+
+        VBox boxJudul = new VBox(2);
+        Label lblJudul = new Label("Buat Kursus Baru");
+        lblJudul.setStyle("-fx-font-size: 17px; -fx-font-weight: bold;");
+        Label lblSub = new Label("Lengkapi informasi kursus baru yang ingin Anda buat.");
+        lblSub.getStyleClass().add("teks-redup");
+        lblSub.setStyle("-fx-font-size: 12px;");
+        boxJudul.getChildren().addAll(lblJudul, lblSub);
+        HBox.setHgrow(boxJudul, Priority.ALWAYS);
+
+        Button btnTutup = new Button();
+        btnTutup.setGraphic(new IkonView(Ikon.SILANG, 14));
+        btnTutup.getStyleClass().add("tombol-ikon");
+        btnTutup.setTooltip(new Tooltip("Tutup (ESC)"));
+        btnTutup.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+
+        barisHeader.getChildren().addAll(boxJudul, btnTutup);
+
+        HBox barisKodePengajar = new HBox(12);
+        VBox boxKode = new VBox(6);
+        boxKode.setPrefWidth(150);
+        Label lblKode = new Label("Kode Kursus");
+        lblKode.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextField tfKode = new TextField();
+        tfKode.setPromptText("Contoh: WEB");
+        tfKode.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold;");
+        boxKode.getChildren().addAll(lblKode, tfKode);
+
+        VBox boxPengajar = new VBox(6);
+        HBox.setHgrow(boxPengajar, Priority.ALWAYS);
+        Label lblPengajar = new Label("Pengajar");
+        lblPengajar.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextField tfPengajar = new TextField(session.getNamaPengguna());
+        boxPengajar.getChildren().addAll(lblPengajar, tfPengajar);
+
+        barisKodePengajar.getChildren().addAll(boxKode, boxPengajar);
+
+        VBox boxNama = new VBox(6);
+        Label lblNama = new Label("Nama Kursus");
+        lblNama.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextField tfNama = new TextField();
+        tfNama.setPromptText("Contoh: Pemrograman Web");
+        boxNama.getChildren().addAll(lblNama, tfNama);
+
+        VBox boxDeskripsi = new VBox(6);
+        Label lblDeskripsi = new Label("Deskripsi Singkat");
+        lblDeskripsi.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
+        TextArea taDeskripsi = new TextArea();
+        taDeskripsi.setPromptText("Deskripsi singkat kursus...");
+        taDeskripsi.setPrefRowCount(3);
+        taDeskripsi.setWrapText(true);
+        boxDeskripsi.getChildren().addAll(lblDeskripsi, taDeskripsi);
+
+        Label lblGalat = new Label();
+        lblGalat.setWrapText(true);
+        lblGalat.setMaxWidth(Double.MAX_VALUE);
+        lblGalat.setStyle("-fx-text-fill: -bahaya; -fx-background-color: rgba(239, 68, 68, 0.1); "
+                + "-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 12px; -fx-font-weight: bold;");
+        lblGalat.setVisible(false);
+        lblGalat.setManaged(false);
+
+        VBox formBox = new VBox(12, barisKodePengajar, boxNama, boxDeskripsi, lblGalat);
+
+        HBox barisTombol = new HBox(10);
+        barisTombol.setAlignment(Pos.CENTER_RIGHT);
+
+        Button btnBatal = new Button("Batal");
+        btnBatal.getStyleClass().add("tombol-hantu");
+        btnBatal.setCancelButton(true);
+        btnBatal.setOnAction(e -> {
+            dialog.setResult(Boolean.FALSE);
+            dialog.close();
+        });
+
+        Button btnSimpan = new Button("Buat Kursus");
+        btnSimpan.getStyleClass().add("tombol-utama");
+        btnSimpan.setDefaultButton(true);
+        btnSimpan.setOnAction(e -> {
+            String kode = tfKode.getText() != null ? tfKode.getText().trim() : "";
+            String nama = tfNama.getText() != null ? tfNama.getText().trim() : "";
+            String pengajar = tfPengajar.getText() != null ? tfPengajar.getText().trim() : "";
+            String deskripsi = taDeskripsi.getText() != null ? taDeskripsi.getText().trim() : "";
+
+            if (StringUtil.isKosong(kode) || StringUtil.isKosong(nama)) {
+                lblGalat.setText("Kode dan nama kursus wajib diisi.");
+                lblGalat.setVisible(true);
+                lblGalat.setManaged(true);
+                return;
+            }
+
+            Bab babAwal = new Bab(1, "Bab 1: Pendahuluan", List.of());
+            String nipPembuat = session.isGuru() && session.getGuruAktif() != null
+                    ? session.getGuruAktif().getNip() : "";
+            Kursus kursusBaru = new Kursus(kode, nama, pengajar, nipPembuat, deskripsi, List.of(babAwal));
             try {
                 session.getKursusService().tambahKursus(kursusBaru);
+                dialog.setResult(Boolean.TRUE);
+                dialog.close();
                 DialogUtil.info("Kursus " + kursusBaru.getKode() + " berhasil dibuat!");
                 session.setKursusAktif(kursusBaru);
                 session.setMateriFokus(null);
                 SceneRouter.pindah(Layar.KURSUS_DETAIL);
-            } catch (IllegalArgumentException | IOException e) {
-                DialogUtil.peringatan("Gagal membuat kursus: " + e.getMessage());
+            } catch (IllegalArgumentException | IOException ex) {
+                lblGalat.setText("Gagal membuat kursus: " + ex.getMessage());
+                lblGalat.setVisible(true);
+                lblGalat.setManaged(true);
             }
         });
+
+        barisTombol.getChildren().addAll(btnBatal, btnSimpan);
+
+        kartu.getChildren().addAll(barisHeader, new Separator(), formBox, new Separator(), barisTombol);
+        pane.setContent(kartu);
+
+        Platform.runLater(tfKode::requestFocus);
+        dialog.showAndWait();
     }
 }

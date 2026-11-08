@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.examify.view.IkonView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.examify.controller.KalenderController" fitToWidth="true" hbarPolicy="NEVER">
+    <VBox spacing="20">
+        <padding><Insets top="32" right="36" bottom="36" left="36"/></padding>
+
+        <!-- Header Halaman -->
+        <HBox spacing="16" alignment="CENTER_LEFT">
+            <VBox spacing="4" HBox.hgrow="ALWAYS">
+                <Label text="Kalender Akademik" styleClass="judul-halaman"/>
+                <Label fx:id="lblSubjudul"
+                       text="Jadwal batas tugas, kuis bab, dan ujian CBT berdasarkan kursus yang kamu ikuti."
+                       styleClass="subjudul" wrapText="true"/>
+            </VBox>
+            <HBox spacing="8" alignment="CENTER_RIGHT" minWidth="-Infinity">
+                <Label fx:id="lblRingkasanKursus" styleClass="badge, badge-netral" minWidth="-Infinity"/>
+                <Label fx:id="lblRingkasanMendatang" styleClass="badge" minWidth="-Infinity"/>
+            </HBox>
+        </HBox>
+
+        <!-- Bar Dua Filter: Filter Mode (Month, Day, Upcoming Event) & Filter Kursus -->
+        <HBox styleClass="kaca" spacing="14" alignment="CENTER_LEFT" style="-fx-padding: 12 18;">
+            <HBox spacing="10" alignment="CENTER_LEFT" minWidth="-Infinity">
+                <Label text="Filter Waktu" styleClass="teks-kecil" style="-fx-font-weight: bold;" minWidth="-Infinity"/>
+                <HBox styleClass="tab-nav-bar" spacing="4" alignment="CENTER_LEFT" minWidth="-Infinity">
+                    <ToggleButton fx:id="tbMonth" text="Month" styleClass="tab-nav-item"
+                                  minWidth="-Infinity" onAction="#handleModeMonth"/>
+                    <ToggleButton fx:id="tbDay" text="Day" styleClass="tab-nav-item"
+                                  minWidth="-Infinity" onAction="#handleModeDay"/>
+                    <ToggleButton fx:id="tbUpcoming" text="Upcoming Event" styleClass="tab-nav-item"
+                                  minWidth="-Infinity" onAction="#handleModeUpcoming"/>
+                </HBox>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT" minWidth="-Infinity">
+                <Label text="Filter Kursus" styleClass="teks-kecil" style="-fx-font-weight: bold;" minWidth="-Infinity"/>
+                <ComboBox fx:id="cbKursus" prefWidth="250" minWidth="190"/>
+            </HBox>
+        </HBox>
+
+        <!-- State Kosong Jika Belum Ada Kursus yang Diikuti (Siswa) atau Dibuat (Guru) -->
+        <VBox fx:id="boxBelumAdaKursus" styleClass="kotak-kosong-kalender" spacing="12"
+              alignment="CENTER" visible="false" managed="false">
+            <StackPane styleClass="ikon-fitur">
+                <IkonView ikon="KALENDER" ukuran="22"/>
+            </StackPane>
+            <Label fx:id="lblKosongKursusJudul" text="Belum Ada Kursus yang Diikuti" styleClass="judul-bagian"/>
+            <Label fx:id="lblKosongKursusPesan"
+                   text="Masukkan kode akses kursus dari pengajar di menu Kursus Saya agar jadwal tugas, kuis, dan ujian otomatis tersinkron ke kalender ini."
+                   styleClass="teks-redup" wrapText="true" maxWidth="520" textAlignment="CENTER"/>
+            <Button text="Buka Kursus Saya" styleClass="tombol-utama" onAction="#handleBukaKursusSaya"/>
+        </VBox>
+
+        <!-- Area Konten Dinamis Berdasarkan Filter Mode -->
+        <StackPane fx:id="spKontenKalender" alignment="TOP_LEFT">
+
+            <!-- 1. TAMPILAN MONTH -->
+            <HBox fx:id="boxTampilanMonth" spacing="20" alignment="TOP_LEFT">
+                <VBox styleClass="kaca" spacing="14" HBox.hgrow="ALWAYS">
+                    <!-- Navigasi Bulan di Atas -->
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Button styleClass="tombol-nav-kalender" minWidth="-Infinity" onAction="#handleBulanSebelumnya">
+                            <graphic><IkonView ikon="PANAH_KIRI" ukuran="15"/></graphic>
+                        </Button>
+                        <Label fx:id="lblJudulBulan" styleClass="judul-bagian" minWidth="-Infinity"
+                               style="-fx-padding: 0 6;" alignment="CENTER"/>
+                        <Button styleClass="tombol-nav-kalender" minWidth="-Infinity" onAction="#handleBulanBerikutnya">
+                            <graphic><IkonView ikon="PANAH_KANAN" ukuran="15"/></graphic>
+                        </Button>
+                        <Button text="Hari Ini" styleClass="tombol-nav-kalender" minWidth="-Infinity"
+                                onAction="#handleLoncatHariIni"/>
+
+                        <Region HBox.hgrow="ALWAYS"/>
+
+                        <Label fx:id="lblJumlahBulan" styleClass="badge" minWidth="-Infinity"/>
+                    </HBox>
+
+                    <!-- Grid Hari & Tanggal -->
+                    <GridPane fx:id="gridHeaderHari" hgap="8"/>
+                    <GridPane fx:id="gridBulan" hgap="8" vgap="8"/>
+
+                    <!-- Legenda Warna di Paling Bawah Setelah Tanggal -->
+                    <Separator/>
+                    <FlowPane hgap="18" vgap="8" alignment="CENTER_LEFT">
+                        <Label text="Keterangan:" styleClass="teks-kecil" style="-fx-font-weight: bold;"/>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Region styleClass="kotak-legenda" style="-fx-background-color: -aksen;"/>
+                            <Label text="Deadline Tugas" styleClass="teks-kecil"/>
+                        </HBox>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Region styleClass="kotak-legenda" style="-fx-background-color: -ragu;"/>
+                            <Label text="Ujian CBT" styleClass="teks-kecil"/>
+                        </HBox>
+                        <HBox spacing="6" alignment="CENTER_LEFT">
+                            <Region styleClass="kotak-legenda" style="-fx-background-color: -aksen-2;"/>
+                            <Label text="Kuis Bab" styleClass="teks-kecil"/>
+                        </HBox>
+                        <HBox fx:id="boxLegendaSelesai" spacing="6" alignment="CENTER_LEFT">
+                            <Region styleClass="kotak-legenda" style="-fx-background-color: -sukses;"/>
+                            <Label text="Sudah Selesai" styleClass="teks-kecil"/>
+                        </HBox>
+                    </FlowPane>
+                </VBox>
+
+                <!-- Panel Samping Detail Tanggal Terpilih -->
+                <VBox styleClass="kaca" spacing="14" prefWidth="320" minWidth="290" maxWidth="340">
+                    <VBox spacing="3">
+                        <Label text="DETAIL TANGGAL" styleClass="label-kecil-kapital"/>
+                        <Label fx:id="lblDetailTanggalJudul" styleClass="judul-kartu" wrapText="true"/>
+                        <Label fx:id="lblDetailTanggalSub" styleClass="teks-kecil" wrapText="true"/>
+                    </VBox>
+                    <Separator/>
+                    <VBox fx:id="boxDaftarDetailTanggal" spacing="10"/>
+                    <Button text="Buka Tampilan Day" styleClass="tombol-sekunder" maxWidth="Infinity"
+                            minWidth="-Infinity" onAction="#handleBukaDayDariDetail"/>
+                </VBox>
+            </HBox>
+
+            <!-- 2. TAMPILAN DAY -->
+            <VBox fx:id="boxTampilanDay" styleClass="kaca" spacing="18" visible="false" managed="false">
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <Button styleClass="tombol-nav-kalender" minWidth="-Infinity" onAction="#handleHariSebelumnya">
+                        <graphic><IkonView ikon="PANAH_KIRI" ukuran="15"/></graphic>
+                    </Button>
+                    <Label fx:id="lblJudulHari" styleClass="judul-bagian" minWidth="-Infinity"/>
+                    <Label fx:id="lblBadgeHariIni" text="Hari Ini" styleClass="badge" minWidth="-Infinity"/>
+                    <Button styleClass="tombol-nav-kalender" minWidth="-Infinity" onAction="#handleHariBerikutnya">
+                        <graphic><IkonView ikon="PANAH_KANAN" ukuran="15"/></graphic>
+                    </Button>
+                    <Button text="Hari Ini" styleClass="tombol-nav-kalender" minWidth="-Infinity"
+                            onAction="#handleLoncatHariIni"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="lblJumlahHari" styleClass="badge, badge-netral" minWidth="-Infinity"/>
+                </HBox>
+
+                <Separator/>
+                <VBox fx:id="boxDaftarHari" spacing="12"/>
+            </VBox>
+
+            <!-- 3. TAMPILAN UPCOMING EVENT -->
+            <VBox fx:id="boxTampilanUpcoming" styleClass="kaca" spacing="18" visible="false" managed="false">
+                <HBox spacing="12" alignment="CENTER_LEFT">
+                    <VBox spacing="2" HBox.hgrow="ALWAYS">
+                        <Label text="Upcoming Event" styleClass="judul-bagian"/>
+                        <Label fx:id="lblSubUpcoming"
+                               text="Urutan agenda terdekat dari waktu sekarang berdasarkan filter kursus yang dipilih."
+                               styleClass="teks-kecil" wrapText="true"/>
+                    </VBox>
+                    <Label fx:id="lblJumlahUpcoming" styleClass="badge" minWidth="-Infinity"/>
+                </HBox>
+
+                <Separator/>
+                <VBox fx:id="boxDaftarUpcoming" spacing="18"/>
+            </VBox>
+
+        </StackPane>
+    </VBox>
+</ScrollPane>
