@@ -5,6 +5,7 @@ import com.examify.io.KursusWriter;
 import com.examify.model.Bab;
 import com.examify.model.JenisMateri;
 import com.examify.model.Kursus;
+import com.examify.model.MateriTeks;
 import com.examify.model.MateriTugas;
 import com.examify.model.PengumpulanTugas;
 import com.examify.model.Siswa;
@@ -187,5 +188,23 @@ class TugasDanPendaftaranTest {
         assertEquals("Tugas Analisis", tugasBaca.getJudul());
         assertEquals("XI-IPA-1", tugasBaca.getTargetKelas());
         assertEquals("Analisis cerpen bab 1", tugasBaca.getDeskripsi());
+    }
+
+    @Test
+    void ujiTentukanFolderMateriKonsistenDanTidakMembuatBin() throws Exception {
+        Path folderMateri = tempDir.resolve("materi").resolve("bahasaindo");
+        Files.createDirectories(folderMateri);
+        Path fileMateri1 = folderMateri.resolve("01-kata-baku.md");
+        Files.writeString(fileMateri1, "# Kata Baku");
+
+        MateriTeks teks = new MateriTeks("bin-01", "Mengenal Kata Baku", fileMateri1);
+        Kursus kBin = new Kursus("BIN", "Bahasa Indonesia", "Sri", "Deskripsi",
+                List.of(new Bab(1, "Bab 1", List.of(teks))));
+
+        KursusService kursusService = new KursusService(List.of(kBin), null);
+        Path folderTarget = kursusService.tentukanFolderMateri(kBin);
+        assertEquals(folderMateri.toAbsolutePath().normalize(), folderTarget.toAbsolutePath().normalize());
+        assertFalse(folderTarget.getFileName().toString().equalsIgnoreCase("bin"),
+                "Folder materi Bahasa Indonesia tidak boleh bernama bin");
     }
 }
