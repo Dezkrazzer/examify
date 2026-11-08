@@ -9,6 +9,7 @@ import com.examify.model.Siswa;
 import com.examify.service.ProgresBelajarService;
 import com.examify.utils.StringUtil;
 import com.examify.view.AnimasiUtil;
+import com.examify.view.GridTengah;
 import com.examify.view.Ikon;
 import com.examify.view.IkonView;
 import com.examify.view.KartuKursus;
@@ -45,6 +46,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class KursusSayaController {
+
+    private static final int MAKS_KOLOM = 4;
 
     private static final Duration DURASI_HITUNG = Duration.millis(900);
 
@@ -107,6 +110,7 @@ public class KursusSayaController {
 
     @FXML
     private void initialize() {
+        GridTengah.terapkan(fpKursus, KartuKursus.LEBAR, MAKS_KOLOM);
         siswa = session.getSiswaAktif();
         if (session.isGuru()) {
             lblSapaan.setText("Halo, " + session.getNamaPengguna().split(" ")[0] + " (Guru)!");

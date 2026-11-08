@@ -15,6 +15,7 @@ public final class AppConfig {
     public static final Path FILE_SISWA = DIR_DATA.resolve("siswa.txt");
     public static final Path FILE_GURU = DIR_DATA.resolve("guru.txt");
     public static final Path FILE_KURSUS = DIR_DATA.resolve("kursus.txt");
+    public static final Path FILE_TIM = DIR_DATA.resolve("tim.txt");
     public static final Path DIR_PENGUMPULAN_TUGAS = DIR_DATA.resolve("pengumpulan_tugas");
     public static final Path FILE_PENGUMPULAN_TUGAS = DIR_DATA.resolve("pengumpulan_tugas.txt");
 

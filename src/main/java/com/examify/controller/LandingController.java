@@ -3,9 +3,15 @@ package com.examify.controller;
 import com.examify.app.AppSession;
 import com.examify.app.Layar;
 import com.examify.app.SceneRouter;
+import com.examify.io.TimReader;
+import com.examify.model.AnggotaTim;
 import com.examify.model.Kursus;
 import com.examify.service.KursusService;
+import com.examify.utils.AppConfig;
 import com.examify.view.AnimasiUtil;
+import com.examify.view.GridTengah;
+import com.examify.view.GulirHalus;
+import com.examify.view.KartuAnggota;
 import com.examify.view.KartuKursus;
 import javafx.animation.Animation;
 import javafx.animation.FadeTransition;
@@ -26,6 +32,8 @@ import java.util.List;
 
 public class LandingController {
 
+    private static final int MAKS_KOLOM = 4;
+
     private static final Duration DURASI_HITUNG = Duration.millis(1400);
 
     @FXML private ScrollPane spKonten;
@@ -34,6 +42,8 @@ public class LandingController {
     @FXML private VBox vbKursus;
     @FXML private FlowPane fpKursus;
     @FXML private Label lblKosong;
+    @FXML private VBox vbTim;
+    @FXML private FlowPane fpTim;
     @FXML private TextField tfCari;
     @FXML private Button btnTema;
     @FXML private Label lblSemester;
@@ -54,6 +64,9 @@ public class LandingController {
         TemaUtil.pasang(btnTema, false);
         lblSemester.setText(teksSemester(LocalDate.now()) + " sedang berlangsung");
         isiHero();
+        GridTengah.terapkan(fpKursus, KartuKursus.LEBAR, MAKS_KOLOM);
+        GridTengah.terapkan(fpTim, KartuAnggota.LEBAR, MAKS_KOLOM);
+        tampilkanTim();
         tampilkanKursus(kursusService.cari(""));
         tfCari.textProperty().addListener((obs, lama, kata) -> tampilkanKursus(kursusService.cari(kata)));
         tfCari.setOnAction(e -> handleKeKursus());
@@ -86,6 +99,24 @@ public class LandingController {
         AnimasiUtil.berurutan(kartu, Duration.millis(70));
     }
 
+    /** Data tim bersifat dekoratif: bila file rusak/kosong, bagian Tim cukup disembunyikan. */
+    private void tampilkanTim() {
+        List<AnggotaTim> daftar;
+        try {
+            daftar = new TimReader().baca(AppConfig.FILE_TIM);
+        } catch (Exception e) {
+            System.err.println("[Examify] gagal memuat " + AppConfig.FILE_TIM + ": " + e.getMessage());
+            daftar = List.of();
+        }
+        List<KartuAnggota> kartu = daftar.stream()
+                .map(anggota -> new KartuAnggota(anggota, AppConfig.DIR_DATA, session::bukaDokumen))
+                .toList();
+        fpTim.getChildren().setAll(kartu);
+        vbTim.setVisible(!kartu.isEmpty());
+        vbTim.setManaged(!kartu.isEmpty());
+        AnimasiUtil.berurutan(kartu, Duration.millis(90));
+    }
+
     private KartuKursus buatKartu(Kursus kursus) {
         KartuKursus kartu = new KartuKursus(kursus, -1, "Masuk untuk belajar");
         kartu.setOnBuka(this::handleMasuk);
@@ -112,13 +143,13 @@ public class LandingController {
     private void gulirKe(Node bagian) {
         double tinggiKonten = vbKonten.getHeight() - spKonten.getViewportBounds().getHeight();
         if (tinggiKonten > 0) {
-            spKonten.setVvalue(Math.min(1, bagian.getBoundsInParent().getMinY() / tinggiKonten));
+            GulirHalus.animasikan(spKonten, Math.min(1, bagian.getBoundsInParent().getMinY() / tinggiKonten));
         }
     }
 
     @FXML
     private void handleKeAtas() {
-        spKonten.setVvalue(0);
+        GulirHalus.animasikan(spKonten, 0);
     }
 
     @FXML
@@ -129,6 +160,11 @@ public class LandingController {
     @FXML
     private void handleKeKursus() {
         gulirKe(vbKursus);
+    }
+
+    @FXML
+    private void handleKeTim() {
+        gulirKe(vbTim);
     }
 
     @FXML

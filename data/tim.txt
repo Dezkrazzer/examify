@@ -1,0 +1,11 @@
+# =====================================================================
+# Examify - Anggota Kelompok                Encoding: UTF-8
+# Format : NIM|NAMA|FOTO|WEBSITE|GITHUB|INSTAGRAM|LINKEDIN
+# FOTO   : path relatif dari folder data/ (mis. tim/akbar.jpg). Kosongkan
+#          atau bila file tidak ada, kartu menampilkan avatar inisial.
+# Sosial : URL lengkap (https://...). Kosongkan bila tidak ada; tombolnya
+#          otomatis nonaktif.
+# =====================================================================
+L0125044|Gilang Ridho Wicaksana|tim/anggota1.jpg|https://github.com/username|https://instagram.com/username|https://linkedin.com/in/username
+L0125105|Lazuardi Akbar Imani|tim/anggota2.jpg|https://lzuardiai.my.id|https://github.com/Dezkrazzer|https://instagram.com/lzuardiai|https://www.linkedin.com/in/lazuardiakbar/
+L0125125|Alfian Naufal Rabbani||||https://instagram.com/username|https://linkedin.com/in/username
