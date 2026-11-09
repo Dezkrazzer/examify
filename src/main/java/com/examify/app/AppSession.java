@@ -1,5 +1,6 @@
 package com.examify.app;
 
+import com.examify.keamanan.ModeAman;
 import com.examify.model.Bab;
 import com.examify.model.Guru;
 import com.examify.model.HasilUjian;
@@ -45,6 +46,7 @@ public final class AppSession {
     private Ujian ujianAktif;
     private HasilUjian hasilAktif;
     private UjianTimer timerAktif;
+    private ModeAman modeAmanAktif;
     private Siswa siswaDipilih;
     private RiwayatNilai riwayatFokus;
 
@@ -84,6 +86,7 @@ public final class AppSession {
 
     public void resetUjian() {
         hentikanTimer();
+        lepasModeAman();
         ujianAktif = null;
         hasilAktif = null;
     }
@@ -227,6 +230,18 @@ public final class AppSession {
 
     public void setTimerAktif(UjianTimer timerAktif) {
         this.timerAktif = timerAktif;
+    }
+
+    public void setModeAmanAktif(ModeAman modeAman) {
+        this.modeAmanAktif = modeAman;
+    }
+
+    /** Mengakhiri Mode Aman (layar penuh, hook keyboard) bila sedang berjalan. */
+    public void lepasModeAman() {
+        if (modeAmanAktif != null) {
+            modeAmanAktif.nonaktifkan();
+            modeAmanAktif = null;
+        }
     }
 
     public Siswa getSiswaDipilih() {

@@ -114,6 +114,7 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         AppSession.getInstance().hentikanTimer();
+        AppSession.getInstance().lepasModeAman();
     }
 
     private void tampilkanErrorStartup() {

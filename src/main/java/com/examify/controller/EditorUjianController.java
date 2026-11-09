@@ -439,7 +439,8 @@ public class EditorUjianController {
             }
 
             boolean bolehUlang = cbBolehUlang != null ? cbBolehUlang.isSelected() : ujian.isBolehUlang();
-            Ujian ujianBaru = new Ujian(ujian.getKodeUjian(), mapel, token, durasi, kkm, hasilSoal, bolehUlang, waktuMulai, waktuSelesai);
+            Ujian ujianBaru = new Ujian(ujian.getKodeUjian(), mapel, token, durasi, kkm, hasilSoal, bolehUlang, waktuMulai, waktuSelesai,
+                    ujian.isModeAman());
 
             session.getUjianService().perbaruiUjian(ujianBaru);
             session.setUjianAktif(ujianBaru);

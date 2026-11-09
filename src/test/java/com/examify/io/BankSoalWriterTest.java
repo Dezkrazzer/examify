@@ -47,4 +47,15 @@ class BankSoalWriterTest {
         assertTrue(u.getDaftarSoal().get(1).evaluasiJawaban("TRUE"));
         assertTrue(u.getDaftarSoal().get(2).evaluasiJawaban("nusantara"));
     }
+
+    @Test
+    void modeAmanIkutTertulisDanTerbacaKembali() throws Exception {
+        Path fileBankSoal = tempDir.resolve("bank_soal_aman.txt");
+        Ujian aman = new Ujian("AMN-01", "Ujian Aman", "AMAN12", 10, 70.0,
+                List.of(new SoalTrueFalse(1, "Langit biru", 10.0, 'T'))).denganModeAman(true);
+
+        new BankSoalWriter().tulis(fileBankSoal, List.of(aman));
+
+        assertTrue(new BankSoalReader().baca(fileBankSoal).get(0).isModeAman());
+    }
 }

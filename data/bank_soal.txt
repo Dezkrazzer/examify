@@ -66,6 +66,7 @@ TOKEN=UJI123
 DURASI=1
 KKM=60
 ULANG=true
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Ibu kota Indonesia saat ini adalah ...|Jakarta;Bandung;Surabaya|A|10
 TF|2|Satu jam sama dengan 60 menit.|T|10

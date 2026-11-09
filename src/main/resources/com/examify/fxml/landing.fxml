@@ -149,7 +149,7 @@
                     <VBox fx:id="vbTim" spacing="6" alignment="TOP_CENTER">
                         <padding><Insets top="8" right="64" bottom="64" left="64"/></padding>
                         <Label text="Tim di balik Examify" styleClass="judul-halaman"/>
-                        <Label text="Anggota kelompok yang merancang dan membangun aplikasi ini." styleClass="teks-redup"/>
+                        <Label text="Kelompok 8 - Informatika 2025D" styleClass="teks-redup"/>
                         <FlowPane fx:id="fpTim" hgap="20" vgap="20">
                             <VBox.margin><Insets top="12"/></VBox.margin>
                         </FlowPane>
@@ -158,7 +158,7 @@
                     <HBox styleClass="footer-landing" alignment="CENTER_LEFT">
                         <Label text="© 2026 Examify - Sistem E-Learning &amp; Computer-Based Test" styleClass="teks-kecil"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Label text="Dibuat dengan Java 17 &amp; JavaFX 21" styleClass="teks-kecil"/>
+                        <Label text="Developed by Kelompok 8" styleClass="teks-kecil"/>
                     </HBox>
                 </VBox>
             </ScrollPane>

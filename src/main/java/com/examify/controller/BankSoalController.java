@@ -134,6 +134,14 @@ public class BankSoalController {
         Label lblMapel = new Label(u.getMataPelajaran());
         lblMapel.getStyleClass().add("judul-kartu");
         lblMapel.setWrapText(true);
+        // baris atas kartu sudah padat, jadi penanda Mode Aman diletakkan di bawah judul
+        VBox blokJudul = new VBox(4, lblMapel);
+        if (u.isModeAman()) {
+            Label badgeAman = new Label("Mode Aman", new IkonView(Ikon.PERISAI, 12));
+            badgeAman.getStyleClass().add("badge-aman");
+            badgeAman.setStyle("-fx-font-size: 11px; -fx-padding: 2 8;");
+            blokJudul.getChildren().add(badgeAman);
+        }
 
         // Info ringkas: Soal, Durasi, KKM
         HBox barisInfo = new HBox(12);
@@ -189,9 +197,9 @@ public class BankSoalController {
             Label lblAkses = new Label(
                     "Akses: " + FormatUtil.formatRentangWaktuAkses(u.getWaktuMulai(), u.getWaktuSelesai()));
             lblAkses.getStyleClass().add("badge");
-            kartu.getChildren().addAll(barisAtas, lblMapel, barisInfo, lblKomposisi, lblAkses, barisAksi);
+            kartu.getChildren().addAll(barisAtas, blokJudul, barisInfo, lblKomposisi, lblAkses, barisAksi);
         } else {
-            kartu.getChildren().addAll(barisAtas, lblMapel, barisInfo, lblKomposisi, barisAksi);
+            kartu.getChildren().addAll(barisAtas, blokJudul, barisInfo, lblKomposisi, barisAksi);
         }
         return kartu;
     }
@@ -390,7 +398,10 @@ public class BankSoalController {
         lblKetUlang.setStyle("-fx-font-size: 11px; -fx-text-fill: -teks-redup;");
         vbUlang.getChildren().addAll(cbBolehUlang, lblKetUlang);
 
-        VBox formContainer = new VBox(14, vbMapel, hbDurasiKkm, vbToken, boxJadwal, vbUlang);
+        CheckBox cbModeAman = new CheckBox();
+        VBox vbModeAman = buatPilihanModeAman(cbModeAman, u.isModeAman());
+
+        VBox formContainer = new VBox(14, vbMapel, hbDurasiKkm, vbToken, boxJadwal, vbUlang, vbModeAman);
 
         Separator sepBawah = new Separator();
         sepBawah.setStyle("-fx-opacity: 0.4;");
@@ -442,7 +453,7 @@ public class BankSoalController {
             try {
                 boolean bolehUlangBaru = cbBolehUlang.isSelected();
                 Ujian ujianBaru = new Ujian(u.getKodeUjian(), mapelBaru, tokenBaru, durasiBaru, kkmBaru,
-                        u.getDaftarSoal(), bolehUlangBaru, mulai, selesai);
+                        u.getDaftarSoal(), bolehUlangBaru, mulai, selesai, cbModeAman.isSelected());
                 ujianService.perbaruiUjian(ujianBaru);
                 muatDaftarUjian();
                 perbaruiStatistik();
@@ -651,7 +662,10 @@ public class BankSoalController {
         lblKetUlang.setStyle("-fx-font-size: 11px; -fx-text-fill: -teks-redup;");
         vbUlang.getChildren().addAll(cbBolehUlang, lblKetUlang);
 
-        VBox formContainer = new VBox(14, hbKodeMapel, hbDurasiKkm, vbToken, boxJadwal, vbUlang);
+        CheckBox cbModeAman = new CheckBox();
+        VBox vbModeAman = buatPilihanModeAman(cbModeAman, false);
+
+        VBox formContainer = new VBox(14, hbKodeMapel, hbDurasiKkm, vbToken, boxJadwal, vbUlang, vbModeAman);
 
         Separator sepBawah = new Separator();
         sepBawah.setStyle("-fx-opacity: 0.4;");
@@ -703,7 +717,8 @@ public class BankSoalController {
 
             try {
                 boolean bolehUlang = cbBolehUlang.isSelected();
-                Ujian ujianBaru = new Ujian(kode, mapel, token, durasi, kkm, new ArrayList<>(), bolehUlang, mulai, selesai);
+                Ujian ujianBaru = new Ujian(kode, mapel, token, durasi, kkm, new ArrayList<>(), bolehUlang, mulai, selesai,
+                        cbModeAman.isSelected());
                 ujianService.tambahUjian(ujianBaru);
                 session.setKursusAktif(null);
                 session.setUjianAktif(ujianBaru);
@@ -720,5 +735,19 @@ public class BankSoalController {
         pane.setContent(kartu);
 
         dialog.showAndWait();
+    }
+
+    /** Kotak pengaturan STRICTLY_SAFE di dialog pengaturan/pembuatan ujian. */
+    private static VBox buatPilihanModeAman(CheckBox cb, boolean terpilih) {
+        cb.setText("Mode Aman (STRICTLY_SAFE)");
+        cb.setSelected(terpilih);
+        cb.setStyle("-fx-font-weight: bold; -fx-text-fill: -teks;");
+        Label ket = new Label("Ujian dikerjakan dalam layar penuh terkunci: tidak bisa ditutup, Alt+Tab dan tombol "
+                + "Windows diblokir, salin-tempel dimatikan. Mode aman berakhir saat ujian dikumpulkan atau waktu habis.");
+        ket.setWrapText(true);
+        ket.setStyle("-fx-font-size: 11px; -fx-text-fill: -teks-redup;");
+        VBox kotak = new VBox(4, cb, ket);
+        kotak.getStyleClass().add("modal-kotak-jadwal");
+        return kotak;
     }
 }

@@ -116,12 +116,25 @@ TOKEN=PBO7UT
 DURASI=30
 KKM=70
 ULANG=false        # opsional: true = boleh dikerjakan ulang (bawaan false)
+STRICTLY_SAFE=false # opsional: true = ujian dikerjakan dalam Mode Aman (bawaan false)
 [SOAL]
 PG|id|pertanyaan|opsi1;opsi2;...;opsiN|kunci(A-E)|bobot
 TF|id|pernyataan|kunci(T/F)|bobot
 IS|id|pertanyaan|jawaban1;jawaban2;...|bobot
 [END]
 ```
+
+### Mode Aman (`STRICTLY_SAFE=true`)
+
+Ujian dengan Mode Aman dikerjakan dalam layar penuh terkunci, mirip exam browser:
+
+- Jendela tidak bisa ditutup, diminimalkan, atau keluar dari layar penuh.
+- Alt+Tab, tombol Windows, Ctrl/Alt+Esc, Ctrl+Shift+Esc, Alt+F4, dan Print Screen diblokir lewat hook keyboard Windows (JNA).
+- Salin, potong, tempel, menu klik kanan, dan seret-lepas dimatikan.
+- Setiap kali siswa meninggalkan jendela ujian, muncul peringatan dan kejadiannya dicatat di `output/pelanggaran_ujian.txt`.
+- Mode Aman berakhir otomatis saat jawaban dikumpulkan atau waktu habis.
+
+Ctrl+Alt+Del tidak bisa diblokir oleh aplikasi biasa karena dikunci oleh Windows.
 
 ### `data/kursus.txt`
 
