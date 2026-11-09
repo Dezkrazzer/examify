@@ -27,10 +27,11 @@ public class BankSoalParser {
     static final String DURASI = "DURASI";
     static final String KKM = "KKM";
     static final String ULANG = "ULANG"; // opsional, bawaan false
+    static final String STRICTLY_SAFE = "STRICTLY_SAFE"; // opsional, bawaan false
     static final String AKSES_MULAI = "AKSES_MULAI";
     static final String AKSES_SELESAI = "AKSES_SELESAI";
     private static final List<String> KUNCI_WAJIB = List.of(KODE, MAPEL, TOKEN, DURASI, KKM);
-    private static final List<String> KUNCI_OPSIONAL = List.of(ULANG, AKSES_MULAI, AKSES_SELESAI);
+    private static final List<String> KUNCI_OPSIONAL = List.of(ULANG, STRICTLY_SAFE, AKSES_MULAI, AKSES_SELESAI);
 
     private static final Pattern POLA_KODE = Pattern.compile("^[A-Z]{2,5}-\\d{2}$");
     private static final Pattern POLA_TOKEN = Pattern.compile("^[A-Z0-9]{6}$");
@@ -68,6 +69,9 @@ public class BankSoalParser {
         if (header.containsKey(ULANG) && BarisData.parseBoolean(header.get(ULANG)) == null) {
             throw new FormatBankSoalException(noBaris, baris, "ULANG harus true atau false");
         }
+        if (header.containsKey(STRICTLY_SAFE) && BarisData.parseBoolean(header.get(STRICTLY_SAFE)) == null) {
+            throw new FormatBankSoalException(noBaris, baris, "STRICTLY_SAFE harus true atau false");
+        }
     }
 
     public Ujian buatUjian(Map<String, String> header, List<Soal> daftarSoal, int noBaris, String baris)
@@ -78,7 +82,8 @@ public class BankSoalParser {
             return new Ujian(header.get(KODE), header.get(MAPEL), header.get(TOKEN),
                     Integer.parseInt(header.get(DURASI)), Double.parseDouble(header.get(KKM)), daftarSoal,
                     Boolean.TRUE.equals(BarisData.parseBoolean(header.getOrDefault(ULANG, "false"))),
-                    mulai, selesai);
+                    mulai, selesai,
+                    Boolean.TRUE.equals(BarisData.parseBoolean(header.getOrDefault(STRICTLY_SAFE, "false"))));
         } catch (NumberFormatException e) {
             throw new FormatBankSoalException(noBaris, baris, "DURASI/KKM harus berupa angka", e);
         } catch (IllegalArgumentException e) {

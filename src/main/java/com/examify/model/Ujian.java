@@ -23,6 +23,8 @@ public class Ujian {
     private final boolean bolehUlang;
     private final LocalDateTime waktuMulai;
     private final LocalDateTime waktuSelesai;
+    /** STRICTLY_SAFE: ujian dikerjakan dalam mode aman (layar penuh terkunci). */
+    private final boolean modeAman;
 
     public Ujian(String kodeUjian, String mataPelajaran, String token, int durasiMenit,
                  double kkm, List<Soal> daftarSoal) {
@@ -37,6 +39,12 @@ public class Ujian {
     public Ujian(String kodeUjian, String mataPelajaran, String token, int durasiMenit,
                  double kkm, List<Soal> daftarSoal, boolean bolehUlang,
                  LocalDateTime waktuMulai, LocalDateTime waktuSelesai) {
+        this(kodeUjian, mataPelajaran, token, durasiMenit, kkm, daftarSoal, bolehUlang, waktuMulai, waktuSelesai, false);
+    }
+
+    public Ujian(String kodeUjian, String mataPelajaran, String token, int durasiMenit,
+                 double kkm, List<Soal> daftarSoal, boolean bolehUlang,
+                 LocalDateTime waktuMulai, LocalDateTime waktuSelesai, boolean modeAman) {
         if (kodeUjian == null || kodeUjian.isBlank()) {
             throw new IllegalArgumentException("Kode ujian tidak boleh kosong");
         }
@@ -68,6 +76,7 @@ public class Ujian {
         this.bolehUlang = bolehUlang;
         this.waktuMulai = waktuMulai;
         this.waktuSelesai = waktuSelesai;
+        this.modeAman = modeAman;
 
         Set<Integer> idTerpakai = new HashSet<>();
         for (Soal soal : daftarSoal) {
@@ -144,11 +153,21 @@ public class Ujian {
     public Ujian denganSoalDiacak() {
         List<Soal> acak = new ArrayList<>(daftarSoal);
         Collections.shuffle(acak);
-        return new Ujian(kodeUjian, mataPelajaran, token, durasiMenit, kkm, acak, bolehUlang, waktuMulai, waktuSelesai);
+        return new Ujian(kodeUjian, mataPelajaran, token, durasiMenit, kkm, acak, bolehUlang, waktuMulai, waktuSelesai, modeAman);
     }
 
     public boolean isBolehUlang() {
         return bolehUlang;
+    }
+
+    public boolean isModeAman() {
+        return modeAman;
+    }
+
+    /** Salinan ujian dengan pengaturan mode aman yang berbeda. */
+    public Ujian denganModeAman(boolean aktif) {
+        return new Ujian(kodeUjian, mataPelajaran, token, durasiMenit, kkm, daftarSoal, bolehUlang,
+                waktuMulai, waktuSelesai, aktif);
     }
 
     public List<Soal> getDaftarSoal() {

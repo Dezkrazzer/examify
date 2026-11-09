@@ -23,6 +23,7 @@ public final class AppConfig {
     public static final Path FILE_REKAP = DIR_OUTPUT.resolve("rekap_nilai.txt");
     public static final Path FILE_PROGRES = DIR_OUTPUT.resolve("progres_belajar.txt");
     public static final Path FILE_PENDAFTARAN = DIR_OUTPUT.resolve("pendaftaran_kursus.txt");
+    public static final Path FILE_PELANGGARAN = DIR_OUTPUT.resolve("pelanggaran_ujian.txt");
     public static final Path DIR_SERTIFIKAT = DIR_OUTPUT.resolve("sertifikat");
 
     public static final int MAKS_PERCOBAAN_TOKEN = 3;

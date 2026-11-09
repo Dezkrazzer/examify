@@ -5,6 +5,8 @@ import com.examify.app.Layar;
 import com.examify.app.SceneRouter;
 import com.examify.exception.JawabanKosongException;
 import com.examify.exception.TimeOutException;
+import com.examify.io.PelanggaranWriter;
+import com.examify.keamanan.ModeAman;
 import com.examify.model.HasilUjian;
 import com.examify.model.ModeSubmit;
 import com.examify.model.Soal;
@@ -18,6 +20,7 @@ import com.examify.utils.FormatUtil;
 import com.examify.view.AnimasiUtil;
 import com.examify.view.SoalViewFactory;
 import javafx.animation.Animation;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -26,8 +29,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -38,6 +43,8 @@ public class CbtRoomController implements TimerListener {
     private static final String NAV_RAGU = "nav-ragu";
     private static final String NAV_AKTIF = "nav-aktif";
     private static final String TIMER_KRITIS = "timer-kritis";
+    private static final String BANNER_INFO = "banner-info";
+    private static final Duration DURASI_BANNER_INFO = Duration.seconds(4);
 
     @FXML private Label lblJudulUjian;
     @FXML private Label lblSiswa;
@@ -55,6 +62,9 @@ public class CbtRoomController implements TimerListener {
     @FXML private Button btnBerikutnya;
     @FXML private Button btnSelesai;
     @FXML private ToggleButton tbRagu;
+    @FXML private Label lblModeAman;
+    @FXML private HBox hbPeringatanAman;
+    @FXML private Label lblPeringatanAman;
 
     private final AppSession session = AppSession.getInstance();
     private final UjianService ujianService = session.getUjianService();
@@ -62,6 +72,8 @@ public class CbtRoomController implements TimerListener {
     private Ujian ujian;
     private int indeksAktif;
     private Animation denyutTimer;
+    private final PauseTransition tutupBanner = new PauseTransition(DURASI_BANNER_INFO);
+    private final PelanggaranWriter pelanggaranWriter = new PelanggaranWriter(AppConfig.FILE_PELANGGARAN);
 
     @FXML
     private void initialize() {
@@ -74,6 +86,55 @@ public class CbtRoomController implements TimerListener {
         onTick(ujian.getDurasiDetik());
         mulaiTimer();
         SceneRouter.getStage().setOnCloseRequest(this::handleTutupJendela);
+        tutupBanner.setOnFinished(e -> tampilkanBanner(null, false));
+        if (ujian.isModeAman()) {
+            Platform.runLater(this::mulaiModeAman); // setelah halaman ini terpasang di scene
+        }
+    }
+
+    // ---------------------------------------------------------------- Mode Aman (STRICTLY_SAFE)
+
+    private void mulaiModeAman() {
+        if (hasil.getStatus() == StatusUjian.SELESAI) {
+            return;
+        }
+        ModeAman modeAman = new ModeAman(SceneRouter.getStage(), this::onPelanggaran, this::onAksiDiblokir);
+        session.setModeAmanAktif(modeAman);
+        modeAman.aktifkan();
+        lblModeAman.setVisible(true);
+        lblModeAman.setManaged(true);
+    }
+
+    private void onPelanggaran(ModeAman.Pelanggaran p) {
+        tutupBanner.stop(); // peringatan pelanggaran tetap tampil sampai ada pesan baru
+        tampilkanBanner("Peringatan ke-" + p.ke() + ": Anda terdeteksi meninggalkan jendela ujian. "
+                + "Kejadian ini dicatat dan dapat dilihat oleh guru.", false);
+        var siswa = hasil.getSiswa();
+        try {
+            pelanggaranWriter.tulis(new PelanggaranWriter.Catatan(p.waktu(), siswa.getNis(), siswa.getNama(),
+                    ujian.getKodeUjian(), p.ke(), p.jenis(), p.keterangan()));
+        } catch (IOException e) {
+            System.err.println("Pelanggaran gagal dicatat: " + e.getMessage());
+        }
+    }
+
+    private void onAksiDiblokir(String pesan) {
+        tampilkanBanner(pesan, true);
+        tutupBanner.playFromStart();
+    }
+
+    /** @param pesan null untuk menyembunyikan banner */
+    private void tampilkanBanner(String pesan, boolean info) {
+        boolean tampil = pesan != null;
+        hbPeringatanAman.setVisible(tampil);
+        hbPeringatanAman.setManaged(tampil);
+        hbPeringatanAman.getStyleClass().remove(BANNER_INFO);
+        if (tampil) {
+            if (info) {
+                hbPeringatanAman.getStyleClass().add(BANNER_INFO);
+            }
+            lblPeringatanAman.setText(pesan);
+        }
     }
 
     private void mulaiTimer() {
@@ -227,6 +288,8 @@ public class CbtRoomController implements TimerListener {
             return; // klik Selesai dan waktu habis bisa terjadi bersamaan
         }
         session.hentikanTimer();
+        session.lepasModeAman(); // mode aman berakhir begitu ujian dikumpulkan / waktu habis
+        tutupBanner.stop();
         if (denyutTimer != null) {
             denyutTimer.stop();
         }

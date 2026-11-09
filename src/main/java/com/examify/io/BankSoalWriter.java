@@ -44,6 +44,10 @@ public class BankSoalWriter {
                     bw.write("ULANG=true");
                     bw.newLine();
                 }
+                if (ujian.isModeAman()) {
+                    bw.write("STRICTLY_SAFE=true");
+                    bw.newLine();
+                }
                 if (ujian.getWaktuMulai() != null) {
                     bw.write("AKSES_MULAI=" + FormatUtil.formatInputAkses(ujian.getWaktuMulai()));
                     bw.newLine();

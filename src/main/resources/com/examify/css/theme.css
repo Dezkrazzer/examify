@@ -22,6 +22,8 @@
     -bahaya-latar: rgba(229, 72, 77, 0.12);
     -ragu: #f59e0b;
     -ragu-latar: rgba(245, 158, 11, 0.15);
+    -ragu-teks: #9a4a06;
+    -bahaya-teks: #b42328;
     -bayangan: rgba(16, 42, 80, 0.13);
     -blob-1: #7cc8ff;
     -blob-2: #b9a8ff;
@@ -164,9 +166,16 @@
 }
 .tombol-sekunder:hover .ikon { -fx-stroke: -aksen; }
 .tombol-ragu {
+    /* ToggleButton tidak memakai aturan .button, jadi bentuknya disamakan di sini */
     -fx-background-color: -kaca-kuat;
     -fx-border-color: -garis;
     -fx-text-fill: -teks;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-padding: 10 18;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
 }
 .tombol-ragu .ikon { -fx-stroke: -teks-redup; }
 .tombol-ragu:hover { -fx-border-color: -ragu; -fx-text-fill: -ragu; }
@@ -805,8 +814,7 @@
     -fx-padding: 14 24;
 }
 .timer {
-    -fx-font-family: "Consolas", monospace;
-    -fx-font-size: 20px;
+    -fx-font-size: 19px;
     -fx-font-weight: bold;
     -fx-background-color: -gradien-aksen;
     -fx-text-fill: white;
@@ -815,6 +823,37 @@
 }
 .timer .ikon { -fx-stroke: white; }
 .timer-kritis { -fx-background-color: linear-gradient(to right, #ff5f6d, #e5484d); }
+
+/* ---------- Mode Aman (STRICTLY_SAFE) ---------- */
+.badge-aman {
+    -fx-background-color: -sukses-latar;
+    -fx-text-fill: -sukses;
+    -fx-background-radius: 999;
+    -fx-padding: 5 12;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.badge-aman .ikon { -fx-stroke: -sukses; }
+.banner-peringatan {
+    -fx-background-color: -bahaya-latar;
+    -fx-border-color: transparent transparent -bahaya transparent;
+    -fx-padding: 10 24;
+}
+.banner-peringatan .label { -fx-text-fill: -bahaya-teks; -fx-font-size: 13.5px; -fx-font-weight: 600; }
+.banner-peringatan .ikon { -fx-stroke: -bahaya-teks; }
+.banner-peringatan.banner-info { -fx-background-color: -ragu-latar; -fx-border-color: transparent transparent -ragu transparent; }
+.banner-peringatan.banner-info .label { -fx-text-fill: -ragu-teks; }
+.banner-peringatan.banner-info .ikon { -fx-stroke: -ragu-teks; }
+.kotak-mode-aman {
+    -fx-background-color: -ragu-latar;
+    -fx-background-radius: 14;
+    -fx-border-color: -ragu;
+    -fx-border-radius: 14;
+    -fx-padding: 14 16;
+}
+.judul-mode-aman { -fx-text-fill: -ragu-teks; -fx-font-size: 14px; -fx-font-weight: bold; -fx-graphic-text-gap: 8; }
+.judul-mode-aman .ikon { -fx-stroke: -ragu-teks; }
+.teks-mode-aman { -fx-text-fill: -teks; -fx-font-size: 12.5px; }
 .pertanyaan { -fx-font-size: 18px; -fx-font-weight: 500; }
 .badge-jenis { -fx-background-color: rgba(109, 92, 255, 0.14); -fx-text-fill: -aksen-2; -fx-background-radius: 999; -fx-padding: 4 12; -fx-font-weight: bold; -fx-font-size: 12px; }
 
@@ -848,7 +887,7 @@
 .kotak-legenda { -fx-min-width: 12; -fx-min-height: 12; -fx-max-width: 12; -fx-max-height: 12; -fx-background-radius: 4; }
 .legenda-terjawab { -fx-background-color: -sukses; }
 .legenda-ragu { -fx-background-color: -ragu; }
-.legenda-kosong { -fx-background-color: -permukaan; -fx-border-color: -garis; -fx-border-radius: 4; }
+.legenda-kosong { -fx-background-color: -permukaan; -fx-border-color: -teks-redup; -fx-border-radius: 4; }
 .legenda-aktif { -fx-background-color: transparent; -fx-border-color: -aksen; -fx-border-width: 2; -fx-border-radius: 4; }
 
 /* ---------- Hasil ---------- */

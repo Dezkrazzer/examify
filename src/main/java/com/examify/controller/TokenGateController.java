@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -44,6 +46,9 @@ public class TokenGateController {
         lblJumlahSoal.setText(String.valueOf(ujian.getJumlahSoal()));
         lblKkm.setText(FormatUtil.angka(ujian.getKkm()));
         isiAturan();
+        if (ujian.isModeAman()) {
+            tampilkanInfoModeAman();
+        }
         lblSisaPercobaan.setText("Maksimal " + AppConfig.MAKS_PERCOBAAN_TOKEN + " kali percobaan.");
         tfToken.setTextFormatter(new TextFormatter<String>(ubah -> {
             ubah.setText(ubah.getText().toUpperCase());
@@ -69,6 +74,23 @@ public class TokenGateController {
             labelAkses.setWrapText(true);
             vbAturan.getChildren().add(labelAkses);
         }
+    }
+
+    /** Siswa diberi tahu sebelum memasukkan token bahwa ujian akan dikunci dalam layar penuh. */
+    private void tampilkanInfoModeAman() {
+        Label judul = new Label("Ujian ini menggunakan Mode Aman", new IkonView(Ikon.PERISAI, 18));
+        judul.getStyleClass().add("judul-mode-aman");
+        HBox kepala = new HBox(judul);
+        kepala.setAlignment(Pos.CENTER_LEFT);
+        Label isi = new Label("Setelah token diterima, ujian langsung dimulai dalam layar penuh terkunci. "
+                + "Aplikasi tidak dapat ditutup atau diminimalkan, Alt+Tab dan tombol Windows dinonaktifkan, "
+                + "serta salin-tempel tidak dapat digunakan. Setiap kali Anda meninggalkan jendela ujian akan "
+                + "dicatat sebagai pelanggaran. Mode Aman berakhir otomatis saat jawaban dikumpulkan atau waktu habis.");
+        isi.setWrapText(true);
+        isi.getStyleClass().add("teks-mode-aman");
+        VBox kotak = new VBox(6, kepala, isi);
+        kotak.getStyleClass().add("kotak-mode-aman");
+        vbKartu.getChildren().add(vbKartu.getChildren().indexOf(vbAturan) + 1, kotak);
     }
 
     @FXML

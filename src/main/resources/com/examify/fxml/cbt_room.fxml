@@ -7,6 +7,8 @@
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
@@ -17,17 +19,32 @@
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.examify.controller.CbtRoomController" styleClass="latar">
     <top>
-        <HBox styleClass="header-ujian" alignment="CENTER_LEFT" spacing="14">
-            <StackPane styleClass="logo-ikon"><IkonView ikon="UJIAN" ukuran="18"/></StackPane>
-            <VBox>
-                <Label fx:id="lblJudulUjian" styleClass="judul-kartu"/>
-                <Label fx:id="lblSiswa" styleClass="teks-kecil"/>
-            </VBox>
-            <Region HBox.hgrow="ALWAYS"/>
-            <Label fx:id="lblTimer" styleClass="timer">
-                <graphic><IkonView ikon="JAM" ukuran="18"/></graphic>
-            </Label>
-        </HBox>
+        <VBox>
+            <!-- StackPane: identitas ujian selalu tepat di tengah, tidak bergeser oleh lebar logo/timer -->
+            <StackPane styleClass="header-ujian">
+                <HBox alignment="CENTER_LEFT" spacing="10" pickOnBounds="false">
+                    <ImageView fitWidth="34" fitHeight="34" smooth="true"><Image url="@../img/examifylogo.png" requestedWidth="136" requestedHeight="136" smooth="true"/></ImageView>
+                    <HBox alignment="CENTER_LEFT" translateY="2"><Label text="Examify" styleClass="logo-teks"/><Label text="." styleClass="logo-titik"/></HBox>
+                </HBox>
+                <VBox alignment="CENTER" spacing="1" maxWidth="-Infinity" pickOnBounds="false">
+                    <Label fx:id="lblJudulUjian" styleClass="judul-kartu"/>
+                    <Label fx:id="lblSiswa" styleClass="teks-kecil"/>
+                </VBox>
+                <HBox alignment="CENTER_RIGHT" spacing="10" pickOnBounds="false">
+                    <Label fx:id="lblModeAman" text="Mode Aman" styleClass="badge-aman" visible="false" managed="false">
+                        <graphic><IkonView ikon="PERISAI" ukuran="14"/></graphic>
+                    </Label>
+                    <Label fx:id="lblTimer" styleClass="timer">
+                        <graphic><IkonView ikon="JAM" ukuran="18"/></graphic>
+                    </Label>
+                </HBox>
+            </StackPane>
+            <HBox fx:id="hbPeringatanAman" styleClass="banner-peringatan" alignment="CENTER_LEFT" spacing="10"
+                  visible="false" managed="false">
+                <IkonView ikon="PERINGATAN" ukuran="18"/>
+                <Label fx:id="lblPeringatanAman" wrapText="true" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+        </VBox>
     </top>
     <center>
         <VBox styleClass="kaca" spacing="16">

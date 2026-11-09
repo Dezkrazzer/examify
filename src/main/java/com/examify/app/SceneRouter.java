@@ -2,11 +2,14 @@ package com.examify.app;
 
 import com.examify.utils.AppConfig;
 import com.examify.view.AnimasiUtil;
+import javafx.application.ColorScheme;
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
 import com.examify.view.GulirHalus;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,7 +17,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -50,6 +55,17 @@ public final class SceneRouter {
         scene = new Scene(new Pane(), LEBAR_AWAL, TINGGI_AWAL);
         scene.getStylesheets().add(sumber(THEME_CSS).toExternalForm());
         temaGelap.addListener((obs, lama, gelap) -> terapkanTema(gelap));
+        // Tema awal mengikuti Windows, dan ikut berubah saat pengguna mengganti mode Windows
+        var preferensiOs = Platform.getPreferences();
+        temaGelap.set(preferensiOs.getColorScheme() == ColorScheme.DARK);
+        terapkanTema(temaGelap.get());
+        preferensiOs.colorSchemeProperty().addListener((obs, lama, skema) -> temaGelap.set(skema == ColorScheme.DARK));
+        // Setiap dialog/jendela baru otomatis memakai tema aplikasi (title bar + stylesheet)
+        Window.getWindows().addListener((ListChangeListener<Window>) ubah -> {
+            while (ubah.next()) {
+                ubah.getAddedSubList().forEach(SceneRouter::terapkanTemaKeJendela);
+            }
+        });
         GulirHalus.pasang(scene);
         stage.setScene(scene);
         stage.setTitle(AppConfig.NAMA_APLIKASI);
@@ -97,10 +113,31 @@ public final class SceneRouter {
     }
 
     private static void terapkanTema(boolean gelap) {
+        terapkanTemaKeScene(scene, gelap);
+        Window.getWindows().forEach(SceneRouter::terapkanTemaKeJendela);
+    }
+
+    /**
+     * Menyamakan warna bingkai jendela (title bar Windows) dan stylesheet dengan tema aplikasi.
+     * Tanpa ini, title bar mengikuti mode Windows sehingga bisa gelap padahal isi aplikasi terang.
+     */
+    private static void terapkanTemaKeJendela(Window jendela) {
+        if (jendela instanceof PopupWindow || jendela.getScene() == null) {
+            return; // popup (menu, tooltip) sudah mewarisi stylesheet dari scene pemiliknya
+        }
+        terapkanTemaKeScene(jendela.getScene(), temaGelap.get());
+    }
+
+    private static void terapkanTemaKeScene(Scene target, boolean gelap) {
+        target.getPreferences().setColorScheme(gelap ? ColorScheme.DARK : ColorScheme.LIGHT);
+        String theme = sumber(THEME_CSS).toExternalForm();
         String dark = sumber(DARK_CSS).toExternalForm();
-        scene.getStylesheets().remove(dark);
+        if (!target.getStylesheets().contains(theme)) {
+            target.getStylesheets().add(0, theme);
+        }
+        target.getStylesheets().remove(dark);
         if (gelap) {
-            scene.getStylesheets().add(dark);
+            target.getStylesheets().add(dark);
         }
     }
 

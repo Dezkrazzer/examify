@@ -139,6 +139,19 @@ class BankSoalParserTest {
     }
 
     @Test
+    void headerStrictlySafeOpsionalDenganBawaanFalse() throws Exception {
+        assertFalse(baca(HEADER + SATU_SOAL).get(0).isModeAman());
+        String aman = HEADER.replace("KKM=75", "KKM=75\nSTRICTLY_SAFE=true");
+        assertTrue(baca(aman + SATU_SOAL).get(0).isModeAman());
+    }
+
+    @Test
+    void headerStrictlySafeSelainTrueFalseDitolak() {
+        String aman = HEADER.replace("KKM=75", "KKM=75\nSTRICTLY_SAFE=mungkin");
+        assertThrows(FormatBankSoalException.class, () -> baca(aman + SATU_SOAL));
+    }
+
+    @Test
     void headerUlangSelainTrueFalseDitolak() {
         String ulang = HEADER.replace("KKM=75", "KKM=75\nULANG=mungkin");
         assertThrows(FormatBankSoalException.class, () -> baca(ulang + SATU_SOAL));
