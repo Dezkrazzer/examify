@@ -1,16 +1,16 @@
 package com.examify.controller;
 
 import com.examify.app.AppSession;
-import com.examify.app.Layar;
+import com.examify.app.AppScreen;
 import com.examify.app.SceneRouter;
-import com.examify.model.HasilUjian;
-import com.examify.model.ModeSubmit;
-import com.examify.model.RiwayatNilai;
-import com.examify.model.Soal;
-import com.examify.model.StatusJawaban;
-import com.examify.model.StatusUjian;
+import com.examify.model.ExamResult;
+import com.examify.model.SubmitMode;
+import com.examify.model.GradeHistory;
+import com.examify.model.Question;
+import com.examify.model.AnswerStatus;
+import com.examify.model.ExamStatus;
 import com.examify.utils.FormatUtil;
-import com.examify.view.AnimasiUtil;
+import com.examify.view.AnimationUtil;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -39,16 +39,16 @@ public class ResultController {
     @FXML private Label lblKosong;
     @FXML private Label lblDurasi;
     @FXML private Label lblMode;
-    @FXML private TableView<Soal> tvPembahasan;
-    @FXML private TableColumn<Soal, String> colNo;
-    @FXML private TableColumn<Soal, String> colPertanyaan;
-    @FXML private TableColumn<Soal, String> colJawabanSiswa;
-    @FXML private TableColumn<Soal, String> colKunci;
-    @FXML private TableColumn<Soal, String> colHasil;
+    @FXML private TableView<Question> tvPembahasan;
+    @FXML private TableColumn<Question, String> colNo;
+    @FXML private TableColumn<Question, String> colPertanyaan;
+    @FXML private TableColumn<Question, String> colJawabanSiswa;
+    @FXML private TableColumn<Question, String> colKunci;
+    @FXML private TableColumn<Question, String> colHasil;
     @FXML private Button btnSertifikat;
 
     private final AppSession session = AppSession.getInstance();
-    private HasilUjian hasil;
+    private ExamResult hasil;
 
     @FXML
     private void initialize() {
@@ -61,10 +61,10 @@ public class ResultController {
         lblSalah.setText(String.valueOf(hasil.getJumlahSalah()));
         lblKosong.setText(String.valueOf(hasil.getJumlahKosong()));
         lblDurasi.setText(FormatUtil.hhmmss(hasil.getDurasiPengerjaan()));
-        lblMode.setText(hasil.getModeSubmit() == ModeSubmit.MANUAL ? "Manual" : "Otomatis");
+        lblMode.setText(hasil.getModeSubmit() == SubmitMode.MANUAL ? "Manual" : "Otomatis");
         siapkanPembahasan();
         btnSertifikat.setDisable(!hasil.isLulus());
-        AnimasiUtil.berurutan(List.of(hbHasil, vbPembahasan), Duration.millis(140));
+        AnimationUtil.berurutan(List.of(hbHasil, vbPembahasan), Duration.millis(140));
     }
 
     private void tampilkanStatus() {
@@ -76,19 +76,19 @@ public class ResultController {
     }
 
     private void siapkanPembahasan() {
-        List<Soal> daftar = hasil.getUjian().getDaftarSoal();
-        TabelUtil.kolom(colNo, soal -> String.valueOf(daftar.indexOf(soal) + 1));
-        TabelUtil.kolom(colPertanyaan, Soal::getPertanyaan);
-        TabelUtil.kolom(colJawabanSiswa, soal -> hasil.getJawaban(soal.getIdSoal()).orElse("-"));
-        TabelUtil.kolom(colKunci, soal -> soal.bukaKunci(StatusUjian.SELESAI));
-        TabelUtil.kolom(colHasil, soal -> hasil.nilaiJawaban(soal).name());
+        List<Question> daftar = hasil.getUjian().getDaftarSoal();
+        TableUtil.kolom(colNo, soal -> String.valueOf(daftar.indexOf(soal) + 1));
+        TableUtil.kolom(colPertanyaan, Question::getPertanyaan);
+        TableUtil.kolom(colJawabanSiswa, soal -> hasil.getJawaban(soal.getIdSoal()).orElse("-"));
+        TableUtil.kolom(colKunci, soal -> soal.bukaKunci(ExamStatus.SELESAI));
+        TableUtil.kolom(colHasil, soal -> hasil.nilaiJawaban(soal).name());
         colHasil.setCellFactory(kolom -> new SelHasil());
-        TabelUtil.barisBisaDibuka(tvPembahasan, colPertanyaan, colJawabanSiswa, colKunci);
+        TableUtil.barisBisaDibuka(tvPembahasan, colPertanyaan, colJawabanSiswa, colKunci);
         tvPembahasan.setItems(FXCollections.observableArrayList(daftar));
     }
 
     /** Hasil per soal ditampilkan sebagai badge hijau/merah/abu. */
-    private static final class SelHasil extends TableCell<Soal, String> {
+    private static final class SelHasil extends TableCell<Question, String> {
         @Override
         protected void updateItem(String status, boolean kosong) {
             super.updateItem(status, kosong);
@@ -99,9 +99,9 @@ public class ResultController {
             }
             Label badge = new Label(status.charAt(0) + status.substring(1).toLowerCase());
             badge.getStyleClass().add("badge");
-            if (StatusJawaban.BENAR.name().equals(status)) {
+            if (AnswerStatus.BENAR.name().equals(status)) {
                 badge.getStyleClass().add("badge-sukses");
-            } else if (StatusJawaban.SALAH.name().equals(status)) {
+            } else if (AnswerStatus.SALAH.name().equals(status)) {
                 badge.getStyleClass().add("badge-bahaya");
             } else {
                 badge.getStyleClass().add("badge-netral");
@@ -113,7 +113,7 @@ public class ResultController {
     @FXML
     private void handleSertifikat() {
         try {
-            Path file = session.getSertifikatService().simpan(RiwayatNilai.dari(hasil), hasil.getUjian());
+            Path file = session.getSertifikatService().simpan(GradeHistory.dari(hasil), hasil.getUjian());
             DialogUtil.info("Sertifikat berhasil disimpan:\n" + file.toAbsolutePath());
         } catch (IOException e) {
             DialogUtil.peringatan("Sertifikat gagal disimpan: " + e.getMessage());
@@ -123,12 +123,12 @@ public class ResultController {
     @FXML
     private void handleKursus() {
         session.resetUjian();
-        SceneRouter.pindah(Layar.KURSUS_DETAIL);
+        SceneRouter.pindah(AppScreen.KURSUS_DETAIL);
     }
 
     @FXML
     private void handleProfil() {
         session.resetUjian();
-        SceneRouter.pindah(Layar.PROFIL);
+        SceneRouter.pindah(AppScreen.PROFIL);
     }
 }

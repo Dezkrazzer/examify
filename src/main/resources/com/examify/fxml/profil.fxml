@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.examify.view.IkonView?>
+<?import com.examify.view.IconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.examify.controller.ProfilController" fitToWidth="true" hbarPolicy="NEVER">
+            fx:controller="com.examify.controller.ProfileController" fitToWidth="true" hbarPolicy="NEVER">
     <VBox spacing="22">
         <padding><Insets top="32" right="36" bottom="36" left="36"/></padding>
 
@@ -39,19 +39,19 @@
         <!-- Statistik -->
         <HBox spacing="18">
             <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                <StackPane styleClass="ikon-fitur"><IkonView ikon="UJIAN" ukuran="22"/></StackPane>
+                <StackPane styleClass="ikon-fitur"><IconView ikon="UJIAN" ukuran="22"/></StackPane>
                 <VBox><Label fx:id="lblUjian" styleClass="angka-tile"/><Label text="Ujian dikerjakan" styleClass="teks-redup"/></VBox>
             </HBox>
             <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                <StackPane styleClass="ikon-fitur"><IkonView ikon="PIALA" ukuran="22"/></StackPane>
+                <StackPane styleClass="ikon-fitur"><IconView ikon="PIALA" ukuran="22"/></StackPane>
                 <VBox><Label fx:id="lblLulus" styleClass="angka-tile"/><Label text="Ujian lulus" styleClass="teks-redup"/></VBox>
             </HBox>
             <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                <StackPane styleClass="ikon-fitur"><IkonView ikon="BINTANG" ukuran="22"/></StackPane>
+                <StackPane styleClass="ikon-fitur"><IconView ikon="BINTANG" ukuran="22"/></StackPane>
                 <VBox><Label fx:id="lblTertinggi" styleClass="angka-tile"/><Label text="Nilai tertinggi" styleClass="teks-redup"/></VBox>
             </HBox>
             <HBox styleClass="kaca, tile-statistik" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
-                <StackPane styleClass="ikon-fitur"><IkonView ikon="BUKU" ukuran="22"/></StackPane>
+                <StackPane styleClass="ikon-fitur"><IconView ikon="BUKU" ukuran="22"/></StackPane>
                 <VBox><Label fx:id="lblMateri" styleClass="angka-tile"/><Label text="Materi selesai" styleClass="teks-redup"/></VBox>
             </HBox>
         </HBox>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.examify.view.IkonView?>
+<?import com.examify.view.IconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -22,14 +22,14 @@
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.examify.controller.EditorMateriController" styleClass="latar">
+            fx:controller="com.examify.controller.MaterialEditorController" styleClass="latar">
     <top>
         <VBox spacing="0">
             <!-- 1. NAVBAR ATAS (NAVIGASI & AKSI UTAMA) -->
             <HBox spacing="16" alignment="CENTER_LEFT" styleClass="navbar">
                 <padding><Insets top="12" right="24" bottom="12" left="24"/></padding>
                 <Button text="Kembali" styleClass="tombol-hantu" onAction="#handleKembali">
-                    <graphic><IkonView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+                    <graphic><IconView ikon="PANAH_KIRI" ukuran="16"/></graphic>
                 </Button>
                 <VBox spacing="2" minWidth="260" prefWidth="340">
                     <Label fx:id="lblBreadcrumb" text="Kursus · Bab" styleClass="teks-kecil"/>
@@ -40,15 +40,15 @@
                 <!-- Switcher Mode: Edit Visual vs Pratinjau Siswa -->
                 <HBox styleClass="tab-nav-bar" spacing="4" alignment="CENTER">
                     <ToggleButton fx:id="tbModeEdit" text="Edit Visual" styleClass="tab-nav-item" selected="true" onAction="#handleModeEdit">
-                        <graphic><IkonView ikon="DOKUMEN" ukuran="15"/></graphic>
+                        <graphic><IconView ikon="DOKUMEN" ukuran="15"/></graphic>
                     </ToggleButton>
                     <ToggleButton fx:id="tbModePratinjau" text="Pratinjau Siswa" styleClass="tab-nav-item" onAction="#handleModePratinjau">
-                        <graphic><IkonView ikon="MAIN" ukuran="15"/></graphic>
+                        <graphic><IconView ikon="MAIN" ukuran="15"/></graphic>
                     </ToggleButton>
                 </HBox>
                 <Region HBox.hgrow="ALWAYS"/>
                 <Button text="Simpan Materi" onAction="#handleSimpanMateri" styleClass="tombol-utama">
-                    <graphic><IkonView ikon="CENTANG" ukuran="16"/></graphic>
+                    <graphic><IconView ikon="CENTANG" ukuran="16"/></graphic>
                 </Button>
             </HBox>
 
@@ -61,15 +61,15 @@
                         <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
                             <HBox spacing="4" alignment="CENTER">
                                 <Button fx:id="btnCopy" text="Salin" styleClass="ribbon-btn" onAction="#handleCopy" focusTraversable="false">
-                                    <graphic><IkonView ikon="SALIN" ukuran="14"/></graphic>
+                                    <graphic><IconView ikon="SALIN" ukuran="14"/></graphic>
                                     <tooltip><Tooltip text="Salin (Ctrl+C)"/></tooltip>
                                 </Button>
                                 <Button fx:id="btnPaste" text="Tempel" styleClass="ribbon-btn" onAction="#handlePaste" focusTraversable="false">
-                                    <graphic><IkonView ikon="TEMPEL" ukuran="14"/></graphic>
+                                    <graphic><IconView ikon="TEMPEL" ukuran="14"/></graphic>
                                     <tooltip><Tooltip text="Tempel (Ctrl+V)"/></tooltip>
                                 </Button>
                                 <Button fx:id="btnUndo" text="Urung" styleClass="ribbon-btn" onAction="#handleUndo" focusTraversable="false">
-                                    <graphic><IkonView ikon="URUNG" ukuran="14"/></graphic>
+                                    <graphic><IconView ikon="URUNG" ukuran="14"/></graphic>
                                     <tooltip><Tooltip text="Urungkan (Ctrl+Z)"/></tooltip>
                                 </Button>
                             </HBox>
@@ -115,7 +115,7 @@
                                     <tooltip><Tooltip text="Warna Sorotan Teks (Text Highlight Color)"/></tooltip>
                                     <graphic>
                                         <VBox alignment="CENTER" spacing="2">
-                                            <IkonView ikon="STABILO" ukuran="14"/>
+                                            <IconView ikon="STABILO" ukuran="14"/>
                                             <Region fx:id="barHighlightColor" styleClass="color-bar-indicator" style="-fx-background-color: #FFE600;"/>
                                         </VBox>
                                     </graphic>
@@ -187,22 +187,22 @@
                             <HBox spacing="4" alignment="CENTER">
                                 <Button fx:id="btnAlignLeft" styleClass="ribbon-btn, ribbon-btn-icon-only"
                                         onAction="#handleAlignLeft" focusTraversable="false">
-                                    <graphic><IkonView ikon="RATA_KIRI" ukuran="14"/></graphic>
+                                    <graphic><IconView ikon="RATA_KIRI" ukuran="14"/></graphic>
                                     <tooltip><Tooltip text="Rata Kiri"/></tooltip>
                                 </Button>
                                 <Button fx:id="btnAlignCenter" styleClass="ribbon-btn, ribbon-btn-icon-only"
                                         onAction="#handleAlignCenter" focusTraversable="false">
-                                    <graphic><IkonView ikon="RATA_TENGAH" ukuran="14"/></graphic>
+                                    <graphic><IconView ikon="RATA_TENGAH" ukuran="14"/></graphic>
                                     <tooltip><Tooltip text="Rata Tengah"/></tooltip>
                                 </Button>
                                 <Button fx:id="btnAlignRight" styleClass="ribbon-btn, ribbon-btn-icon-only"
                                         onAction="#handleAlignRight" focusTraversable="false">
-                                    <graphic><IkonView ikon="RATA_KANAN" ukuran="14"/></graphic>
+                                    <graphic><IconView ikon="RATA_KANAN" ukuran="14"/></graphic>
                                     <tooltip><Tooltip text="Rata Kanan"/></tooltip>
                                 </Button>
                                 <Button fx:id="btnBulletList" text="List" styleClass="ribbon-btn"
                                         onAction="#handleBulletList" focusTraversable="false">
-                                    <graphic><IkonView ikon="DAFTAR" ukuran="14"/></graphic>
+                                    <graphic><IconView ikon="DAFTAR" ukuran="14"/></graphic>
                                     <tooltip><Tooltip text="Daftar Butir (Bullet List)"/></tooltip>
                                 </Button>
                             </HBox>
@@ -228,7 +228,7 @@
                             <Button fx:id="btnPageBreak" text="+ Pemisah Slide (Page Break)"
                                     styleClass="ribbon-btn, tombol-aksen-lembut"
                                     onAction="#handlePageBreak" focusTraversable="false">
-                                <graphic><IkonView ikon="SLIDE" ukuran="15"/></graphic>
+                                <graphic><IconView ikon="SLIDE" ukuran="15"/></graphic>
                                 <tooltip><Tooltip text="Potong materi menjadi slide/halaman baru"/></tooltip>
                             </Button>
                             <Label text="Slide" styleClass="ribbon-group-label"/>
@@ -241,12 +241,12 @@
                             <HBox spacing="6" alignment="CENTER">
                                 <Button fx:id="btnInsertImage" text="Sisipkan Gambar" styleClass="ribbon-btn"
                                         onAction="#handleInsertImage" focusTraversable="false">
-                                    <graphic><IkonView ikon="GAMBAR" ukuran="15"/></graphic>
+                                    <graphic><IconView ikon="GAMBAR" ukuran="15"/></graphic>
                                     <tooltip><Tooltip text="Sisipkan gambar visual ke dalam materi"/></tooltip>
                                 </Button>
                                 <Button fx:id="btnEmbedVideo" text="Embed Video" styleClass="ribbon-btn"
                                         onAction="#handleEmbedVideo" focusTraversable="false">
-                                    <graphic><IkonView ikon="VIDEO" ukuran="15"/></graphic>
+                                    <graphic><IconView ikon="VIDEO" ukuran="15"/></graphic>
                                     <tooltip><Tooltip text="Sematkan video YouTube langsung"/></tooltip>
                                 </Button>
                             </HBox>
@@ -259,7 +259,7 @@
                         <VBox styleClass="ribbon-group" alignment="CENTER" spacing="3">
                             <Button fx:id="btnUploadDoc" text="Unggah Dokumen (.pdf/.docx)" styleClass="ribbon-btn"
                                     onAction="#handleUploadDoc" focusTraversable="false">
-                                <graphic><IkonView ikon="DOKUMEN" ukuran="15"/></graphic>
+                                <graphic><IconView ikon="DOKUMEN" ukuran="15"/></graphic>
                                 <tooltip><Tooltip text="Unggah atau lampirkan berkas dokumen (.pdf, .docx, .md, .txt)"/></tooltip>
                             </Button>
                             <Label text="Lampiran" styleClass="ribbon-group-label"/>
@@ -278,7 +278,7 @@
             <VBox styleClass="kaca" spacing="12" prefWidth="230" minWidth="210" maxWidth="250">
                 <padding><Insets top="16" right="12" bottom="16" left="12"/></padding>
                 <HBox alignment="CENTER_LEFT" spacing="6">
-                    <IkonView ikon="SLIDE" ukuran="16"/>
+                    <IconView ikon="SLIDE" ukuran="16"/>
                     <Label text="DAFTAR SLIDE" styleClass="teks-kecil" style="-fx-font-weight: bold;"/>
                     <Region HBox.hgrow="ALWAYS"/>
                     <Label fx:id="lblJumlahSlideNav" styleClass="badge" style="-fx-font-size: 10.5px; -fx-padding: 2 8;"/>

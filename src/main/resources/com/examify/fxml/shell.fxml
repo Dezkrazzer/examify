@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.examify.view.IkonView?>
-<?import com.examify.view.LatarAnimasi?>
+<?import com.examify.view.IconView?>
+<?import com.examify.view.AnimatedBackground?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
@@ -16,7 +16,7 @@
 
 <StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.examify.controller.ShellController" styleClass="latar">
-    <LatarAnimasi/>
+    <AnimatedBackground/>
     <BorderPane>
         <left>
             <VBox styleClass="sidebar" spacing="6" prefWidth="250" minWidth="250">
@@ -30,23 +30,23 @@
                 </Label>
                 <ToggleButton fx:id="tbKursus" text="Kursus Saya" styleClass="nav-item" maxWidth="Infinity"
                               onAction="#handleKursus">
-                    <graphic><IkonView ikon="BUKU" ukuran="18"/></graphic>
+                    <graphic><IconView ikon="BUKU" ukuran="18"/></graphic>
                 </ToggleButton>
                 <ToggleButton fx:id="tbKalender" text="Kalender" styleClass="nav-item" maxWidth="Infinity"
                               onAction="#handleKalender">
-                    <graphic><IkonView ikon="KALENDER" ukuran="18"/></graphic>
+                    <graphic><IconView ikon="KALENDER" ukuran="18"/></graphic>
                 </ToggleButton>
                 <ToggleButton fx:id="tbBankSoal" text="Bank Soal" styleClass="nav-item" maxWidth="Infinity"
                               onAction="#handleBankSoal">
-                    <graphic><IkonView ikon="UJIAN" ukuran="18"/></graphic>
+                    <graphic><IconView ikon="UJIAN" ukuran="18"/></graphic>
                 </ToggleButton>
                 <ToggleButton fx:id="tbSiswa" text="Siswa" styleClass="nav-item" maxWidth="Infinity"
                               onAction="#handleSiswa">
-                    <graphic><IkonView ikon="PENGGUNA" ukuran="18"/></graphic>
+                    <graphic><IconView ikon="PENGGUNA" ukuran="18"/></graphic>
                 </ToggleButton>
                 <ToggleButton fx:id="tbProfil" text="Profil &amp; Nilai" styleClass="nav-item" maxWidth="Infinity"
                               onAction="#handleProfil">
-                    <graphic><IkonView ikon="PROFIL" ukuran="18"/></graphic>
+                    <graphic><IconView ikon="PROFIL" ukuran="18"/></graphic>
                 </ToggleButton>
                 <Region VBox.vgrow="ALWAYS"/>
                 <Button fx:id="btnTema" styleClass="nav-item" maxWidth="Infinity"/>
@@ -58,7 +58,7 @@
                     </VBox>
                 </HBox>
                 <Button text="Keluar" styleClass="nav-item" maxWidth="Infinity" onAction="#handleKeluar">
-                    <graphic><IkonView ikon="KELUAR" ukuran="18"/></graphic>
+                    <graphic><IconView ikon="KELUAR" ukuran="18"/></graphic>
                 </Button>
             </VBox>
         </left>

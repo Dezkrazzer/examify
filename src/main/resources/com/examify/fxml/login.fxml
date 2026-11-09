@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.examify.view.IkonView?>
-<?import com.examify.view.LatarAnimasi?>
+<?import com.examify.view.IconView?>
+<?import com.examify.view.AnimatedBackground?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
@@ -15,11 +15,11 @@
 
 <StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.examify.controller.LoginController" styleClass="latar">
-    <LatarAnimasi/>
+    <AnimatedBackground/>
     <HBox StackPane.alignment="TOP_LEFT" spacing="10" alignment="CENTER_LEFT" maxHeight="-Infinity">
         <StackPane.margin><Insets top="22" left="28"/></StackPane.margin>
         <Button text="Kembali ke beranda" styleClass="tombol-hantu" onAction="#handleKembali">
-            <graphic><IkonView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+            <graphic><IconView ikon="PANAH_KIRI" ukuran="16"/></graphic>
         </Button>
         <Button fx:id="btnTema" styleClass="tombol-ikon"/>
     </HBox>
@@ -42,7 +42,7 @@
         <Label fx:id="lblError" styleClass="label-error" wrapText="true"/>
         <Button text="Masuk" onAction="#handleMasuk" defaultButton="true" contentDisplay="RIGHT"
                 styleClass="tombol-utama, tombol-besar" maxWidth="Infinity">
-            <graphic><IkonView ikon="PANAH_KANAN" ukuran="18"/></graphic>
+            <graphic><IconView ikon="PANAH_KANAN" ukuran="18"/></graphic>
         </Button>
         <Label text="Akun demo: Siswa (2410001 - PIN 1234) | Guru (19850101 - PIN 1234)" styleClass="teks-kecil"/>
     </VBox>

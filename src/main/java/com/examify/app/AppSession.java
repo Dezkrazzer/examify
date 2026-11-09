@@ -1,25 +1,25 @@
 package com.examify.app;
 
-import com.examify.keamanan.ModeAman;
-import com.examify.model.Bab;
-import com.examify.model.Guru;
-import com.examify.model.HasilUjian;
-import com.examify.model.Kursus;
-import com.examify.model.Materi;
-import com.examify.model.MateriTeks;
-import com.examify.model.RiwayatNilai;
-import com.examify.model.Siswa;
-import com.examify.model.Ujian;
+import com.examify.security.SecureMode;
+import com.examify.model.Chapter;
+import com.examify.model.Teacher;
+import com.examify.model.ExamResult;
+import com.examify.model.Course;
+import com.examify.model.Material;
+import com.examify.model.TextMaterial;
+import com.examify.model.GradeHistory;
+import com.examify.model.Student;
+import com.examify.model.Exam;
 import com.examify.service.AuthService;
-import com.examify.service.KursusService;
-import com.examify.service.PendaftaranKursusService;
-import com.examify.service.ProgresBelajarService;
-import com.examify.service.TugasService;
+import com.examify.service.CourseService;
+import com.examify.service.CourseEnrollmentService;
+import com.examify.service.LearningProgressService;
+import com.examify.service.AssignmentService;
 import com.examify.utils.AppConfig;
-import com.examify.service.RekapService;
-import com.examify.service.SertifikatService;
-import com.examify.service.UjianService;
-import com.examify.thread.UjianTimer;
+import com.examify.service.GradeRecapService;
+import com.examify.service.CertificateService;
+import com.examify.service.ExamService;
+import com.examify.thread.ExamTimer;
 import javafx.application.HostServices;
 
 /** State sesi aplikasi (singleton): service, siswa/guru yang login, serta kursus/ujian yang sedang aktif. */
@@ -28,27 +28,27 @@ public final class AppSession {
     private static final AppSession INSTANCE = new AppSession();
 
     private AuthService authService;
-    private UjianService ujianService;
-    private RekapService rekapService;
-    private SertifikatService sertifikatService;
-    private KursusService kursusService;
-    private ProgresBelajarService progresService;
-    private PendaftaranKursusService pendaftaranService;
-    private TugasService tugasService;
+    private ExamService ujianService;
+    private GradeRecapService rekapService;
+    private CertificateService sertifikatService;
+    private CourseService kursusService;
+    private LearningProgressService progresService;
+    private CourseEnrollmentService pendaftaranService;
+    private AssignmentService tugasService;
     private HostServices hostServices;
 
-    private Siswa siswaAktif;
-    private Guru guruAktif;
-    private Kursus kursusAktif;
-    private Bab babAktifMateri;
-    private MateriTeks materiTeksAktif;
-    private Materi materiFokus; // dibuka kembali saat kembali ke halaman kursus
-    private Ujian ujianAktif;
-    private HasilUjian hasilAktif;
-    private UjianTimer timerAktif;
-    private ModeAman modeAmanAktif;
-    private Siswa siswaDipilih;
-    private RiwayatNilai riwayatFokus;
+    private Student siswaAktif;
+    private Teacher guruAktif;
+    private Course kursusAktif;
+    private Chapter babAktifMateri;
+    private TextMaterial materiTeksAktif;
+    private Material materiFokus; // dibuka kembali saat kembali ke halaman kursus
+    private Exam ujianAktif;
+    private ExamResult hasilAktif;
+    private ExamTimer timerAktif;
+    private SecureMode modeAmanAktif;
+    private Student siswaDipilih;
+    private GradeHistory riwayatFokus;
 
     private AppSession() {
     }
@@ -57,14 +57,14 @@ public final class AppSession {
         return INSTANCE;
     }
 
-    void pasangService(AuthService auth, UjianService ujian, RekapService rekap, SertifikatService sertifikat,
-                       KursusService kursus, ProgresBelajarService progres) {
+    void pasangService(AuthService auth, ExamService ujian, GradeRecapService rekap, CertificateService sertifikat,
+                       CourseService kursus, LearningProgressService progres) {
         pasangService(auth, ujian, rekap, sertifikat, kursus, progres, null, null);
     }
 
-    void pasangService(AuthService auth, UjianService ujian, RekapService rekap, SertifikatService sertifikat,
-                       KursusService kursus, ProgresBelajarService progres,
-                       PendaftaranKursusService pendaftaran, TugasService tugas) {
+    void pasangService(AuthService auth, ExamService ujian, GradeRecapService rekap, CertificateService sertifikat,
+                       CourseService kursus, LearningProgressService progres,
+                       CourseEnrollmentService pendaftaran, AssignmentService tugas) {
         this.authService = auth;
         this.ujianService = ujian;
         this.rekapService = rekap;
@@ -138,101 +138,101 @@ public final class AppSession {
         return authService;
     }
 
-    public UjianService getUjianService() {
+    public ExamService getUjianService() {
         return ujianService;
     }
 
-    public RekapService getRekapService() {
+    public GradeRecapService getRekapService() {
         return rekapService;
     }
 
-    public SertifikatService getSertifikatService() {
+    public CertificateService getSertifikatService() {
         return sertifikatService;
     }
 
-    public KursusService getKursusService() {
+    public CourseService getKursusService() {
         return kursusService;
     }
 
-    public ProgresBelajarService getProgresService() {
+    public LearningProgressService getProgresService() {
         return progresService;
     }
 
-    public Siswa getSiswaAktif() {
+    public Student getSiswaAktif() {
         return siswaAktif;
     }
 
-    public void setSiswaAktif(Siswa siswaAktif) {
+    public void setSiswaAktif(Student siswaAktif) {
         this.siswaAktif = siswaAktif;
         if (siswaAktif != null) {
             this.guruAktif = null;
         }
     }
 
-    public Guru getGuruAktif() {
+    public Teacher getGuruAktif() {
         return guruAktif;
     }
 
-    public void setGuruAktif(Guru guruAktif) {
+    public void setGuruAktif(Teacher guruAktif) {
         this.guruAktif = guruAktif;
         if (guruAktif != null) {
             this.siswaAktif = null;
         }
     }
 
-    public Kursus getKursusAktif() {
+    public Course getKursusAktif() {
         return kursusAktif;
     }
 
-    public void setKursusAktif(Kursus kursusAktif) {
+    public void setKursusAktif(Course kursusAktif) {
         this.kursusAktif = kursusAktif;
     }
 
-    public Bab getBabAktifMateri() {
+    public Chapter getBabAktifMateri() {
         return babAktifMateri;
     }
 
-    public void setBabAktifMateri(Bab babAktifMateri) {
+    public void setBabAktifMateri(Chapter babAktifMateri) {
         this.babAktifMateri = babAktifMateri;
     }
 
-    public MateriTeks getMateriTeksAktif() {
+    public TextMaterial getMateriTeksAktif() {
         return materiTeksAktif;
     }
 
-    public void setMateriTeksAktif(MateriTeks materiTeksAktif) {
+    public void setMateriTeksAktif(TextMaterial materiTeksAktif) {
         this.materiTeksAktif = materiTeksAktif;
     }
 
-    public Materi getMateriFokus() {
+    public Material getMateriFokus() {
         return materiFokus;
     }
 
-    public void setMateriFokus(Materi materiFokus) {
+    public void setMateriFokus(Material materiFokus) {
         this.materiFokus = materiFokus;
     }
 
-    public Ujian getUjianAktif() {
+    public Exam getUjianAktif() {
         return ujianAktif;
     }
 
-    public void setUjianAktif(Ujian ujianAktif) {
+    public void setUjianAktif(Exam ujianAktif) {
         this.ujianAktif = ujianAktif;
     }
 
-    public HasilUjian getHasilAktif() {
+    public ExamResult getHasilAktif() {
         return hasilAktif;
     }
 
-    public void setHasilAktif(HasilUjian hasilAktif) {
+    public void setHasilAktif(ExamResult hasilAktif) {
         this.hasilAktif = hasilAktif;
     }
 
-    public void setTimerAktif(UjianTimer timerAktif) {
+    public void setTimerAktif(ExamTimer timerAktif) {
         this.timerAktif = timerAktif;
     }
 
-    public void setModeAmanAktif(ModeAman modeAman) {
+    public void setModeAmanAktif(SecureMode modeAman) {
         this.modeAmanAktif = modeAman;
     }
 
@@ -244,41 +244,41 @@ public final class AppSession {
         }
     }
 
-    public Siswa getSiswaDipilih() {
+    public Student getSiswaDipilih() {
         return siswaDipilih;
     }
 
-    public void setSiswaDipilih(Siswa siswaDipilih) {
+    public void setSiswaDipilih(Student siswaDipilih) {
         this.siswaDipilih = siswaDipilih;
     }
 
-    public RiwayatNilai getRiwayatFokus() {
+    public GradeHistory getRiwayatFokus() {
         return riwayatFokus;
     }
 
-    public void setRiwayatFokus(RiwayatNilai riwayatFokus) {
+    public void setRiwayatFokus(GradeHistory riwayatFokus) {
         this.riwayatFokus = riwayatFokus;
     }
 
-    public PendaftaranKursusService getPendaftaranService() {
+    public CourseEnrollmentService getPendaftaranService() {
         if (pendaftaranService == null) {
-            pendaftaranService = new PendaftaranKursusService(AppConfig.FILE_PENDAFTARAN, progresService);
+            pendaftaranService = new CourseEnrollmentService(AppConfig.FILE_PENDAFTARAN, progresService);
         }
         return pendaftaranService;
     }
 
-    public void setPendaftaranService(PendaftaranKursusService pendaftaranService) {
+    public void setPendaftaranService(CourseEnrollmentService pendaftaranService) {
         this.pendaftaranService = pendaftaranService;
     }
 
-    public TugasService getTugasService() {
+    public AssignmentService getTugasService() {
         if (tugasService == null) {
-            tugasService = new TugasService(AppConfig.FILE_PENGUMPULAN_TUGAS, AppConfig.DIR_PENGUMPULAN_TUGAS);
+            tugasService = new AssignmentService(AppConfig.FILE_PENGUMPULAN_TUGAS, AppConfig.DIR_PENGUMPULAN_TUGAS);
         }
         return tugasService;
     }
 
-    public void setTugasService(TugasService tugasService) {
+    public void setTugasService(AssignmentService tugasService) {
         this.tugasService = tugasService;
     }
 }

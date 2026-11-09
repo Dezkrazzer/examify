@@ -1,16 +1,16 @@
 package com.examify.controller;
 
 import com.examify.app.AppSession;
-import com.examify.app.Layar;
+import com.examify.app.AppScreen;
 import com.examify.app.SceneRouter;
-import com.examify.exception.TokenTidakValidException;
-import com.examify.model.Ujian;
-import com.examify.service.UjianService;
+import com.examify.exception.InvalidTokenException;
+import com.examify.model.Exam;
+import com.examify.service.ExamService;
 import com.examify.utils.AppConfig;
 import com.examify.utils.FormatUtil;
-import com.examify.view.AnimasiUtil;
-import com.examify.view.Ikon;
-import com.examify.view.IkonView;
+import com.examify.view.AnimationUtil;
+import com.examify.view.Icon;
+import com.examify.view.IconView;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -35,8 +35,8 @@ public class TokenGateController {
     @FXML private Label lblSisaPercobaan;
 
     private final AppSession session = AppSession.getInstance();
-    private final UjianService ujianService = session.getUjianService();
-    private Ujian ujian;
+    private final ExamService ujianService = session.getUjianService();
+    private Exam ujian;
 
     @FXML
     private void initialize() {
@@ -62,14 +62,14 @@ public class TokenGateController {
                 "Jawaban tersimpan otomatis setiap kali dipilih atau diketik.",
                 "Saat waktu habis, jawaban dikumpulkan otomatis.");
         for (String teks : aturan) {
-            Label label = new Label(teks, new IkonView(Ikon.CENTANG, 14));
+            Label label = new Label(teks, new IconView(Icon.CENTANG, 14));
             label.getStyleClass().add("teks-redup");
             label.setWrapText(true);
             vbAturan.getChildren().add(label);
         }
         if (ujian.hasJadwalAkses()) {
             Label labelAkses = new Label("Waktu Akses: " + FormatUtil.formatRentangWaktuAkses(ujian.getWaktuMulai(), ujian.getWaktuSelesai()),
-                    new IkonView(Ikon.JAM, 14));
+                    new IconView(Icon.JAM, 14));
             labelAkses.getStyleClass().add("teks-redup");
             labelAkses.setWrapText(true);
             vbAturan.getChildren().add(labelAkses);
@@ -78,7 +78,7 @@ public class TokenGateController {
 
     /** Siswa diberi tahu sebelum memasukkan token bahwa ujian akan dikunci dalam layar penuh. */
     private void tampilkanInfoModeAman() {
-        Label judul = new Label("Ujian ini menggunakan Mode Aman", new IkonView(Ikon.PERISAI, 18));
+        Label judul = new Label("Ujian ini menggunakan Mode Aman", new IconView(Icon.PERISAI, 18));
         judul.getStyleClass().add("judul-mode-aman");
         HBox kepala = new HBox(judul);
         kepala.setAlignment(Pos.CENTER_LEFT);
@@ -104,14 +104,14 @@ public class TokenGateController {
         try {
             ujianService.verifikasiToken(session.getSiswaAktif(), ujian, tfToken.getText());
             session.setHasilAktif(ujianService.mulaiUjian(session.getSiswaAktif(), ujian));
-            SceneRouter.pindah(Layar.CBT_ROOM);
-        } catch (TokenTidakValidException e) {
+            SceneRouter.pindah(AppScreen.CBT_ROOM);
+        } catch (InvalidTokenException e) {
             tanganiTokenSalah(e);
         }
     }
 
-    private void tanganiTokenSalah(TokenTidakValidException e) {
-        AnimasiUtil.getar(vbKartu);
+    private void tanganiTokenSalah(InvalidTokenException e) {
+        AnimationUtil.getar(vbKartu);
         if (e.getSisaPercobaan() > 0) {
             lblSisaPercobaan.setText(e.getMessage());
             lblSisaPercobaan.getStyleClass().setAll("label-error");
@@ -126,6 +126,6 @@ public class TokenGateController {
     @FXML
     private void handleKembali() {
         session.setUjianAktif(null);
-        SceneRouter.pindah(Layar.KURSUS_DETAIL);
+        SceneRouter.pindah(AppScreen.KURSUS_DETAIL);
     }
 }

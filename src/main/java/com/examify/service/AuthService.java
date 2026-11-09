@@ -1,7 +1,7 @@
 package com.examify.service;
 
-import com.examify.model.Guru;
-import com.examify.model.Siswa;
+import com.examify.model.Teacher;
+import com.examify.model.Student;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -11,14 +11,14 @@ import java.util.Optional;
 
 public class AuthService {
 
-    private final Map<String, Siswa> siswaByNis = new LinkedHashMap<>();
-    private final Map<String, Guru> guruByNip = new LinkedHashMap<>();
+    private final Map<String, Student> siswaByNis = new LinkedHashMap<>();
+    private final Map<String, Teacher> guruByNip = new LinkedHashMap<>();
 
-    public AuthService(List<Siswa> daftarSiswa) {
+    public AuthService(List<Student> daftarSiswa) {
         this(daftarSiswa, List.of());
     }
 
-    public AuthService(List<Siswa> daftarSiswa, List<Guru> daftarGuru) {
+    public AuthService(List<Student> daftarSiswa, List<Teacher> daftarGuru) {
         if (daftarSiswa != null) {
             daftarSiswa.forEach(siswa -> siswaByNis.put(siswa.getNis(), siswa));
         }
@@ -27,11 +27,11 @@ public class AuthService {
         }
     }
 
-    public Optional<Siswa> login(String nis, String pin) {
+    public Optional<Student> login(String nis, String pin) {
         return loginSiswa(nis, pin);
     }
 
-    public Optional<Siswa> loginSiswa(String nis, String pin) {
+    public Optional<Student> loginSiswa(String nis, String pin) {
         if (nis == null) {
             return Optional.empty();
         }
@@ -39,7 +39,7 @@ public class AuthService {
                 .filter(siswa -> siswa.verifikasiPin(pin));
     }
 
-    public Optional<Guru> loginGuru(String nip, String pin) {
+    public Optional<Teacher> loginGuru(String nip, String pin) {
         if (nip == null) {
             return Optional.empty();
         }
@@ -47,20 +47,20 @@ public class AuthService {
                 .filter(guru -> guru.verifikasiPin(pin));
     }
 
-    public List<Siswa> getSemuaSiswa() {
+    public List<Student> getSemuaSiswa() {
         return new ArrayList<>(siswaByNis.values());
     }
 
-    public List<Guru> getSemuaGuru() {
+    public List<Teacher> getSemuaGuru() {
         return new ArrayList<>(guruByNip.values());
     }
 
-    public Optional<Siswa> cariSiswa(String nis) {
+    public Optional<Student> cariSiswa(String nis) {
         if (nis == null) return Optional.empty();
         return Optional.ofNullable(siswaByNis.get(nis.trim()));
     }
 
-    public Optional<Guru> cariGuru(String nip) {
+    public Optional<Teacher> cariGuru(String nip) {
         if (nip == null) return Optional.empty();
         return Optional.ofNullable(guruByNip.get(nip.trim()));
     }

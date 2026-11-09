@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
  */
 public final class MarkdownParser {
 
-    public enum JenisBlok { HEADING, PARAGRAF, BUTIR, NOMOR, KODE, KUTIPAN, GARIS }
+    public enum BlockType { HEADING, PARAGRAF, BUTIR, NOMOR, KODE, KUTIPAN, GARIS }
 
     public enum GayaTeks { BIASA, TEBAL, MIRING, KODE, GARIS_BAWAH }
 
     /** level dipakai untuk heading (1-3) dan nomor urut daftar bernomor. */
-    public record Blok(JenisBlok jenis, String isi, int level) {
+    public record Blok(BlockType jenis, String isi, int level) {
     }
 
     public record Potongan(String teks, GayaTeks gaya, String warnaTeks, String warnaLatar) {
@@ -59,7 +59,7 @@ public final class MarkdownParser {
                     tutupParagraf(hasil, paragraf);
                     kode = new StringBuilder();
                 } else {
-                    hasil.add(new Blok(JenisBlok.KODE, kode.toString().stripTrailing(), 0));
+                    hasil.add(new Blok(BlockType.KODE, kode.toString().stripTrailing(), 0));
                     kode = null;
                 }
                 continue;
@@ -79,7 +79,7 @@ public final class MarkdownParser {
             }
         }
         if (kode != null) {
-            hasil.add(new Blok(JenisBlok.KODE, kode.toString().stripTrailing(), 0));
+            hasil.add(new Blok(BlockType.KODE, kode.toString().stripTrailing(), 0));
         }
         tutupParagraf(hasil, paragraf);
         return hasil;
@@ -88,29 +88,29 @@ public final class MarkdownParser {
     /** @return blok untuk baris yang berdiri sendiri, atau null bila baris bagian dari paragraf */
     private static Blok blokSatuBaris(String isi) {
         if (isi.equals("---")) {
-            return new Blok(JenisBlok.GARIS, "", 0);
+            return new Blok(BlockType.GARIS, "", 0);
         }
         Matcher m = POLA_HEADING.matcher(isi);
         if (m.matches()) {
-            return new Blok(JenisBlok.HEADING, m.group(2), m.group(1).length());
+            return new Blok(BlockType.HEADING, m.group(2), m.group(1).length());
         }
         m = POLA_BUTIR.matcher(isi);
         if (m.matches()) {
-            return new Blok(JenisBlok.BUTIR, m.group(1), 0);
+            return new Blok(BlockType.BUTIR, m.group(1), 0);
         }
         m = POLA_NOMOR.matcher(isi);
         if (m.matches()) {
-            return new Blok(JenisBlok.NOMOR, m.group(2), Integer.parseInt(m.group(1)));
+            return new Blok(BlockType.NOMOR, m.group(2), Integer.parseInt(m.group(1)));
         }
         if (isi.startsWith(">")) {
-            return new Blok(JenisBlok.KUTIPAN, isi.substring(1).trim(), 0);
+            return new Blok(BlockType.KUTIPAN, isi.substring(1).trim(), 0);
         }
         return null;
     }
 
     private static void tutupParagraf(List<Blok> hasil, StringBuilder paragraf) {
         if (paragraf.length() > 0) {
-            hasil.add(new Blok(JenisBlok.PARAGRAF, paragraf.toString(), 0));
+            hasil.add(new Blok(BlockType.PARAGRAF, paragraf.toString(), 0));
             paragraf.setLength(0);
         }
     }
