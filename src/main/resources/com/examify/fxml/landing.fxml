@@ -50,13 +50,13 @@
                             </HBox>
                             <VBox spacing="0">
                                 <Label text="Belajar &amp; ujian online," styleClass="judul-hero" wrapText="true"/>
-                                <FlowPane alignment="TOP_LEFT">
+                                <HBox alignment="TOP_LEFT">
                                     <VBox>
                                         <Label text="kapan saja" styleClass="judul-hero-aksen" minWidth="-Infinity"/>
                                         <Region styleClass="garis-sorot" translateY="-8"/>
                                     </VBox>
                                     <Label text=", di mana saja." styleClass="judul-hero" minWidth="-Infinity"/>
-                                </FlowPane>
+                                </HBox>
                             </VBox>
                             <Label styleClass="subjudul" wrapText="true"
                                    text="Examify menggabungkan kelas e-learning dan Computer-Based Test dalam satu aplikasi. Baca materi per bab, kerjakan ujian dengan timer, lalu pantau nilai dan unduh sertifikatmu."/>
