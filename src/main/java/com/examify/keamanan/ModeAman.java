@@ -14,7 +14,9 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.geometry.Rectangle2D;
 import javafx.stage.PopupWindow;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
@@ -47,6 +49,7 @@ public final class ModeAman {
     private final Consumer<Pelanggaran> pendengarPelanggaran;
     private final Consumer<String> pendengarDiblokir;
     private final PemblokirKeyboard pemblokir = new PemblokirKeyboard();
+    private PenjagaJendelaDepan penjagaJendela;
 
     private final EventHandler<WindowEvent> tolakTutup = Event::consume;
     private final EventHandler<KeyEvent> saringTombol = this::saringTombol;
@@ -89,7 +92,10 @@ public final class ModeAman {
         stage.setFullScreenExitHint("");
         stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setAlwaysOnTop(true);
+        sesuaikanKeLayar();
         stage.setFullScreen(true);
+        // beberapa driver/skala DPI melaporkan ukuran scene yang belum final saat masuk layar penuh
+        javafx.application.Platform.runLater(() -> scene.getRoot().requestLayout());
         stage.addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, tolakTutup);
         scene.addEventFilter(KeyEvent.ANY, saringTombol);
         scene.addEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, tolakMenu);
@@ -99,6 +105,14 @@ public final class ModeAman {
         stage.iconifiedProperty().addListener(pantauMinimize);
         penjagaFokus.play();
         hookAktif = pemblokir.pasang();
+        // swipe 3/4 jari touchpad tidak bisa diblokir; aplikasi lain yang sempat aktif langsung ditutup kembali
+        penjagaJendela = new PenjagaJendelaDepan(stage.getTitle(), () -> javafx.application.Platform.runLater(() -> {
+            if (aktif) {
+                catat(JENIS_KELUAR_JENDELA, "Siswa berpindah ke aplikasi/desktop lain (gesture atau pintasan)");
+                rebutFokus();
+            }
+        }));
+        penjagaJendela.mulai();
         if (!hookAktif) {
             System.err.println("[ModeAman] Hook keyboard tidak aktif; pintasan sistem hanya dideteksi, tidak diblokir.");
         }
@@ -111,6 +125,10 @@ public final class ModeAman {
         aktif = false;
         penjagaFokus.stop();
         pemblokir.lepas();
+        if (penjagaJendela != null) {
+            penjagaJendela.berhenti();
+            penjagaJendela = null;
+        }
         stage.removeEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, tolakTutup);
         scene.removeEventFilter(KeyEvent.ANY, saringTombol);
         scene.removeEventFilter(ContextMenuEvent.CONTEXT_MENU_REQUESTED, tolakMenu);
@@ -120,6 +138,7 @@ public final class ModeAman {
         stage.iconifiedProperty().removeListener(pantauMinimize);
         stage.setAlwaysOnTop(false);
         stage.setFullScreen(false);
+        stage.setMaximized(true);
         stage.setFullScreenExitKeyCombination(null); // kembali ke bawaan (Esc)
         stage.setFullScreenExitHint(null);
     }
@@ -171,6 +190,23 @@ public final class ModeAman {
                 }
             });
         }
+    }
+
+    /**
+     * Menyamakan ukuran jendela dengan monitor sebelum masuk layar penuh. Tanpa ini, pada skala
+     * DPI pecahan ukuran jendela lama bisa terbawa sehingga bagian bawah layar tidak tertutup scene.
+     */
+    private void sesuaikanKeLayar() {
+        if (stage.isFullScreen()) {
+            return;
+        }
+        var layar = Screen.getScreensForRectangle(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight());
+        Rectangle2D batas = (layar.isEmpty() ? Screen.getPrimary() : layar.get(0)).getBounds();
+        stage.setMaximized(false);
+        stage.setX(batas.getMinX());
+        stage.setY(batas.getMinY());
+        stage.setWidth(batas.getWidth());
+        stage.setHeight(batas.getHeight());
     }
 
     private void saatFokusBerubah(boolean fokus) {

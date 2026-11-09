@@ -805,6 +805,7 @@
 .table-row-cell:hover { -fx-background-color: -garis; }
 .table-row-cell:selected { -fx-background-color: rgba(26, 163, 232, 0.14); }
 .table-cell { -fx-text-fill: -teks; -fx-alignment: center-left; -fx-padding: 0 10; }
+.table-cell .teks-sel { -fx-padding: 10 0; }
 .table-view .placeholder .label { -fx-text-fill: -teks-redup; }
 
 /* ---------- Header ujian ---------- */

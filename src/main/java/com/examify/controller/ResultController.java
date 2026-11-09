@@ -83,6 +83,7 @@ public class ResultController {
         TabelUtil.kolom(colKunci, soal -> soal.bukaKunci(StatusUjian.SELESAI));
         TabelUtil.kolom(colHasil, soal -> hasil.nilaiJawaban(soal).name());
         colHasil.setCellFactory(kolom -> new SelHasil());
+        TabelUtil.barisBisaDibuka(tvPembahasan, colPertanyaan, colJawabanSiswa, colKunci);
         tvPembahasan.setItems(FXCollections.observableArrayList(daftar));
     }
 

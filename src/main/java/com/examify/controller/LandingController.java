@@ -22,7 +22,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -36,8 +40,14 @@ public class LandingController {
 
     private static final Duration DURASI_HITUNG = Duration.millis(1400);
 
+    /** Di bawah lebar ini ilustrasi hero disembunyikan agar konten tidak melebihi viewport. */
+    private static final double LEBAR_MIN_ILUSTRASI = 1180;
+    private static final double LEBAR_SEMPIT = 900;
+
     @FXML private ScrollPane spKonten;
     @FXML private VBox vbKonten;
+    @FXML private StackPane spIlustrasi;
+    @FXML private Region rgJarakHero;
     @FXML private VBox vbFitur;
     @FXML private VBox vbKursus;
     @FXML private FlowPane fpKursus;
@@ -71,6 +81,42 @@ public class LandingController {
         tfCari.textProperty().addListener((obs, lama, kata) -> tampilkanKursus(kursusService.cari(kata)));
         tfCari.setOnAction(e -> handleKeKursus());
         animasiDekorasi();
+        pasangResponsif();
+    }
+
+    /**
+     * Landing page selalu selebar viewport: ilustrasi hero dan padding menyesuaikan lebar layar,
+     * dan geser horizontal (touchpad/shift+scroll) diabaikan agar halaman tidak bisa digeser kiri-kanan.
+     */
+    private void pasangResponsif() {
+        spKonten.viewportBoundsProperty().addListener((obs, lama, baru) -> sesuaikanLebar(baru.getWidth()));
+        spKonten.addEventFilter(ScrollEvent.SCROLL, e -> {
+            if (Math.abs(e.getDeltaX()) > Math.abs(e.getDeltaY())) {
+                e.consume();
+            }
+        });
+        spKonten.hvalueProperty().addListener((obs, lama, nilai) -> {
+            if (nilai.doubleValue() != 0) {
+                spKonten.setHvalue(0);
+            }
+        });
+    }
+
+    private void sesuaikanLebar(double lebar) {
+        if (lebar <= 0) {
+            return;
+        }
+        boolean ilustrasi = lebar >= LEBAR_MIN_ILUSTRASI;
+        spIlustrasi.setVisible(ilustrasi);
+        spIlustrasi.setManaged(ilustrasi);
+        rgJarakHero.setManaged(ilustrasi);
+        double samping = lebar < LEBAR_SEMPIT ? 28 : 64;
+        for (Node bagian : vbKonten.getChildren()) {
+            if (bagian instanceof Region r && !r.getStyleClass().contains("footer-landing")) {
+                Insets p = r.getPadding();
+                r.setPadding(new Insets(p.getTop(), samping, p.getBottom(), samping));
+            }
+        }
     }
 
     /** Juli-Desember = semester ganjil, Januari-Juni = semester genap. */

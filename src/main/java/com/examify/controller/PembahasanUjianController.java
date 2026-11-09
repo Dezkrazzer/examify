@@ -103,6 +103,7 @@ public class PembahasanUjianController {
         TabelUtil.kolom(colPertanyaan, Soal::getPertanyaan);
         TabelUtil.kolom(colKunci, s -> s.bukaKunci(StatusUjian.SELESAI));
         TabelUtil.kolom(colBobot, s -> FormatUtil.angka(s.getBobot()) + " Poin");
+        TabelUtil.barisBisaDibuka(tvPembahasan, colPertanyaan, colKunci);
 
         tvPembahasan.setItems(FXCollections.observableArrayList(daftarSoal));
     }

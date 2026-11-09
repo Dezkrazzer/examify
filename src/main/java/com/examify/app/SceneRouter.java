@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -36,6 +37,8 @@ public final class SceneRouter {
     private static final String THEME_CSS = "/com/examify/css/theme.css";
     private static final String LOGO = "/com/examify/img/examifylogo.png";
     private static final String DARK_CSS = "/com/examify/css/dark.css";
+    private static final Color LATAR_TERANG = Color.web("#eef4fb");
+    private static final Color LATAR_GELAP = Color.web("#0a1120");
     private static final double LEBAR_AWAL = 1240;
     private static final double TINGGI_AWAL = 800;
 
@@ -130,6 +133,9 @@ public final class SceneRouter {
 
     private static void terapkanTemaKeScene(Scene target, boolean gelap) {
         target.getPreferences().setColorScheme(gelap ? ColorScheme.DARK : ColorScheme.LIGHT);
+        // Fill scene = warna latar tema. Saat layar penuh dengan skala DPI pecahan (125%/150%),
+        // ukuran root bisa lebih kecil 1-2 px dari layar; sisanya tidak lagi tampil sebagai strip putih.
+        target.setFill(gelap ? LATAR_GELAP : LATAR_TERANG);
         String theme = sumber(THEME_CSS).toExternalForm();
         String dark = sumber(DARK_CSS).toExternalForm();
         if (!target.getStylesheets().contains(theme)) {
