@@ -1,7 +1,7 @@
 package com.examify.app;
 
 import com.examify.utils.AppConfig;
-import com.examify.view.AnimasiUtil;
+import com.examify.view.AnimationUtil;
 import javafx.application.ColorScheme;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -10,13 +10,14 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
-import com.examify.view.GulirHalus;
+import com.examify.view.SmoothScroll;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -32,14 +33,16 @@ import java.util.Objects;
  */
 public final class SceneRouter {
 
-    private static final String SHELL_FXML = Layar.FOLDER_FXML + "shell.fxml";
+    private static final String SHELL_FXML = AppScreen.FOLDER_FXML + "shell.fxml";
     private static final String THEME_CSS = "/com/examify/css/theme.css";
     private static final String LOGO = "/com/examify/img/examifylogo.png";
     private static final String DARK_CSS = "/com/examify/css/dark.css";
+    private static final Color LATAR_TERANG = Color.web("#eef4fb");
+    private static final Color LATAR_GELAP = Color.web("#0a1120");
     private static final double LEBAR_AWAL = 1240;
     private static final double TINGGI_AWAL = 800;
 
-    private static final ObjectProperty<Layar> layarAktif = new SimpleObjectProperty<>();
+    private static final ObjectProperty<AppScreen> layarAktif = new SimpleObjectProperty<>();
     private static final BooleanProperty temaGelap = new SimpleBooleanProperty(false);
 
     private static Stage stage;
@@ -66,7 +69,7 @@ public final class SceneRouter {
                 ubah.getAddedSubList().forEach(SceneRouter::terapkanTemaKeJendela);
             }
         });
-        GulirHalus.pasang(scene);
+        SmoothScroll.pasang(scene);
         stage.setScene(scene);
         stage.setTitle(AppConfig.NAMA_APLIKASI);
         stage.getIcons().add(new Image(sumber(LOGO).toExternalForm()));
@@ -74,7 +77,7 @@ public final class SceneRouter {
         stage.setMinHeight(680);
     }
 
-    public static void pindah(Layar layar) {
+    public static void pindah(AppScreen layar) {
         stage.setOnCloseRequest(null); // handler khusus layar lama tidak boleh terbawa
         Parent halaman = muat(layar.getFxmlPath());
         if (layar.isDalamShell()) {
@@ -85,7 +88,7 @@ public final class SceneRouter {
             scene.setRoot(halaman);
         }
         layarAktif.set(layar);
-        AnimasiUtil.masuk(halaman);
+        AnimationUtil.masuk(halaman);
     }
 
     private static void pastikanShellTampil() {
@@ -100,7 +103,7 @@ public final class SceneRouter {
         kontenShell = konten;
     }
 
-    public static ReadOnlyObjectProperty<Layar> layarAktifProperty() {
+    public static ReadOnlyObjectProperty<AppScreen> layarAktifProperty() {
         return layarAktif;
     }
 
@@ -130,6 +133,9 @@ public final class SceneRouter {
 
     private static void terapkanTemaKeScene(Scene target, boolean gelap) {
         target.getPreferences().setColorScheme(gelap ? ColorScheme.DARK : ColorScheme.LIGHT);
+        // Fill scene = warna latar tema. Saat layar penuh dengan skala DPI pecahan (125%/150%),
+        // ukuran root bisa lebih kecil 1-2 px dari layar; sisanya tidak lagi tampil sebagai strip putih.
+        target.setFill(gelap ? LATAR_GELAP : LATAR_TERANG);
         String theme = sumber(THEME_CSS).toExternalForm();
         String dark = sumber(DARK_CSS).toExternalForm();
         if (!target.getStylesheets().contains(theme)) {

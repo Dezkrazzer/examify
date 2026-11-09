@@ -1,24 +1,24 @@
 package com.examify.controller;
 
 import com.examify.app.AppSession;
-import com.examify.app.Layar;
+import com.examify.app.AppScreen;
 import com.examify.app.SceneRouter;
-import com.examify.exception.JawabanKosongException;
+import com.examify.exception.EmptyAnswerException;
 import com.examify.exception.TimeOutException;
-import com.examify.io.PelanggaranWriter;
-import com.examify.keamanan.ModeAman;
-import com.examify.model.HasilUjian;
-import com.examify.model.ModeSubmit;
-import com.examify.model.Soal;
-import com.examify.model.StatusUjian;
-import com.examify.model.Ujian;
-import com.examify.service.UjianService;
+import com.examify.io.ViolationWriter;
+import com.examify.security.SecureMode;
+import com.examify.model.ExamResult;
+import com.examify.model.SubmitMode;
+import com.examify.model.Question;
+import com.examify.model.ExamStatus;
+import com.examify.model.Exam;
+import com.examify.service.ExamService;
 import com.examify.thread.TimerListener;
-import com.examify.thread.UjianTimer;
+import com.examify.thread.ExamTimer;
 import com.examify.utils.AppConfig;
 import com.examify.utils.FormatUtil;
-import com.examify.view.AnimasiUtil;
-import com.examify.view.SoalViewFactory;
+import com.examify.view.AnimationUtil;
+import com.examify.view.QuestionViewFactory;
 import javafx.animation.Animation;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -67,13 +67,13 @@ public class CbtRoomController implements TimerListener {
     @FXML private Label lblPeringatanAman;
 
     private final AppSession session = AppSession.getInstance();
-    private final UjianService ujianService = session.getUjianService();
-    private HasilUjian hasil;
-    private Ujian ujian;
+    private final ExamService ujianService = session.getUjianService();
+    private ExamResult hasil;
+    private Exam ujian;
     private int indeksAktif;
     private Animation denyutTimer;
     private final PauseTransition tutupBanner = new PauseTransition(DURASI_BANNER_INFO);
-    private final PelanggaranWriter pelanggaranWriter = new PelanggaranWriter(AppConfig.FILE_PELANGGARAN);
+    private final ViolationWriter pelanggaranWriter = new ViolationWriter(AppConfig.FILE_PELANGGARAN);
 
     @FXML
     private void initialize() {
@@ -95,23 +95,23 @@ public class CbtRoomController implements TimerListener {
     // ---------------------------------------------------------------- Mode Aman (STRICTLY_SAFE)
 
     private void mulaiModeAman() {
-        if (hasil.getStatus() == StatusUjian.SELESAI) {
+        if (hasil.getStatus() == ExamStatus.SELESAI) {
             return;
         }
-        ModeAman modeAman = new ModeAman(SceneRouter.getStage(), this::onPelanggaran, this::onAksiDiblokir);
+        SecureMode modeAman = new SecureMode(SceneRouter.getStage(), this::onPelanggaran, this::onAksiDiblokir);
         session.setModeAmanAktif(modeAman);
         modeAman.aktifkan();
         lblModeAman.setVisible(true);
         lblModeAman.setManaged(true);
     }
 
-    private void onPelanggaran(ModeAman.Pelanggaran p) {
+    private void onPelanggaran(SecureMode.Pelanggaran p) {
         tutupBanner.stop(); // peringatan pelanggaran tetap tampil sampai ada pesan baru
         tampilkanBanner("Peringatan ke-" + p.ke() + ": Anda terdeteksi meninggalkan jendela ujian. "
                 + "Kejadian ini dicatat dan dapat dilihat oleh guru.", false);
         var siswa = hasil.getSiswa();
         try {
-            pelanggaranWriter.tulis(new PelanggaranWriter.Catatan(p.waktu(), siswa.getNis(), siswa.getNama(),
+            pelanggaranWriter.tulis(new ViolationWriter.Catatan(p.waktu(), siswa.getNis(), siswa.getNama(),
                     ujian.getKodeUjian(), p.ke(), p.jenis(), p.keterangan()));
         } catch (IOException e) {
             System.err.println("Pelanggaran gagal dicatat: " + e.getMessage());
@@ -138,7 +138,7 @@ public class CbtRoomController implements TimerListener {
     }
 
     private void mulaiTimer() {
-        UjianTimer timer = new UjianTimer(ujian.getDurasiDetik(), this);
+        ExamTimer timer = new ExamTimer(ujian.getDurasiDetik(), this);
         session.setTimerAktif(timer);
         timer.mulai();
     }
@@ -153,19 +153,19 @@ public class CbtRoomController implements TimerListener {
         }
     }
 
-    private Soal soalAktif() {
+    private Question soalAktif() {
         return ujian.getSoalBerdasarkanIndeks(indeksAktif);
     }
 
     private void tampilkanSoal(int indeks) {
         indeksAktif = indeks;
-        Soal soal = soalAktif();
+        Question soal = soalAktif();
         lblNomor.setText("Soal " + (indeks + 1) + " dari " + ujian.getJumlahSoal());
         lblJenis.setText(soal.getJenis().getLabel());
         lblPertanyaan.setText(soal.getPertanyaan());
         lblPetunjuk.setText(soal.getPetunjukFormat());
         lblPeringatan.setText("");
-        Node input = SoalViewFactory.buatInput(soal, hasil.getJawaban(soal.getIdSoal()), this::simpanJawabanAktif);
+        Node input = QuestionViewFactory.buatInput(soal, hasil.getJawaban(soal.getIdSoal()), this::simpanJawabanAktif);
         vbInput.getChildren().setAll(input);
         input.requestFocus(); // siswa bisa langsung mengetik jawaban isian
         btnSebelumnya.setDisable(indeks == 0);
@@ -183,11 +183,11 @@ public class CbtRoomController implements TimerListener {
         try {
             hasil.simpanJawaban(idSoal, jawaban);
             lblPeringatan.setText("");
-        } catch (JawabanKosongException e) {
+        } catch (EmptyAnswerException e) {
             hasil.hapusJawaban(idSoal);
             lblPeringatan.setText("Jawaban kosong, soal ditandai belum dijawab.");
         } catch (TimeOutException e) {
-            selesaikanUjian(ModeSubmit.AUTO_SUBMIT);
+            selesaikanUjian(SubmitMode.AUTO_SUBMIT);
             return;
         }
         perbaruiNavigasi();
@@ -263,7 +263,7 @@ public class CbtRoomController implements TimerListener {
 
 
         if (DialogUtil.konfirmasi(sb.toString())) {
-            selesaikanUjian(ModeSubmit.MANUAL);
+            selesaikanUjian(SubmitMode.MANUAL);
         }
     }
 
@@ -273,18 +273,18 @@ public class CbtRoomController implements TimerListener {
         boolean kritis = sisaDetik <= AppConfig.BATAS_WAKTU_KRITIS_DETIK;
         if (kritis && denyutTimer == null) {
             lblTimer.getStyleClass().add(TIMER_KRITIS);
-            denyutTimer = AnimasiUtil.denyut(lblTimer); // sekali dipasang, berdenyut sampai ujian selesai
+            denyutTimer = AnimationUtil.denyut(lblTimer); // sekali dipasang, berdenyut sampai ujian selesai
         }
     }
 
     @Override
     public void onWaktuHabis() {
         // jawaban sudah tersimpan setiap kali berubah, jadi cukup dikumpulkan
-        selesaikanUjian(ModeSubmit.AUTO_SUBMIT);
+        selesaikanUjian(SubmitMode.AUTO_SUBMIT);
     }
 
-    private void selesaikanUjian(ModeSubmit mode) {
-        if (hasil.getStatus() == StatusUjian.SELESAI) {
+    private void selesaikanUjian(SubmitMode mode) {
+        if (hasil.getStatus() == ExamStatus.SELESAI) {
             return; // klik Selesai dan waktu habis bisa terjadi bersamaan
         }
         session.hentikanTimer();
@@ -305,13 +305,13 @@ public class CbtRoomController implements TimerListener {
         } catch (IOException e) {
             DialogUtil.peringatan("Nilai tersimpan di sesi ini, tetapi rekap gagal ditulis ke file: " + e.getMessage());
         }
-        if (hasil.getModeSubmit() == ModeSubmit.AUTO_SUBMIT) {
+        if (hasil.getModeSubmit() == SubmitMode.AUTO_SUBMIT) {
             DialogUtil.info("Waktu habis. Jawaban Anda telah dikumpulkan otomatis.");
         }
-        SceneRouter.pindah(Layar.RESULT);
+        SceneRouter.pindah(AppScreen.RESULT);
     }
 
-    private void kumpulkan(ModeSubmit mode) throws IOException {
+    private void kumpulkan(SubmitMode mode) throws IOException {
         try {
             ujianService.selesaikan(hasil, mode);
         } catch (TimeOutException e) {

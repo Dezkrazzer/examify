@@ -1,6 +1,6 @@
 package com.examify.io;
 
-import com.examify.exception.FormatDataException;
+import com.examify.exception.DataFormatException;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface DataReader<T> {
 
-    List<T> baca(Path path) throws IOException, FormatDataException;
+    List<T> baca(Path path) throws IOException, DataFormatException;
 }

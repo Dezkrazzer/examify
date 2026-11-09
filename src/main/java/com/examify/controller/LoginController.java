@@ -1,12 +1,12 @@
 package com.examify.controller;
 
 import com.examify.app.AppSession;
-import com.examify.app.Layar;
+import com.examify.app.AppScreen;
 import com.examify.app.SceneRouter;
-import com.examify.model.Guru;
-import com.examify.model.Siswa;
+import com.examify.model.Teacher;
+import com.examify.model.Student;
 import com.examify.utils.StringUtil;
-import com.examify.view.AnimasiUtil;
+import com.examify.view.AnimationUtil;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,7 +32,7 @@ public class LoginController {
 
     @FXML
     private void initialize() {
-        TemaUtil.pasang(btnTema, false);
+        ThemeUtil.pasang(btnTema, false);
         tfNis.setTextFormatter(new TextFormatter<String>(ubah ->
                 ubah.getControlNewText().matches(POLA_IDENTITAS) ? ubah : null));
         lblError.setText("");
@@ -49,17 +49,17 @@ public class LoginController {
         }
 
         var authService = session.getAuthService();
-        Optional<Guru> optGuru = authService.loginGuru(identitas, pin);
+        Optional<Teacher> optGuru = authService.loginGuru(identitas, pin);
         if (optGuru.isPresent()) {
             session.setGuruAktif(optGuru.get());
-            SceneRouter.pindah(Layar.KURSUS_SAYA);
+            SceneRouter.pindah(AppScreen.KURSUS_SAYA);
             return;
         }
 
-        Optional<Siswa> optSiswa = authService.loginSiswa(identitas, pin);
+        Optional<Student> optSiswa = authService.loginSiswa(identitas, pin);
         if (optSiswa.isPresent()) {
             session.setSiswaAktif(optSiswa.get());
-            SceneRouter.pindah(Layar.KURSUS_SAYA);
+            SceneRouter.pindah(AppScreen.KURSUS_SAYA);
             return;
         }
 
@@ -70,11 +70,11 @@ public class LoginController {
         lblError.setText(pesan);
         pfPin.clear();
         pfPin.requestFocus();
-        AnimasiUtil.getar(vbKartu);
+        AnimationUtil.getar(vbKartu);
     }
 
     @FXML
     private void handleKembali() {
-        SceneRouter.pindah(Layar.LANDING);
+        SceneRouter.pindah(AppScreen.LANDING);
     }
 }

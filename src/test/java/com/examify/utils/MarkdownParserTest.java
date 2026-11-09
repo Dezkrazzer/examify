@@ -2,7 +2,7 @@ package com.examify.utils;
 
 import com.examify.utils.MarkdownParser.Blok;
 import com.examify.utils.MarkdownParser.GayaTeks;
-import com.examify.utils.MarkdownParser.JenisBlok;
+import com.examify.utils.MarkdownParser.BlockType;
 import com.examify.utils.MarkdownParser.Potongan;
 import org.junit.jupiter.api.Test;
 
@@ -25,19 +25,19 @@ class MarkdownParserTest {
                 ---
                 """);
         assertEquals(List.of(
-                new Blok(JenisBlok.HEADING, "Judul", 1),
-                new Blok(JenisBlok.PARAGRAF, "Baris satu baris dua.", 0),
-                new Blok(JenisBlok.BUTIR, "butir", 0),
-                new Blok(JenisBlok.NOMOR, "nomor", 2),
-                new Blok(JenisBlok.KUTIPAN, "catatan", 0),
-                new Blok(JenisBlok.GARIS, "", 0)), blok);
+                new Blok(BlockType.HEADING, "Judul", 1),
+                new Blok(BlockType.PARAGRAF, "Baris satu baris dua.", 0),
+                new Blok(BlockType.BUTIR, "butir", 0),
+                new Blok(BlockType.NOMOR, "nomor", 2),
+                new Blok(BlockType.KUTIPAN, "catatan", 0),
+                new Blok(BlockType.GARIS, "", 0)), blok);
     }
 
     @Test
     void blokKodeMempertahankanIndentasiDanTidakDiparse() {
         List<Blok> blok = MarkdownParser.parse("```java\nclass A {\n    # bukan heading\n}\n```");
         assertEquals(1, blok.size());
-        assertEquals(new Blok(JenisBlok.KODE, "class A {\n    # bukan heading\n}", 0), blok.get(0));
+        assertEquals(new Blok(BlockType.KODE, "class A {\n    # bukan heading\n}", 0), blok.get(0));
     }
 
     @Test

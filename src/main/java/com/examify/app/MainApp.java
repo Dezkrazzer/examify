@@ -1,29 +1,29 @@
 package com.examify.app;
 
-import com.examify.exception.FormatDataException;
-import com.examify.io.BankSoalReader;
-import com.examify.io.BankSoalWriter;
+import com.examify.exception.DataFormatException;
+import com.examify.io.QuestionBankReader;
+import com.examify.io.QuestionBankWriter;
 import com.examify.io.DataReader;
-import com.examify.io.GuruReader;
-import com.examify.io.KursusReader;
-import com.examify.io.KursusWriter;
-import com.examify.io.ProgresBelajarReader;
-import com.examify.io.ProgresBelajarWriter;
-import com.examify.io.RekapNilaiReader;
-import com.examify.io.RekapNilaiWriter;
-import com.examify.io.SertifikatWriter;
-import com.examify.io.SiswaReader;
-import com.examify.model.Guru;
-import com.examify.model.Siswa;
-import com.examify.model.Ujian;
+import com.examify.io.TeacherReader;
+import com.examify.io.CourseReader;
+import com.examify.io.CourseWriter;
+import com.examify.io.LearningProgressReader;
+import com.examify.io.LearningProgressWriter;
+import com.examify.io.GradeRecapReader;
+import com.examify.io.GradeRecapWriter;
+import com.examify.io.CertificateWriter;
+import com.examify.io.StudentReader;
+import com.examify.model.Teacher;
+import com.examify.model.Student;
+import com.examify.model.Exam;
 import com.examify.service.AuthService;
-import com.examify.service.KursusService;
-import com.examify.service.PendaftaranKursusService;
-import com.examify.service.ProgresBelajarService;
-import com.examify.service.TugasService;
-import com.examify.service.RekapService;
-import com.examify.service.SertifikatService;
-import com.examify.service.UjianService;
+import com.examify.service.CourseService;
+import com.examify.service.CourseEnrollmentService;
+import com.examify.service.LearningProgressService;
+import com.examify.service.AssignmentService;
+import com.examify.service.GradeRecapService;
+import com.examify.service.CertificateService;
+import com.examify.service.ExamService;
 import com.examify.utils.AppConfig;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -50,26 +50,26 @@ public class MainApp extends Application {
                 + MainApp.class.desiredAssertionStatus());
         try {
             AppConfig.siapkanFolderOutput();
-            List<Siswa> daftarSiswa = muat(new SiswaReader(), AppConfig.FILE_SISWA);
-            List<Guru> daftarGuru = muat(new GuruReader(), AppConfig.FILE_GURU);
-            List<Ujian> daftarUjian = muat(new BankSoalReader(), AppConfig.FILE_BANK_SOAL);
-            var rekapService = new RekapService(new RekapNilaiWriter(AppConfig.FILE_REKAP),
-                    muat(new RekapNilaiReader(), AppConfig.FILE_REKAP));
-            var bankSoalWriter = new BankSoalWriter();
-            var ujianService = new UjianService(daftarUjian, rekapService, Clock.systemDefaultZone(),
+            List<Student> daftarSiswa = muat(new StudentReader(), AppConfig.FILE_SISWA);
+            List<Teacher> daftarGuru = muat(new TeacherReader(), AppConfig.FILE_GURU);
+            List<Exam> daftarUjian = muat(new QuestionBankReader(), AppConfig.FILE_BANK_SOAL);
+            var rekapService = new GradeRecapService(new GradeRecapWriter(AppConfig.FILE_REKAP),
+                    muat(new GradeRecapReader(), AppConfig.FILE_REKAP));
+            var bankSoalWriter = new QuestionBankWriter();
+            var ujianService = new ExamService(daftarUjian, rekapService, Clock.systemDefaultZone(),
                     bankSoalWriter, AppConfig.FILE_BANK_SOAL);
-            var kursusWriter = new KursusWriter(AppConfig.DIR_DATA);
-            var kursusService = new KursusService(
-                    muat(new KursusReader(AppConfig.DIR_DATA), AppConfig.FILE_KURSUS), ujianService, kursusWriter, AppConfig.FILE_KURSUS);
-            var progresService = new ProgresBelajarService(new ProgresBelajarWriter(AppConfig.FILE_PROGRES),
-                    muat(new ProgresBelajarReader(), AppConfig.FILE_PROGRES), kursusService, rekapService);
-            var pendaftaranService = new PendaftaranKursusService(AppConfig.FILE_PENDAFTARAN, progresService);
-            var tugasService = new TugasService(AppConfig.FILE_PENGUMPULAN_TUGAS, AppConfig.DIR_PENGUMPULAN_TUGAS);
+            var kursusWriter = new CourseWriter(AppConfig.DIR_DATA);
+            var kursusService = new CourseService(
+                    muat(new CourseReader(AppConfig.DIR_DATA), AppConfig.FILE_KURSUS), ujianService, kursusWriter, AppConfig.FILE_KURSUS);
+            var progresService = new LearningProgressService(new LearningProgressWriter(AppConfig.FILE_PROGRES),
+                    muat(new LearningProgressReader(), AppConfig.FILE_PROGRES), kursusService, rekapService);
+            var pendaftaranService = new CourseEnrollmentService(AppConfig.FILE_PENDAFTARAN, progresService);
+            var tugasService = new AssignmentService(AppConfig.FILE_PENGUMPULAN_TUGAS, AppConfig.DIR_PENGUMPULAN_TUGAS);
             AppSession.getInstance().pasangService(
                     new AuthService(daftarSiswa, daftarGuru),
                     ujianService,
                     rekapService,
-                    new SertifikatService(new SertifikatWriter(AppConfig.DIR_SERTIFIKAT)),
+                    new CertificateService(new CertificateWriter(AppConfig.DIR_SERTIFIKAT)),
                     kursusService,
                     progresService,
                     pendaftaranService,
@@ -79,7 +79,7 @@ public class MainApp extends Application {
         }
     }
 
-    private static <T> List<T> muat(DataReader<T> reader, Path file) throws IOException, FormatDataException {
+    private static <T> List<T> muat(DataReader<T> reader, Path file) throws IOException, DataFormatException {
         List<T> data = reader.baca(file);
         System.err.println("[" + AppConfig.NAMA_APLIKASI + "] " + data.size() + " data dimuat dari " + file);
         return data;
@@ -107,7 +107,7 @@ public class MainApp extends Application {
         muatFont();
         AppSession.getInstance().pasangHostServices(getHostServices());
         SceneRouter.init(stage);
-        SceneRouter.pindah(Layar.LANDING);
+        SceneRouter.pindah(AppScreen.LANDING);
         stage.show();
     }
 

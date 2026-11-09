@@ -82,13 +82,14 @@ examify/
     │   ├── java/
     │   │   ├── module-info.java
     │   │   └── com/examify/
-    │   │       ├── app/         MainApp, SceneRouter (shell + tema), Layar, AppSession
+    │   │       ├── app/         MainApp, SceneRouter (shell + tema), AppScreen, AppSession
     │   │       ├── controller/  satu controller per layar FXML
-    │   │       ├── view/        komponen UI: AnimasiUtil, LatarAnimasi, IkonView, MarkdownView, ...
-    │   │       ├── service/     logika bisnis (Auth, Ujian, Rekap, Kursus, ProgresBelajar, ...)
-    │   │       ├── model/       entitas domain, record, enum
+    │   │       ├── view/        komponen UI: AnimationUtil, AnimatedBackground, IconView, MarkdownView, ...
+    │   │       ├── service/     logika bisnis (Auth, Exam, GradeRecap, Course, LearningProgress, ...)
+    │   │       ├── security/    Mode Aman: SecureMode, KeyboardBlocker, ForegroundGuard
+│   │       ├── model/       entitas domain, record, enum
     │   │       ├── io/          reader & writer file teks
-    │   │       ├── thread/      UjianTimer (Runnable) & TimerListener
+    │   │       ├── thread/      ExamTimer (Runnable) & TimerListener
     │   │       ├── exception/   exception kustom (checked)
     │   │       └── utils/       AppConfig, StringUtil, FormatUtil, MarkdownParser, ...
     │   └── resources/com/examify/

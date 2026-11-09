@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.examify.view.IkonView?>
-<?import com.examify.view.LatarAnimasi?>
+<?import com.examify.view.IconView?>
+<?import com.examify.view.AnimatedBackground?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
@@ -20,7 +20,7 @@
 
 <StackPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.examify.controller.LandingController" styleClass="latar">
-    <LatarAnimasi/>
+    <AnimatedBackground/>
     <BorderPane>
         <top>
             <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="10">
@@ -33,23 +33,23 @@
                 <Button text="Tim" styleClass="nav-link" onAction="#handleKeTim"/>
                 <Button fx:id="btnTema" styleClass="tombol-ikon"/>
                 <Button text="Masuk" styleClass="tombol-utama" onAction="#handleMasuk">
-                    <graphic><IkonView ikon="PROFIL" ukuran="16"/></graphic>
+                    <graphic><IconView ikon="PROFIL" ukuran="16"/></graphic>
                 </Button>
             </HBox>
         </top>
         <center>
-            <ScrollPane fx:id="spKonten" fitToWidth="true" hbarPolicy="NEVER">
-                <VBox fx:id="vbKonten">
+            <ScrollPane fx:id="spKonten" fitToWidth="true" hbarPolicy="NEVER" pannable="false">
+                <VBox fx:id="vbKonten" minWidth="0">
                     <!-- ===== Hero ===== -->
                     <HBox fx:id="hbHero" spacing="40" alignment="CENTER_LEFT">
                         <padding><Insets top="56" right="64" bottom="56" left="64"/></padding>
-                        <VBox spacing="20" HBox.hgrow="ALWAYS" maxWidth="620">
+                        <VBox spacing="20" HBox.hgrow="ALWAYS" maxWidth="620" minWidth="0">
                             <HBox styleClass="badge" alignment="CENTER_LEFT" spacing="8" maxWidth="-Infinity">
                                 <Circle fx:id="cTitikHidup" radius="4" styleClass="titik-hidup"/>
                                 <Label fx:id="lblSemester" styleClass="badge-teks"/>
                             </HBox>
                             <VBox spacing="0">
-                                <Label text="Belajar &amp; ujian online," styleClass="judul-hero" minWidth="-Infinity"/>
+                                <Label text="Belajar &amp; ujian online," styleClass="judul-hero" wrapText="true"/>
                                 <HBox alignment="TOP_LEFT">
                                     <VBox>
                                         <Label text="kapan saja" styleClass="judul-hero-aksen" minWidth="-Infinity"/>
@@ -63,23 +63,23 @@
                             <HBox spacing="14">
                                 <Button text="Masuk ke Examify" styleClass="tombol-utama, tombol-besar" onAction="#handleMasuk"
                                         contentDisplay="RIGHT">
-                                    <graphic><IkonView ikon="PANAH_KANAN" ukuran="18"/></graphic>
+                                    <graphic><IconView ikon="PANAH_KANAN" ukuran="18"/></graphic>
                                 </Button>
                                 <Button text="Jelajahi kursus" styleClass="tombol-sekunder, tombol-besar" onAction="#handleKeKursus"/>
                             </HBox>
                             <HBox styleClass="kotak-cari" alignment="CENTER_LEFT" spacing="8" maxWidth="520">
-                                <IkonView ikon="CARI" ukuran="18"/>
+                                <IconView ikon="CARI" ukuran="18"/>
                                 <TextField fx:id="tfCari" promptText="Cari nama atau kode kursus..." HBox.hgrow="ALWAYS"/>
                             </HBox>
                         </VBox>
-                        <Region HBox.hgrow="ALWAYS"/>
+                        <Region fx:id="rgJarakHero" HBox.hgrow="ALWAYS"/>
                         <StackPane fx:id="spIlustrasi" minWidth="460" prefWidth="460" prefHeight="440">
                             <Circle radius="200" styleClass="hero-lingkaran"/>
                             <Circle fx:id="cCincin" radius="222" styleClass="hero-cincin"/>
                             <!-- Mock jendela ujian -->
                             <VBox fx:id="vbMockUjian" styleClass="kaca, kaca-kuat" spacing="10" maxWidth="250" maxHeight="-Infinity" translateX="95">
                                 <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <StackPane styleClass="ikon-materi, ikon-materi-ujian"><IkonView ikon="UJIAN" ukuran="20"/></StackPane>
+                                    <StackPane styleClass="ikon-materi, ikon-materi-ujian"><IconView ikon="UJIAN" ukuran="20"/></StackPane>
                                     <VBox>
                                         <Label text="Ujian CBT" styleClass="judul-kartu"/>
                                         <Label text="PBO-01 - 10 soal" styleClass="teks-kecil"/>
@@ -113,19 +113,19 @@
                         <padding><Insets top="8" right="64" bottom="24" left="64"/></padding>
                         <HBox fx:id="hbFitur" spacing="20">
                             <VBox styleClass="kaca, kartu-fitur" spacing="10" HBox.hgrow="ALWAYS">
-                                <StackPane styleClass="ikon-fitur"><IkonView ikon="BUKU" ukuran="22"/></StackPane>
+                                <StackPane styleClass="ikon-fitur"><IconView ikon="BUKU" ukuran="22"/></StackPane>
                                 <Label text="Materi per bab" styleClass="judul-kartu"/>
                                 <Label styleClass="teks-redup" wrapText="true"
                                        text="Bacaan Markdown, tautan video atau slide, dan PDF tersusun rapi di setiap bab."/>
                             </VBox>
                             <VBox styleClass="kaca, kartu-fitur" spacing="10" HBox.hgrow="ALWAYS">
-                                <StackPane styleClass="ikon-fitur"><IkonView ikon="JAM" ukuran="22"/></StackPane>
+                                <StackPane styleClass="ikon-fitur"><IconView ikon="JAM" ukuran="22"/></StackPane>
                                 <Label text="Ujian CBT ber-timer" styleClass="judul-kartu"/>
                                 <Label styleClass="teks-redup" wrapText="true"
                                        text="Token ujian, navigasi soal, simpan otomatis, dan pengumpulan otomatis saat waktu habis."/>
                             </VBox>
                             <VBox styleClass="kaca, kartu-fitur" spacing="10" HBox.hgrow="ALWAYS">
-                                <StackPane styleClass="ikon-fitur"><IkonView ikon="PIALA" ukuran="22"/></StackPane>
+                                <StackPane styleClass="ikon-fitur"><IconView ikon="PIALA" ukuran="22"/></StackPane>
                                 <Label text="Nilai &amp; sertifikat" styleClass="judul-kartu"/>
                                 <Label styleClass="teks-redup" wrapText="true"
                                        text="Riwayat nilai tersimpan permanen, lengkap dengan grafik dan e-sertifikat untuk ujian yang lulus."/>

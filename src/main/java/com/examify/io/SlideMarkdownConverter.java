@@ -1,8 +1,8 @@
 package com.examify.io;
 
-import com.examify.model.materi.DrafBlok;
-import com.examify.model.materi.DrafSlide;
-import com.examify.model.materi.JenisBlok;
+import com.examify.model.material.BlockDraft;
+import com.examify.model.material.SlideDraft;
+import com.examify.model.material.BlockType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +24,11 @@ public final class SlideMarkdownConverter {
     }
 
     /** Mem-parsing teks Markdown menjadi daftar DrafSlide beserta blok-blok kontennya. */
-    public static List<DrafSlide> parse(String markdown) {
-        List<DrafSlide> daftarSlide = new ArrayList<>();
+    public static List<SlideDraft> parse(String markdown) {
+        List<SlideDraft> daftarSlide = new ArrayList<>();
         if (markdown == null || markdown.trim().isEmpty()) {
-            DrafSlide s = new DrafSlide("Slide 1");
-            s.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, ""));
+            SlideDraft s = new SlideDraft("Slide 1");
+            s.tambahBlok(new BlockDraft(BlockType.PARAGRAF, ""));
             daftarSlide.add(s);
             return daftarSlide;
         }
@@ -48,7 +48,7 @@ public final class SlideMarkdownConverter {
         }
 
         if (splitStarts.isEmpty()) {
-            DrafSlide s = parseKontenSlide(teksBersih, "Slide 1");
+            SlideDraft s = parseKontenSlide(teksBersih, "Slide 1");
             daftarSlide.add(s);
             return daftarSlide;
         }
@@ -72,18 +72,18 @@ public final class SlideMarkdownConverter {
         }
 
         if (daftarSlide.isEmpty()) {
-            DrafSlide s = new DrafSlide("Slide 1");
-            s.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, ""));
+            SlideDraft s = new SlideDraft("Slide 1");
+            s.tambahBlok(new BlockDraft(BlockType.PARAGRAF, ""));
             daftarSlide.add(s);
         }
 
         return daftarSlide;
     }
 
-    private static DrafSlide parseKontenSlide(String teks, String judulDefault) {
-        DrafSlide slide = new DrafSlide(judulDefault);
+    private static SlideDraft parseKontenSlide(String teks, String judulDefault) {
+        SlideDraft slide = new SlideDraft(judulDefault);
         if (teks == null || teks.trim().isEmpty()) {
-            slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, ""));
+            slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, ""));
             return slide;
         }
 
@@ -96,7 +96,7 @@ public final class SlideMarkdownConverter {
 
             if (trim.isEmpty()) {
                 if (!bufferParagraf.isEmpty()) {
-                    slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
                     bufferParagraf.setLength(0);
                 }
                 continue;
@@ -115,7 +115,7 @@ public final class SlideMarkdownConverter {
 
             if (trimH1.startsWith("# ") && !trimH1.startsWith("## ")) {
                 if (!bufferParagraf.isEmpty()) {
-                    slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
                     bufferParagraf.setLength(0);
                 }
                 String judulH1 = trimH1.substring(2).trim();
@@ -126,7 +126,7 @@ public final class SlideMarkdownConverter {
                     alignH1 = "right";
                     judulH1 = judulH1.substring(19, judulH1.length() - 6).trim();
                 }
-                slide.tambahBlok(new DrafBlok(JenisBlok.HEADING_1, judulH1, alignH1));
+                slide.tambahBlok(new BlockDraft(BlockType.HEADING_1, judulH1, alignH1));
                 if ("Slide 1".equals(slide.getJudulSlide()) || slide.getJudulSlide().startsWith("Slide ")) {
                     slide.setJudulSlide(judulH1);
                 }
@@ -146,7 +146,7 @@ public final class SlideMarkdownConverter {
 
             if (trimH2.startsWith("## ")) {
                 if (!bufferParagraf.isEmpty()) {
-                    slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
                     bufferParagraf.setLength(0);
                 }
                 String judulH2 = trimH2.substring(3).trim();
@@ -157,7 +157,7 @@ public final class SlideMarkdownConverter {
                     alignH2 = "right";
                     judulH2 = judulH2.substring(19, judulH2.length() - 6).trim();
                 }
-                slide.tambahBlok(new DrafBlok(JenisBlok.HEADING_2, judulH2, alignH2));
+                slide.tambahBlok(new BlockDraft(BlockType.HEADING_2, judulH2, alignH2));
                 continue;
             }
 
@@ -165,12 +165,12 @@ public final class SlideMarkdownConverter {
             Matcher mYt = POLA_YOUTUBE.matcher(trim);
             if (mYt.matches()) {
                 if (!bufferParagraf.isEmpty()) {
-                    slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
                     bufferParagraf.setLength(0);
                 }
                 String url = mYt.group(1).trim();
                 String label = mYt.group(2) != null ? mYt.group(2).trim() : "";
-                slide.tambahBlok(new DrafBlok(JenisBlok.VIDEO, url, label));
+                slide.tambahBlok(new BlockDraft(BlockType.VIDEO, url, label));
                 continue;
             }
 
@@ -178,19 +178,19 @@ public final class SlideMarkdownConverter {
             Matcher mGb = POLA_GAMBAR.matcher(trim);
             if (mGb.matches()) {
                 if (!bufferParagraf.isEmpty()) {
-                    slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
                     bufferParagraf.setLength(0);
                 }
                 String caption = mGb.group(1).trim();
                 String path = mGb.group(2).trim();
-                slide.tambahBlok(new DrafBlok(JenisBlok.GAMBAR, path, caption));
+                slide.tambahBlok(new BlockDraft(BlockType.GAMBAR, path, caption));
                 continue;
             }
 
             // Blok Kode: ```lang ... ```
             if (trim.startsWith("```")) {
                 if (!bufferParagraf.isEmpty()) {
-                    slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
                     bufferParagraf.setLength(0);
                 }
                 String bahasa = trim.substring(3).trim();
@@ -200,14 +200,14 @@ public final class SlideMarkdownConverter {
                     sbKode.append(baris[i]).append("\n");
                     i++;
                 }
-                slide.tambahBlok(new DrafBlok(JenisBlok.KODE, sbKode.toString().stripTrailing(), bahasa));
+                slide.tambahBlok(new BlockDraft(BlockType.KODE, sbKode.toString().stripTrailing(), bahasa));
                 continue;
             }
 
             // Callout: > [!NOTE] atau Kutipan >
             if (trim.startsWith(">")) {
                 if (!bufferParagraf.isEmpty()) {
-                    slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
                     bufferParagraf.setLength(0);
                 }
 
@@ -222,7 +222,7 @@ public final class SlideMarkdownConverter {
                         i++;
                     }
                     i--; // kembalikan pointer 1 langkah
-                    slide.tambahBlok(new DrafBlok(JenisBlok.CALLOUT, sbCallout.toString().trim(), jenisCallout));
+                    slide.tambahBlok(new BlockDraft(BlockType.CALLOUT, sbCallout.toString().trim(), jenisCallout));
                 } else {
                     // Kutipan biasa
                     StringBuilder sbKutipan = new StringBuilder();
@@ -231,7 +231,7 @@ public final class SlideMarkdownConverter {
                         i++;
                     }
                     i--;
-                    slide.tambahBlok(new DrafBlok(JenisBlok.KUTIPAN, sbKutipan.toString().trim()));
+                    slide.tambahBlok(new BlockDraft(BlockType.KUTIPAN, sbKutipan.toString().trim()));
                 }
                 continue;
             }
@@ -244,18 +244,18 @@ public final class SlideMarkdownConverter {
         }
 
         if (!bufferParagraf.isEmpty()) {
-            slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, bufferParagraf.toString().trim()));
+            slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, bufferParagraf.toString().trim()));
         }
 
         if (slide.getDaftarBlok().isEmpty()) {
-            slide.tambahBlok(new DrafBlok(JenisBlok.PARAGRAF, ""));
+            slide.tambahBlok(new BlockDraft(BlockType.PARAGRAF, ""));
         }
 
         return slide;
     }
 
     /** Men-serialisasi satu DrafSlide ke format Markdown standar. */
-    public static String toMarkdown(DrafSlide slide) {
+    public static String toMarkdown(SlideDraft slide) {
         if (slide == null) {
             return "";
         }
@@ -263,14 +263,14 @@ public final class SlideMarkdownConverter {
     }
 
     /** Men-serialisasi daftar DrafSlide kembali ke format Markdown UTF-8 standar. */
-    public static String toMarkdown(List<DrafSlide> daftarSlide) {
+    public static String toMarkdown(List<SlideDraft> daftarSlide) {
         if (daftarSlide == null || daftarSlide.isEmpty()) {
             return "";
         }
 
         StringBuilder sb = new StringBuilder();
         for (int sIdx = 0; sIdx < daftarSlide.size(); sIdx++) {
-            DrafSlide slide = daftarSlide.get(sIdx);
+            SlideDraft slide = daftarSlide.get(sIdx);
 
             if (sIdx > 0) {
                 String jdl = slide.getJudulSlide();
@@ -280,7 +280,7 @@ public final class SlideMarkdownConverter {
                 sb.append("\n<!-- slide: ").append(jdl).append(" -->\n\n");
             }
 
-            for (DrafBlok blok : slide.getDaftarBlok()) {
+            for (BlockDraft blok : slide.getDaftarBlok()) {
                 String isi = blok.getIsi() == null ? "" : blok.getIsi().trim();
                 switch (blok.getJenis()) {
                     case HEADING_1 -> {

@@ -1,10 +1,10 @@
 package com.examify.controller;
 
 import com.examify.app.AppSession;
-import com.examify.app.Layar;
+import com.examify.app.AppScreen;
 import com.examify.app.SceneRouter;
-import com.examify.model.Guru;
-import com.examify.model.Siswa;
+import com.examify.model.Teacher;
+import com.examify.model.Student;
 import com.examify.utils.FormatUtil;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.WeakChangeListener;
@@ -30,12 +30,12 @@ public class ShellController {
     @FXML private Label lblNis;
 
     private final AppSession session = AppSession.getInstance();
-    private final ChangeListener<Layar> listenerLayar = (obs, lama, layar) -> sorotMenu(layar);
+    private final ChangeListener<AppScreen> listenerLayar = (obs, lama, layar) -> sorotMenu(layar);
 
     @FXML
     private void initialize() {
         SceneRouter.pasangKontenShell(spKonten);
-        TemaUtil.pasang(btnTema, true);
+        ThemeUtil.pasang(btnTema, true);
 
         ToggleGroup grup = new ToggleGroup();
         tbKursus.setToggleGroup(grup);
@@ -46,7 +46,7 @@ public class ShellController {
         SceneRouter.layarAktifProperty().addListener(new WeakChangeListener<>(listenerLayar));
 
         if (session.isGuru()) {
-            Guru guru = session.getGuruAktif();
+            Teacher guru = session.getGuruAktif();
             lblAvatar.setText(FormatUtil.inisial(guru.getNama()));
             lblNama.setText(guru.getNama());
             lblNis.setText("Guru • NIP " + guru.getNip());
@@ -59,7 +59,7 @@ public class ShellController {
             tbProfil.setVisible(false);
             tbProfil.setManaged(false);
         } else if (session.isSiswa()) {
-            Siswa siswa = session.getSiswaAktif();
+            Student siswa = session.getSiswaAktif();
             lblAvatar.setText(FormatUtil.inisial(siswa.getNama()));
             lblNama.setText(siswa.getNama());
             lblNis.setText(siswa.getNis() + " - " + siswa.getKelas());
@@ -74,37 +74,37 @@ public class ShellController {
         }
     }
 
-    private void sorotMenu(Layar layar) {
-        tbKursus.setSelected(layar == Layar.KURSUS_SAYA || layar == Layar.KURSUS_DETAIL);
-        tbKalender.setSelected(layar == Layar.KALENDER);
-        tbBankSoal.setSelected(layar == Layar.BANK_SOAL || layar == Layar.EDITOR_UJIAN);
-        tbSiswa.setSelected(layar == Layar.GURU_SISWA || layar == Layar.GURU_DETAIL_SISWA);
-        tbProfil.setSelected(layar == Layar.PROFIL || layar == Layar.PEMBAHASAN_UJIAN);
+    private void sorotMenu(AppScreen layar) {
+        tbKursus.setSelected(layar == AppScreen.KURSUS_SAYA || layar == AppScreen.KURSUS_DETAIL);
+        tbKalender.setSelected(layar == AppScreen.KALENDER);
+        tbBankSoal.setSelected(layar == AppScreen.BANK_SOAL || layar == AppScreen.EDITOR_UJIAN);
+        tbSiswa.setSelected(layar == AppScreen.GURU_SISWA || layar == AppScreen.GURU_DETAIL_SISWA);
+        tbProfil.setSelected(layar == AppScreen.PROFIL || layar == AppScreen.PEMBAHASAN_UJIAN);
     }
 
     @FXML
     private void handleKursus() {
-        SceneRouter.pindah(Layar.KURSUS_SAYA);
+        SceneRouter.pindah(AppScreen.KURSUS_SAYA);
     }
 
     @FXML
     private void handleKalender() {
-        SceneRouter.pindah(Layar.KALENDER);
+        SceneRouter.pindah(AppScreen.KALENDER);
     }
 
     @FXML
     private void handleBankSoal() {
-        SceneRouter.pindah(Layar.BANK_SOAL);
+        SceneRouter.pindah(AppScreen.BANK_SOAL);
     }
 
     @FXML
     private void handleSiswa() {
-        SceneRouter.pindah(Layar.GURU_SISWA);
+        SceneRouter.pindah(AppScreen.GURU_SISWA);
     }
 
     @FXML
     private void handleProfil() {
-        SceneRouter.pindah(Layar.PROFIL);
+        SceneRouter.pindah(AppScreen.PROFIL);
     }
 
     @FXML
@@ -112,7 +112,7 @@ public class ShellController {
         String nama = session.getNamaPengguna();
         if (DialogUtil.konfirmasi("Keluar dari akun " + nama + "?")) {
             session.logout();
-            SceneRouter.pindah(Layar.LANDING);
+            SceneRouter.pindah(AppScreen.LANDING);
         }
     }
 }
