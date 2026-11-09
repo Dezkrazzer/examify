@@ -6,6 +6,6 @@
 # Sosial : URL lengkap (https://...). Kosongkan bila tidak ada; tombolnya
 #          otomatis nonaktif.
 # =====================================================================
-L0125044|Gilang Ridho Wicaksana|tim/anggota1.jpg||https://github.com/username|https://instagram.com/username|https://linkedin.com/in/username
+L0125044|Gilang Ridho Wicaksana|tim/anggota1.jpeg||https://github.com/username|https://instagram.com/username|https://linkedin.com/in/username
 L0125105|Lazuardi Akbar Imani|tim/anggota2.jpg|https://lzuardiai.my.id|https://github.com/Dezkrazzer|https://instagram.com/lzuardiai|https://www.linkedin.com/in/lazuardiakbar/
-L0125125|Alfian Naufal Rabbani|tim/anggota3.jpg|https://portfolio-website.alfiannr234.workers.dev/|https://github.com/Alfiannr234|https://instagram.com/alfiannrabbani|https://linkedin.com/in/alfian-naufal-rabbani
+L0125125|Alfian Naufal Rabbani|tim/anggota3.jpeg|https://portfolio-website.alfiannr234.workers.dev/|https://github.com/Alfiannr234|https://instagram.com/alfiannrabbani|https://linkedin.com/in/alfian-naufal-rabbani
