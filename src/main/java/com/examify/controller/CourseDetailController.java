@@ -6513,13 +6513,7 @@ public class CourseDetailController {
 
 
                     session.setMateriFokus(materi);
-
-
-
-
-
-
-
+                    session.setLayarAsalPembahasan(AppScreen.KURSUS_DETAIL);
                     SceneRouter.pindah(AppScreen.PEMBAHASAN_UJIAN);
 
 

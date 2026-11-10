@@ -47,6 +47,7 @@ public class ExamReviewController {
     @FXML private TableColumn<Question, String> colKunci;
     @FXML private TableColumn<Question, String> colBobot;
 
+    @FXML private Button btnKembali;
     @FXML private Button btnSertifikat;
     @FXML private VBox vbSoalKosong;
 
@@ -95,6 +96,11 @@ public class ExamReviewController {
             btnSertifikat.setManaged(riwayat.lulus());
             btnSertifikat.setOnAction(e -> handleSertifikat());
         }
+
+        if (btnKembali != null) {
+            boolean dariKursus = session.getLayarAsalPembahasan() == AppScreen.KURSUS_DETAIL && session.getKursusAktif() != null;
+            btnKembali.setText(dariKursus ? "Kembali ke Kursus" : "Kembali ke Profil & Nilai");
+        }
     }
 
     private void isiTabelPembahasan(List<Question> daftarSoal) {
@@ -124,7 +130,9 @@ public class ExamReviewController {
 
     @FXML
     private void handleKembali() {
-        if (session.getKursusAktif() != null) {
+        boolean dariKursus = session.getLayarAsalPembahasan() == AppScreen.KURSUS_DETAIL && session.getKursusAktif() != null;
+        session.setLayarAsalPembahasan(AppScreen.PROFIL);
+        if (dariKursus) {
             SceneRouter.pindah(AppScreen.KURSUS_DETAIL);
         } else {
             SceneRouter.pindah(AppScreen.PROFIL);
