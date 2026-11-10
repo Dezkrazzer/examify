@@ -49,6 +49,7 @@ public final class AppSession {
     private SecureMode modeAmanAktif;
     private Student siswaDipilih;
     private GradeHistory riwayatFokus;
+    private AppScreen layarAsalPembahasan = AppScreen.PROFIL;
 
     private AppSession() {
     }
@@ -101,6 +102,7 @@ public final class AppSession {
         guruAktif = null;
         siswaDipilih = null;
         riwayatFokus = null;
+        layarAsalPembahasan = AppScreen.PROFIL;
     }
 
     public void hentikanTimer() {
@@ -258,6 +260,14 @@ public final class AppSession {
 
     public void setRiwayatFokus(GradeHistory riwayatFokus) {
         this.riwayatFokus = riwayatFokus;
+    }
+
+    public AppScreen getLayarAsalPembahasan() {
+        return layarAsalPembahasan != null ? layarAsalPembahasan : AppScreen.PROFIL;
+    }
+
+    public void setLayarAsalPembahasan(AppScreen layarAsalPembahasan) {
+        this.layarAsalPembahasan = layarAsalPembahasan;
     }
 
     public CourseEnrollmentService getPendaftaranService() {
