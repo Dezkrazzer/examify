@@ -719,6 +719,10 @@ public class CalendarController {
     }
 
     private void bukaAgendaDiKursus(CalendarAgenda ag) {
+        if (modeGuru && !session.getKursusService().isKursusMilikGuru(guru, ag.kursus())) {
+            DialogUtil.peringatan("Anda hanya dapat mengakses kursus yang Anda buat sendiri.");
+            return;
+        }
         session.setKursusAktif(ag.kursus());
         session.setMateriFokus(ag.materi());
         SceneRouter.pindah(AppScreen.KURSUS_DETAIL);

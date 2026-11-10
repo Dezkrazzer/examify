@@ -6,6 +6,7 @@ import com.examify.app.SceneRouter;
 import com.examify.io.SlideMarkdownConverter;
 import com.examify.model.Chapter;
 import com.examify.model.Course;
+import com.examify.model.Teacher;
 import com.examify.model.Material;
 import com.examify.model.TextMaterial;
 import com.examify.model.material.BlockDraft;
@@ -158,6 +159,15 @@ public class MaterialEditorController {
         if (kursus == null || bab == null) {
             SceneRouter.pindah(AppScreen.KURSUS_SAYA);
             return;
+        }
+
+        if (session.isGuru()) {
+            Teacher guru = session.getGuruAktif();
+            if (!session.getKursusService().isKursusMilikGuru(guru, kursus)) {
+                DialogUtil.peringatan("Anda hanya dapat mengedit materi pada kursus yang Anda buat sendiri.");
+                SceneRouter.pindah(AppScreen.KURSUS_SAYA);
+                return;
+            }
         }
 
         ToggleGroup tgMode = new ToggleGroup();
