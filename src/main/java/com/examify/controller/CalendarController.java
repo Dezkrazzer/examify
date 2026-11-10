@@ -80,9 +80,6 @@ public class CalendarController {
     @FXML private ToggleButton tbUpcoming;
     @FXML private ComboBox<PilihanKursus> cbKursus;
 
-    @FXML private VBox boxBelumAdaKursus;
-    @FXML private Label lblKosongKursusJudul;
-    @FXML private Label lblKosongKursusPesan;
     @FXML private StackPane spKontenKalender;
 
     // Month View
@@ -137,16 +134,12 @@ public class CalendarController {
 
         if (modeGuru) {
             lblSubjudul.setText("Jadwal batas tugas, kuis bab, dan ujian CBT berdasarkan kursus yang Anda buat.");
-            lblKosongKursusJudul.setText("Belum Ada Kursus yang Anda Buat");
-            lblKosongKursusPesan.setText("Buat kursus baru di menu Kursus Saya lalu tambahkan jadwal tugas, kuis bab, atau ujian CBT agar otomatis tampil di kalender ini.");
             if (boxLegendaSelesai != null) {
                 boxLegendaSelesai.setVisible(false);
                 boxLegendaSelesai.setManaged(false);
             }
         } else {
             lblSubjudul.setText("Jadwal batas tugas, kuis bab, dan ujian CBT berdasarkan kursus yang kamu ikuti.");
-            lblKosongKursusJudul.setText("Belum Ada Kursus yang Diikuti");
-            lblKosongKursusPesan.setText("Masukkan kode akses kursus dari pengajar di menu Kursus Saya agar jadwal tugas, kuis, dan ujian otomatis tersinkron ke kalender ini.");
         }
 
         ToggleGroup grupMode = new ToggleGroup();
@@ -251,16 +244,6 @@ public class CalendarController {
         lblRingkasanKursus.setText(daftarKursusRelevan.size()
                 + (modeGuru ? " kursus dibuat" : " kursus diikuti"));
         lblRingkasanMendatang.setText(mendatang.size() + " agenda mendatang");
-
-        boolean belumAdaKursus = daftarKursusRelevan.isEmpty();
-        boxBelumAdaKursus.setVisible(belumAdaKursus);
-        boxBelumAdaKursus.setManaged(belumAdaKursus);
-        spKontenKalender.setVisible(!belumAdaKursus);
-        spKontenKalender.setManaged(!belumAdaKursus);
-
-        if (belumAdaKursus) {
-            return;
-        }
 
         aturVisibilitasPanel(boxTampilanMonth, modeAktif == ModeTampilan.MONTH);
         aturVisibilitasPanel(boxTampilanDay, modeAktif == ModeTampilan.DAY);
@@ -406,14 +389,25 @@ public class CalendarController {
 
         boxDaftarDetailTanggal.getChildren().clear();
         if (daftar.isEmpty()) {
-            VBox kosong = new VBox(6);
+            VBox kosong = new VBox(8);
             kosong.getStyleClass().add("modal-kotak-jadwal");
             kosong.setAlignment(Pos.CENTER_LEFT);
-            Label lblInfo = new Label("Belum ada batas tugas, kuis, atau ujian di tanggal ini.");
+            Label lblInfo = new Label(daftarKursusRelevan.isEmpty()
+                    ? (modeGuru
+                            ? "Belum ada kursus yang Anda buat. Buka menu Kursus Saya untuk membuat kursus."
+                            : "Belum ada kursus yang kamu ikuti. Buka menu Kursus Saya untuk bergabung ke kursus.")
+                    : "Belum ada batas tugas, kuis, atau ujian di tanggal ini.");
             lblInfo.getStyleClass().add("teks-redup");
             lblInfo.setWrapText(true);
             lblInfo.setStyle("-fx-font-size: 12.5px;");
             kosong.getChildren().add(lblInfo);
+            if (daftarKursusRelevan.isEmpty()) {
+                Button btnBuka = new Button(modeGuru ? "Buat Kursus" : "Buka Kursus Saya");
+                btnBuka.getStyleClass().add("tombol-sekunder");
+                btnBuka.setStyle("-fx-padding: 5 10; -fx-font-size: 11.5px;");
+                btnBuka.setOnAction(e -> handleBukaKursusSaya());
+                kosong.getChildren().add(btnBuka);
+            }
             boxDaftarDetailTanggal.getChildren().add(kosong);
             return;
         }
@@ -468,10 +462,20 @@ public class CalendarController {
         if (agendaHari.isEmpty()) {
             VBox kosong = buatKotakKosong(
                     "Tidak Ada Agenda pada Tanggal Ini",
-                    "Tidak ditemukan batas pengumpulan tugas, kuis bab, maupun jadwal ujian pada "
-                            + kapitalAwal(tanggalTerpilih.format(FORMAT_HARI_LENGKAP)) + ".",
-                    "Lihat Upcoming Event",
-                    () -> aktifkanMode(ModeTampilan.UPCOMING)
+                    daftarKursusRelevan.isEmpty()
+                            ? (modeGuru
+                                    ? "Anda belum membuat kursus. Buat kursus di menu Kursus Saya agar jadwal tugas dan ujian otomatis muncul di sini."
+                                    : "Kamu belum mengikuti kursus apa pun. Buka menu Kursus Saya untuk bergabung ke kursus agar jadwal tugas dan ujian tersinkron.")
+                            : "Tidak ditemukan batas pengumpulan tugas, kuis bab, maupun jadwal ujian pada "
+                                    + kapitalAwal(tanggalTerpilih.format(FORMAT_HARI_LENGKAP)) + ".",
+                    daftarKursusRelevan.isEmpty() ? (modeGuru ? "Buat Kursus" : "Buka Kursus Saya") : "Lihat Upcoming Event",
+                    () -> {
+                        if (daftarKursusRelevan.isEmpty()) {
+                            handleBukaKursusSaya();
+                        } else {
+                            aktifkanMode(ModeTampilan.UPCOMING);
+                        }
+                    }
             );
             boxDaftarHari.getChildren().add(kosong);
             return;
@@ -494,10 +498,22 @@ public class CalendarController {
         boxDaftarUpcoming.getChildren().clear();
         if (mendatang.isEmpty()) {
             VBox kosong = buatKotakKosong(
-                    "Belum Ada Agenda Mendatang",
-                    "Tidak ada tugas, kuis bab, atau ujian yang dijadwalkan dalam waktu mendatang pada filter kursus ini.",
-                    "Lihat Kalender Month",
-                    () -> aktifkanMode(ModeTampilan.MONTH)
+                    daftarKursusRelevan.isEmpty()
+                            ? (modeGuru ? "Belum Ada Kursus yang Dibuat" : "Belum Ada Kursus yang Diikuti")
+                            : "Belum Ada Agenda Mendatang",
+                    daftarKursusRelevan.isEmpty()
+                            ? (modeGuru
+                                    ? "Buat kursus baru dan jadwalkan tugas, kuis, atau ujian agar muncul di daftar agenda mendatang."
+                                    : "Ikuti kursus di menu Kursus Saya agar jadwal tugas, kuis bab, dan ujian CBT otomatis muncul di sini.")
+                            : "Tidak ada tugas, kuis bab, atau ujian yang dijadwalkan dalam waktu mendatang pada filter kursus ini.",
+                    daftarKursusRelevan.isEmpty() ? (modeGuru ? "Buat Kursus" : "Buka Kursus Saya") : "Lihat Kalender Month",
+                    () -> {
+                        if (daftarKursusRelevan.isEmpty()) {
+                            handleBukaKursusSaya();
+                        } else {
+                            aktifkanMode(ModeTampilan.MONTH);
+                        }
+                    }
             );
             boxDaftarUpcoming.getChildren().add(kosong);
             return;
