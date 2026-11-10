@@ -56,19 +56,6 @@
             </HBox>
         </HBox>
 
-        <!-- State Kosong Jika Belum Ada Kursus yang Diikuti (Siswa) atau Dibuat (Guru) -->
-        <VBox fx:id="boxBelumAdaKursus" styleClass="kotak-kosong-kalender" spacing="12"
-              alignment="CENTER" visible="false" managed="false">
-            <StackPane styleClass="ikon-fitur">
-                <IconView ikon="KALENDER" ukuran="22"/>
-            </StackPane>
-            <Label fx:id="lblKosongKursusJudul" text="Belum Ada Kursus yang Diikuti" styleClass="judul-bagian"/>
-            <Label fx:id="lblKosongKursusPesan"
-                   text="Masukkan kode akses kursus dari pengajar di menu Kursus Saya agar jadwal tugas, kuis, dan ujian otomatis tersinkron ke kalender ini."
-                   styleClass="teks-redup" wrapText="true" maxWidth="520" textAlignment="CENTER"/>
-            <Button text="Buka Kursus Saya" styleClass="tombol-utama" onAction="#handleBukaKursusSaya"/>
-        </VBox>
-
         <!-- Area Konten Dinamis Berdasarkan Filter Mode -->
         <StackPane fx:id="spKontenKalender" alignment="TOP_LEFT">
 

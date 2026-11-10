@@ -186,6 +186,9 @@ class CalendarServiceTest {
     void kalenderKosongSebelumSiswaMasukKursus() {
         assertTrue(kalenderService.getKursusDiikuti(siswaA).isEmpty());
         assertTrue(kalenderService.getSemuaAgenda(siswaA, null).isEmpty());
+        assertTrue(kalenderService.filterBulan(siswaA, YearMonth.of(2026, 11), null).isEmpty());
+        assertTrue(kalenderService.filterHari(siswaA, LocalDate.of(2026, 11, 10), null).isEmpty());
+        assertTrue(kalenderService.filterMendatang(siswaA, LocalDateTime.of(2026, 11, 10, 9, 0), null).isEmpty());
     }
 
     @Test
