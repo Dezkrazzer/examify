@@ -103,6 +103,16 @@ public class MyCoursesController {
     @FXML private Button btnAksiKhusus;
     @FXML private FlowPane fpKursus;
     @FXML private Label lblKosong;
+    @FXML private Label lblJudulKursus;
+    @FXML private VBox boxKursusLain;
+    @FXML private Label lblJudulLain;
+    @FXML private Button btnLihatSemua;
+    @FXML private FlowPane fpKursusLain;
+    @FXML private Label lblKosongLain;
+
+    /** Batas kartu "Available Courses" sebelum tombol Lihat Semua dipakai (2 baris). */
+    private static final int BATAS_KURSUS_LAIN = MAKS_KOLOM * 2;
+    private boolean lihatSemuaLain = false;
 
     private final AppSession session = AppSession.getInstance();
     private final LearningProgressService progresService = session.getProgresService();
@@ -111,6 +121,7 @@ public class MyCoursesController {
     @FXML
     private void initialize() {
         CenteredGrid.terapkan(fpKursus, CourseCard.LEBAR, MAKS_KOLOM);
+        CenteredGrid.terapkan(fpKursusLain, CourseCard.LEBAR, MAKS_KOLOM);
         siswa = session.getSiswaAktif();
         if (session.isGuru()) {
             lblSapaan.setText("Halo, " + session.getNamaPengguna().split(" ")[0] + " (Guru)!");
@@ -166,11 +177,56 @@ public class MyCoursesController {
                 .filter(kursus -> filter.cocok.test(progres(kursus)))
                 .sorted(pembanding(cbUrut.getValue()))
                 .toList();
-        List<CourseCard> kartu = daftar.stream().map(this::buatKartu).toList();
-        fpKursus.getChildren().setAll(kartu);
-        lblKosong.setVisible(daftar.isEmpty());
-        lblKosong.setManaged(daftar.isEmpty());
-        AnimationUtil.berurutan(kartu, Duration.millis(60));
+        if (session.isGuru() || siswa == null) {
+            List<CourseCard> kartu = daftar.stream().map(this::buatKartu).toList();
+            fpKursus.getChildren().setAll(kartu);
+            tampilkanLabel(lblKosong, daftar.isEmpty());
+            AnimationUtil.berurutan(kartu, Duration.millis(60));
+            return;
+        }
+
+        boolean sedangMencari = !StringUtil.isKosong(tfCari.getText()) || filter != Filter.SEMUA;
+        List<Course> diikuti = daftar.stream().filter(this::isSiswaTerdaftar).toList();
+        List<Course> lain = daftar.stream().filter(k -> !isSiswaTerdaftar(k)).toList();
+
+        // Bagian atas: My Course
+        lblJudulKursus.setText("My Course (" + diikuti.size() + ")");
+        List<CourseCard> kartuDiikuti = diikuti.stream().map(this::buatKartu).toList();
+        fpKursus.getChildren().setAll(kartuDiikuti);
+        lblKosong.setText(sedangMencari
+                ? "Tidak ada kursus yang kamu ikuti yang cocok."
+                : "Kamu belum mengikuti kursus apa pun. Masukkan kode kursus atau pilih kursus di bawah.");
+        tampilkanLabel(lblKosong, diikuti.isEmpty());
+
+        // Bagian bawah: kursus yang belum diikuti
+        boxKursusLain.setVisible(true);
+        boxKursusLain.setManaged(true);
+        lblJudulLain.setText("Available Courses (" + lain.size() + ")");
+        boolean perluBatas = lain.size() > BATAS_KURSUS_LAIN;
+        List<Course> lainTampil = (perluBatas && !lihatSemuaLain) ? lain.subList(0, BATAS_KURSUS_LAIN) : lain;
+        List<CourseCard> kartuLain = lainTampil.stream().map(this::buatKartu).toList();
+        fpKursusLain.getChildren().setAll(kartuLain);
+        btnLihatSemua.setText(lihatSemuaLain ? "Tampilkan Lebih Sedikit" : "Lihat Semua");
+        btnLihatSemua.setVisible(perluBatas);
+        btnLihatSemua.setManaged(perluBatas);
+        lblKosongLain.setText(sedangMencari
+                ? "Tidak ada kursus lain yang cocok."
+                : "Kamu sudah mengikuti semua kursus yang tersedia.");
+        tampilkanLabel(lblKosongLain, lain.isEmpty());
+
+        AnimationUtil.berurutan(kartuDiikuti, Duration.millis(60));
+        AnimationUtil.berurutan(kartuLain, Duration.millis(60));
+    }
+
+    private static void tampilkanLabel(Label label, boolean tampil) {
+        label.setVisible(tampil);
+        label.setManaged(tampil);
+    }
+
+    @FXML
+    private void handleLihatSemua() {
+        lihatSemuaLain = !lihatSemuaLain;
+        tampilkan();
     }
 
     private Comparator<Course> pembanding(Urutan urutan) {

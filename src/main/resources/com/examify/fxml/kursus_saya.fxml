@@ -39,7 +39,7 @@
         </HBox>
 
         <HBox spacing="12" alignment="CENTER_LEFT">
-            <Label text="Kursus Saya" styleClass="judul-bagian"/>
+            <Label fx:id="lblJudulKursus" text="Kursus Saya" styleClass="judul-bagian"/>
             <Region HBox.hgrow="ALWAYS"/>
             <HBox styleClass="kotak-cari" alignment="CENTER_LEFT" spacing="6" prefWidth="240">
                 <IconView ikon="CARI" ukuran="16"/>
@@ -51,6 +51,18 @@
         </HBox>
 
         <FlowPane fx:id="fpKursus" hgap="20" vgap="20"/>
-        <Label fx:id="lblKosong" text="Tidak ada kursus yang cocok." styleClass="teks-redup" visible="false" managed="false"/>
+        <Label fx:id="lblKosong" text="Tidak ada kursus yang cocok." styleClass="teks-redup" wrapText="true" visible="false" managed="false"/>
+
+        <VBox fx:id="boxKursusLain" spacing="24" visible="false" managed="false">
+            <padding><Insets top="12"/></padding>
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label fx:id="lblJudulLain" text="Available Courses" styleClass="judul-bagian"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnLihatSemua" text="Lihat Semua" onAction="#handleLihatSemua"
+                        styleClass="tombol-hantu" visible="false" managed="false"/>
+            </HBox>
+            <FlowPane fx:id="fpKursusLain" hgap="20" vgap="20"/>
+            <Label fx:id="lblKosongLain" styleClass="teks-redup" wrapText="true" visible="false" managed="false"/>
+        </VBox>
     </VBox>
 </ScrollPane>

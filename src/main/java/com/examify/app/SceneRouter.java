@@ -10,7 +10,6 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
-import com.examify.view.SmoothScroll;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -69,7 +68,6 @@ public final class SceneRouter {
                 ubah.getAddedSubList().forEach(SceneRouter::terapkanTemaKeJendela);
             }
         });
-        SmoothScroll.pasang(scene);
         stage.setScene(scene);
         stage.setTitle(AppConfig.NAMA_APLIKASI);
         stage.getIcons().add(new Image(sumber(LOGO).toExternalForm()));
