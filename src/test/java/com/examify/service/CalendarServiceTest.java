@@ -312,4 +312,26 @@ class CalendarServiceTest {
         assertEquals("1988001", hasil.get(0).getNipPembuat());
         assertTrue(kalenderService.isKursusMilikGuru(guruSri, hasil.get(0)));
     }
+
+    @Test
+    void guruHanyaDapatMengaksesKursusYangDibuatSendiri() {
+        assertTrue(kursusService.isKursusMilikGuru(guruSri, kursusBin));
+        assertTrue(kursusService.isKursusMilikGuru(guruSri, kursusSastraSri));
+        assertFalse(kursusService.isKursusMilikGuru(guruSri, kursusMtk));
+        assertFalse(kursusService.isKursusMilikGuru(guruSri, kursusBelumDiikuti));
+
+        List<Course> dibuatGuru = kursusService.getKursusDibuatGuru(guruSri);
+        assertEquals(2, dibuatGuru.size());
+        assertTrue(dibuatGuru.stream().anyMatch(k -> k.getKode().equals("BIN")));
+        assertTrue(dibuatGuru.stream().anyMatch(k -> k.getKode().equals("SAS")));
+        assertTrue(dibuatGuru.stream().noneMatch(k -> k.getKode().equals("MTK")));
+
+        Teacher guruLain = new Teacher("9999", "Pak Joko", "1234", "Fisika");
+        assertTrue(kursusService.getKursusDibuatGuru(guruLain).isEmpty());
+        assertFalse(kursusService.isKursusMilikGuru(guruLain, kursusBin));
+
+        List<Course> cariSastra = kursusService.cariUntukGuru(guruSri, "Sastra");
+        assertEquals(1, cariSastra.size());
+        assertEquals("SAS", cariSastra.get(0).getKode());
+    }
 }

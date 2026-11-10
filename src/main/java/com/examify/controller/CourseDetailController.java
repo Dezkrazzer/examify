@@ -1122,14 +1122,21 @@ public class CourseDetailController {
 
 
         kursus = session.getKursusAktif();
-
-
-
-
-
-
-
         siswa = session.getSiswaAktif();
+
+        if (kursus == null) {
+            SceneRouter.pindah(AppScreen.KURSUS_SAYA);
+            return;
+        }
+
+        if (session.isGuru()) {
+            Teacher guru = session.getGuruAktif();
+            if (!session.getKursusService().isKursusMilikGuru(guru, kursus)) {
+                DialogUtil.peringatan("Anda hanya dapat mengakses kursus yang Anda buat sendiri.");
+                SceneRouter.pindah(AppScreen.KURSUS_SAYA);
+                return;
+            }
+        }
 
 
 
