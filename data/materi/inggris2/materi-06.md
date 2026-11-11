@@ -1,0 +1,15 @@
+# Analyzing Methodology and Experimental Results
+
+Mata kuliah **Bahasa Inggris II** (`0953222015`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+
+## Ringkasan Materi
+
+Pada pertemuan ini dibahas konsep utama mengenai **Analyzing Methodology and Experimental Results**, landasan teori, serta penerapannya dalam penyelesaian masalah akademik dan komputasi.
+
+## Pokok Bahasan
+
+1. Definisi dan konsep fundamental Analyzing Methodology and Experimental Results
+2. Prinsip kerja, formulasi, dan analisis struktur
+3. Studi kasus dan latihan pemecahan masalah
+
+> Pelajari seluruh poin pada bab ini sebagai persiapan menghadapi evaluasi UTS dan UAS.

@@ -101,6 +101,18 @@ public class Course {
         return getSemuaMateri().size();
     }
 
+    public int getJumlahMateriPembelajaran() {
+        return (int) getSemuaMateri().stream()
+                .filter(m -> !(m instanceof ExamMaterial || m instanceof QuizMaterial))
+                .count();
+    }
+
+    public int getJumlahUjian() {
+        return (int) getSemuaMateri().stream()
+                .filter(m -> m instanceof ExamMaterial || m instanceof QuizMaterial)
+                .count();
+    }
+
     @Override
     public String toString() {
         return kode + " - " + nama;

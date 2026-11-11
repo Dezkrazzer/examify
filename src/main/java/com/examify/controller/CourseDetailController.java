@@ -2376,7 +2376,8 @@ public class CourseDetailController {
 
 
 
-            lblRingkasProgres.setText(kursus.getJumlahMateri() + " materi terdaftar");
+            lblRingkasProgres.setText(kursus.getJumlahMateriPembelajaran() + " materi · "
+                    + kursus.getJumlahUjian() + " ujian terdaftar");
 
 
 

@@ -3,94 +3,883 @@
 # =====================================================================
 
 [KURSUS]
-KODE=PBO
-NAMA=Pemrograman Berorientasi Objek
-PENGAJAR=Dr. Rina Kartika, M.Kom.
-NIP_PEMBUAT=19850101
-DESKRIPSI=Konsep OOP dan Java Core: class & object, pewarisan, polimorfisme, hingga GUI dan multithreading.
-[BAB] Pengenalan OOP
-TEKS|pbo-01|Apa itu Pemrograman Berorientasi Objek?|materi/pbo/01-pengenalan.md
-LINK|pbo-01b|Oracle Tutorial: Object-Oriented Concepts|https://docs.oracle.com/javase/tutorial/java/concepts/index.html
-[BAB] Class & Object
-TEKS|pbo-02|Class, Object, dan Konstruktor|materi/pbo/02-class-object.md
-LINK|pbo-02b|Oracle Tutorial: Classes|https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html
-[BAB] Java Variables
-TEKS|pbo-03|Tipe Data dan Jenis Variabel|materi/pbo/03-variables.md
-LINK|pbo-03b|Oracle Tutorial: Variables|https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html
-[BAB] Inheritance
-TEKS|pbo-04|Pewarisan dengan extends dan super|materi/pbo/04-inheritance.md
-LINK|pbo-04b|Oracle Tutorial: Inheritance|https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html
-[BAB] Encapsulation
-TEKS|pbo-05|Access Modifier dan Penyembunyian Data|materi/pbo/05-encapsulation.md
-LINK|pbo-05b|Oracle Tutorial: Access Control|https://docs.oracle.com/javase/tutorial/java/javaOO/accesscontrol.html
-[BAB] Polymorphism
-TEKS|pbo-06|Overriding dan Overloading|materi/pbo/06-polymorphism.md
-LINK|pbo-06b|Oracle Tutorial: Polymorphism|https://docs.oracle.com/javase/tutorial/java/IandI/polymorphism.html
-[BAB] Abstraction
-TEKS|pbo-07|Abstract Class dan Interface|materi/pbo/07-abstraction.md
-PDF|pbo-07b|Ringkasan Empat Pilar OOP|materi/pbo/ringkasan-pilar-oop.pdf
-[BAB] UTS
-UJIAN|pbo-uts|Ujian Tengah Semester|PBO-01
-[BAB] String
-TEKS|pbo-08|Manipulasi String dan StringBuilder|materi/pbo/08-string.md
-LINK|pbo-08b|Oracle Tutorial: Strings|https://docs.oracle.com/javase/tutorial/java/data/strings.html
-[BAB] Generics & Collections
-TEKS|pbo-09|List, Set, Map, dan Tipe Generik|materi/pbo/09-generics-collections.md
-LINK|pbo-09b|Oracle Tutorial: Collections|https://docs.oracle.com/javase/tutorial/collections/index.html
-[BAB] Exceptions & Assertions
-TEKS|pbo-10|Menangani Kesalahan dengan Aman|materi/pbo/10-exception.md
-LINK|pbo-10b|Oracle Tutorial: Exceptions|https://docs.oracle.com/javase/tutorial/essential/exceptions/index.html
-[BAB] Java IO
-TEKS|pbo-11|Membaca dan Menulis File|materi/pbo/11-java-io.md
-LINK|pbo-11b|Oracle Tutorial: Basic I/O|https://docs.oracle.com/javase/tutorial/essential/io/index.html
-[BAB] Java GUI
-TEKS|pbo-12|JavaFX, FXML, dan CSS|materi/pbo/12-java-gui.md
-LINK|pbo-12b|Dokumentasi OpenJFX|https://openjfx.io/openjfx-docs/
-[BAB] Multithreading
-TEKS|pbo-13|Thread, Runnable, dan Sinkronisasi|materi/pbo/13-multithreading.md
-LINK|pbo-13b|Oracle Tutorial: Concurrency|https://docs.oracle.com/javase/tutorial/essential/concurrency/index.html
-[BAB] UAS
-PDF|pbo-uas-c|Cheat Sheet Java untuk UAS|materi/pbo/cheatsheet-java.pdf
-UJIAN|pbo-uas|Ujian Akhir Semester|PBO-02
+KODE=0953112001
+NAMA=Pendidikan Agama
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Pembentukan karakter beragama, etika akademik, toleransi, dan nilai moral dalam kehidupan bermasyarakat serta profesi teknologi.
+[BAB] Bab 1: Konsep Ketuhanan dan Keimanan
+TEKS|pai-m01|Konsep Ketuhanan dan Keimanan|materi/agama/materi-01.md
+[BAB] Bab 2: Hakikat Manusia dan Tanggung Jawabnya
+TEKS|pai-m02|Hakikat Manusia dan Tanggung Jawabnya|materi/agama/materi-02.md
+[BAB] Bab 3: Sumber Ajaran dan Nilai Moral Agama
+TEKS|pai-m03|Sumber Ajaran dan Nilai Moral Agama|materi/agama/materi-03.md
+[BAB] Bab 4: Etika dan Akhlak dalam Kehidupan Akademik
+TEKS|pai-m04|Etika dan Akhlak dalam Kehidupan Akademik|materi/agama/materi-04.md
+[BAB] Bab 5: Hak Asasi Manusia dan Demokrasi dalam Perspektif Agama
+TEKS|pai-m05|Hak Asasi Manusia dan Demokrasi dalam Perspektif Agama|materi/agama/materi-05.md
+[BAB] Bab 6: Hukum dan Keadilan Sosial
+TEKS|pai-m06|Hukum dan Keadilan Sosial|materi/agama/materi-06.md
+[BAB] Bab 7: Ilmu Pengetahuan, Teknologi, dan Seni dalam Agama
+TEKS|pai-m07|Ilmu Pengetahuan, Teknologi, dan Seni dalam Agama|materi/agama/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|pai-uts|Ujian Tengah Semester (UTS) Pendidikan Agama|PAI-01
+[BAB] Bab 9: Kerukunan Antarumat Beragama dan Toleransi
+TEKS|pai-m08|Kerukunan Antarumat Beragama dan Toleransi|materi/agama/materi-08.md
+[BAB] Bab 10: Masyarakat Madani dan Kesejahteraan Umat
+TEKS|pai-m09|Masyarakat Madani dan Kesejahteraan Umat|materi/agama/materi-09.md
+[BAB] Bab 11: Kebudayaan dan Kearifan Lokal
+TEKS|pai-m10|Kebudayaan dan Kearifan Lokal|materi/agama/materi-10.md
+[BAB] Bab 12: Etika Profesi di Era Digital
+TEKS|pai-m11|Etika Profesi di Era Digital|materi/agama/materi-11.md
+[BAB] Bab 13: Keluarga Sakinah dan Tanggung Jawab Sosial
+TEKS|pai-m12|Keluarga Sakinah dan Tanggung Jawab Sosial|materi/agama/materi-12.md
+[BAB] Bab 14: Kepemimpinan dan Amanah dalam Organisasi
+TEKS|pai-m13|Kepemimpinan dan Amanah dalam Organisasi|materi/agama/materi-13.md
+[BAB] Bab 15: Kontribusi Agama dalam Perdamaian Dunia
+TEKS|pai-m14|Kontribusi Agama dalam Perdamaian Dunia|materi/agama/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|pai-uas|Ujian Akhir Semester (UAS) Pendidikan Agama|PAI-02
 [END]
 
 [KURSUS]
-KODE=MTK
-NAMA=Matematika
-PENGAJAR=Budi Hartono, S.Pd.
-DESKRIPSI=Operasi bilangan dan aljabar dasar untuk persiapan ujian.
-[BAB] Operasi Bilangan
-TEKS|mtk-01|Urutan Operasi dan Pecahan|materi/mtk/01-bilangan.md
-[BAB] Aljabar Dasar
-TEKS|mtk-02|Bentuk Aljabar dan Persamaan Linear|materi/mtk/02-aljabar.md
-[BAB] Evaluasi
-UJIAN|mtk-uji|Ujian Matematika|MTK-01
+KODE=0953124002
+NAMA=Konsep Pemrograman
+PENGAJAR=Drs. Bambang Harjito, M.App.Sc., Ph.D.
+NIP_PEMBUAT=19850102
+DESKRIPSI=Dasar logika algoritma, flowchart, tipe data, struktur kontrol, fungsi, array, pointer, dan pengelolaan berkas dalam pemrograman.
+[BAB] Bab 1: Pengantar Algoritma dan Pemrograman
+TEKS|kp-m01|Pengantar Algoritma dan Pemrograman|materi/konsep_pemrograman/materi-01.md
+[BAB] Bab 2: Pseudocode dan Diagram Alir (Flowchart)
+TEKS|kp-m02|Pseudocode dan Diagram Alir (Flowchart)|materi/konsep_pemrograman/materi-02.md
+[BAB] Bab 3: Tipe Data, Variabel, dan Konstanta
+TEKS|kp-m03|Tipe Data, Variabel, dan Konstanta|materi/konsep_pemrograman/materi-03.md
+[BAB] Bab 4: Operator Aritmatika, Relasional, dan Logika
+TEKS|kp-m04|Operator Aritmatika, Relasional, dan Logika|materi/konsep_pemrograman/materi-04.md
+[BAB] Bab 5: Input dan Output Standar
+TEKS|kp-m05|Input dan Output Standar|materi/konsep_pemrograman/materi-05.md
+[BAB] Bab 6: Percabangan Kondisional (If-Else dan Switch)
+TEKS|kp-m06|Percabangan Kondisional (If-Else dan Switch)|materi/konsep_pemrograman/materi-06.md
+[BAB] Bab 7: Perulangan (For, While, dan Do-While)
+TEKS|kp-m07|Perulangan (For, While, dan Do-While)|materi/konsep_pemrograman/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|kp-uts|Ujian Tengah Semester (UTS) Konsep Pemrograman|KP-01
+[BAB] Bab 9: Perulangan Bersarang dan Kontrol Alur
+TEKS|kp-m08|Perulangan Bersarang dan Kontrol Alur|materi/konsep_pemrograman/materi-08.md
+[BAB] Bab 10: Fungsi, Prosedur, dan Ruang Lingkup Variabel
+TEKS|kp-m09|Fungsi, Prosedur, dan Ruang Lingkup Variabel|materi/konsep_pemrograman/materi-09.md
+[BAB] Bab 11: Rekursi dan Penyelesaian Masalah Berulang
+TEKS|kp-m10|Rekursi dan Penyelesaian Masalah Berulang|materi/konsep_pemrograman/materi-10.md
+[BAB] Bab 12: Array Satu Dimensi dan Multi Dimensi
+TEKS|kp-m11|Array Satu Dimensi dan Multi Dimensi|materi/konsep_pemrograman/materi-11.md
+[BAB] Bab 13: Manipulasi String dan Karakter
+TEKS|kp-m12|Manipulasi String dan Karakter|materi/konsep_pemrograman/materi-12.md
+[BAB] Bab 14: Struct, Tipe Data Bentukan, dan Pointer Dasar
+TEKS|kp-m13|Struct, Tipe Data Bentukan, dan Pointer Dasar|materi/konsep_pemrograman/materi-13.md
+[BAB] Bab 15: Operasi File dan Penanganan Kesalahan Dasar
+TEKS|kp-m14|Operasi File dan Penanganan Kesalahan Dasar|materi/konsep_pemrograman/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|kp-uas|Ujian Akhir Semester (UAS) Konsep Pemrograman|KP-02
 [END]
 
 [KURSUS]
-KODE=BIN
+KODE=0953123003
+NAMA=Sistem Digital
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Sistem bilangan biner, aljabar Boolean, gerbang logika, penyederhanaan Karnaugh Map, rangkaian kombinasional, dan rangkaian sekuensial.
+[BAB] Bab 1: Sistem Bilangan dan Konversi Basis
+TEKS|sdig-m01|Sistem Bilangan dan Konversi Basis|materi/sistem_digital/materi-01.md
+[BAB] Bab 2: Aritmatika Biner dan Komplemen Dua
+TEKS|sdig-m02|Aritmatika Biner dan Komplemen Dua|materi/sistem_digital/materi-02.md
+[BAB] Bab 3: Kode Digital (BCD, Gray, ASCII)
+TEKS|sdig-m03|Kode Digital (BCD, Gray, ASCII)|materi/sistem_digital/materi-03.md
+[BAB] Bab 4: Gerbang Logika Dasar dan Universal
+TEKS|sdig-m04|Gerbang Logika Dasar dan Universal|materi/sistem_digital/materi-04.md
+[BAB] Bab 5: Aljabar Boolean dan Teorema De Morgan
+TEKS|sdig-m05|Aljabar Boolean dan Teorema De Morgan|materi/sistem_digital/materi-05.md
+[BAB] Bab 6: Bentuk Kanonik SOP dan POS
+TEKS|sdig-m06|Bentuk Kanonik SOP dan POS|materi/sistem_digital/materi-06.md
+[BAB] Bab 7: Minimisasi Fungsi dengan Peta Karnaugh (K-Map)
+TEKS|sdig-m07|Minimisasi Fungsi dengan Peta Karnaugh (K-Map)|materi/sistem_digital/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|sdig-uts|Ujian Tengah Semester (UTS) Sistem Digital|SDIG-01
+[BAB] Bab 9: Metode Quine-McCluskey
+TEKS|sdig-m08|Metode Quine-McCluskey|materi/sistem_digital/materi-08.md
+[BAB] Bab 10: Rangkaian Kombinasional: Adder dan Subtractor
+TEKS|sdig-m09|Rangkaian Kombinasional: Adder dan Subtractor|materi/sistem_digital/materi-09.md
+[BAB] Bab 11: Decoder, Encoder, dan Multiplexer
+TEKS|sdig-m10|Decoder, Encoder, dan Multiplexer|materi/sistem_digital/materi-10.md
+[BAB] Bab 12: Demultiplexer dan Comparator
+TEKS|sdig-m11|Demultiplexer dan Comparator|materi/sistem_digital/materi-11.md
+[BAB] Bab 13: Pengantar Rangkaian Sekuensial: Latch dan Flip-Flop
+TEKS|sdig-m12|Pengantar Rangkaian Sekuensial: Latch dan Flip-Flop|materi/sistem_digital/materi-12.md
+[BAB] Bab 14: Register dan Shift Register
+TEKS|sdig-m13|Register dan Shift Register|materi/sistem_digital/materi-13.md
+[BAB] Bab 15: Counter Sinkron dan Asinkron
+TEKS|sdig-m14|Counter Sinkron dan Asinkron|materi/sistem_digital/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|sdig-uas|Ujian Akhir Semester (UAS) Sistem Digital|SDIG-02
+[END]
+
+[KURSUS]
+KODE=0953123004
+NAMA=Kalkulus I
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Sistem bilangan real, fungsi, limit, kekontinuan, turunan, aplikasi diferensial, dan integral fungsi satu peubah.
+[BAB] Bab 1: Sistem Bilangan Real dan Pertaksamaan
+TEKS|kalk-m01|Sistem Bilangan Real dan Pertaksamaan|materi/kalkulus1/materi-01.md
+[BAB] Bab 2: Fungsi, Domain, dan Grafik Fungsi
+TEKS|kalk-m02|Fungsi, Domain, dan Grafik Fungsi|materi/kalkulus1/materi-02.md
+[BAB] Bab 3: Fungsi Transenden dan Invers
+TEKS|kalk-m03|Fungsi Transenden dan Invers|materi/kalkulus1/materi-03.md
+[BAB] Bab 4: Konsep Limit dan Teorema Limit
+TEKS|kalk-m04|Konsep Limit dan Teorema Limit|materi/kalkulus1/materi-04.md
+[BAB] Bab 5: Kekontinuan Fungsi pada Suatu Titik dan Interval
+TEKS|kalk-m05|Kekontinuan Fungsi pada Suatu Titik dan Interval|materi/kalkulus1/materi-05.md
+[BAB] Bab 6: Definisi Turunan dan Aturan Pencarian Turunan
+TEKS|kalk-m06|Definisi Turunan dan Aturan Pencarian Turunan|materi/kalkulus1/materi-06.md
+[BAB] Bab 7: Aturan Rantai dan Turunan Implisit
+TEKS|kalk-m07|Aturan Rantai dan Turunan Implisit|materi/kalkulus1/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|kalk-uts|Ujian Tengah Semester (UTS) Kalkulus I|KALK-01
+[BAB] Bab 9: Turunan Tingkat Tinggi dan Laju Berkaitan
+TEKS|kalk-m08|Turunan Tingkat Tinggi dan Laju Berkaitan|materi/kalkulus1/materi-08.md
+[BAB] Bab 10: Nilai Ekstrem, Kemonotonan, dan Kecekungan
+TEKS|kalk-m09|Nilai Ekstrem, Kemonotonan, dan Kecekungan|materi/kalkulus1/materi-09.md
+[BAB] Bab 11: Masalah Optimasi Terapan
+TEKS|kalk-m10|Masalah Optimasi Terapan|materi/kalkulus1/materi-10.md
+[BAB] Bab 12: Teorema Nilai Rata-Rata dan Dalil L'Hopital
+TEKS|kalk-m11|Teorema Nilai Rata-Rata dan Dalil L'Hopital|materi/kalkulus1/materi-11.md
+[BAB] Bab 13: Integral Tak Tentu dan Anti-Turunan
+TEKS|kalk-m12|Integral Tak Tentu dan Anti-Turunan|materi/kalkulus1/materi-12.md
+[BAB] Bab 14: Integral Tentu dan Jumlah Riemann
+TEKS|kalk-m13|Integral Tentu dan Jumlah Riemann|materi/kalkulus1/materi-13.md
+[BAB] Bab 15: Teorema Dasar Kalkulus dan Aplikasi Luas Daerah
+TEKS|kalk-m14|Teorema Dasar Kalkulus dan Aplikasi Luas Daerah|materi/kalkulus1/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|kalk-uas|Ujian Akhir Semester (UAS) Kalkulus I|KALK-02
+[END]
+
+[KURSUS]
+KODE=0953123005
+NAMA=Fisika
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Besaran fisika, kinematika, dinamika partikel, usaha dan energi, momentum, kelistrikan, kemagnetan, dan gelombang.
+[BAB] Bab 1: Besaran, Satuan SI, dan Analisis Vektor
+TEKS|fis-m01|Besaran, Satuan SI, dan Analisis Vektor|materi/fisika/materi-01.md
+[BAB] Bab 2: Kinematika Gerak Lurus
+TEKS|fis-m02|Kinematika Gerak Lurus|materi/fisika/materi-02.md
+[BAB] Bab 3: Gerak Parabola dan Gerak Melingkar
+TEKS|fis-m03|Gerak Parabola dan Gerak Melingkar|materi/fisika/materi-03.md
+[BAB] Bab 4: Hukum-Hukum Newton tentang Gerak
+TEKS|fis-m04|Hukum-Hukum Newton tentang Gerak|materi/fisika/materi-04.md
+[BAB] Bab 5: Usaha, Energi Kinetik, dan Energi Potensial
+TEKS|fis-m05|Usaha, Energi Kinetik, dan Energi Potensial|materi/fisika/materi-05.md
+[BAB] Bab 6: Momentum Linear dan Tumbukan
+TEKS|fis-m06|Momentum Linear dan Tumbukan|materi/fisika/materi-06.md
+[BAB] Bab 7: Dinamika Rotasi dan Kesetimbangan Benda Tegar
+TEKS|fis-m07|Dinamika Rotasi dan Kesetimbangan Benda Tegar|materi/fisika/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|fis-uts|Ujian Tengah Semester (UTS) Fisika|FIS-01
+[BAB] Bab 9: Mekanika Fluida Statis dan Dinamis
+TEKS|fis-m08|Mekanika Fluida Statis dan Dinamis|materi/fisika/materi-08.md
+[BAB] Bab 10: Getaran Harmonik dan Gelombang Mekanik
+TEKS|fis-m09|Getaran Harmonik dan Gelombang Mekanik|materi/fisika/materi-09.md
+[BAB] Bab 11: Suhu, Kalor, dan Hukum Termodinamika
+TEKS|fis-m10|Suhu, Kalor, dan Hukum Termodinamika|materi/fisika/materi-10.md
+[BAB] Bab 12: Elektrostatika: Hukum Coulomb dan Medan Listrik
+TEKS|fis-m11|Elektrostatika: Hukum Coulomb dan Medan Listrik|materi/fisika/materi-11.md
+[BAB] Bab 13: Potensial Listrik dan Kapasitor
+TEKS|fis-m12|Potensial Listrik dan Kapasitor|materi/fisika/materi-12.md
+[BAB] Bab 14: Rangkaian Arus Searah dan Hukum Kirchhoff
+TEKS|fis-m13|Rangkaian Arus Searah dan Hukum Kirchhoff|materi/fisika/materi-13.md
+[BAB] Bab 15: Medan Magnet dan Induksi Elektromagnetik
+TEKS|fis-m14|Medan Magnet dan Induksi Elektromagnetik|materi/fisika/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|fis-uas|Ujian Akhir Semester (UAS) Fisika|FIS-02
+[END]
+
+[KURSUS]
+KODE=0953112006
+NAMA=Bahasa Inggris I
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Keterampilan membaca teks akademik bahasa Inggris, tata bahasa esensial, kosakata teknologi informasi, dan penulisan paragraf ilmiah.
+[BAB] Bab 1: Parts of Speech and Sentence Structure
+TEKS|bing-m01|Parts of Speech and Sentence Structure|materi/inggris1/materi-01.md
+[BAB] Bab 2: Present Tenses in Academic Context
+TEKS|bing-m02|Present Tenses in Academic Context|materi/inggris1/materi-02.md
+[BAB] Bab 3: Past and Future Tenses for Technical Reporting
+TEKS|bing-m03|Past and Future Tenses for Technical Reporting|materi/inggris1/materi-03.md
+[BAB] Bab 4: Passive Voice in Scientific Writing
+TEKS|bing-m04|Passive Voice in Scientific Writing|materi/inggris1/materi-04.md
+[BAB] Bab 5: Reading Strategies: Skimming and Scanning
+TEKS|bing-m05|Reading Strategies: Skimming and Scanning|materi/inggris1/materi-05.md
+[BAB] Bab 6: Identifying Main Ideas and Supporting Details
+TEKS|bing-m06|Identifying Main Ideas and Supporting Details|materi/inggris1/materi-06.md
+[BAB] Bab 7: Contextual Vocabulary in Computer Science
+TEKS|bing-m07|Contextual Vocabulary in Computer Science|materi/inggris1/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|bing-uts|Ujian Tengah Semester (UTS) Bahasa Inggris I|BING-01
+[BAB] Bab 9: Subject-Verb Agreement and Parallel Structure
+TEKS|bing-m08|Subject-Verb Agreement and Parallel Structure|materi/inggris1/materi-08.md
+[BAB] Bab 10: Relative Clauses and Adjective Phrases
+TEKS|bing-m09|Relative Clauses and Adjective Phrases|materi/inggris1/materi-09.md
+[BAB] Bab 11: Modal Auxiliaries and Conditional Sentences
+TEKS|bing-m10|Modal Auxiliaries and Conditional Sentences|materi/inggris1/materi-10.md
+[BAB] Bab 12: Summarizing Technical Articles
+TEKS|bing-m11|Summarizing Technical Articles|materi/inggris1/materi-11.md
+[BAB] Bab 13: Paragraph Organization: Topic and Concluding Sentences
+TEKS|bing-m12|Paragraph Organization: Topic and Concluding Sentences|materi/inggris1/materi-12.md
+[BAB] Bab 14: Academic Listening and Note-Taking
+TEKS|bing-m13|Academic Listening and Note-Taking|materi/inggris1/materi-13.md
+[BAB] Bab 15: Oral Presentation Fundamentals
+TEKS|bing-m14|Oral Presentation Fundamentals|materi/inggris1/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|bing-uas|Ujian Akhir Semester (UAS) Bahasa Inggris I|BING-02
+[END]
+
+[KURSUS]
+KODE=0953123007
+NAMA=Statistika & Probabilitas
+PENGAJAR=Esti Suryani, S.Si., M.Kom.
+NIP_PEMBUAT=19850103
+DESKRIPSI=Statistika deskriptif, teori peluang, peubah acak, distribusi peluang diskrit dan kontinu, pendugaan parameter, serta uji hipotesis.
+[BAB] Bab 1: Pengantar Statistika dan Penyajian Data
+TEKS|stat-m01|Pengantar Statistika dan Penyajian Data|materi/statistika/materi-01.md
+[BAB] Bab 2: Ukuran Pemusatan Data (Mean, Median, Modus)
+TEKS|stat-m02|Ukuran Pemusatan Data (Mean, Median, Modus)|materi/statistika/materi-02.md
+[BAB] Bab 3: Ukuran Penyebaran Data (Variansi dan Simpangan Baku)
+TEKS|stat-m03|Ukuran Penyebaran Data (Variansi dan Simpangan Baku)|materi/statistika/materi-03.md
+[BAB] Bab 4: Konsep Dasar Ruang Sampel dan Kejadian
+TEKS|stat-m04|Konsep Dasar Ruang Sampel dan Kejadian|materi/statistika/materi-04.md
+[BAB] Bab 5: Aturan Peluang, Peluang Bersyarat, dan Teorema Bayes
+TEKS|stat-m05|Aturan Peluang, Peluang Bersyarat, dan Teorema Bayes|materi/statistika/materi-05.md
+[BAB] Bab 6: Peubah Acak Diskrit dan Kontinu
+TEKS|stat-m06|Peubah Acak Diskrit dan Kontinu|materi/statistika/materi-06.md
+[BAB] Bab 7: Nilai Harapan dan Variansi Peubah Acak
+TEKS|stat-m07|Nilai Harapan dan Variansi Peubah Acak|materi/statistika/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|stat-uts|Ujian Tengah Semester (UTS) Statistika & Probabilitas|STAT-01
+[BAB] Bab 9: Distribusi Peluang Diskrit (Binomial, Poisson)
+TEKS|stat-m08|Distribusi Peluang Diskrit (Binomial, Poisson)|materi/statistika/materi-08.md
+[BAB] Bab 10: Distribusi Peluang Kontinu dan Distribusi Normal
+TEKS|stat-m09|Distribusi Peluang Kontinu dan Distribusi Normal|materi/statistika/materi-09.md
+[BAB] Bab 11: Distribusi Sampling dan Teorema Limit Pusat
+TEKS|stat-m10|Distribusi Sampling dan Teorema Limit Pusat|materi/statistika/materi-10.md
+[BAB] Bab 12: Pendugaan Titik dan Selang Kepercayaan
+TEKS|stat-m11|Pendugaan Titik dan Selang Kepercayaan|materi/statistika/materi-11.md
+[BAB] Bab 13: Pengujian Hipotesis Satu dan Dua Sampel
+TEKS|stat-m12|Pengujian Hipotesis Satu dan Dua Sampel|materi/statistika/materi-12.md
+[BAB] Bab 14: Analisis Korelasi dan Regresi Linear Sederhana
+TEKS|stat-m13|Analisis Korelasi dan Regresi Linear Sederhana|materi/statistika/materi-13.md
+[BAB] Bab 15: Uji Khi-Kuadrat dan Analisis Variansi Dasar
+TEKS|stat-m14|Uji Khi-Kuadrat dan Analisis Variansi Dasar|materi/statistika/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|stat-uas|Ujian Akhir Semester (UAS) Statistika & Probabilitas|STAT-02
+[END]
+
+[KURSUS]
+KODE=0953112008
 NAMA=Bahasa Indonesia
-PENGAJAR=Sri Wahyuni, S.Pd.
-DESKRIPSI=Kata baku dan kalimat efektif sesuai PUEBI.
-[BAB] Kata Baku
-TEKS|bin-01|Mengenal Kata Baku|materi/bahasaindo/01-kata-baku.md
-[BAB] Kalimat Efektif
-TEKS|bin-02|Ciri Kalimat Efektif|materi/bahasaindo/02-kalimat-efektif.md
-[BAB] Evaluasi
-UJIAN|bin-uji|Ujian Bahasa Indonesia|BIN-01
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Sejarah dan kedudukan bahasa Indonesia, EYD, diksi, kalimat efektif, paragraf ilmiah, kutipan, daftar pustaka, dan penulisan karya ilmiah.
+[BAB] Bab 1: Sejarah, Kedudukan, dan Fungsi Bahasa Indonesia
+TEKS|bind-m01|Sejarah, Kedudukan, dan Fungsi Bahasa Indonesia|materi/bahasaindo/materi-01.md
+[BAB] Bab 2: Ragam Bahasa Ilmiah dan Ejaan Bahasa Indonesia (EYD)
+TEKS|bind-m02|Ragam Bahasa Ilmiah dan Ejaan Bahasa Indonesia (EYD)|materi/bahasaindo/materi-02.md
+[BAB] Bab 3: Pilihan Kata (Diksi) dan Kata Baku
+TEKS|bind-m03|Pilihan Kata (Diksi) dan Kata Baku|materi/bahasaindo/materi-03.md
+[BAB] Bab 4: Kalimat Efektif dalam Penulisan Akademik
+TEKS|bind-m04|Kalimat Efektif dalam Penulisan Akademik|materi/bahasaindo/materi-04.md
+[BAB] Bab 5: Pengembangan Paragraf yang Kohesif dan Koheren
+TEKS|bind-m05|Pengembangan Paragraf yang Kohesif dan Koheren|materi/bahasaindo/materi-05.md
+[BAB] Bab 6: Perencanaan Karangan Ilmiah dan Topik Penelitian
+TEKS|bind-m06|Perencanaan Karangan Ilmiah dan Topik Penelitian|materi/bahasaindo/materi-06.md
+[BAB] Bab 7: Sistematika Karya Tulis Ilmiah
+TEKS|bind-m07|Sistematika Karya Tulis Ilmiah|materi/bahasaindo/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|bind-uts|Ujian Tengah Semester (UTS) Bahasa Indonesia|BIND-01
+[BAB] Bab 9: Teknik Kutipan Langsung dan Tidak Langsung
+TEKS|bind-m08|Teknik Kutipan Langsung dan Tidak Langsung|materi/bahasaindo/materi-08.md
+[BAB] Bab 10: Penulisan Catatan Kaki dan Daftar Pustaka
+TEKS|bind-m09|Penulisan Catatan Kaki dan Daftar Pustaka|materi/bahasaindo/materi-09.md
+[BAB] Bab 11: Abstrak, Pendahuluan, dan Tinjauan Pustaka
+TEKS|bind-m10|Abstrak, Pendahuluan, dan Tinjauan Pustaka|materi/bahasaindo/materi-10.md
+[BAB] Bab 12: Penulisan Metodologi dan Pembahasan Hasil
+TEKS|bind-m11|Penulisan Metodologi dan Pembahasan Hasil|materi/bahasaindo/materi-11.md
+[BAB] Bab 13: Simpulan, Saran, dan Penyuntingan Naskah
+TEKS|bind-m12|Simpulan, Saran, dan Penyuntingan Naskah|materi/bahasaindo/materi-12.md
+[BAB] Bab 14: Korespondensi Resmi dan Surat Akademik
+TEKS|bind-m13|Korespondensi Resmi dan Surat Akademik|materi/bahasaindo/materi-13.md
+[BAB] Bab 15: Teknik Presentasi Ilmiah Berbahasa Indonesia
+TEKS|bind-m14|Teknik Presentasi Ilmiah Berbahasa Indonesia|materi/bahasaindo/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|bind-uas|Ujian Akhir Semester (UAS) Bahasa Indonesia|BIND-02
 [END]
 
 [KURSUS]
-KODE=IPA
-NAMA=Ilmu Pengetahuan Alam
-PENGAJAR=Agus Setiawan, S.Si.
-DESKRIPSI=Tata surya dan perubahan wujud zat.
-[BAB] Tata Surya
-TEKS|ipa-01|Planet-Planet di Tata Surya|materi/ipa/01-tata-surya.md
-[BAB] Wujud Zat
-TEKS|ipa-02|Perubahan Wujud Zat|materi/ipa/02-wujud-zat.md
-[BAB] Evaluasi
-UJIAN|ipa-uji|Ujian IPA|IPA-01
+KODE=0953223009
+NAMA=Kalkulus II
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Teknik pengintegralan lanjut, bentuk tak tentu, integral tak wajar, barisan dan deret tak hingga, serta fungsi peubah banyak.
+[BAB] Bab 1: Teknik Integrasi Substitusi dan Parsial
+TEKS|kalb-m01|Teknik Integrasi Substitusi dan Parsial|materi/kalkulus2/materi-01.md
+[BAB] Bab 2: Integral Fungsi Trigonometri
+TEKS|kalb-m02|Integral Fungsi Trigonometri|materi/kalkulus2/materi-02.md
+[BAB] Bab 3: Substitusi Trigonometri dan Pecahan Parsial
+TEKS|kalb-m03|Substitusi Trigonometri dan Pecahan Parsial|materi/kalkulus2/materi-03.md
+[BAB] Bab 4: Aplikasi Integral: Volume Benda Putar
+TEKS|kalb-m04|Aplikasi Integral: Volume Benda Putar|materi/kalkulus2/materi-04.md
+[BAB] Bab 5: Panjang Busur dan Luas Permukaan Putar
+TEKS|kalb-m05|Panjang Busur dan Luas Permukaan Putar|materi/kalkulus2/materi-05.md
+[BAB] Bab 6: Bentuk Tak Tentu dan Integral Tak Wajar
+TEKS|kalb-m06|Bentuk Tak Tentu dan Integral Tak Wajar|materi/kalkulus2/materi-06.md
+[BAB] Bab 7: Sistem Koordinat Polar dan Persamaan Parametrik
+TEKS|kalb-m07|Sistem Koordinat Polar dan Persamaan Parametrik|materi/kalkulus2/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|kalb-uts|Ujian Tengah Semester (UTS) Kalkulus II|KALB-01
+[BAB] Bab 9: Barisan Tak Hingga dan Kekonvergenan
+TEKS|kalb-m08|Barisan Tak Hingga dan Kekonvergenan|materi/kalkulus2/materi-08.md
+[BAB] Bab 10: Deret Tak Hingga dan Uji Konvergensi
+TEKS|kalb-m09|Deret Tak Hingga dan Uji Konvergensi|materi/kalkulus2/materi-09.md
+[BAB] Bab 11: Deret Pangkat, Deret Taylor, dan Deret Maclaurin
+TEKS|kalb-m10|Deret Pangkat, Deret Taylor, dan Deret Maclaurin|materi/kalkulus2/materi-10.md
+[BAB] Bab 12: Fungsi Dua Peubah atau Lebih dan Limitnya
+TEKS|kalb-m11|Fungsi Dua Peubah atau Lebih dan Limitnya|materi/kalkulus2/materi-11.md
+[BAB] Bab 13: Turunan Parsial dan Keterdiferensialan
+TEKS|kalb-m12|Turunan Parsial dan Keterdiferensialan|materi/kalkulus2/materi-12.md
+[BAB] Bab 14: Aturan Rantai dan Gradien Fungsi Peubah Banyak
+TEKS|kalb-m13|Aturan Rantai dan Gradien Fungsi Peubah Banyak|materi/kalkulus2/materi-13.md
+[BAB] Bab 15: Integral Lipat Dua dan Aplikasinya
+TEKS|kalb-m14|Integral Lipat Dua dan Aplikasinya|materi/kalkulus2/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|kalb-uas|Ujian Akhir Semester (UAS) Kalkulus II|KALB-02
+[END]
+
+[KURSUS]
+KODE=0953223010
+NAMA=Matematika Diskrit I
+PENGAJAR=Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.
+NIP_PEMBUAT=19850101
+DESKRIPSI=Logika proposisional, metode pembuktian, teori himpunan, relasi dan fungsi, induksi matematika, serta kombinatorika dasar.
+[BAB] Bab 1: Logika Proposisional dan Tabel Kebenaran
+TEKS|mdis-m01|Logika Proposisional dan Tabel Kebenaran|materi/matdis1/materi-01.md
+[BAB] Bab 2: Ekuivalensi Logika dan Hukum-Hukum Logika
+TEKS|mdis-m02|Ekuivalensi Logika dan Hukum-Hukum Logika|materi/matdis1/materi-02.md
+[BAB] Bab 3: Logika Predikat dan Kuantor
+TEKS|mdis-m03|Logika Predikat dan Kuantor|materi/matdis1/materi-03.md
+[BAB] Bab 4: Aturan Inferensi dan Metode Pembuktian
+TEKS|mdis-m04|Aturan Inferensi dan Metode Pembuktian|materi/matdis1/materi-04.md
+[BAB] Bab 5: Teori Himpunan dan Operasi Himpunan
+TEKS|mdis-m05|Teori Himpunan dan Operasi Himpunan|materi/matdis1/materi-05.md
+[BAB] Bab 6: Relasi dan Sifat-Sifat Relasi
+TEKS|mdis-m06|Relasi dan Sifat-Sifat Relasi|materi/matdis1/materi-06.md
+[BAB] Bab 7: Relasi Ekuivalensi dan Pengurutan Parsial
+TEKS|mdis-m07|Relasi Ekuivalensi dan Pengurutan Parsial|materi/matdis1/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|mdis-uts|Ujian Tengah Semester (UTS) Matematika Diskrit I|MDIS-01
+[BAB] Bab 9: Fungsi, Fungsi Injektif, Surjektif, dan Bijektif
+TEKS|mdis-m08|Fungsi, Fungsi Injektif, Surjektif, dan Bijektif|materi/matdis1/materi-08.md
+[BAB] Bab 10: Barisan, Notasi Sigma, dan Kardinalitas
+TEKS|mdis-m09|Barisan, Notasi Sigma, dan Kardinalitas|materi/matdis1/materi-09.md
+[BAB] Bab 11: Induksi Matematika dan Induksi Kuat
+TEKS|mdis-m10|Induksi Matematika dan Induksi Kuat|materi/matdis1/materi-10.md
+[BAB] Bab 12: Definisi Rekursif dan Algoritma Rekursif
+TEKS|mdis-m11|Definisi Rekursif dan Algoritma Rekursif|materi/matdis1/materi-11.md
+[BAB] Bab 13: Prinsip Dasar Membilang (Aturan Penjumlahan dan Perkalian)
+TEKS|mdis-m12|Prinsip Dasar Membilang (Aturan Penjumlahan dan Perkalian)|materi/matdis1/materi-12.md
+[BAB] Bab 14: Prinsip Sarang Merpati (Pigeonhole Principle)
+TEKS|mdis-m13|Prinsip Sarang Merpati (Pigeonhole Principle)|materi/matdis1/materi-13.md
+[BAB] Bab 15: Permutasi, Kombinasi, dan Koefisien Binomial
+TEKS|mdis-m14|Permutasi, Kombinasi, dan Koefisien Binomial|materi/matdis1/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|mdis-uas|Ujian Akhir Semester (UAS) Matematika Diskrit I|MDIS-02
+[END]
+
+[KURSUS]
+KODE=0953223011
+NAMA=Aljabar Linier
+PENGAJAR=Drs. Bambang Harjito, M.App.Sc., Ph.D.
+NIP_PEMBUAT=19850102
+DESKRIPSI=Sistem persamaan linier, matriks, determinan, ruang vektor Euclides, ruang vektor umum, nilai eigen, dan transformasi linier.
+[BAB] Bab 1: Sistem Persamaan Linier dan Eliminasi Gauss-Jordan
+TEKS|alin-m01|Sistem Persamaan Linier dan Eliminasi Gauss-Jordan|materi/aljabar_linier/materi-01.md
+[BAB] Bab 2: Matriks dan Operasi Aljabar Matriks
+TEKS|alin-m02|Matriks dan Operasi Aljabar Matriks|materi/aljabar_linier/materi-02.md
+[BAB] Bab 3: Matriks Invers dan Matriks Elementer
+TEKS|alin-m03|Matriks Invers dan Matriks Elementer|materi/aljabar_linier/materi-03.md
+[BAB] Bab 4: Determinan dengan Ekspansi Kofaktor dan Reduksi Baris
+TEKS|alin-m04|Determinan dengan Ekspansi Kofaktor dan Reduksi Baris|materi/aljabar_linier/materi-04.md
+[BAB] Bab 5: Aturan Cramer dan Aplikasi Determinan
+TEKS|alin-m05|Aturan Cramer dan Aplikasi Determinan|materi/aljabar_linier/materi-05.md
+[BAB] Bab 6: Vektor di Ruang 2D dan 3D
+TEKS|alin-m06|Vektor di Ruang 2D dan 3D|materi/aljabar_linier/materi-06.md
+[BAB] Bab 7: Hasil Kali Titik (Dot Product) dan Hasil Kali Silang
+TEKS|alin-m07|Hasil Kali Titik (Dot Product) dan Hasil Kali Silang|materi/aljabar_linier/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|alin-uts|Ujian Tengah Semester (UTS) Aljabar Linier|ALIN-01
+[BAB] Bab 9: Ruang Vektor Umum dan Subruang
+TEKS|alin-m08|Ruang Vektor Umum dan Subruang|materi/aljabar_linier/materi-08.md
+[BAB] Bab 10: Kombinasi Linier dan Kebebasan Linier
+TEKS|alin-m09|Kombinasi Linier dan Kebebasan Linier|materi/aljabar_linier/materi-09.md
+[BAB] Bab 11: Basis, Dimensi, dan Rank Matriks
+TEKS|alin-m10|Basis, Dimensi, dan Rank Matriks|materi/aljabar_linier/materi-10.md
+[BAB] Bab 12: Ruang Hasil Kali Dalam dan Proses Gram-Schmidt
+TEKS|alin-m11|Ruang Hasil Kali Dalam dan Proses Gram-Schmidt|materi/aljabar_linier/materi-11.md
+[BAB] Bab 13: Nilai Eigen, Vektor Eigen, dan Diagonalisasi
+TEKS|alin-m12|Nilai Eigen, Vektor Eigen, dan Diagonalisasi|materi/aljabar_linier/materi-12.md
+[BAB] Bab 14: Transformasi Linier, Kernel, dan Jangkauan
+TEKS|alin-m13|Transformasi Linier, Kernel, dan Jangkauan|materi/aljabar_linier/materi-13.md
+[BAB] Bab 15: Matriks Transformasi Linier dan Aplikasi Komputasi
+TEKS|alin-m14|Matriks Transformasi Linier dan Aplikasi Komputasi|materi/aljabar_linier/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|alin-uas|Ujian Akhir Semester (UAS) Aljabar Linier|ALIN-02
+[END]
+
+[KURSUS]
+KODE=0953223012
+NAMA=Struktur Data & Algoritma
+PENGAJAR=Esti Suryani, S.Si., M.Kom.
+NIP_PEMBUAT=19850103
+DESKRIPSI=Abstraksi data, kompleksitas algoritma, linked list, stack, queue, tree, binary search tree, heap, hashing, graf, dan pengurutan.
+[BAB] Bab 1: Kontrak Belajar, ADT, dan Kompleksitas Waktu Big-O
+TEKS|sda-m01|Kontrak Belajar, ADT, dan Kompleksitas Waktu Big-O|materi/sda/materi-01.md
+[BAB] Bab 2: Array Dinamis dan Analisis Memori
+TEKS|sda-m02|Array Dinamis dan Analisis Memori|materi/sda/materi-02.md
+[BAB] Bab 3: Single Linked List dan Operasi Dasar
+TEKS|sda-m03|Single Linked List dan Operasi Dasar|materi/sda/materi-03.md
+[BAB] Bab 4: Double Linked List dan Circular Linked List
+TEKS|sda-m04|Double Linked List dan Circular Linked List|materi/sda/materi-04.md
+[BAB] Bab 5: Stack (Tumpukan) dan Evaluasi Ekspresi
+TEKS|sda-m05|Stack (Tumpukan) dan Evaluasi Ekspresi|materi/sda/materi-05.md
+[BAB] Bab 6: Queue (Antrean), Circular Queue, dan Priority Queue
+TEKS|sda-m06|Queue (Antrean), Circular Queue, dan Priority Queue|materi/sda/materi-06.md
+[BAB] Bab 7: Algoritma Pencarian: Linear Search dan Binary Search
+TEKS|sda-m07|Algoritma Pencarian: Linear Search dan Binary Search|materi/sda/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|sda-uts|Ujian Tengah Semester (UTS) Struktur Data & Algoritma|SDA-01
+[BAB] Bab 9: Algoritma Pengurutan Dasar: Bubble, Selection, Insertion Sort
+TEKS|sda-m08|Algoritma Pengurutan Dasar: Bubble, Selection, Insertion Sort|materi/sda/materi-08.md
+[BAB] Bab 10: Algoritma Pengurutan Lanjut: Merge Sort dan Quick Sort
+TEKS|sda-m09|Algoritma Pengurutan Lanjut: Merge Sort dan Quick Sort|materi/sda/materi-09.md
+[BAB] Bab 11: Konsep Pohon (Tree) dan Binary Tree Traversal
+TEKS|sda-m10|Konsep Pohon (Tree) dan Binary Tree Traversal|materi/sda/materi-10.md
+[BAB] Bab 12: Binary Search Tree (BST): Pencarian, Penyisipan, Penghapusan
+TEKS|sda-m11|Binary Search Tree (BST): Pencarian, Penyisipan, Penghapusan|materi/sda/materi-11.md
+[BAB] Bab 13: AVL Tree dan Penyeimbangan Pohon
+TEKS|sda-m12|AVL Tree dan Penyeimbangan Pohon|materi/sda/materi-12.md
+[BAB] Bab 14: Heap, Heapsort, dan Hash Table
+TEKS|sda-m13|Heap, Heapsort, dan Hash Table|materi/sda/materi-13.md
+[BAB] Bab 15: Representasi Graf serta Penelusuran BFS dan DFS
+TEKS|sda-m14|Representasi Graf serta Penelusuran BFS dan DFS|materi/sda/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|sda-uas|Ujian Akhir Semester (UAS) Struktur Data & Algoritma|SDA-02
+[END]
+
+[KURSUS]
+KODE=0953223013
+NAMA=Organisasi Sistem Komputer
+PENGAJAR=Herdito Ibnu Dewangkoro
+NIP_PEMBUAT=19850104
+DESKRIPSI=Arsitektur Von Neumann, unit pemrosesan pusat (CPU), set instruksi, jalur data, hierarki memori, cache, sistem bus, dan modul I/O.
+[BAB] Bab 1: Pengantar Organisasi dan Arsitektur Komputer
+TEKS|osk-m01|Pengantar Organisasi dan Arsitektur Komputer|materi/osk/materi-01.md
+[BAB] Bab 2: Evolusi Komputer dan Arsitektur Von Neumann
+TEKS|osk-m02|Evolusi Komputer dan Arsitektur Von Neumann|materi/osk/materi-02.md
+[BAB] Bab 3: Sistem Bus dan Interkoneksi Komponen
+TEKS|osk-m03|Sistem Bus dan Interkoneksi Komponen|materi/osk/materi-03.md
+[BAB] Bab 4: Memori Internal: RAM, ROM, dan Organisasi Sel Memori
+TEKS|osk-m04|Memori Internal: RAM, ROM, dan Organisasi Sel Memori|materi/osk/materi-04.md
+[BAB] Bab 5: Memori Cache dan Prinsip Lokalitas
+TEKS|osk-m05|Memori Cache dan Prinsip Lokalitas|materi/osk/materi-05.md
+[BAB] Bab 6: Memori Eksternal: Magnetic Disk, SSD, dan RAID
+TEKS|osk-m06|Memori Eksternal: Magnetic Disk, SSD, dan RAID|materi/osk/materi-06.md
+[BAB] Bab 7: Modul Input/Output, Interrupt, dan DMA
+TEKS|osk-m07|Modul Input/Output, Interrupt, dan DMA|materi/osk/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|osk-uts|Ujian Tengah Semester (UTS) Organisasi Sistem Komputer|OSK-01
+[BAB] Bab 9: Aritmatika Komputer: Integer dan Floating Point IEEE 754
+TEKS|osk-m08|Aritmatika Komputer: Integer dan Floating Point IEEE 754|materi/osk/materi-08.md
+[BAB] Bab 10: Karakteristik dan Fungsi Set Instruksi (ISA)
+TEKS|osk-m09|Karakteristik dan Fungsi Set Instruksi (ISA)|materi/osk/materi-09.md
+[BAB] Bab 11: Mode Pengalamatan dan Format Instruksi
+TEKS|osk-m10|Mode Pengalamatan dan Format Instruksi|materi/osk/materi-10.md
+[BAB] Bab 12: Struktur dan Fungsi Prosesor (CPU) serta Siklus Instruksi
+TEKS|osk-m11|Struktur dan Fungsi Prosesor (CPU) serta Siklus Instruksi|materi/osk/materi-11.md
+[BAB] Bab 13: Pipelining Instruksi dan Penanganan Hazard
+TEKS|osk-m12|Pipelining Instruksi dan Penanganan Hazard|materi/osk/materi-12.md
+[BAB] Bab 14: Arsitektur RISC vs CISC
+TEKS|osk-m13|Arsitektur RISC vs CISC|materi/osk/materi-13.md
+[BAB] Bab 15: Unit Kontrol dan Prosesor Multicore
+TEKS|osk-m14|Unit Kontrol dan Prosesor Multicore|materi/osk/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|osk-uas|Ujian Akhir Semester (UAS) Organisasi Sistem Komputer|OSK-02
+[END]
+
+[KURSUS]
+KODE=0953212014
+NAMA=Pendidikan Kewarganegaraan
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Identitas nasional, integrasi bangsa, konstitusi UUD 1945, hak dan kewajiban warga negara, demokrasi, wawasan nusantara, dan ketahanan nasional.
+[BAB] Bab 1: Hakikat dan Pentingnya Pendidikan Kewarganegaraan
+TEKS|pkn-m01|Hakikat dan Pentingnya Pendidikan Kewarganegaraan|materi/pkn/materi-01.md
+[BAB] Bab 2: Identitas Nasional dan Karakter Bangsa Indonesia
+TEKS|pkn-m02|Identitas Nasional dan Karakter Bangsa Indonesia|materi/pkn/materi-02.md
+[BAB] Bab 3: Integrasi Nasional dalam Masyarakat Majemuk
+TEKS|pkn-m03|Integrasi Nasional dalam Masyarakat Majemuk|materi/pkn/materi-03.md
+[BAB] Bab 4: Nilai dan Norma Konstitusional UUD NRI 1945
+TEKS|pkn-m04|Nilai dan Norma Konstitusional UUD NRI 1945|materi/pkn/materi-04.md
+[BAB] Bab 5: Harmoni Kewajiban dan Hak Negara serta Warga Negara
+TEKS|pkn-m05|Harmoni Kewajiban dan Hak Negara serta Warga Negara|materi/pkn/materi-05.md
+[BAB] Bab 6: Hakikat, Instrumentasi, dan Praksis Demokrasi Indonesia
+TEKS|pkn-m06|Hakikat, Instrumentasi, dan Praksis Demokrasi Indonesia|materi/pkn/materi-06.md
+[BAB] Bab 7: Penegakan Hukum yang Berkeadilan
+TEKS|pkn-m07|Penegakan Hukum yang Berkeadilan|materi/pkn/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|pkn-uts|Ujian Tengah Semester (UTS) Pendidikan Kewarganegaraan|PKN-01
+[BAB] Bab 9: Dinamika Historis Konstitusi di Indonesia
+TEKS|pkn-m08|Dinamika Historis Konstitusi di Indonesia|materi/pkn/materi-08.md
+[BAB] Bab 10: Kewarganegaraan Digital dan Etika Ruang Siber
+TEKS|pkn-m09|Kewarganegaraan Digital dan Etika Ruang Siber|materi/pkn/materi-09.md
+[BAB] Bab 11: Wawasan Nusantara sebagai Geopolitik Indonesia
+TEKS|pkn-m10|Wawasan Nusantara sebagai Geopolitik Indonesia|materi/pkn/materi-10.md
+[BAB] Bab 12: Ketahanan Nasional dan Bela Negara
+TEKS|pkn-m11|Ketahanan Nasional dan Bela Negara|materi/pkn/materi-11.md
+[BAB] Bab 13: Otonomi Daerah dan Tata Kelola Pemerintahan yang Baik
+TEKS|pkn-m12|Otonomi Daerah dan Tata Kelola Pemerintahan yang Baik|materi/pkn/materi-12.md
+[BAB] Bab 14: Pencegahan Korupsi dan Integritas Publik
+TEKS|pkn-m13|Pencegahan Korupsi dan Integritas Publik|materi/pkn/materi-13.md
+[BAB] Bab 15: Peran Generasi Muda dalam Pembangunan Nasional
+TEKS|pkn-m14|Peran Generasi Muda dalam Pembangunan Nasional|materi/pkn/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|pkn-uas|Ujian Akhir Semester (UAS) Pendidikan Kewarganegaraan|PKN-02
+[END]
+
+[KURSUS]
+KODE=0953222015
+NAMA=Bahasa Inggris II
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Penulisan esai akademik, telaah kritis jurnal internasional bidang informatika, korespondensi profesional, dan presentasi ilmiah bahasa Inggris.
+[BAB] Bab 1: Academic Essay Structure and Thesis Statement
+TEKS|bingb-m01|Academic Essay Structure and Thesis Statement|materi/inggris2/materi-01.md
+[BAB] Bab 2: Cause and Effect Essays in Technology
+TEKS|bingb-m02|Cause and Effect Essays in Technology|materi/inggris2/materi-02.md
+[BAB] Bab 3: Comparison and Contrast Writing
+TEKS|bingb-m03|Comparison and Contrast Writing|materi/inggris2/materi-03.md
+[BAB] Bab 4: Argumentative Essays and Critical Thinking
+TEKS|bingb-m04|Argumentative Essays and Critical Thinking|materi/inggris2/materi-04.md
+[BAB] Bab 5: Reading Research Papers: Abstract and Introduction
+TEKS|bingb-m05|Reading Research Papers: Abstract and Introduction|materi/inggris2/materi-05.md
+[BAB] Bab 6: Analyzing Methodology and Experimental Results
+TEKS|bingb-m06|Analyzing Methodology and Experimental Results|materi/inggris2/materi-06.md
+[BAB] Bab 7: Paraphrasing, Quoting, and Avoiding Plagiarism
+TEKS|bingb-m07|Paraphrasing, Quoting, and Avoiding Plagiarism|materi/inggris2/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|bingb-uts|Ujian Tengah Semester (UTS) Bahasa Inggris II|BINGB-01
+[BAB] Bab 9: Describing Charts, Graphs, and Data Trends
+TEKS|bingb-m08|Describing Charts, Graphs, and Data Trends|materi/inggris2/materi-08.md
+[BAB] Bab 10: Writing Technical Documentation and Reports
+TEKS|bingb-m09|Writing Technical Documentation and Reports|materi/inggris2/materi-09.md
+[BAB] Bab 11: Professional Email and Cover Letter Writing
+TEKS|bingb-m10|Professional Email and Cover Letter Writing|materi/inggris2/materi-10.md
+[BAB] Bab 12: Curriculum Vitae and Job Interview Preparation
+TEKS|bingb-m11|Curriculum Vitae and Job Interview Preparation|materi/inggris2/materi-11.md
+[BAB] Bab 13: Designing Effective Presentation Slides
+TEKS|bingb-m12|Designing Effective Presentation Slides|materi/inggris2/materi-12.md
+[BAB] Bab 14: Delivering Technical Presentations and Q&A Handling
+TEKS|bingb-m13|Delivering Technical Presentations and Q&A Handling|materi/inggris2/materi-13.md
+[BAB] Bab 15: TOEFL/IELTS Academic Reading and Structure Review
+TEKS|bingb-m14|TOEFL/IELTS Academic Reading and Structure Review|materi/inggris2/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|bingb-uas|Ujian Akhir Semester (UAS) Bahasa Inggris II|BINGB-02
+[END]
+
+[KURSUS]
+KODE=0953122016
+NAMA=Matematika Diskrit II
+PENGAJAR=Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.
+NIP_PEMBUAT=19850101
+DESKRIPSI=Prasyarat: 0953223010. Relasi rekurensi lanjut, fungsi pembangkit, teori graf, pohon merentang, pewarnaan graf, aljabar Boole, dan otomata hingga.
+[BAB] Bab 1: Relasi Rekurensi Linier Homogen dan Non-Homogen
+TEKS|mdisb-m01|Relasi Rekurensi Linier Homogen dan Non-Homogen|materi/matdis2/materi-01.md
+[BAB] Bab 2: Fungsi Pembangkit Biasa dan Eksponensial
+TEKS|mdisb-m02|Fungsi Pembangkit Biasa dan Eksponensial|materi/matdis2/materi-02.md
+[BAB] Bab 3: Prinsip Inklusi-Eksklusi dan Aplikasinya
+TEKS|mdisb-m03|Prinsip Inklusi-Eksklusi dan Aplikasinya|materi/matdis2/materi-03.md
+[BAB] Bab 4: Konsep Dasar Teori Graf dan Terminologi Graf
+TEKS|mdisb-m04|Konsep Dasar Teori Graf dan Terminologi Graf|materi/matdis2/materi-04.md
+[BAB] Bab 5: Representasi Graf dan Isomorfisme Graf
+TEKS|mdisb-m05|Representasi Graf dan Isomorfisme Graf|materi/matdis2/materi-05.md
+[BAB] Bab 6: Keterhubungan, Lintasan Euler, dan Lintasan Hamilton
+TEKS|mdisb-m06|Keterhubungan, Lintasan Euler, dan Lintasan Hamilton|materi/matdis2/materi-06.md
+[BAB] Bab 7: Lintasan Terpendek: Algoritma Dijkstra dan Bellman-Ford
+TEKS|mdisb-m07|Lintasan Terpendek: Algoritma Dijkstra dan Bellman-Ford|materi/matdis2/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|mdisb-uts|Ujian Tengah Semester (UTS) Matematika Diskrit II|MDISB-01
+[BAB] Bab 9: Graf Planar dan Pewarnaan Graf (Graph Coloring)
+TEKS|mdisb-m08|Graf Planar dan Pewarnaan Graf (Graph Coloring)|materi/matdis2/materi-08.md
+[BAB] Bab 10: Pohon (Trees), Pohon Berakar, dan Aplikasinya
+TEKS|mdisb-m09|Pohon (Trees), Pohon Berakar, dan Aplikasinya|materi/matdis2/materi-09.md
+[BAB] Bab 11: Pohon Merentang Minimum: Algoritma Prim dan Kruskal
+TEKS|mdisb-m10|Pohon Merentang Minimum: Algoritma Prim dan Kruskal|materi/matdis2/materi-10.md
+[BAB] Bab 12: Jaringan Transportasi dan Aliran Maksimum
+TEKS|mdisb-m11|Jaringan Transportasi dan Aliran Maksimum|materi/matdis2/materi-11.md
+[BAB] Bab 13: Poset, Lattice, dan Struktur Aljabar Diskrit
+TEKS|mdisb-m12|Poset, Lattice, dan Struktur Aljabar Diskrit|materi/matdis2/materi-12.md
+[BAB] Bab 14: Teori Bilangan Modul dan Kriptografi Kunci Publik
+TEKS|mdisb-m13|Teori Bilangan Modul dan Kriptografi Kunci Publik|materi/matdis2/materi-13.md
+[BAB] Bab 15: Pengantar Bahasa Formal dan Finite State Automata
+TEKS|mdisb-m14|Pengantar Bahasa Formal dan Finite State Automata|materi/matdis2/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|mdisb-uas|Ujian Akhir Semester (UAS) Matematika Diskrit II|MDISB-02
+[END]
+
+[KURSUS]
+KODE=0953123017
+NAMA=Pemrograman Berorientasi Objek
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Prasyarat: 0953223012. Paradigma OOP di Java: class, object, encapsulation, inheritance, polymorphism, abstraction, generic, exception, GUI, dan thread.
+[BAB] Bab 1: Pengenalan Pemrograman Berorientasi Objek
+TEKS|pbo-m01|Pengenalan Pemrograman Berorientasi Objek|materi/pbo/materi-01.md
+[BAB] Bab 2: Class, Object, dan Konstruktor
+TEKS|pbo-m02|Class, Object, dan Konstruktor|materi/pbo/materi-02.md
+[BAB] Bab 3: Tipe Data, Variabel, dan Method
+TEKS|pbo-m03|Tipe Data, Variabel, dan Method|materi/pbo/materi-03.md
+[BAB] Bab 4: Encapsulation dan Access Modifier
+TEKS|pbo-m04|Encapsulation dan Access Modifier|materi/pbo/materi-04.md
+[BAB] Bab 5: Relasi Antar Kelas: Association, Aggregation, Composition
+TEKS|pbo-m05|Relasi Antar Kelas: Association, Aggregation, Composition|materi/pbo/materi-05.md
+[BAB] Bab 6: Inheritance dengan extends dan super
+TEKS|pbo-m06|Inheritance dengan extends dan super|materi/pbo/materi-06.md
+[BAB] Bab 7: Polymorphism: Overloading dan Overriding
+TEKS|pbo-m07|Polymorphism: Overloading dan Overriding|materi/pbo/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|pbo-uts|Ujian Tengah Semester (UTS) Pemrograman Berorientasi Objek|PBO-01
+[BAB] Bab 9: Abstract Class dan Interface
+TEKS|pbo-m08|Abstract Class dan Interface|materi/pbo/materi-08.md
+[BAB] Bab 10: Manipulasi String dan StringBuilder
+TEKS|pbo-m09|Manipulasi String dan StringBuilder|materi/pbo/materi-09.md
+[BAB] Bab 11: Generics dan Java Collections Framework
+TEKS|pbo-m10|Generics dan Java Collections Framework|materi/pbo/materi-10.md
+[BAB] Bab 12: Exception Handling dan Assertions
+TEKS|pbo-m11|Exception Handling dan Assertions|materi/pbo/materi-11.md
+[BAB] Bab 13: Operasi Input/Output dan File Streams
+TEKS|pbo-m12|Operasi Input/Output dan File Streams|materi/pbo/materi-12.md
+[BAB] Bab 14: Pemrograman Antarmuka Grafis dengan JavaFX
+TEKS|pbo-m13|Pemrograman Antarmuka Grafis dengan JavaFX|materi/pbo/materi-13.md
+[BAB] Bab 15: Multithreading dan Sinkronisasi
+TEKS|pbo-m14|Multithreading dan Sinkronisasi|materi/pbo/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|pbo-uas|Ujian Akhir Semester (UAS) Pemrograman Berorientasi Objek|PBO-02
+[END]
+
+[KURSUS]
+KODE=0953124018
+NAMA=Basis Data
+PENGAJAR=Haryono Setiyadi, S.T., M.Eng.
+NIP_PEMBUAT=19850106
+DESKRIPSI=Arsitektur sistem basis data, pemodelan Entity-Relationship (ERD), model relasional, aljabar relasional, SQL (DDL, DML, DCL), normalisasi, dan transaksi.
+[BAB] Bab 1: Pengantar Sistem Basis Data dan Arsitektur DBMS
+TEKS|bdat-m01|Pengantar Sistem Basis Data dan Arsitektur DBMS|materi/basis_data/materi-01.md
+[BAB] Bab 2: Model Data Entity-Relationship (ERD)
+TEKS|bdat-m02|Model Data Entity-Relationship (ERD)|materi/basis_data/materi-02.md
+[BAB] Bab 3: Enhanced Entity-Relationship (EER) dan Kardinalitas
+TEKS|bdat-m03|Enhanced Entity-Relationship (EER) dan Kardinalitas|materi/basis_data/materi-03.md
+[BAB] Bab 4: Model Data Relasional dan Integritas Referensial
+TEKS|bdat-m04|Model Data Relasional dan Integritas Referensial|materi/basis_data/materi-04.md
+[BAB] Bab 5: Transformasi ERD ke Skema Relasional
+TEKS|bdat-m05|Transformasi ERD ke Skema Relasional|materi/basis_data/materi-05.md
+[BAB] Bab 6: Aljabar Relasional dan Kalkulus Relasional
+TEKS|bdat-m06|Aljabar Relasional dan Kalkulus Relasional|materi/basis_data/materi-06.md
+[BAB] Bab 7: SQL Dasar: Data Definition Language (DDL)
+TEKS|bdat-m07|SQL Dasar: Data Definition Language (DDL)|materi/basis_data/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|bdat-uts|Ujian Tengah Semester (UTS) Basis Data|BDAT-01
+[BAB] Bab 9: SQL Manipulasi Data: SELECT, INSERT, UPDATE, DELETE
+TEKS|bdat-m08|SQL Manipulasi Data: SELECT, INSERT, UPDATE, DELETE|materi/basis_data/materi-08.md
+[BAB] Bab 10: Fungsi Agregasi, GROUP BY, dan Subquery
+TEKS|bdat-m09|Fungsi Agregasi, GROUP BY, dan Subquery|materi/basis_data/materi-09.md
+[BAB] Bab 11: Operasi JOIN Multi-Tabel dan View
+TEKS|bdat-m10|Operasi JOIN Multi-Tabel dan View|materi/basis_data/materi-10.md
+[BAB] Bab 12: Ketergantungan Fungsional (Functional Dependency)
+TEKS|bdat-m11|Ketergantungan Fungsional (Functional Dependency)|materi/basis_data/materi-11.md
+[BAB] Bab 13: Normalisasi Basis Data (1NF, 2NF, 3NF, BCNF)
+TEKS|bdat-m12|Normalisasi Basis Data (1NF, 2NF, 3NF, BCNF)|materi/basis_data/materi-12.md
+[BAB] Bab 14: Indeks, Penyimpanan Fisik, dan Optimasi Query
+TEKS|bdat-m13|Indeks, Penyimpanan Fisik, dan Optimasi Query|materi/basis_data/materi-13.md
+[BAB] Bab 15: Manajemen Transaksi, Properti ACID, dan Concurrency Control
+TEKS|bdat-m14|Manajemen Transaksi, Properti ACID, dan Concurrency Control|materi/basis_data/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|bdat-uas|Ujian Akhir Semester (UAS) Basis Data|BDAT-02
+[END]
+
+[KURSUS]
+KODE=0953123019
+NAMA=Sistem Operasi
+PENGAJAR=Herdito Ibnu Dewangkoro
+NIP_PEMBUAT=19850104
+DESKRIPSI=Prasyarat: 0953223013. Struktur kernel, manajemen proses, thread, penjadwalan CPU, sinkronisasi, deadlock, memori virtual, dan sistem berkas.
+[BAB] Bab 1: Pengantar, Sejarah, dan Struktur Sistem Operasi
+TEKS|sisop-m01|Pengantar, Sejarah, dan Struktur Sistem Operasi|materi/sistem_operasi/materi-01.md
+[BAB] Bab 2: System Calls dan Arsitektur Kernel
+TEKS|sisop-m02|System Calls dan Arsitektur Kernel|materi/sistem_operasi/materi-02.md
+[BAB] Bab 3: Konsep Proses, PCB, dan Komunikasi Antarproses (IPC)
+TEKS|sisop-m03|Konsep Proses, PCB, dan Komunikasi Antarproses (IPC)|materi/sistem_operasi/materi-03.md
+[BAB] Bab 4: Thread dan Pemrograman Multithreading pada OS
+TEKS|sisop-m04|Thread dan Pemrograman Multithreading pada OS|materi/sistem_operasi/materi-04.md
+[BAB] Bab 5: Algoritma Penjadwalan CPU (FCFS, SJF, Round Robin)
+TEKS|sisop-m05|Algoritma Penjadwalan CPU (FCFS, SJF, Round Robin)|materi/sistem_operasi/materi-05.md
+[BAB] Bab 6: Sinkronisasi Proses dan Masalah Critical Section
+TEKS|sisop-m06|Sinkronisasi Proses dan Masalah Critical Section|materi/sistem_operasi/materi-06.md
+[BAB] Bab 7: Semaphore, Mutex, dan Monitor
+TEKS|sisop-m07|Semaphore, Mutex, dan Monitor|materi/sistem_operasi/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|sisop-uts|Ujian Tengah Semester (UTS) Sistem Operasi|SISOP-01
+[BAB] Bab 9: Deadlock: Karakteristik, Pencegahan, dan Algoritma Banker
+TEKS|sisop-m08|Deadlock: Karakteristik, Pencegahan, dan Algoritma Banker|materi/sistem_operasi/materi-08.md
+[BAB] Bab 10: Manajemen Memori Utama, Paging, dan Segmentasi
+TEKS|sisop-m09|Manajemen Memori Utama, Paging, dan Segmentasi|materi/sistem_operasi/materi-09.md
+[BAB] Bab 11: Memori Virtual, Demand Paging, dan Page Replacement
+TEKS|sisop-m10|Memori Virtual, Demand Paging, dan Page Replacement|materi/sistem_operasi/materi-10.md
+[BAB] Bab 12: Antarmuka dan Implementasi Sistem Berkas (File System)
+TEKS|sisop-m11|Antarmuka dan Implementasi Sistem Berkas (File System)|materi/sistem_operasi/materi-11.md
+[BAB] Bab 13: Manajemen Penyimpanan Massal dan Penjadwalan Disk
+TEKS|sisop-m12|Manajemen Penyimpanan Massal dan Penjadwalan Disk|materi/sistem_operasi/materi-12.md
+[BAB] Bab 14: Sistem Input/Output dan Device Driver
+TEKS|sisop-m13|Sistem Input/Output dan Device Driver|materi/sistem_operasi/materi-13.md
+[BAB] Bab 15: Keamanan dan Proteksi pada Sistem Operasi
+TEKS|sisop-m14|Keamanan dan Proteksi pada Sistem Operasi|materi/sistem_operasi/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|sisop-uas|Ujian Akhir Semester (UAS) Sistem Operasi|SISOP-02
+[END]
+
+[KURSUS]
+KODE=0953112020
+NAMA=Pendidikan Pancasila
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Landasan historis, kultural, yuridis, dan filosofis Pancasila sebagai dasar negara, ideologi nasional, sistem filsafat, etika, dan pengembangan ilmu.
+[BAB] Bab 1: Pengantar dan Landasan Pendidikan Pancasila
+TEKS|panc-m01|Pengantar dan Landasan Pendidikan Pancasila|materi/pancasila/materi-01.md
+[BAB] Bab 2: Pancasila dalam Arus Sejarah Perjuangan Bangsa
+TEKS|panc-m02|Pancasila dalam Arus Sejarah Perjuangan Bangsa|materi/pancasila/materi-02.md
+[BAB] Bab 3: Perumusan dan Pengesahan Pancasila sebagai Dasar Negara
+TEKS|panc-m03|Perumusan dan Pengesahan Pancasila sebagai Dasar Negara|materi/pancasila/materi-03.md
+[BAB] Bab 4: Pancasila sebagai Dasar Negara Republik Indonesia
+TEKS|panc-m04|Pancasila sebagai Dasar Negara Republik Indonesia|materi/pancasila/materi-04.md
+[BAB] Bab 5: Implementasi Pancasila dalam Perundang-undangan
+TEKS|panc-m05|Implementasi Pancasila dalam Perundang-undangan|materi/pancasila/materi-05.md
+[BAB] Bab 6: Pancasila sebagai Ideologi Nasional dan Ideologi Terbuka
+TEKS|panc-m06|Pancasila sebagai Ideologi Nasional dan Ideologi Terbuka|materi/pancasila/materi-06.md
+[BAB] Bab 7: Perbandingan Ideologi Pancasila dengan Ideologi Dunia
+TEKS|panc-m07|Perbandingan Ideologi Pancasila dengan Ideologi Dunia|materi/pancasila/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|panc-uts|Ujian Tengah Semester (UTS) Pendidikan Pancasila|PANC-01
+[BAB] Bab 9: Pancasila sebagai Sistem Filsafat
+TEKS|panc-m08|Pancasila sebagai Sistem Filsafat|materi/pancasila/materi-08.md
+[BAB] Bab 10: Hakikat Sila-Sila Pancasila secara Ontologis dan Epistemologis
+TEKS|panc-m09|Hakikat Sila-Sila Pancasila secara Ontologis dan Epistemologis|materi/pancasila/materi-09.md
+[BAB] Bab 11: Pancasila sebagai Sistem Etika
+TEKS|panc-m10|Pancasila sebagai Sistem Etika|materi/pancasila/materi-10.md
+[BAB] Bab 12: Etika Kehidupan Berbangsa dan Bernegara
+TEKS|panc-m11|Etika Kehidupan Berbangsa dan Bernegara|materi/pancasila/materi-11.md
+[BAB] Bab 13: Pancasila sebagai Dasar Nilai Pengembangan Ilmu
+TEKS|panc-m12|Pancasila sebagai Dasar Nilai Pengembangan Ilmu|materi/pancasila/materi-12.md
+[BAB] Bab 14: Tantangan Aktualisasi Pancasila di Era Globalisasi
+TEKS|panc-m13|Tantangan Aktualisasi Pancasila di Era Globalisasi|materi/pancasila/materi-13.md
+[BAB] Bab 15: Pengamalan Nilai Pancasila dalam Profesi Teknologi Informasi
+TEKS|panc-m14|Pengamalan Nilai Pancasila dalam Profesi Teknologi Informasi|materi/pancasila/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|panc-uas|Ujian Akhir Semester (UAS) Pendidikan Pancasila|PANC-02
+[END]
+
+[KURSUS]
+KODE=0953123021
+NAMA=Metode Numerik
+PENGAJAR=Dr. Umi Salamah, S.Si., M.Kom.
+NIP_PEMBUAT=19850105
+DESKRIPSI=Prasyarat: 0953223009; 0953223011. Analisis galat, akar persamaan nirlinier, SPL numerik, interpolasi, regresi, diferensiasi, dan integrasi numerik.
+[BAB] Bab 1: Pengantar Metode Numerik dan Analisis Galat (Error)
+TEKS|mnum-m01|Pengantar Metode Numerik dan Analisis Galat (Error)|materi/metode_numerik/materi-01.md
+[BAB] Bab 2: Representasi Bilangan Titik Kambang dan Perambatan Galat
+TEKS|mnum-m02|Representasi Bilangan Titik Kambang dan Perambatan Galat|materi/metode_numerik/materi-02.md
+[BAB] Bab 3: Akar Persamaan Nirlinier: Metode Bagi Dua dan Regula Falsi
+TEKS|mnum-m03|Akar Persamaan Nirlinier: Metode Bagi Dua dan Regula Falsi|materi/metode_numerik/materi-03.md
+[BAB] Bab 4: Metode Terbuka: Iterasi Titik Tetap, Newton-Raphson, dan Secant
+TEKS|mnum-m04|Metode Terbuka: Iterasi Titik Tetap, Newton-Raphson, dan Secant|materi/metode_numerik/materi-04.md
+[BAB] Bab 5: Sistem Persamaan Linier: Eliminasi Gauss dan Pivoting
+TEKS|mnum-m05|Sistem Persamaan Linier: Eliminasi Gauss dan Pivoting|materi/metode_numerik/materi-05.md
+[BAB] Bab 6: Dekomposisi LU dan Matriks Tridiagonal
+TEKS|mnum-m06|Dekomposisi LU dan Matriks Tridiagonal|materi/metode_numerik/materi-06.md
+[BAB] Bab 7: Metode Iteratif SPL: Jacobi dan Gauss-Seidel
+TEKS|mnum-m07|Metode Iteratif SPL: Jacobi dan Gauss-Seidel|materi/metode_numerik/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|mnum-uts|Ujian Tengah Semester (UTS) Metode Numerik|MNUM-01
+[BAB] Bab 9: Interpolasi Polinomial: Metode Lagrange
+TEKS|mnum-m08|Interpolasi Polinomial: Metode Lagrange|materi/metode_numerik/materi-08.md
+[BAB] Bab 10: Interpolasi Beda Terbagi Newton dan Spline
+TEKS|mnum-m09|Interpolasi Beda Terbagi Newton dan Spline|materi/metode_numerik/materi-09.md
+[BAB] Bab 11: Regresi Kuadrat Terkecil (Least Squares Regression)
+TEKS|mnum-m10|Regresi Kuadrat Terkecil (Least Squares Regression)|materi/metode_numerik/materi-10.md
+[BAB] Bab 12: Turunan Numerik: Selisih Maju, Mundur, dan Pusat
+TEKS|mnum-m11|Turunan Numerik: Selisih Maju, Mundur, dan Pusat|materi/metode_numerik/materi-11.md
+[BAB] Bab 13: Integrasi Numerik: Aturan Trapesium dan Aturan Simpson
+TEKS|mnum-m12|Integrasi Numerik: Aturan Trapesium dan Aturan Simpson|materi/metode_numerik/materi-12.md
+[BAB] Bab 14: Integrasi Romberg dan Kuadratur Gauss
+TEKS|mnum-m13|Integrasi Romberg dan Kuadratur Gauss|materi/metode_numerik/materi-13.md
+[BAB] Bab 15: Solusi Numerik Persamaan Diferensial Biasa: Euler dan Runge-Kutta
+TEKS|mnum-m14|Solusi Numerik Persamaan Diferensial Biasa: Euler dan Runge-Kutta|materi/metode_numerik/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|mnum-uas|Ujian Akhir Semester (UAS) Metode Numerik|MNUM-02
+[END]
+
+[KURSUS]
+KODE=0953123022
+NAMA=Desain & Analisis Algoritma
+PENGAJAR=Lazuardi Akbar Imani S.Kokop
+NIP_PEMBUAT=L0125105
+DESKRIPSI=Prasyarat: 0953223012. Analisis asimtotik, relasi rekurensi, brute force, divide and conquer, decrease and conquer, greedy, dynamic programming, dan NP.
+[BAB] Bab 1: Dasar Analisis Efisiensi Algoritma dan Notasi Asimtotik
+TEKS|daa-m01|Dasar Analisis Efisiensi Algoritma dan Notasi Asimtotik|materi/daa/materi-01.md
+[BAB] Bab 2: Analisis Algoritma Non-Rekursif dan Rekursif (Master Theorem)
+TEKS|daa-m02|Analisis Algoritma Non-Rekursif dan Rekursif (Master Theorem)|materi/daa/materi-02.md
+[BAB] Bab 3: Strategi Brute Force dan Exhaustive Search
+TEKS|daa-m03|Strategi Brute Force dan Exhaustive Search|materi/daa/materi-03.md
+[BAB] Bab 4: Strategi Decrease and Conquer (Insertion Sort, Topological Sort)
+TEKS|daa-m04|Strategi Decrease and Conquer (Insertion Sort, Topological Sort)|materi/daa/materi-04.md
+[BAB] Bab 5: Strategi Divide and Conquer (Merge Sort, Quick Sort, Karatsuba)
+TEKS|daa-m05|Strategi Divide and Conquer (Merge Sort, Quick Sort, Karatsuba)|materi/daa/materi-05.md
+[BAB] Bab 6: Transform and Conquer (Presorting, Gaussian Elimination, Heap)
+TEKS|daa-m06|Transform and Conquer (Presorting, Gaussian Elimination, Heap)|materi/daa/materi-06.md
+[BAB] Bab 7: Space and Time Trade-Offs (Hashing, Horspool, Boyer-Moore)
+TEKS|daa-m07|Space and Time Trade-Offs (Hashing, Horspool, Boyer-Moore)|materi/daa/materi-07.md
+[BAB] Bab 8: Ujian Tengah Semester (UTS)
+UJIAN|daa-uts|Ujian Tengah Semester (UTS) Desain & Analisis Algoritma|DAA-01
+[BAB] Bab 9: Algoritma Greedy: Coin Change, Knapsack Fraksional, Huffman
+TEKS|daa-m08|Algoritma Greedy: Coin Change, Knapsack Fraksional, Huffman|materi/daa/materi-08.md
+[BAB] Bab 10: Algoritma Greedy pada Graf: Prim, Kruskal, dan Dijkstra
+TEKS|daa-m09|Algoritma Greedy pada Graf: Prim, Kruskal, dan Dijkstra|materi/daa/materi-09.md
+[BAB] Bab 11: Dynamic Programming Dasar: Fibonacci, Coin Row, dan 0/1 Knapsack
+TEKS|daa-m10|Dynamic Programming Dasar: Fibonacci, Coin Row, dan 0/1 Knapsack|materi/daa/materi-10.md
+[BAB] Bab 12: Dynamic Programming Lanjut: LCS dan Floyd-Warshall
+TEKS|daa-m11|Dynamic Programming Lanjut: LCS dan Floyd-Warshall|materi/daa/materi-11.md
+[BAB] Bab 13: Strategi Backtracking: N-Queens, Subset Sum, dan Hamiltonian
+TEKS|daa-m12|Strategi Backtracking: N-Queens, Subset Sum, dan Hamiltonian|materi/daa/materi-12.md
+[BAB] Bab 14: Strategi Branch and Bound: Assignment dan Traveling Salesperson
+TEKS|daa-m13|Strategi Branch and Bound: Assignment dan Traveling Salesperson|materi/daa/materi-13.md
+[BAB] Bab 15: Kelas Kompleksitas P, NP, NP-Complete, dan Algoritma Aproksimasi
+TEKS|daa-m14|Kelas Kompleksitas P, NP, NP-Complete, dan Algoritma Aproksimasi|materi/daa/materi-14.md
+[BAB] Bab 16: Ujian Akhir Semester (UAS)
+UJIAN|daa-uas|Ujian Akhir Semester (UAS) Desain & Analisis Algoritma|DAA-02
 [END]
 
 [KURSUS]
@@ -101,14 +890,4 @@ DESKRIPSI=Ujian singkat 1 menit untuk mencoba fitur auto-submit. Boleh diulang.
 [BAB] Mulai di Sini
 TEKS|uji-01|Panduan Mengikuti Ujian|materi/uji/01-panduan.md
 UJIAN|uji-coba|Ujian Coba 1 Menit|UJI-01
-[END]
-
-[KURSUS]
-KODE=JMK48
-NAMA=JOMOKISASI
-PENGAJAR=Lazuardi iMani, S.Mok
-NIP_PEMBUAT=L0125105
-DESKRIPSI=Pembelajaran jomok
-[BAB] Bab 1: Pendahuluan
-TUGAS|tgs-59176|Sejarah Suki|2026-11-15 23:59|Semua Kelas|jelaskan sejarah suki
 [END]

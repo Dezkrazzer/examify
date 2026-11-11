@@ -82,7 +82,12 @@ public class CourseCard extends VBox {
 
 
 
-        Label info = new Label(kursus.getDaftarBab().size() + " bab  ·  " + kursus.getJumlahMateri() + " materi");
+        int jmlMateri = kursus.getJumlahMateriPembelajaran();
+        int jmlUjian = kursus.getJumlahUjian();
+        String teksInfo = jmlUjian > 0
+                ? kursus.getDaftarBab().size() + " bab  ·  " + jmlMateri + " materi  ·  " + jmlUjian + " ujian"
+                : kursus.getDaftarBab().size() + " bab  ·  " + jmlMateri + " materi";
+        Label info = new Label(teksInfo);
 
         info.getStyleClass().add("teks-kecil");
 
