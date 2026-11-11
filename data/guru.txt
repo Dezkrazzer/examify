@@ -1,8 +1,8 @@
 # NIP|NAMA|PIN|MAPEL
-19850101|Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.|1234|Matematika Diskrit I & II
-19850102|Drs. Bambang Harjito, M.App.Sc., Ph.D.|1234|Konsep Pemrograman & Aljabar Linier
-19850103|Esti Suryani, S.Si., M.Kom.|1234|Statistika & Probabilitas, Struktur Data & Algoritma
-19850104|Herdito Ibnu Dewangkoro|1234|Organisasi Sistem Komputer & Sistem Operasi
-19850105|Dr. Umi Salamah, S.Si., M.Kom.|1234|Metode Numerik
-19850106|Haryono Setiyadi, S.T., M.Eng.|1234|Basis Data
-L0125105|Lazuardi Akbar Imani S.Kokop|1111|Mata Kuliah Umum & Informatika
+19850101|Dr. Andi Wijaya, S.Kom., M.Kom.|1234|Matematika Diskrit I & II
+19850102|Dr. Ratna Sari Dewi, S.Si., M.Sc.|1234|Konsep Pemrograman & Aljabar Linier
+19850103|Siti Nurhaliza, S.Si., M.Kom.|1234|Statistika & Probabilitas, Struktur Data & Algoritma
+19850104|Budi Hartono, S.T., M.T.|1234|Organisasi Sistem Komputer & Sistem Operasi
+19850105|Dr. Dewi Anggraini, S.Si., M.Kom.|1234|Metode Numerik
+19850106|Agus Setiawan, S.T., M.Eng.|1234|Basis Data
+19850107|Rudi Hermawan, S.Kom., M.Cs.|1234|Mata Kuliah Umum & Informatika

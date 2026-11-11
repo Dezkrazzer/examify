@@ -1,6 +1,7 @@
 # NIS|NAMA|KELAS|PIN
-1234567|Lazuardi Akbar Imani|IF2025D|1111
-125125|Alfian Solomon|XXX|6767
-2410001|Andi Pratama|XI-IPA-1|1234
-2410002|Budi Santoso|XI-IPA-1|5678
-2410003|Citra Lestari|XI-IPA-2|2468
+2410001|Andi Pratama|IF-A|1234
+2410002|Budi Santoso|IF-B|5678
+2410003|Citra Lestari|IF-C|2468
+2410004|Dimas Saputra|IF-D|1111
+2410005|Eka Rahmawati|IF-E|6767
+0000001|Lazuardi Akbar Imani|IF-A|1111
