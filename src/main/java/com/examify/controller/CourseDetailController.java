@@ -6903,6 +6903,7 @@ public class CourseDetailController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
@@ -7208,6 +7209,7 @@ public class CourseDetailController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
@@ -7841,6 +7843,7 @@ public class CourseDetailController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
@@ -9486,6 +9489,7 @@ public class CourseDetailController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
@@ -12649,6 +12653,7 @@ public class CourseDetailController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
@@ -13167,6 +13172,7 @@ public class CourseDetailController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 

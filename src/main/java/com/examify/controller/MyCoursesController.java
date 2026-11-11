@@ -327,6 +327,7 @@ public class MyCoursesController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
@@ -503,6 +504,7 @@ public class MyCoursesController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
@@ -650,6 +652,7 @@ public class MyCoursesController {
         dialog.setOnShown(e -> {
             if (pane.getScene() != null) {
                 pane.getScene().setFill(Color.TRANSPARENT);
+                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
             }
         });
 
