@@ -5,8 +5,8 @@
 [KURSUS]
 KODE=0953112001
 NAMA=Pendidikan Agama
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Pembentukan karakter beragama, etika akademik, toleransi, dan nilai moral dalam kehidupan bermasyarakat serta profesi teknologi.
 [BAB] Bab 1: Konsep Ketuhanan dan Keimanan
 TEKS|pai-m01|Konsep Ketuhanan dan Keimanan|materi/agama/materi-01.md
@@ -45,7 +45,7 @@ UJIAN|pai-uas|Ujian Akhir Semester (UAS) Pendidikan Agama|PAI-02
 [KURSUS]
 KODE=0953124002
 NAMA=Konsep Pemrograman
-PENGAJAR=Drs. Bambang Harjito, M.App.Sc., Ph.D.
+PENGAJAR=Dr. Ratna Sari Dewi, S.Si., M.Sc.
 NIP_PEMBUAT=19850102
 DESKRIPSI=Dasar logika algoritma, flowchart, tipe data, struktur kontrol, fungsi, array, pointer, dan pengelolaan berkas dalam pemrograman.
 [BAB] Bab 1: Pengantar Algoritma dan Pemrograman
@@ -85,8 +85,8 @@ UJIAN|kp-uas|Ujian Akhir Semester (UAS) Konsep Pemrograman|KP-02
 [KURSUS]
 KODE=0953123003
 NAMA=Sistem Digital
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Sistem bilangan biner, aljabar Boolean, gerbang logika, penyederhanaan Karnaugh Map, rangkaian kombinasional, dan rangkaian sekuensial.
 [BAB] Bab 1: Sistem Bilangan dan Konversi Basis
 TEKS|sdig-m01|Sistem Bilangan dan Konversi Basis|materi/sistem_digital/materi-01.md
@@ -125,8 +125,8 @@ UJIAN|sdig-uas|Ujian Akhir Semester (UAS) Sistem Digital|SDIG-02
 [KURSUS]
 KODE=0953123004
 NAMA=Kalkulus I
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Sistem bilangan real, fungsi, limit, kekontinuan, turunan, aplikasi diferensial, dan integral fungsi satu peubah.
 [BAB] Bab 1: Sistem Bilangan Real dan Pertaksamaan
 TEKS|kalk-m01|Sistem Bilangan Real dan Pertaksamaan|materi/kalkulus1/materi-01.md
@@ -165,8 +165,8 @@ UJIAN|kalk-uas|Ujian Akhir Semester (UAS) Kalkulus I|KALK-02
 [KURSUS]
 KODE=0953123005
 NAMA=Fisika
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Besaran fisika, kinematika, dinamika partikel, usaha dan energi, momentum, kelistrikan, kemagnetan, dan gelombang.
 [BAB] Bab 1: Besaran, Satuan SI, dan Analisis Vektor
 TEKS|fis-m01|Besaran, Satuan SI, dan Analisis Vektor|materi/fisika/materi-01.md
@@ -205,8 +205,8 @@ UJIAN|fis-uas|Ujian Akhir Semester (UAS) Fisika|FIS-02
 [KURSUS]
 KODE=0953112006
 NAMA=Bahasa Inggris I
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Keterampilan membaca teks akademik bahasa Inggris, tata bahasa esensial, kosakata teknologi informasi, dan penulisan paragraf ilmiah.
 [BAB] Bab 1: Parts of Speech and Sentence Structure
 TEKS|bing-m01|Parts of Speech and Sentence Structure|materi/inggris1/materi-01.md
@@ -245,7 +245,7 @@ UJIAN|bing-uas|Ujian Akhir Semester (UAS) Bahasa Inggris I|BING-02
 [KURSUS]
 KODE=0953123007
 NAMA=Statistika & Probabilitas
-PENGAJAR=Esti Suryani, S.Si., M.Kom.
+PENGAJAR=Siti Nurhaliza, S.Si., M.Kom.
 NIP_PEMBUAT=19850103
 DESKRIPSI=Statistika deskriptif, teori peluang, peubah acak, distribusi peluang diskrit dan kontinu, pendugaan parameter, serta uji hipotesis.
 [BAB] Bab 1: Pengantar Statistika dan Penyajian Data
@@ -285,8 +285,8 @@ UJIAN|stat-uas|Ujian Akhir Semester (UAS) Statistika & Probabilitas|STAT-02
 [KURSUS]
 KODE=0953112008
 NAMA=Bahasa Indonesia
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Sejarah dan kedudukan bahasa Indonesia, EYD, diksi, kalimat efektif, paragraf ilmiah, kutipan, daftar pustaka, dan penulisan karya ilmiah.
 [BAB] Bab 1: Sejarah, Kedudukan, dan Fungsi Bahasa Indonesia
 TEKS|bind-m01|Sejarah, Kedudukan, dan Fungsi Bahasa Indonesia|materi/bahasaindo/materi-01.md
@@ -325,8 +325,8 @@ UJIAN|bind-uas|Ujian Akhir Semester (UAS) Bahasa Indonesia|BIND-02
 [KURSUS]
 KODE=0953223009
 NAMA=Kalkulus II
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Teknik pengintegralan lanjut, bentuk tak tentu, integral tak wajar, barisan dan deret tak hingga, serta fungsi peubah banyak.
 [BAB] Bab 1: Teknik Integrasi Substitusi dan Parsial
 TEKS|kalb-m01|Teknik Integrasi Substitusi dan Parsial|materi/kalkulus2/materi-01.md
@@ -365,7 +365,7 @@ UJIAN|kalb-uas|Ujian Akhir Semester (UAS) Kalkulus II|KALB-02
 [KURSUS]
 KODE=0953223010
 NAMA=Matematika Diskrit I
-PENGAJAR=Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.
+PENGAJAR=Dr. Andi Wijaya, S.Kom., M.Kom.
 NIP_PEMBUAT=19850101
 DESKRIPSI=Logika proposisional, metode pembuktian, teori himpunan, relasi dan fungsi, induksi matematika, serta kombinatorika dasar.
 [BAB] Bab 1: Logika Proposisional dan Tabel Kebenaran
@@ -405,7 +405,7 @@ UJIAN|mdis-uas|Ujian Akhir Semester (UAS) Matematika Diskrit I|MDIS-02
 [KURSUS]
 KODE=0953223011
 NAMA=Aljabar Linier
-PENGAJAR=Drs. Bambang Harjito, M.App.Sc., Ph.D.
+PENGAJAR=Dr. Ratna Sari Dewi, S.Si., M.Sc.
 NIP_PEMBUAT=19850102
 DESKRIPSI=Sistem persamaan linier, matriks, determinan, ruang vektor Euclides, ruang vektor umum, nilai eigen, dan transformasi linier.
 [BAB] Bab 1: Sistem Persamaan Linier dan Eliminasi Gauss-Jordan
@@ -445,7 +445,7 @@ UJIAN|alin-uas|Ujian Akhir Semester (UAS) Aljabar Linier|ALIN-02
 [KURSUS]
 KODE=0953223012
 NAMA=Struktur Data & Algoritma
-PENGAJAR=Esti Suryani, S.Si., M.Kom.
+PENGAJAR=Siti Nurhaliza, S.Si., M.Kom.
 NIP_PEMBUAT=19850103
 DESKRIPSI=Abstraksi data, kompleksitas algoritma, linked list, stack, queue, tree, binary search tree, heap, hashing, graf, dan pengurutan.
 [BAB] Bab 1: Kontrak Belajar, ADT, dan Kompleksitas Waktu Big-O
@@ -485,7 +485,7 @@ UJIAN|sda-uas|Ujian Akhir Semester (UAS) Struktur Data & Algoritma|SDA-02
 [KURSUS]
 KODE=0953223013
 NAMA=Organisasi Sistem Komputer
-PENGAJAR=Herdito Ibnu Dewangkoro
+PENGAJAR=Budi Hartono, S.T., M.T.
 NIP_PEMBUAT=19850104
 DESKRIPSI=Arsitektur Von Neumann, unit pemrosesan pusat (CPU), set instruksi, jalur data, hierarki memori, cache, sistem bus, dan modul I/O.
 [BAB] Bab 1: Pengantar Organisasi dan Arsitektur Komputer
@@ -525,8 +525,8 @@ UJIAN|osk-uas|Ujian Akhir Semester (UAS) Organisasi Sistem Komputer|OSK-02
 [KURSUS]
 KODE=0953212014
 NAMA=Pendidikan Kewarganegaraan
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Identitas nasional, integrasi bangsa, konstitusi UUD 1945, hak dan kewajiban warga negara, demokrasi, wawasan nusantara, dan ketahanan nasional.
 [BAB] Bab 1: Hakikat dan Pentingnya Pendidikan Kewarganegaraan
 TEKS|pkn-m01|Hakikat dan Pentingnya Pendidikan Kewarganegaraan|materi/pkn/materi-01.md
@@ -565,8 +565,8 @@ UJIAN|pkn-uas|Ujian Akhir Semester (UAS) Pendidikan Kewarganegaraan|PKN-02
 [KURSUS]
 KODE=0953222015
 NAMA=Bahasa Inggris II
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Penulisan esai akademik, telaah kritis jurnal internasional bidang informatika, korespondensi profesional, dan presentasi ilmiah bahasa Inggris.
 [BAB] Bab 1: Academic Essay Structure and Thesis Statement
 TEKS|bingb-m01|Academic Essay Structure and Thesis Statement|materi/inggris2/materi-01.md
@@ -605,7 +605,7 @@ UJIAN|bingb-uas|Ujian Akhir Semester (UAS) Bahasa Inggris II|BINGB-02
 [KURSUS]
 KODE=0953122016
 NAMA=Matematika Diskrit II
-PENGAJAR=Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.
+PENGAJAR=Dr. Andi Wijaya, S.Kom., M.Kom.
 NIP_PEMBUAT=19850101
 DESKRIPSI=Prasyarat: 0953223010. Relasi rekurensi lanjut, fungsi pembangkit, teori graf, pohon merentang, pewarnaan graf, aljabar Boole, dan otomata hingga.
 [BAB] Bab 1: Relasi Rekurensi Linier Homogen dan Non-Homogen
@@ -645,8 +645,8 @@ UJIAN|mdisb-uas|Ujian Akhir Semester (UAS) Matematika Diskrit II|MDISB-02
 [KURSUS]
 KODE=0953123017
 NAMA=Pemrograman Berorientasi Objek
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Prasyarat: 0953223012. Paradigma OOP di Java: class, object, encapsulation, inheritance, polymorphism, abstraction, generic, exception, GUI, dan thread.
 [BAB] Bab 1: Pengenalan Pemrograman Berorientasi Objek
 TEKS|pbo-m01|Pengenalan Pemrograman Berorientasi Objek|materi/pbo/materi-01.md
@@ -685,7 +685,7 @@ UJIAN|pbo-uas|Ujian Akhir Semester (UAS) Pemrograman Berorientasi Objek|PBO-02
 [KURSUS]
 KODE=0953124018
 NAMA=Basis Data
-PENGAJAR=Haryono Setiyadi, S.T., M.Eng.
+PENGAJAR=Agus Setiawan, S.T., M.Eng.
 NIP_PEMBUAT=19850106
 DESKRIPSI=Arsitektur sistem basis data, pemodelan Entity-Relationship (ERD), model relasional, aljabar relasional, SQL (DDL, DML, DCL), normalisasi, dan transaksi.
 [BAB] Bab 1: Pengantar Sistem Basis Data dan Arsitektur DBMS
@@ -725,7 +725,7 @@ UJIAN|bdat-uas|Ujian Akhir Semester (UAS) Basis Data|BDAT-02
 [KURSUS]
 KODE=0953123019
 NAMA=Sistem Operasi
-PENGAJAR=Herdito Ibnu Dewangkoro
+PENGAJAR=Budi Hartono, S.T., M.T.
 NIP_PEMBUAT=19850104
 DESKRIPSI=Prasyarat: 0953223013. Struktur kernel, manajemen proses, thread, penjadwalan CPU, sinkronisasi, deadlock, memori virtual, dan sistem berkas.
 [BAB] Bab 1: Pengantar, Sejarah, dan Struktur Sistem Operasi
@@ -765,8 +765,8 @@ UJIAN|sisop-uas|Ujian Akhir Semester (UAS) Sistem Operasi|SISOP-02
 [KURSUS]
 KODE=0953112020
 NAMA=Pendidikan Pancasila
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Landasan historis, kultural, yuridis, dan filosofis Pancasila sebagai dasar negara, ideologi nasional, sistem filsafat, etika, dan pengembangan ilmu.
 [BAB] Bab 1: Pengantar dan Landasan Pendidikan Pancasila
 TEKS|panc-m01|Pengantar dan Landasan Pendidikan Pancasila|materi/pancasila/materi-01.md
@@ -805,7 +805,7 @@ UJIAN|panc-uas|Ujian Akhir Semester (UAS) Pendidikan Pancasila|PANC-02
 [KURSUS]
 KODE=0953123021
 NAMA=Metode Numerik
-PENGAJAR=Dr. Umi Salamah, S.Si., M.Kom.
+PENGAJAR=Dr. Dewi Anggraini, S.Si., M.Kom.
 NIP_PEMBUAT=19850105
 DESKRIPSI=Prasyarat: 0953223009; 0953223011. Analisis galat, akar persamaan nirlinier, SPL numerik, interpolasi, regresi, diferensiasi, dan integrasi numerik.
 [BAB] Bab 1: Pengantar Metode Numerik dan Analisis Galat (Error)
@@ -845,8 +845,8 @@ UJIAN|mnum-uas|Ujian Akhir Semester (UAS) Metode Numerik|MNUM-02
 [KURSUS]
 KODE=0953123022
 NAMA=Desain & Analisis Algoritma
-PENGAJAR=Lazuardi Akbar Imani S.Kokop
-NIP_PEMBUAT=L0125105
+PENGAJAR=Rudi Hermawan, S.Kom., M.Cs.
+NIP_PEMBUAT=19850107
 DESKRIPSI=Prasyarat: 0953223012. Analisis asimtotik, relasi rekurensi, brute force, divide and conquer, decrease and conquer, greedy, dynamic programming, dan NP.
 [BAB] Bab 1: Dasar Analisis Efisiensi Algoritma dan Notasi Asimtotik
 TEKS|daa-m01|Dasar Analisis Efisiensi Algoritma dan Notasi Asimtotik|materi/daa/materi-01.md
