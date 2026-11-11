@@ -137,11 +137,8 @@ public class MyCoursesController {
 
             List<Course> kursusGuru = session.getKursusService().getKursusDibuatGuru(guru);
             int jmlKursus = kursusGuru.size();
-            int jmlMateri = kursusGuru.stream().mapToInt(Course::getJumlahMateri).sum();
-            int jmlUjian = (int) kursusGuru.stream()
-                    .flatMap(k -> k.getSemuaMateri().stream())
-                    .filter(m -> m instanceof ExamMaterial || m instanceof QuizMaterial)
-                    .count();
+            int jmlMateri = kursusGuru.stream().mapToInt(Course::getJumlahMateriPembelajaran).sum();
+            int jmlUjian = kursusGuru.stream().mapToInt(Course::getJumlahUjian).sum();
 
             AnimationUtil.hitungNaik(lblJumlahKursus, jmlKursus, DURASI_HITUNG);
             AnimationUtil.hitungNaik(lblMateriSelesai, jmlMateri, DURASI_HITUNG);

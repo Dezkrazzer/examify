@@ -1,4 +1,8 @@
 # NIP|NAMA|PIN|MAPEL
-19850101|Dr. Rina Kartika, M.Kom.|1234|Pemrograman Berorientasi Objek
-19870202|Bambang Sudarmono, M.Pd.|1234|Matematika
-L0125105|Lazuardi Akbar Imani|1111|Uji Coba
+19850101|Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.|1234|Matematika Diskrit I & II
+19850102|Drs. Bambang Harjito, M.App.Sc., Ph.D.|1234|Konsep Pemrograman & Aljabar Linier
+19850103|Esti Suryani, S.Si., M.Kom.|1234|Statistika & Probabilitas, Struktur Data & Algoritma
+19850104|Herdito Ibnu Dewangkoro|1234|Organisasi Sistem Komputer & Sistem Operasi
+19850105|Dr. Umi Salamah, S.Si., M.Kom.|1234|Metode Numerik
+19850106|Haryono Setiyadi, S.T., M.Eng.|1234|Basis Data
+L0125105|Lazuardi Akbar Imani S.Kokop|1111|Mata Kuliah Umum & Informatika

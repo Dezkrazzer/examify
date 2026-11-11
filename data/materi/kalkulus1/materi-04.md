@@ -1,0 +1,15 @@
+# Konsep Limit dan Teorema Limit
+
+Mata kuliah **Kalkulus I** (`0953123004`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+
+## Ringkasan Materi
+
+Pada pertemuan ini dibahas konsep utama mengenai **Konsep Limit dan Teorema Limit**, landasan teori, serta penerapannya dalam penyelesaian masalah akademik dan komputasi.
+
+## Pokok Bahasan
+
+1. Definisi dan konsep fundamental Konsep Limit dan Teorema Limit
+2. Prinsip kerja, formulasi, dan analisis struktur
+3. Studi kasus dan latihan pemecahan masalah
+
+> Pelajari seluruh poin pada bab ini sebagai persiapan menghadapi evaluasi UTS dan UAS.
