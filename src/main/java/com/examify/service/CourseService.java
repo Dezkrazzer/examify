@@ -8,6 +8,7 @@ import com.examify.model.QuizMaterial;
 import com.examify.model.TextMaterial;
 import com.examify.model.ExamMaterial;
 import com.examify.model.Exam;
+import com.examify.model.Teacher;
 import com.examify.utils.AppConfig;
 
 import java.io.IOException;
@@ -68,6 +69,73 @@ public class CourseService {
     /** Kursus yang cocok dengan kata kunci, diurutkan berdasarkan nama. */
     public List<Course> cari(String kataKunci) {
         return katalog.values().stream()
+                .filter(kursus -> kursus.cocokDengan(kataKunci))
+                .sorted(Comparator.comparing(Course::getNama))
+                .toList();
+    }
+
+    /** Memeriksa apakah suatu kursus dibuat atau diampu oleh guru tertentu. */
+    public boolean isKursusMilikGuru(Teacher guru, Course kursus) {
+        if (guru == null || kursus == null) {
+            return false;
+        }
+        if (!kursus.getNipPembuat().isBlank()) {
+            return kursus.getNipPembuat().equalsIgnoreCase(guru.getNip());
+        }
+        if (kursus.getPengajar().isBlank()) {
+            return false;
+        }
+        String pengajarKursus = kursus.getPengajar().trim();
+        String namaGuru = guru.getNama().trim();
+        if (pengajarKursus.equalsIgnoreCase(namaGuru)) {
+            return true;
+        }
+        return cocokNamaFleksibel(pengajarKursus, namaGuru);
+    }
+
+    private boolean cocokNamaFleksibel(String p1, String p2) {
+        String s1 = bersihkanGelar(p1);
+        String s2 = bersihkanGelar(p2);
+        if (s1.equalsIgnoreCase(s2) && !s1.isEmpty()) {
+            return true;
+        }
+        String[] w1 = s1.split("\\s+");
+        String[] w2 = s2.split("\\s+");
+        if (w1.length > 0 && w2.length > 0 && !w1[0].isEmpty() && w1[0].equalsIgnoreCase(w2[0])) {
+            if (w1.length > 1 && w2.length > 1) {
+                return w1[w1.length - 1].equalsIgnoreCase(w2[w2.length - 1]);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private String bersihkanGelar(String nama) {
+        if (nama == null) return "";
+        return nama.replaceAll("(?i)\\b(dr|prof|ir|drs|dra)\\b\\.?", "")
+                .replaceAll(",.*$", "")
+                .replaceAll("[^a-zA-Z0-9\\s]", "")
+                .trim()
+                .toLowerCase();
+    }
+
+    /** Mengambil seluruh kursus yang dibuat atau diampu oleh guru tertentu. */
+    public List<Course> getKursusDibuatGuru(Teacher guru) {
+        if (guru == null) {
+            return List.of();
+        }
+        return getDaftarKursus().stream()
+                .filter(k -> isKursusMilikGuru(guru, k))
+                .sorted(Comparator.comparing(Course::getNama, String.CASE_INSENSITIVE_ORDER))
+                .toList();
+    }
+
+    /** Mencari kursus milik guru berdasarkan kata kunci. */
+    public List<Course> cariUntukGuru(Teacher guru, String kataKunci) {
+        if (guru == null) {
+            return List.of();
+        }
+        return getKursusDibuatGuru(guru).stream()
                 .filter(kursus -> kursus.cocokDengan(kataKunci))
                 .sorted(Comparator.comparing(Course::getNama))
                 .toList();

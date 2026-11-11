@@ -5,7 +5,10 @@ import com.examify.app.AppScreen;
 import com.examify.app.SceneRouter;
 import com.examify.model.Chapter;
 import com.examify.model.Course;
+import com.examify.model.ExamMaterial;
+import com.examify.model.QuizMaterial;
 import com.examify.model.Student;
+import com.examify.model.Teacher;
 import com.examify.service.LearningProgressService;
 import com.examify.utils.StringUtil;
 import com.examify.view.AnimationUtil;
@@ -124,6 +127,7 @@ public class MyCoursesController {
         CenteredGrid.terapkan(fpKursusLain, CourseCard.LEBAR, MAKS_KOLOM);
         siswa = session.getSiswaAktif();
         if (session.isGuru()) {
+            Teacher guru = session.getGuruAktif();
             lblSapaan.setText("Halo, " + session.getNamaPengguna().split(" ")[0] + " (Guru)!");
             lblSubjudul.setText("Kelola kursus, bab materi, dan bank soal ujian Anda.");
             lblTile1.setText("Total Kursus");
@@ -131,12 +135,17 @@ public class MyCoursesController {
             lblTile3.setText("Total Ujian");
             btnAksiKhusus.setText("+ Buat Kursus Baru");
 
-            int jmlDiikuti = (int) session.getKursusService().getDaftarKursus().stream()
-                    .filter(this::isSiswaTerdaftar)
-                    .count();
-            AnimationUtil.hitungNaik(lblJumlahKursus, jmlDiikuti, DURASI_HITUNG);
-            AnimationUtil.hitungNaik(lblMateriSelesai, session.getKursusService().getJumlahMateriSemuaKursus(), DURASI_HITUNG);
-            AnimationUtil.hitungNaik(lblUjianDikerjakan, session.getUjianService().getJumlahUjian(), DURASI_HITUNG);
+            List<Course> kursusGuru = session.getKursusService().getKursusDibuatGuru(guru);
+            int jmlKursus = kursusGuru.size();
+            int jmlMateri = kursusGuru.stream().mapToInt(Course::getJumlahMateriPembelajaran).sum();
+            int jmlUjian = kursusGuru.stream().mapToInt(Course::getJumlahUjian).sum();
+
+            AnimationUtil.hitungNaik(lblJumlahKursus, jmlKursus, DURASI_HITUNG);
+            AnimationUtil.hitungNaik(lblMateriSelesai, jmlMateri, DURASI_HITUNG);
+            AnimationUtil.hitungNaik(lblUjianDikerjakan, jmlUjian, DURASI_HITUNG);
+
+            cbFilter.setVisible(false);
+            cbFilter.setManaged(false);
         } else {
             lblSapaan.setText("Halo, " + (siswa != null ? siswa.getNama().split(" ")[0] : "Siswa") + "!");
             lblSubjudul.setText("Lanjutkan belajar dari kursus yang sedang kamu ikuti.");
@@ -172,12 +181,37 @@ public class MyCoursesController {
     }
 
     private void tampilkan() {
+        if (session.isGuru()) {
+            Teacher guru = session.getGuruAktif();
+            List<Course> kursusGuru = session.getKursusService().getKursusDibuatGuru(guru);
+            String kataKunci = tfCari.getText() != null ? tfCari.getText().trim() : "";
+            List<Course> daftar = kursusGuru.stream()
+                    .filter(k -> k.cocokDengan(kataKunci))
+                    .sorted(pembanding(cbUrut.getValue()))
+                    .toList();
+
+            lblJudulKursus.setText("Kursus yang Dibuat (" + daftar.size() + ")");
+            boxKursusLain.setVisible(false);
+            boxKursusLain.setManaged(false);
+
+            List<CourseCard> kartu = daftar.stream().map(this::buatKartu).toList();
+            fpKursus.getChildren().setAll(kartu);
+
+            boolean sedangMencari = !StringUtil.isKosong(kataKunci);
+            lblKosong.setText(sedangMencari
+                    ? "Tidak ada kursus Anda yang cocok dengan pencarian."
+                    : "Anda belum membuat kursus. Klik tombol '+ Buat Kursus Baru' di atas untuk membuat kursus pertama Anda.");
+            tampilkanLabel(lblKosong, daftar.isEmpty());
+            AnimationUtil.berurutan(kartu, Duration.millis(60));
+            return;
+        }
+
         Filter filter = cbFilter.getValue();
         List<Course> daftar = session.getKursusService().cari(tfCari.getText()).stream()
                 .filter(kursus -> filter.cocok.test(progres(kursus)))
                 .sorted(pembanding(cbUrut.getValue()))
                 .toList();
-        if (session.isGuru() || siswa == null) {
+        if (siswa == null) {
             List<CourseCard> kartu = daftar.stream().map(this::buatKartu).toList();
             fpKursus.getChildren().setAll(kartu);
             tampilkanLabel(lblKosong, daftar.isEmpty());
@@ -255,7 +289,19 @@ public class MyCoursesController {
     }
 
     private void masukKursus(Course kursus) {
-        if (session.isGuru() || isSiswaTerdaftar(kursus)) {
+        if (session.isGuru()) {
+            Teacher guru = session.getGuruAktif();
+            if (!session.getKursusService().isKursusMilikGuru(guru, kursus)) {
+                DialogUtil.peringatan("Anda hanya dapat mengakses kursus yang Anda buat sendiri.");
+                return;
+            }
+            session.setKursusAktif(kursus);
+            session.setMateriFokus(null);
+            SceneRouter.pindah(AppScreen.KURSUS_DETAIL);
+            return;
+        }
+
+        if (isSiswaTerdaftar(kursus)) {
             session.setKursusAktif(kursus);
             session.setMateriFokus(null);
             SceneRouter.pindah(AppScreen.KURSUS_DETAIL);

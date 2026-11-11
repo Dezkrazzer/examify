@@ -3,60 +3,839 @@
 # =====================================================================
 
 [UJIAN]
-KODE=MTK-01
-MAPEL=Matematika
-TOKEN=MTK7X2
-DURASI=30
-KKM=75
-[SOAL]
-PG|1|Hasil dari 12 x 3 adalah ...|30;36;38;42|B|10
-PG|2|Bentuk sederhana dari 2x + 3x - x adalah ...|4x;5x;6x;3x|A|10
-TF|3|Bilangan 2 adalah satu-satunya bilangan prima genap.|T|10
-IS|4|Nilai dari 2 pangkat 5 adalah ...|32;TIGA PULUH DUA|10
-PG|5|Keliling persegi dengan sisi 7 cm adalah ...|14 cm;21 cm;28 cm;49 cm|C|10
-TF|6|Jumlah sudut dalam segitiga adalah 360 derajat.|F|10
-IS|7|Akar kuadrat dari 144 adalah ...|DUA BELAS;12|10
-PG|8|Jika 3x = 21, maka nilai x adalah ...|5;6;7;8|C|10
-PG|9|Hasil dari 1/2 + 1/4 adalah ...|1/6;2/6;3/4;1|C|10
-TF|10|Bilangan 0,5 sama dengan 50 persen.|T|10
-[END]
-
-[UJIAN]
-KODE=BIN-01
-MAPEL=Bahasa Indonesia
-TOKEN=BIN9K4
-DURASI=20
+KODE=PAI-01
+MAPEL=UTS Pendidikan Agama
+TOKEN=PAIUT1
+DURASI=60
 KKM=70
 [SOAL]
-PG|1|Kata baku dari "aktifitas" adalah ...|aktifitas;aktivitas;aktivitet;aktipitas|B|10
-TF|2|Kalimat efektif boleh mengandung pemborosan kata.|F|10
-IS|3|Ibu kota provinsi Jawa Tengah adalah ...|KOTA SEMARANG;SEMARANG|10
-PG|4|Lawan kata (antonim) dari "rajin" adalah ...|tekun;giat;malas;cermat|C|10
-PG|5|Kata baku yang tepat adalah ...|apotik;apotek;apothek;apoteek|B|10
-TF|6|Huruf kapital dipakai sebagai huruf pertama awal kalimat.|T|10
-IS|7|Sinonim dari kata "pandai" adalah ...|CERDAS;MAHIR;PINTAR|10
-PG|8|Kalimat yang berisi perintah diakhiri dengan tanda ...|titik;koma;seru;tanya|C|10
-TF|9|Paragraf deduktif memiliki kalimat utama di akhir paragraf.|F|10
-IS|10|Bahasa resmi negara Indonesia adalah bahasa ...|BAHASA INDONESIA;INDONESIA|10
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Pendidikan Agama adalah ...|Konsep Ketuhanan dan Keimanan;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Hakikat Manusia dan Tanggung Jawabnya merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Pendidikan Agama.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Pendidikan Agama adalah ...|Desain Kompiler;Sumber Ajaran dan Nilai Moral Agama;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Pendidikan Agama membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Etika dan Akhlak dalam Kehidupan Akademik;Komputasi Awan|C|10
+TF|5|Konsep Hak Asasi Manusia dan Demokrasi dalam Perspektif Agama dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Pendidikan Agama sebelum UTS adalah ...|Kriptografi;Hukum dan Keadilan Sosial;Bioinformatika;Robotika|B|10
+TF|7|Topik Ilmu Pengetahuan, Teknologi, dan Seni dalam Agama adalah materi penutup paruh pertama semester pada Pendidikan Agama.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Pendidikan Agama?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Konsep Ketuhanan dan Keimanan diperlukan untuk memahami bab selanjutnya pada Pendidikan Agama.|T|10
 [END]
 
 [UJIAN]
-KODE=IPA-01
-MAPEL=Ilmu Pengetahuan Alam
-TOKEN=IPA3Q8
-DURASI=25
-KKM=75
+KODE=PAI-02
+MAPEL=UAS Pendidikan Agama
+TOKEN=PAIUA1
+DURASI=90
+KKM=70
 [SOAL]
-PG|1|Planet yang paling dekat dengan Matahari adalah ...|Venus;Merkurius;Mars;Bumi|B|10
-TF|2|Air mendidih pada suhu 100 derajat Celsius di permukaan laut.|T|10
-IS|3|Gas yang dihasilkan tumbuhan saat fotosintesis adalah ...|OKSIGEN;O2|10
-PG|4|Satuan SI untuk gaya adalah ...|Joule;Watt;Newton;Pascal|C|10
-PG|5|Organ yang berfungsi memompa darah ke seluruh tubuh adalah ...|paru-paru;jantung;hati;ginjal|B|10
-TF|6|Bulan memancarkan cahayanya sendiri.|F|10
-IS|7|Perubahan wujud dari padat menjadi cair disebut ...|MENCAIR;MELEBUR|10
-PG|8|Hewan yang memakan tumbuhan disebut ...|karnivora;omnivora;herbivora;insektivora|C|10
-TF|9|Magnet dapat menarik benda yang terbuat dari besi.|T|10
-PG|10|Lapisan atmosfer tempat terjadinya cuaca adalah ...|troposfer;stratosfer;mesosfer;termosfer;eksosfer|A|10
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pendidikan Agama mencakup ...|Kerukunan Antarumat Beragama dan Toleransi;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Masyarakat Madani dan Kesejahteraan Umat dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pendidikan Agama.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Pendidikan Agama adalah ...|Sistem Tertanam;Kebudayaan dan Kearifan Lokal;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Pendidikan Agama membahas mengenai ...|Forensik Digital;Game Engine;Etika Profesi di Era Digital;Komputasi Grid|C|10
+TF|5|Materi Keluarga Sakinah dan Tanggung Jawab Sosial termasuk dalam cakupan Ujian Akhir Semester (UAS) Pendidikan Agama.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Pendidikan Agama adalah ...|Teknologi Blockchain;Kepemimpinan dan Amanah dalam Organisasi;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Kontribusi Agama dalam Perdamaian Dunia merupakan topik penutup sebelum pelaksanaan UAS Pendidikan Agama.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Pendidikan Agama adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Pendidikan Agama mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=KP-01
+MAPEL=UTS Konsep Pemrograman
+TOKEN=KPUT21
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Konsep Pemrograman adalah ...|Pengantar Algoritma dan Pemrograman;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Pseudocode dan Diagram Alir (Flowchart) merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Konsep Pemrograman.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Konsep Pemrograman adalah ...|Desain Kompiler;Tipe Data, Variabel, dan Konstanta;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Konsep Pemrograman membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Operator Aritmatika, Relasional, dan Logika;Komputasi Awan|C|10
+TF|5|Konsep Input dan Output Standar dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Konsep Pemrograman sebelum UTS adalah ...|Kriptografi;Percabangan Kondisional (If-Else dan Switch);Bioinformatika;Robotika|B|10
+TF|7|Topik Perulangan (For, While, dan Do-While) adalah materi penutup paruh pertama semester pada Konsep Pemrograman.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Konsep Pemrograman?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengantar Algoritma dan Pemrograman diperlukan untuk memahami bab selanjutnya pada Konsep Pemrograman.|T|10
+[END]
+
+[UJIAN]
+KODE=KP-02
+MAPEL=UAS Konsep Pemrograman
+TOKEN=KPUA22
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Konsep Pemrograman mencakup ...|Perulangan Bersarang dan Kontrol Alur;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Fungsi, Prosedur, dan Ruang Lingkup Variabel dipelajari setelah pelaksanaan Ujian Tengah Semester pada Konsep Pemrograman.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Konsep Pemrograman adalah ...|Sistem Tertanam;Rekursi dan Penyelesaian Masalah Berulang;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Konsep Pemrograman membahas mengenai ...|Forensik Digital;Game Engine;Array Satu Dimensi dan Multi Dimensi;Komputasi Grid|C|10
+TF|5|Materi Manipulasi String dan Karakter termasuk dalam cakupan Ujian Akhir Semester (UAS) Konsep Pemrograman.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Konsep Pemrograman adalah ...|Teknologi Blockchain;Struct, Tipe Data Bentukan, dan Pointer Dasar;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Operasi File dan Penanganan Kesalahan Dasar merupakan topik penutup sebelum pelaksanaan UAS Konsep Pemrograman.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Konsep Pemrograman adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Konsep Pemrograman mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=SDIG-01
+MAPEL=UTS Sistem Digital
+TOKEN=SDIUT3
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Sistem Digital adalah ...|Sistem Bilangan dan Konversi Basis;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Aritmatika Biner dan Komplemen Dua merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Sistem Digital.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Sistem Digital adalah ...|Desain Kompiler;Kode Digital (BCD, Gray, ASCII);Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Sistem Digital membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Gerbang Logika Dasar dan Universal;Komputasi Awan|C|10
+TF|5|Konsep Aljabar Boolean dan Teorema De Morgan dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Sistem Digital sebelum UTS adalah ...|Kriptografi;Bentuk Kanonik SOP dan POS;Bioinformatika;Robotika|B|10
+TF|7|Topik Minimisasi Fungsi dengan Peta Karnaugh (K-Map) adalah materi penutup paruh pertama semester pada Sistem Digital.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Sistem Digital?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Sistem Bilangan dan Konversi Basis diperlukan untuk memahami bab selanjutnya pada Sistem Digital.|T|10
+[END]
+
+[UJIAN]
+KODE=SDIG-02
+MAPEL=UAS Sistem Digital
+TOKEN=SDIUA3
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Sistem Digital mencakup ...|Metode Quine-McCluskey;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Rangkaian Kombinasional: Adder dan Subtractor dipelajari setelah pelaksanaan Ujian Tengah Semester pada Sistem Digital.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Sistem Digital adalah ...|Sistem Tertanam;Decoder, Encoder, dan Multiplexer;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Sistem Digital membahas mengenai ...|Forensik Digital;Game Engine;Demultiplexer dan Comparator;Komputasi Grid|C|10
+TF|5|Materi Pengantar Rangkaian Sekuensial: Latch dan Flip-Flop termasuk dalam cakupan Ujian Akhir Semester (UAS) Sistem Digital.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Sistem Digital adalah ...|Teknologi Blockchain;Register dan Shift Register;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Counter Sinkron dan Asinkron merupakan topik penutup sebelum pelaksanaan UAS Sistem Digital.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Sistem Digital adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Sistem Digital mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=KALK-01
+MAPEL=UTS Kalkulus I
+TOKEN=KALUT4
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Kalkulus I adalah ...|Sistem Bilangan Real dan Pertaksamaan;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Fungsi, Domain, dan Grafik Fungsi merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Kalkulus I.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Kalkulus I adalah ...|Desain Kompiler;Fungsi Transenden dan Invers;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Kalkulus I membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Konsep Limit dan Teorema Limit;Komputasi Awan|C|10
+TF|5|Konsep Kekontinuan Fungsi pada Suatu Titik dan Interval dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Kalkulus I sebelum UTS adalah ...|Kriptografi;Definisi Turunan dan Aturan Pencarian Turunan;Bioinformatika;Robotika|B|10
+TF|7|Topik Aturan Rantai dan Turunan Implisit adalah materi penutup paruh pertama semester pada Kalkulus I.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Kalkulus I?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Sistem Bilangan Real dan Pertaksamaan diperlukan untuk memahami bab selanjutnya pada Kalkulus I.|T|10
+[END]
+
+[UJIAN]
+KODE=KALK-02
+MAPEL=UAS Kalkulus I
+TOKEN=KALUA4
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Kalkulus I mencakup ...|Turunan Tingkat Tinggi dan Laju Berkaitan;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Nilai Ekstrem, Kemonotonan, dan Kecekungan dipelajari setelah pelaksanaan Ujian Tengah Semester pada Kalkulus I.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Kalkulus I adalah ...|Sistem Tertanam;Masalah Optimasi Terapan;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Kalkulus I membahas mengenai ...|Forensik Digital;Game Engine;Teorema Nilai Rata-Rata dan Dalil L'Hopital;Komputasi Grid|C|10
+TF|5|Materi Integral Tak Tentu dan Anti-Turunan termasuk dalam cakupan Ujian Akhir Semester (UAS) Kalkulus I.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Kalkulus I adalah ...|Teknologi Blockchain;Integral Tentu dan Jumlah Riemann;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Teorema Dasar Kalkulus dan Aplikasi Luas Daerah merupakan topik penutup sebelum pelaksanaan UAS Kalkulus I.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Kalkulus I adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Kalkulus I mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=FIS-01
+MAPEL=UTS Fisika
+TOKEN=FISUT5
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Fisika adalah ...|Besaran, Satuan SI, dan Analisis Vektor;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Kinematika Gerak Lurus merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Fisika.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Fisika adalah ...|Desain Kompiler;Gerak Parabola dan Gerak Melingkar;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Fisika membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Hukum-Hukum Newton tentang Gerak;Komputasi Awan|C|10
+TF|5|Konsep Usaha, Energi Kinetik, dan Energi Potensial dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Fisika sebelum UTS adalah ...|Kriptografi;Momentum Linear dan Tumbukan;Bioinformatika;Robotika|B|10
+TF|7|Topik Dinamika Rotasi dan Kesetimbangan Benda Tegar adalah materi penutup paruh pertama semester pada Fisika.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Fisika?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Besaran, Satuan SI, dan Analisis Vektor diperlukan untuk memahami bab selanjutnya pada Fisika.|T|10
+[END]
+
+[UJIAN]
+KODE=FIS-02
+MAPEL=UAS Fisika
+TOKEN=FISUA5
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Fisika mencakup ...|Mekanika Fluida Statis dan Dinamis;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Getaran Harmonik dan Gelombang Mekanik dipelajari setelah pelaksanaan Ujian Tengah Semester pada Fisika.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Fisika adalah ...|Sistem Tertanam;Suhu, Kalor, dan Hukum Termodinamika;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Fisika membahas mengenai ...|Forensik Digital;Game Engine;Elektrostatika: Hukum Coulomb dan Medan Listrik;Komputasi Grid|C|10
+TF|5|Materi Potensial Listrik dan Kapasitor termasuk dalam cakupan Ujian Akhir Semester (UAS) Fisika.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Fisika adalah ...|Teknologi Blockchain;Rangkaian Arus Searah dan Hukum Kirchhoff;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Medan Magnet dan Induksi Elektromagnetik merupakan topik penutup sebelum pelaksanaan UAS Fisika.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Fisika adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Fisika mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=BING-01
+MAPEL=UTS Bahasa Inggris I
+TOKEN=BINUT6
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Bahasa Inggris I adalah ...|Parts of Speech and Sentence Structure;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Present Tenses in Academic Context merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Bahasa Inggris I.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Bahasa Inggris I adalah ...|Desain Kompiler;Past and Future Tenses for Technical Reporting;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Bahasa Inggris I membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Passive Voice in Scientific Writing;Komputasi Awan|C|10
+TF|5|Konsep Reading Strategies: Skimming and Scanning dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Bahasa Inggris I sebelum UTS adalah ...|Kriptografi;Identifying Main Ideas and Supporting Details;Bioinformatika;Robotika|B|10
+TF|7|Topik Contextual Vocabulary in Computer Science adalah materi penutup paruh pertama semester pada Bahasa Inggris I.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Bahasa Inggris I?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Parts of Speech and Sentence Structure diperlukan untuk memahami bab selanjutnya pada Bahasa Inggris I.|T|10
+[END]
+
+[UJIAN]
+KODE=BING-02
+MAPEL=UAS Bahasa Inggris I
+TOKEN=BINUA6
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Bahasa Inggris I mencakup ...|Subject-Verb Agreement and Parallel Structure;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Relative Clauses and Adjective Phrases dipelajari setelah pelaksanaan Ujian Tengah Semester pada Bahasa Inggris I.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Bahasa Inggris I adalah ...|Sistem Tertanam;Modal Auxiliaries and Conditional Sentences;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Bahasa Inggris I membahas mengenai ...|Forensik Digital;Game Engine;Summarizing Technical Articles;Komputasi Grid|C|10
+TF|5|Materi Paragraph Organization: Topic and Concluding Sentences termasuk dalam cakupan Ujian Akhir Semester (UAS) Bahasa Inggris I.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Bahasa Inggris I adalah ...|Teknologi Blockchain;Academic Listening and Note-Taking;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Oral Presentation Fundamentals merupakan topik penutup sebelum pelaksanaan UAS Bahasa Inggris I.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Bahasa Inggris I adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Bahasa Inggris I mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=STAT-01
+MAPEL=UTS Statistika & Probabilitas
+TOKEN=STAUT7
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Statistika & Probabilitas adalah ...|Pengantar Statistika dan Penyajian Data;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Ukuran Pemusatan Data (Mean, Median, Modus) merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Statistika & Probabilitas.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Statistika & Probabilitas adalah ...|Desain Kompiler;Ukuran Penyebaran Data (Variansi dan Simpangan Baku);Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Statistika & Probabilitas membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Konsep Dasar Ruang Sampel dan Kejadian;Komputasi Awan|C|10
+TF|5|Konsep Aturan Peluang, Peluang Bersyarat, dan Teorema Bayes dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Statistika & Probabilitas sebelum UTS adalah ...|Kriptografi;Peubah Acak Diskrit dan Kontinu;Bioinformatika;Robotika|B|10
+TF|7|Topik Nilai Harapan dan Variansi Peubah Acak adalah materi penutup paruh pertama semester pada Statistika & Probabilitas.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Statistika & Probabilitas?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengantar Statistika dan Penyajian Data diperlukan untuk memahami bab selanjutnya pada Statistika & Probabilitas.|T|10
+[END]
+
+[UJIAN]
+KODE=STAT-02
+MAPEL=UAS Statistika & Probabilitas
+TOKEN=STAUA7
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Statistika & Probabilitas mencakup ...|Distribusi Peluang Diskrit (Binomial, Poisson);Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Distribusi Peluang Kontinu dan Distribusi Normal dipelajari setelah pelaksanaan Ujian Tengah Semester pada Statistika & Probabilitas.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Statistika & Probabilitas adalah ...|Sistem Tertanam;Distribusi Sampling dan Teorema Limit Pusat;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Statistika & Probabilitas membahas mengenai ...|Forensik Digital;Game Engine;Pendugaan Titik dan Selang Kepercayaan;Komputasi Grid|C|10
+TF|5|Materi Pengujian Hipotesis Satu dan Dua Sampel termasuk dalam cakupan Ujian Akhir Semester (UAS) Statistika & Probabilitas.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Statistika & Probabilitas adalah ...|Teknologi Blockchain;Analisis Korelasi dan Regresi Linear Sederhana;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Uji Khi-Kuadrat dan Analisis Variansi Dasar merupakan topik penutup sebelum pelaksanaan UAS Statistika & Probabilitas.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Statistika & Probabilitas adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Statistika & Probabilitas mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=BIND-01
+MAPEL=UTS Bahasa Indonesia
+TOKEN=BINUT8
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Bahasa Indonesia adalah ...|Sejarah, Kedudukan, dan Fungsi Bahasa Indonesia;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Ragam Bahasa Ilmiah dan Ejaan Bahasa Indonesia (EYD) merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Bahasa Indonesia.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Bahasa Indonesia adalah ...|Desain Kompiler;Pilihan Kata (Diksi) dan Kata Baku;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Bahasa Indonesia membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Kalimat Efektif dalam Penulisan Akademik;Komputasi Awan|C|10
+TF|5|Konsep Pengembangan Paragraf yang Kohesif dan Koheren dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Bahasa Indonesia sebelum UTS adalah ...|Kriptografi;Perencanaan Karangan Ilmiah dan Topik Penelitian;Bioinformatika;Robotika|B|10
+TF|7|Topik Sistematika Karya Tulis Ilmiah adalah materi penutup paruh pertama semester pada Bahasa Indonesia.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Bahasa Indonesia?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Sejarah, Kedudukan, dan Fungsi Bahasa Indonesia diperlukan untuk memahami bab selanjutnya pada Bahasa Indonesia.|T|10
+[END]
+
+[UJIAN]
+KODE=BIND-02
+MAPEL=UAS Bahasa Indonesia
+TOKEN=BINUA8
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Bahasa Indonesia mencakup ...|Teknik Kutipan Langsung dan Tidak Langsung;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Penulisan Catatan Kaki dan Daftar Pustaka dipelajari setelah pelaksanaan Ujian Tengah Semester pada Bahasa Indonesia.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Bahasa Indonesia adalah ...|Sistem Tertanam;Abstrak, Pendahuluan, dan Tinjauan Pustaka;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Bahasa Indonesia membahas mengenai ...|Forensik Digital;Game Engine;Penulisan Metodologi dan Pembahasan Hasil;Komputasi Grid|C|10
+TF|5|Materi Simpulan, Saran, dan Penyuntingan Naskah termasuk dalam cakupan Ujian Akhir Semester (UAS) Bahasa Indonesia.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Bahasa Indonesia adalah ...|Teknologi Blockchain;Korespondensi Resmi dan Surat Akademik;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Teknik Presentasi Ilmiah Berbahasa Indonesia merupakan topik penutup sebelum pelaksanaan UAS Bahasa Indonesia.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Bahasa Indonesia adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Bahasa Indonesia mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=KALB-01
+MAPEL=UTS Kalkulus II
+TOKEN=KALUT9
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Kalkulus II adalah ...|Teknik Integrasi Substitusi dan Parsial;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Integral Fungsi Trigonometri merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Kalkulus II.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Kalkulus II adalah ...|Desain Kompiler;Substitusi Trigonometri dan Pecahan Parsial;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Kalkulus II membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Aplikasi Integral: Volume Benda Putar;Komputasi Awan|C|10
+TF|5|Konsep Panjang Busur dan Luas Permukaan Putar dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Kalkulus II sebelum UTS adalah ...|Kriptografi;Bentuk Tak Tentu dan Integral Tak Wajar;Bioinformatika;Robotika|B|10
+TF|7|Topik Sistem Koordinat Polar dan Persamaan Parametrik adalah materi penutup paruh pertama semester pada Kalkulus II.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Kalkulus II?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Teknik Integrasi Substitusi dan Parsial diperlukan untuk memahami bab selanjutnya pada Kalkulus II.|T|10
+[END]
+
+[UJIAN]
+KODE=KALB-02
+MAPEL=UAS Kalkulus II
+TOKEN=KALUA9
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Kalkulus II mencakup ...|Barisan Tak Hingga dan Kekonvergenan;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Deret Tak Hingga dan Uji Konvergensi dipelajari setelah pelaksanaan Ujian Tengah Semester pada Kalkulus II.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Kalkulus II adalah ...|Sistem Tertanam;Deret Pangkat, Deret Taylor, dan Deret Maclaurin;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Kalkulus II membahas mengenai ...|Forensik Digital;Game Engine;Fungsi Dua Peubah atau Lebih dan Limitnya;Komputasi Grid|C|10
+TF|5|Materi Turunan Parsial dan Keterdiferensialan termasuk dalam cakupan Ujian Akhir Semester (UAS) Kalkulus II.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Kalkulus II adalah ...|Teknologi Blockchain;Aturan Rantai dan Gradien Fungsi Peubah Banyak;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Integral Lipat Dua dan Aplikasinya merupakan topik penutup sebelum pelaksanaan UAS Kalkulus II.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Kalkulus II adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Kalkulus II mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=MDIS-01
+MAPEL=UTS Matematika Diskrit I
+TOKEN=MDIUT0
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Matematika Diskrit I adalah ...|Logika Proposisional dan Tabel Kebenaran;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Ekuivalensi Logika dan Hukum-Hukum Logika merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Matematika Diskrit I.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Matematika Diskrit I adalah ...|Desain Kompiler;Logika Predikat dan Kuantor;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Matematika Diskrit I membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Aturan Inferensi dan Metode Pembuktian;Komputasi Awan|C|10
+TF|5|Konsep Teori Himpunan dan Operasi Himpunan dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Matematika Diskrit I sebelum UTS adalah ...|Kriptografi;Relasi dan Sifat-Sifat Relasi;Bioinformatika;Robotika|B|10
+TF|7|Topik Relasi Ekuivalensi dan Pengurutan Parsial adalah materi penutup paruh pertama semester pada Matematika Diskrit I.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Matematika Diskrit I?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Logika Proposisional dan Tabel Kebenaran diperlukan untuk memahami bab selanjutnya pada Matematika Diskrit I.|T|10
+[END]
+
+[UJIAN]
+KODE=MDIS-02
+MAPEL=UAS Matematika Diskrit I
+TOKEN=MDIUA0
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Matematika Diskrit I mencakup ...|Fungsi, Fungsi Injektif, Surjektif, dan Bijektif;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Barisan, Notasi Sigma, dan Kardinalitas dipelajari setelah pelaksanaan Ujian Tengah Semester pada Matematika Diskrit I.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Matematika Diskrit I adalah ...|Sistem Tertanam;Induksi Matematika dan Induksi Kuat;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Matematika Diskrit I membahas mengenai ...|Forensik Digital;Game Engine;Definisi Rekursif dan Algoritma Rekursif;Komputasi Grid|C|10
+TF|5|Materi Prinsip Dasar Membilang (Aturan Penjumlahan dan Perkalian) termasuk dalam cakupan Ujian Akhir Semester (UAS) Matematika Diskrit I.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Matematika Diskrit I adalah ...|Teknologi Blockchain;Prinsip Sarang Merpati (Pigeonhole Principle);Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Permutasi, Kombinasi, dan Koefisien Binomial merupakan topik penutup sebelum pelaksanaan UAS Matematika Diskrit I.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Matematika Diskrit I adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Matematika Diskrit I mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=ALIN-01
+MAPEL=UTS Aljabar Linier
+TOKEN=ALIUT1
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Aljabar Linier adalah ...|Sistem Persamaan Linier dan Eliminasi Gauss-Jordan;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Matriks dan Operasi Aljabar Matriks merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Aljabar Linier.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Aljabar Linier adalah ...|Desain Kompiler;Matriks Invers dan Matriks Elementer;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Aljabar Linier membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Determinan dengan Ekspansi Kofaktor dan Reduksi Baris;Komputasi Awan|C|10
+TF|5|Konsep Aturan Cramer dan Aplikasi Determinan dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Aljabar Linier sebelum UTS adalah ...|Kriptografi;Vektor di Ruang 2D dan 3D;Bioinformatika;Robotika|B|10
+TF|7|Topik Hasil Kali Titik (Dot Product) dan Hasil Kali Silang adalah materi penutup paruh pertama semester pada Aljabar Linier.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Aljabar Linier?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Sistem Persamaan Linier dan Eliminasi Gauss-Jordan diperlukan untuk memahami bab selanjutnya pada Aljabar Linier.|T|10
+[END]
+
+[UJIAN]
+KODE=ALIN-02
+MAPEL=UAS Aljabar Linier
+TOKEN=ALIUA1
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Aljabar Linier mencakup ...|Ruang Vektor Umum dan Subruang;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Kombinasi Linier dan Kebebasan Linier dipelajari setelah pelaksanaan Ujian Tengah Semester pada Aljabar Linier.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Aljabar Linier adalah ...|Sistem Tertanam;Basis, Dimensi, dan Rank Matriks;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Aljabar Linier membahas mengenai ...|Forensik Digital;Game Engine;Ruang Hasil Kali Dalam dan Proses Gram-Schmidt;Komputasi Grid|C|10
+TF|5|Materi Nilai Eigen, Vektor Eigen, dan Diagonalisasi termasuk dalam cakupan Ujian Akhir Semester (UAS) Aljabar Linier.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Aljabar Linier adalah ...|Teknologi Blockchain;Transformasi Linier, Kernel, dan Jangkauan;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Matriks Transformasi Linier dan Aplikasi Komputasi merupakan topik penutup sebelum pelaksanaan UAS Aljabar Linier.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Aljabar Linier adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Aljabar Linier mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=SDA-01
+MAPEL=UTS Struktur Data & Algoritma
+TOKEN=SDAUT2
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Struktur Data & Algoritma adalah ...|Kontrak Belajar, ADT, dan Kompleksitas Waktu Big-O;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Array Dinamis dan Analisis Memori merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Struktur Data & Algoritma.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Struktur Data & Algoritma adalah ...|Desain Kompiler;Single Linked List dan Operasi Dasar;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Struktur Data & Algoritma membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Double Linked List dan Circular Linked List;Komputasi Awan|C|10
+TF|5|Konsep Stack (Tumpukan) dan Evaluasi Ekspresi dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Struktur Data & Algoritma sebelum UTS adalah ...|Kriptografi;Queue (Antrean), Circular Queue, dan Priority Queue;Bioinformatika;Robotika|B|10
+TF|7|Topik Algoritma Pencarian: Linear Search dan Binary Search adalah materi penutup paruh pertama semester pada Struktur Data & Algoritma.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Struktur Data & Algoritma?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Kontrak Belajar, ADT, dan Kompleksitas Waktu Big-O diperlukan untuk memahami bab selanjutnya pada Struktur Data & Algoritma.|T|10
+[END]
+
+[UJIAN]
+KODE=SDA-02
+MAPEL=UAS Struktur Data & Algoritma
+TOKEN=SDAUA2
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Struktur Data & Algoritma mencakup ...|Algoritma Pengurutan Dasar: Bubble, Selection, Insertion Sort;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Algoritma Pengurutan Lanjut: Merge Sort dan Quick Sort dipelajari setelah pelaksanaan Ujian Tengah Semester pada Struktur Data & Algoritma.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Struktur Data & Algoritma adalah ...|Sistem Tertanam;Konsep Pohon (Tree) dan Binary Tree Traversal;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Struktur Data & Algoritma membahas mengenai ...|Forensik Digital;Game Engine;Binary Search Tree (BST): Pencarian, Penyisipan, Penghapusan;Komputasi Grid|C|10
+TF|5|Materi AVL Tree dan Penyeimbangan Pohon termasuk dalam cakupan Ujian Akhir Semester (UAS) Struktur Data & Algoritma.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Struktur Data & Algoritma adalah ...|Teknologi Blockchain;Heap, Heapsort, dan Hash Table;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Representasi Graf serta Penelusuran BFS dan DFS merupakan topik penutup sebelum pelaksanaan UAS Struktur Data & Algoritma.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Struktur Data & Algoritma adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Struktur Data & Algoritma mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=OSK-01
+MAPEL=UTS Organisasi Sistem Komputer
+TOKEN=OSKUT3
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Organisasi Sistem Komputer adalah ...|Pengantar Organisasi dan Arsitektur Komputer;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Evolusi Komputer dan Arsitektur Von Neumann merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Organisasi Sistem Komputer.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Organisasi Sistem Komputer adalah ...|Desain Kompiler;Sistem Bus dan Interkoneksi Komponen;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Organisasi Sistem Komputer membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Memori Internal: RAM, ROM, dan Organisasi Sel Memori;Komputasi Awan|C|10
+TF|5|Konsep Memori Cache dan Prinsip Lokalitas dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Organisasi Sistem Komputer sebelum UTS adalah ...|Kriptografi;Memori Eksternal: Magnetic Disk, SSD, dan RAID;Bioinformatika;Robotika|B|10
+TF|7|Topik Modul Input/Output, Interrupt, dan DMA adalah materi penutup paruh pertama semester pada Organisasi Sistem Komputer.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Organisasi Sistem Komputer?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengantar Organisasi dan Arsitektur Komputer diperlukan untuk memahami bab selanjutnya pada Organisasi Sistem Komputer.|T|10
+[END]
+
+[UJIAN]
+KODE=OSK-02
+MAPEL=UAS Organisasi Sistem Komputer
+TOKEN=OSKUA3
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Organisasi Sistem Komputer mencakup ...|Aritmatika Komputer: Integer dan Floating Point IEEE 754;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Karakteristik dan Fungsi Set Instruksi (ISA) dipelajari setelah pelaksanaan Ujian Tengah Semester pada Organisasi Sistem Komputer.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Organisasi Sistem Komputer adalah ...|Sistem Tertanam;Mode Pengalamatan dan Format Instruksi;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Organisasi Sistem Komputer membahas mengenai ...|Forensik Digital;Game Engine;Struktur dan Fungsi Prosesor (CPU) serta Siklus Instruksi;Komputasi Grid|C|10
+TF|5|Materi Pipelining Instruksi dan Penanganan Hazard termasuk dalam cakupan Ujian Akhir Semester (UAS) Organisasi Sistem Komputer.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Organisasi Sistem Komputer adalah ...|Teknologi Blockchain;Arsitektur RISC vs CISC;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Unit Kontrol dan Prosesor Multicore merupakan topik penutup sebelum pelaksanaan UAS Organisasi Sistem Komputer.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Organisasi Sistem Komputer adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Organisasi Sistem Komputer mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=PKN-01
+MAPEL=UTS Pendidikan Kewarganegaraan
+TOKEN=PKNUT4
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Pendidikan Kewarganegaraan adalah ...|Hakikat dan Pentingnya Pendidikan Kewarganegaraan;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Identitas Nasional dan Karakter Bangsa Indonesia merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Pendidikan Kewarganegaraan.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Pendidikan Kewarganegaraan adalah ...|Desain Kompiler;Integrasi Nasional dalam Masyarakat Majemuk;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Pendidikan Kewarganegaraan membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Nilai dan Norma Konstitusional UUD NRI 1945;Komputasi Awan|C|10
+TF|5|Konsep Harmoni Kewajiban dan Hak Negara serta Warga Negara dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Pendidikan Kewarganegaraan sebelum UTS adalah ...|Kriptografi;Hakikat, Instrumentasi, dan Praksis Demokrasi Indonesia;Bioinformatika;Robotika|B|10
+TF|7|Topik Penegakan Hukum yang Berkeadilan adalah materi penutup paruh pertama semester pada Pendidikan Kewarganegaraan.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Pendidikan Kewarganegaraan?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Hakikat dan Pentingnya Pendidikan Kewarganegaraan diperlukan untuk memahami bab selanjutnya pada Pendidikan Kewarganegaraan.|T|10
+[END]
+
+[UJIAN]
+KODE=PKN-02
+MAPEL=UAS Pendidikan Kewarganegaraan
+TOKEN=PKNUA4
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pendidikan Kewarganegaraan mencakup ...|Dinamika Historis Konstitusi di Indonesia;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Kewarganegaraan Digital dan Etika Ruang Siber dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pendidikan Kewarganegaraan.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Pendidikan Kewarganegaraan adalah ...|Sistem Tertanam;Wawasan Nusantara sebagai Geopolitik Indonesia;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Pendidikan Kewarganegaraan membahas mengenai ...|Forensik Digital;Game Engine;Ketahanan Nasional dan Bela Negara;Komputasi Grid|C|10
+TF|5|Materi Otonomi Daerah dan Tata Kelola Pemerintahan yang Baik termasuk dalam cakupan Ujian Akhir Semester (UAS) Pendidikan Kewarganegaraan.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Pendidikan Kewarganegaraan adalah ...|Teknologi Blockchain;Pencegahan Korupsi dan Integritas Publik;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Peran Generasi Muda dalam Pembangunan Nasional merupakan topik penutup sebelum pelaksanaan UAS Pendidikan Kewarganegaraan.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Pendidikan Kewarganegaraan adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Pendidikan Kewarganegaraan mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=BINGB-01
+MAPEL=UTS Bahasa Inggris II
+TOKEN=BINUT5
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Bahasa Inggris II adalah ...|Academic Essay Structure and Thesis Statement;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Cause and Effect Essays in Technology merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Bahasa Inggris II.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Bahasa Inggris II adalah ...|Desain Kompiler;Comparison and Contrast Writing;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Bahasa Inggris II membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Argumentative Essays and Critical Thinking;Komputasi Awan|C|10
+TF|5|Konsep Reading Research Papers: Abstract and Introduction dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Bahasa Inggris II sebelum UTS adalah ...|Kriptografi;Analyzing Methodology and Experimental Results;Bioinformatika;Robotika|B|10
+TF|7|Topik Paraphrasing, Quoting, and Avoiding Plagiarism adalah materi penutup paruh pertama semester pada Bahasa Inggris II.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Bahasa Inggris II?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Academic Essay Structure and Thesis Statement diperlukan untuk memahami bab selanjutnya pada Bahasa Inggris II.|T|10
+[END]
+
+[UJIAN]
+KODE=BINGB-02
+MAPEL=UAS Bahasa Inggris II
+TOKEN=BINUA5
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Bahasa Inggris II mencakup ...|Describing Charts, Graphs, and Data Trends;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Writing Technical Documentation and Reports dipelajari setelah pelaksanaan Ujian Tengah Semester pada Bahasa Inggris II.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Bahasa Inggris II adalah ...|Sistem Tertanam;Professional Email and Cover Letter Writing;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Bahasa Inggris II membahas mengenai ...|Forensik Digital;Game Engine;Curriculum Vitae and Job Interview Preparation;Komputasi Grid|C|10
+TF|5|Materi Designing Effective Presentation Slides termasuk dalam cakupan Ujian Akhir Semester (UAS) Bahasa Inggris II.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Bahasa Inggris II adalah ...|Teknologi Blockchain;Delivering Technical Presentations and Q&A Handling;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi TOEFL/IELTS Academic Reading and Structure Review merupakan topik penutup sebelum pelaksanaan UAS Bahasa Inggris II.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Bahasa Inggris II adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Bahasa Inggris II mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=MDISB-01
+MAPEL=UTS Matematika Diskrit II
+TOKEN=MDIUT6
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Matematika Diskrit II adalah ...|Relasi Rekurensi Linier Homogen dan Non-Homogen;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Fungsi Pembangkit Biasa dan Eksponensial merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Matematika Diskrit II.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Matematika Diskrit II adalah ...|Desain Kompiler;Prinsip Inklusi-Eksklusi dan Aplikasinya;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Matematika Diskrit II membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Konsep Dasar Teori Graf dan Terminologi Graf;Komputasi Awan|C|10
+TF|5|Konsep Representasi Graf dan Isomorfisme Graf dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Matematika Diskrit II sebelum UTS adalah ...|Kriptografi;Keterhubungan, Lintasan Euler, dan Lintasan Hamilton;Bioinformatika;Robotika|B|10
+TF|7|Topik Lintasan Terpendek: Algoritma Dijkstra dan Bellman-Ford adalah materi penutup paruh pertama semester pada Matematika Diskrit II.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Matematika Diskrit II?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Relasi Rekurensi Linier Homogen dan Non-Homogen diperlukan untuk memahami bab selanjutnya pada Matematika Diskrit II.|T|10
+[END]
+
+[UJIAN]
+KODE=MDISB-02
+MAPEL=UAS Matematika Diskrit II
+TOKEN=MDIUA6
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Matematika Diskrit II mencakup ...|Graf Planar dan Pewarnaan Graf (Graph Coloring);Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Pohon (Trees), Pohon Berakar, dan Aplikasinya dipelajari setelah pelaksanaan Ujian Tengah Semester pada Matematika Diskrit II.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Matematika Diskrit II adalah ...|Sistem Tertanam;Pohon Merentang Minimum: Algoritma Prim dan Kruskal;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Matematika Diskrit II membahas mengenai ...|Forensik Digital;Game Engine;Jaringan Transportasi dan Aliran Maksimum;Komputasi Grid|C|10
+TF|5|Materi Poset, Lattice, dan Struktur Aljabar Diskrit termasuk dalam cakupan Ujian Akhir Semester (UAS) Matematika Diskrit II.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Matematika Diskrit II adalah ...|Teknologi Blockchain;Teori Bilangan Modul dan Kriptografi Kunci Publik;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Pengantar Bahasa Formal dan Finite State Automata merupakan topik penutup sebelum pelaksanaan UAS Matematika Diskrit II.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Matematika Diskrit II adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Matematika Diskrit II mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=PBO-01
+MAPEL=UTS Pemrograman Berorientasi Objek
+TOKEN=PBOUT7
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Pemrograman Berorientasi Objek adalah ...|Pengenalan Pemrograman Berorientasi Objek;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Class, Object, dan Konstruktor merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Pemrograman Berorientasi Objek.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Pemrograman Berorientasi Objek adalah ...|Desain Kompiler;Tipe Data, Variabel, dan Method;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Pemrograman Berorientasi Objek membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Encapsulation dan Access Modifier;Komputasi Awan|C|10
+TF|5|Konsep Relasi Antar Kelas: Association, Aggregation, Composition dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Pemrograman Berorientasi Objek sebelum UTS adalah ...|Kriptografi;Inheritance dengan extends dan super;Bioinformatika;Robotika|B|10
+TF|7|Topik Polymorphism: Overloading dan Overriding adalah materi penutup paruh pertama semester pada Pemrograman Berorientasi Objek.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Pemrograman Berorientasi Objek?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengenalan Pemrograman Berorientasi Objek diperlukan untuk memahami bab selanjutnya pada Pemrograman Berorientasi Objek.|T|10
+[END]
+
+[UJIAN]
+KODE=PBO-02
+MAPEL=UAS Pemrograman Berorientasi Objek
+TOKEN=PBOUA7
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pemrograman Berorientasi Objek mencakup ...|Abstract Class dan Interface;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Manipulasi String dan StringBuilder dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pemrograman Berorientasi Objek.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Pemrograman Berorientasi Objek adalah ...|Sistem Tertanam;Generics dan Java Collections Framework;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Pemrograman Berorientasi Objek membahas mengenai ...|Forensik Digital;Game Engine;Exception Handling dan Assertions;Komputasi Grid|C|10
+TF|5|Materi Operasi Input/Output dan File Streams termasuk dalam cakupan Ujian Akhir Semester (UAS) Pemrograman Berorientasi Objek.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Pemrograman Berorientasi Objek adalah ...|Teknologi Blockchain;Pemrograman Antarmuka Grafis dengan JavaFX;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Multithreading dan Sinkronisasi merupakan topik penutup sebelum pelaksanaan UAS Pemrograman Berorientasi Objek.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Pemrograman Berorientasi Objek adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Pemrograman Berorientasi Objek mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=BDAT-01
+MAPEL=UTS Basis Data
+TOKEN=BDAUT8
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Basis Data adalah ...|Pengantar Sistem Basis Data dan Arsitektur DBMS;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Model Data Entity-Relationship (ERD) merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Basis Data.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Basis Data adalah ...|Desain Kompiler;Enhanced Entity-Relationship (EER) dan Kardinalitas;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Basis Data membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Model Data Relasional dan Integritas Referensial;Komputasi Awan|C|10
+TF|5|Konsep Transformasi ERD ke Skema Relasional dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Basis Data sebelum UTS adalah ...|Kriptografi;Aljabar Relasional dan Kalkulus Relasional;Bioinformatika;Robotika|B|10
+TF|7|Topik SQL Dasar: Data Definition Language (DDL) adalah materi penutup paruh pertama semester pada Basis Data.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Basis Data?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengantar Sistem Basis Data dan Arsitektur DBMS diperlukan untuk memahami bab selanjutnya pada Basis Data.|T|10
+[END]
+
+[UJIAN]
+KODE=BDAT-02
+MAPEL=UAS Basis Data
+TOKEN=BDAUA8
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Basis Data mencakup ...|SQL Manipulasi Data: SELECT, INSERT, UPDATE, DELETE;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Fungsi Agregasi, GROUP BY, dan Subquery dipelajari setelah pelaksanaan Ujian Tengah Semester pada Basis Data.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Basis Data adalah ...|Sistem Tertanam;Operasi JOIN Multi-Tabel dan View;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Basis Data membahas mengenai ...|Forensik Digital;Game Engine;Ketergantungan Fungsional (Functional Dependency);Komputasi Grid|C|10
+TF|5|Materi Normalisasi Basis Data (1NF, 2NF, 3NF, BCNF) termasuk dalam cakupan Ujian Akhir Semester (UAS) Basis Data.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Basis Data adalah ...|Teknologi Blockchain;Indeks, Penyimpanan Fisik, dan Optimasi Query;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Manajemen Transaksi, Properti ACID, dan Concurrency Control merupakan topik penutup sebelum pelaksanaan UAS Basis Data.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Basis Data adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Basis Data mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=SISOP-01
+MAPEL=UTS Sistem Operasi
+TOKEN=SISUT9
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Sistem Operasi adalah ...|Pengantar, Sejarah, dan Struktur Sistem Operasi;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi System Calls dan Arsitektur Kernel merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Sistem Operasi.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Sistem Operasi adalah ...|Desain Kompiler;Konsep Proses, PCB, dan Komunikasi Antarproses (IPC);Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Sistem Operasi membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Thread dan Pemrograman Multithreading pada OS;Komputasi Awan|C|10
+TF|5|Konsep Algoritma Penjadwalan CPU (FCFS, SJF, Round Robin) dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Sistem Operasi sebelum UTS adalah ...|Kriptografi;Sinkronisasi Proses dan Masalah Critical Section;Bioinformatika;Robotika|B|10
+TF|7|Topik Semaphore, Mutex, dan Monitor adalah materi penutup paruh pertama semester pada Sistem Operasi.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Sistem Operasi?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengantar, Sejarah, dan Struktur Sistem Operasi diperlukan untuk memahami bab selanjutnya pada Sistem Operasi.|T|10
+[END]
+
+[UJIAN]
+KODE=SISOP-02
+MAPEL=UAS Sistem Operasi
+TOKEN=SISUA9
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Sistem Operasi mencakup ...|Deadlock: Karakteristik, Pencegahan, dan Algoritma Banker;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Manajemen Memori Utama, Paging, dan Segmentasi dipelajari setelah pelaksanaan Ujian Tengah Semester pada Sistem Operasi.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Sistem Operasi adalah ...|Sistem Tertanam;Memori Virtual, Demand Paging, dan Page Replacement;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Sistem Operasi membahas mengenai ...|Forensik Digital;Game Engine;Antarmuka dan Implementasi Sistem Berkas (File System);Komputasi Grid|C|10
+TF|5|Materi Manajemen Penyimpanan Massal dan Penjadwalan Disk termasuk dalam cakupan Ujian Akhir Semester (UAS) Sistem Operasi.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Sistem Operasi adalah ...|Teknologi Blockchain;Sistem Input/Output dan Device Driver;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Keamanan dan Proteksi pada Sistem Operasi merupakan topik penutup sebelum pelaksanaan UAS Sistem Operasi.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Sistem Operasi adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Sistem Operasi mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=PANC-01
+MAPEL=UTS Pendidikan Pancasila
+TOKEN=PANUT0
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Pendidikan Pancasila adalah ...|Pengantar dan Landasan Pendidikan Pancasila;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Pancasila dalam Arus Sejarah Perjuangan Bangsa merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Pendidikan Pancasila.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Pendidikan Pancasila adalah ...|Desain Kompiler;Perumusan dan Pengesahan Pancasila sebagai Dasar Negara;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Pendidikan Pancasila membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Pancasila sebagai Dasar Negara Republik Indonesia;Komputasi Awan|C|10
+TF|5|Konsep Implementasi Pancasila dalam Perundang-undangan dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Pendidikan Pancasila sebelum UTS adalah ...|Kriptografi;Pancasila sebagai Ideologi Nasional dan Ideologi Terbuka;Bioinformatika;Robotika|B|10
+TF|7|Topik Perbandingan Ideologi Pancasila dengan Ideologi Dunia adalah materi penutup paruh pertama semester pada Pendidikan Pancasila.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Pendidikan Pancasila?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengantar dan Landasan Pendidikan Pancasila diperlukan untuk memahami bab selanjutnya pada Pendidikan Pancasila.|T|10
+[END]
+
+[UJIAN]
+KODE=PANC-02
+MAPEL=UAS Pendidikan Pancasila
+TOKEN=PANUA0
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pendidikan Pancasila mencakup ...|Pancasila sebagai Sistem Filsafat;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Hakikat Sila-Sila Pancasila secara Ontologis dan Epistemologis dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pendidikan Pancasila.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Pendidikan Pancasila adalah ...|Sistem Tertanam;Pancasila sebagai Sistem Etika;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Pendidikan Pancasila membahas mengenai ...|Forensik Digital;Game Engine;Etika Kehidupan Berbangsa dan Bernegara;Komputasi Grid|C|10
+TF|5|Materi Pancasila sebagai Dasar Nilai Pengembangan Ilmu termasuk dalam cakupan Ujian Akhir Semester (UAS) Pendidikan Pancasila.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Pendidikan Pancasila adalah ...|Teknologi Blockchain;Tantangan Aktualisasi Pancasila di Era Globalisasi;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Pengamalan Nilai Pancasila dalam Profesi Teknologi Informasi merupakan topik penutup sebelum pelaksanaan UAS Pendidikan Pancasila.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Pendidikan Pancasila adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Pendidikan Pancasila mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=MNUM-01
+MAPEL=UTS Metode Numerik
+TOKEN=MNUUT1
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Metode Numerik adalah ...|Pengantar Metode Numerik dan Analisis Galat (Error);Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Representasi Bilangan Titik Kambang dan Perambatan Galat merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Metode Numerik.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Metode Numerik adalah ...|Desain Kompiler;Akar Persamaan Nirlinier: Metode Bagi Dua dan Regula Falsi;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Metode Numerik membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Metode Terbuka: Iterasi Titik Tetap, Newton-Raphson, dan Secant;Komputasi Awan|C|10
+TF|5|Konsep Sistem Persamaan Linier: Eliminasi Gauss dan Pivoting dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Metode Numerik sebelum UTS adalah ...|Kriptografi;Dekomposisi LU dan Matriks Tridiagonal;Bioinformatika;Robotika|B|10
+TF|7|Topik Metode Iteratif SPL: Jacobi dan Gauss-Seidel adalah materi penutup paruh pertama semester pada Metode Numerik.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Metode Numerik?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Pengantar Metode Numerik dan Analisis Galat (Error) diperlukan untuk memahami bab selanjutnya pada Metode Numerik.|T|10
+[END]
+
+[UJIAN]
+KODE=MNUM-02
+MAPEL=UAS Metode Numerik
+TOKEN=MNUUA1
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Metode Numerik mencakup ...|Interpolasi Polinomial: Metode Lagrange;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Interpolasi Beda Terbagi Newton dan Spline dipelajari setelah pelaksanaan Ujian Tengah Semester pada Metode Numerik.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Metode Numerik adalah ...|Sistem Tertanam;Regresi Kuadrat Terkecil (Least Squares Regression);Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Metode Numerik membahas mengenai ...|Forensik Digital;Game Engine;Turunan Numerik: Selisih Maju, Mundur, dan Pusat;Komputasi Grid|C|10
+TF|5|Materi Integrasi Numerik: Aturan Trapesium dan Aturan Simpson termasuk dalam cakupan Ujian Akhir Semester (UAS) Metode Numerik.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Metode Numerik adalah ...|Teknologi Blockchain;Integrasi Romberg dan Kuadratur Gauss;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Solusi Numerik Persamaan Diferensial Biasa: Euler dan Runge-Kutta merupakan topik penutup sebelum pelaksanaan UAS Metode Numerik.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Metode Numerik adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Metode Numerik mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
+[END]
+
+[UJIAN]
+KODE=DAA-01
+MAPEL=UTS Desain & Analisis Algoritma
+TOKEN=DAAUT2
+DURASI=60
+KKM=70
+[SOAL]
+PG|1|Topik pembuka yang dipelajari pada mata kuliah Desain & Analisis Algoritma adalah ...|Dasar Analisis Efisiensi Algoritma dan Notasi Asimtotik;Rekayasa Jaringan;Komputasi Kuantum;Kriptografi Lanjut|A|10
+TF|2|Materi Analisis Algoritma Non-Rekursif dan Rekursif (Master Theorem) merupakan bagian dari cakupan evaluasi paruh pertama (UTS) pada Desain & Analisis Algoritma.|T|10
+PG|3|Pokok bahasan ketiga yang menjadi fondasi pada mata kuliah Desain & Analisis Algoritma adalah ...|Desain Kompiler;Strategi Brute Force dan Exhaustive Search;Pemrograman Mikrokontroler;Jaringan Nirkabel|B|10
+PG|4|Materi pertemuan keempat pada mata kuliah Desain & Analisis Algoritma membahas tentang ...|Pemrosesan Citra;Sistem Pakar;Strategi Decrease and Conquer (Insertion Sort, Topological Sort);Komputasi Awan|C|10
+TF|5|Konsep Strategi Divide and Conquer (Merge Sort, Quick Sort, Karatsuba) dipelajari sebelum pelaksanaan Ujian Tengah Semester.|T|10
+PG|6|Pokok bahasan keenam dalam silabus Desain & Analisis Algoritma sebelum UTS adalah ...|Kriptografi;Transform and Conquer (Presorting, Gaussian Elimination, Heap);Bioinformatika;Robotika|B|10
+TF|7|Topik Space and Time Trade-Offs (Hashing, Horspool, Boyer-Moore) adalah materi penutup paruh pertama semester pada Desain & Analisis Algoritma.|T|10
+IS|8|Singkatan dari Ujian Tengah Semester adalah ...|UTS|10
+PG|9|Berapa jumlah bab materi yang diujikan pada UTS Desain & Analisis Algoritma?|5 bab;6 bab;7 bab;10 bab|C|10
+TF|10|Penguasaan konsep dasar Dasar Analisis Efisiensi Algoritma dan Notasi Asimtotik diperlukan untuk memahami bab selanjutnya pada Desain & Analisis Algoritma.|T|10
+[END]
+
+[UJIAN]
+KODE=DAA-02
+MAPEL=UAS Desain & Analisis Algoritma
+TOKEN=DAAUA2
+DURASI=90
+KKM=70
+[SOAL]
+PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Desain & Analisis Algoritma mencakup ...|Algoritma Greedy: Coin Change, Knapsack Fraksional, Huffman;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
+TF|2|Topik Algoritma Greedy pada Graf: Prim, Kruskal, dan Dijkstra dipelajari setelah pelaksanaan Ujian Tengah Semester pada Desain & Analisis Algoritma.|T|10
+PG|3|Salah satu materi lanjutan yang diujikan pada UAS Desain & Analisis Algoritma adalah ...|Sistem Tertanam;Dynamic Programming Dasar: Fibonacci, Coin Row, dan 0/1 Knapsack;Realitas Virtual;Pemrosesan Sinyal|B|10
+PG|4|Topik kesebelas pada mata kuliah Desain & Analisis Algoritma membahas mengenai ...|Forensik Digital;Game Engine;Dynamic Programming Lanjut: LCS dan Floyd-Warshall;Komputasi Grid|C|10
+TF|5|Materi Strategi Backtracking: N-Queens, Subset Sum, dan Hamiltonian termasuk dalam cakupan Ujian Akhir Semester (UAS) Desain & Analisis Algoritma.|T|10
+PG|6|Pokok bahasan menjelang akhir semester pada Desain & Analisis Algoritma adalah ...|Teknologi Blockchain;Strategi Branch and Bound: Assignment dan Traveling Salesperson;Visi Komputer;Jaringan Sensor|B|10
+TF|7|Materi Kelas Kompleksitas P, NP, NP-Complete, dan Algoritma Aproksimasi merupakan topik penutup sebelum pelaksanaan UAS Desain & Analisis Algoritma.|T|10
+IS|8|Singkatan dari Ujian Akhir Semester adalah ...|UAS|10
+PG|9|Total keseluruhan bab dalam satu semester pada mata kuliah Desain & Analisis Algoritma adalah ...|12 bab;14 bab;16 bab;18 bab|C|10
+TF|10|Evaluasi akhir Desain & Analisis Algoritma mengintegrasikan pemahaman konsep dari paruh pertama dan kedua perkuliahan.|T|10
 [END]
 
 [UJIAN]
@@ -72,54 +851,3 @@ PG|1|Ibu kota Indonesia saat ini adalah ...|Jakarta;Bandung;Surabaya|A|10
 TF|2|Satu jam sama dengan 60 menit.|T|10
 IS|3|Warna langit pada siang hari yang cerah adalah ...|BIRU|10
 [END]
-
-[UJIAN]
-KODE=PBO-01
-MAPEL=Pemrograman Berorientasi Objek
-TOKEN=PBO7UT
-DURASI=30
-KKM=70
-[SOAL]
-PG|1|Kata kunci untuk membuat object dari sebuah class adalah ...|class;new;this;extends|B|10
-TF|2|Satu class hanya dapat menghasilkan satu object.|F|10
-PG|3|Tipe primitif yang tepat untuk menyimpan satu huruf kunci jawaban adalah ...|String;int;char;boolean|C|10
-IS|4|Kata kunci untuk mewarisi sebuah class di Java adalah ...|EXTENDS|10
-PG|5|Access modifier yang membuat atribut hanya dapat diakses di dalam class itu sendiri adalah ...|public;protected;default;private|D|10
-TF|6|Method overloading adalah method dengan nama sama tetapi parameter berbeda.|T|10
-PG|7|Anotasi yang dipakai saat menimpa method superclass adalah ...|@Override;@Deprecated;@FXML;@Test|A|10
-IS|8|Class yang tidak dapat dibuat object-nya secara langsung disebut abstract ...|CLASS|10
-TF|9|Sebuah class di Java boleh mengimplementasikan lebih dari satu interface.|T|10
-PG|10|Konstruktor superclass dipanggil dengan kata kunci ...|this;super;parent;base|B|10
-[END]
-
-[UJIAN]
-KODE=PBO-02
-MAPEL=Pemrograman Berorientasi Objek
-TOKEN=PBO9UA
-DURASI=30
-KKM=70
-[SOAL]
-PG|1|Class yang tepat untuk menyusun string panjang di dalam perulangan adalah ...|String;StringBuilder;Scanner;Character|B|10
-TF|2|Membandingkan isi dua String sebaiknya memakai operator ==.|F|10
-PG|3|Struktur data yang tidak mengizinkan elemen duplikat adalah ...|List;Set;Map;Array|B|10
-IS|4|Agar objek aman dipakai sebagai key HashMap, method equals harus di-override bersama method ...|HASHCODE;HASHCODE()|10
-PG|5|Blok yang selalu dijalankan baik terjadi exception maupun tidak adalah ...|catch;throw;finally;throws|C|10
-TF|6|Assertion di Java aktif secara bawaan tanpa opsi tambahan.|F|10
-PG|7|Opsi JVM untuk mengaktifkan assertion adalah ...|-ea;-da;-cp;-jar|A|10
-IS|8|Interface yang diimplementasikan untuk membuat tugas yang dijalankan sebuah Thread adalah ...|RUNNABLE|10
-PG|9|Method JavaFX untuk memperbarui tampilan dari thread lain adalah ...|Platform.exit;Platform.runLater;Thread.sleep;Stage.show|B|10
-TF|10|Kata kunci volatile menjamin perubahan variabel terlihat oleh thread lain.|T|10
-[END]
-
-[UJIAN]
-KODE=JM-48
-MAPEL=Ujian Bab 1: Pendahuluan
-TOKEN=JMK696
-DURASI=1
-KKM=50
-[SOAL]
-PG|1|Berapa panjang punya alfian|10cm;12cm;15cm;18cm|A|10
-PG|2|Berapa diameter punya alfian|3cm;4cm;5cm;6cm|A|10
-PG|3|How much has Akbar's lenght increased?|1 cm;1.25 cm;1.5 cm;2 cm|C|10
-[END]
-

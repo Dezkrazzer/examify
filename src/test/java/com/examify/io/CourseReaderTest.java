@@ -112,6 +112,21 @@ class CourseReaderTest {
     @Test
     void fileKursusContohTerbacaLengkap() throws Exception {
         List<Course> daftar = new CourseReader(AppConfig.DIR_DATA).baca(AppConfig.FILE_KURSUS);
-        assertTrue(daftar.size() >= 3);
+        assertEquals(23, daftar.size());
+        var daftarUjian = new QuestionBankReader().baca(AppConfig.FILE_BANK_SOAL);
+        var daftarGuru = new TeacherReader().baca(AppConfig.FILE_GURU);
+        assertEquals(7, daftarGuru.size());
+        var ujianService = new com.examify.service.ExamService(
+                daftarUjian, new com.examify.service.GradeRecapService(null, List.of()), java.time.Clock.systemDefaultZone());
+        var kursusService = new com.examify.service.CourseService(daftar, ujianService);
+
+        for (Course k : daftar) {
+            if (!"UJI".equals(k.getKode())) {
+                assertEquals(16, k.getDaftarBab().size(), "Kursus " + k.getKode() + " harus memiliki 16 bab");
+                assertEquals(14, k.getJumlahMateriPembelajaran(), "Kursus " + k.getKode() + " harus memiliki 14 materi");
+                assertEquals(2, k.getJumlahUjian(), "Kursus " + k.getKode() + " harus memiliki 2 ujian (UTS dan UAS)");
+            }
+        }
+        assertEquals(23, kursusService.getJumlahKursus());
     }
 }

@@ -19,7 +19,7 @@
 
         <!-- Tombol Kembali -->
         <HBox alignment="CENTER_LEFT">
-            <Button text="Kembali ke Profil &amp; Nilai" styleClass="tombol-hantu" onAction="#handleKembali">
+            <Button fx:id="btnKembali" text="Kembali ke Profil &amp; Nilai" styleClass="tombol-hantu" onAction="#handleKembali">
                 <graphic><IconView ikon="PANAH_KIRI" ukuran="16"/></graphic>
             </Button>
         </HBox>

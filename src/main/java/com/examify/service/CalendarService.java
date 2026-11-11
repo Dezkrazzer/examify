@@ -73,15 +73,15 @@ public class CalendarService {
         if (guru == null || kursusService == null) {
             return List.of();
         }
-        return kursusService.getDaftarKursus().stream()
-                .filter(k -> isKursusMilikGuru(guru, k))
-                .sorted(Comparator.comparing(Course::getNama, String.CASE_INSENSITIVE_ORDER))
-                .toList();
+        return kursusService.getKursusDibuatGuru(guru);
     }
 
     public boolean isKursusMilikGuru(Teacher guru, Course kursus) {
         if (guru == null || kursus == null) {
             return false;
+        }
+        if (kursusService != null) {
+            return kursusService.isKursusMilikGuru(guru, kursus);
         }
         if (!kursus.getNipPembuat().isBlank()) {
             return kursus.getNipPembuat().equalsIgnoreCase(guru.getNip());

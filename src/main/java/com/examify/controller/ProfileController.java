@@ -172,6 +172,7 @@ public class ProfileController {
 
     private void bukaHalamanPembahasan(GradeHistory r) {
         session.setRiwayatFokus(r);
+        session.setLayarAsalPembahasan(AppScreen.PROFIL);
         SceneRouter.pindah(AppScreen.PEMBAHASAN_UJIAN);
     }
 

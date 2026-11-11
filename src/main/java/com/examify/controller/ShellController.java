@@ -75,11 +75,12 @@ public class ShellController {
     }
 
     private void sorotMenu(AppScreen layar) {
-        tbKursus.setSelected(layar == AppScreen.KURSUS_SAYA || layar == AppScreen.KURSUS_DETAIL);
+        boolean dariKursus = session.getLayarAsalPembahasan() == AppScreen.KURSUS_DETAIL;
+        tbKursus.setSelected(layar == AppScreen.KURSUS_SAYA || layar == AppScreen.KURSUS_DETAIL || (layar == AppScreen.PEMBAHASAN_UJIAN && dariKursus));
         tbKalender.setSelected(layar == AppScreen.KALENDER);
         tbBankSoal.setSelected(layar == AppScreen.BANK_SOAL || layar == AppScreen.EDITOR_UJIAN);
         tbSiswa.setSelected(layar == AppScreen.GURU_SISWA || layar == AppScreen.GURU_DETAIL_SISWA);
-        tbProfil.setSelected(layar == AppScreen.PROFIL || layar == AppScreen.PEMBAHASAN_UJIAN);
+        tbProfil.setSelected(layar == AppScreen.PROFIL || (layar == AppScreen.PEMBAHASAN_UJIAN && !dariKursus));
     }
 
     @FXML

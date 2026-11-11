@@ -1122,14 +1122,21 @@ public class CourseDetailController {
 
 
         kursus = session.getKursusAktif();
-
-
-
-
-
-
-
         siswa = session.getSiswaAktif();
+
+        if (kursus == null) {
+            SceneRouter.pindah(AppScreen.KURSUS_SAYA);
+            return;
+        }
+
+        if (session.isGuru()) {
+            Teacher guru = session.getGuruAktif();
+            if (!session.getKursusService().isKursusMilikGuru(guru, kursus)) {
+                DialogUtil.peringatan("Anda hanya dapat mengakses kursus yang Anda buat sendiri.");
+                SceneRouter.pindah(AppScreen.KURSUS_SAYA);
+                return;
+            }
+        }
 
 
 
@@ -2369,7 +2376,8 @@ public class CourseDetailController {
 
 
 
-            lblRingkasProgres.setText(kursus.getJumlahMateri() + " materi terdaftar");
+            lblRingkasProgres.setText(kursus.getJumlahMateriPembelajaran() + " materi · "
+                    + kursus.getJumlahUjian() + " ujian terdaftar");
 
 
 
@@ -6506,13 +6514,7 @@ public class CourseDetailController {
 
 
                     session.setMateriFokus(materi);
-
-
-
-
-
-
-
+                    session.setLayarAsalPembahasan(AppScreen.KURSUS_DETAIL);
                     SceneRouter.pindah(AppScreen.PEMBAHASAN_UJIAN);
 
 
