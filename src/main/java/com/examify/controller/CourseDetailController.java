@@ -436,11 +436,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Separator;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
-import javafx.stage.StageStyle;
 import java.security.SecureRandom;
 
 
@@ -6884,46 +6880,13 @@ public class CourseDetailController {
 
 
     private void handleTambahBab() {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(430);
-        kartu.setMaxWidth(450);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<String> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(430, 450);
 
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         Label lblJudul = new Label("Tambah Bab Baru");
@@ -7190,46 +7153,13 @@ public class CourseDetailController {
 
 
     private void handleUbahJudulBab(Chapter bab) {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(430);
-        kartu.setMaxWidth(450);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<String> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(430, 450);
 
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         Label lblJudul = new Label("Ubah Judul Bab " + bab.getNomor());
@@ -7824,46 +7754,13 @@ public class CourseDetailController {
 
 
     private void handleTambahUjian(Chapter babDefault) {
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(520);
-        kartu.setMaxWidth(540);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(520, 540);
 
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         HBox barisJudulBadge = new HBox(8);
@@ -9470,46 +9367,13 @@ public class CourseDetailController {
 
 
     private void handleBuatKuisBab(Chapter babTarget) {
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(520);
-        kartu.setMaxWidth(540);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(520, 540);
 
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         HBox barisJudulBadge = new HBox(8);
@@ -12634,48 +12498,14 @@ public class CourseDetailController {
 
 
     private void handleUbahKode() {
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(450);
-        kartu.setMaxWidth(470);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(450, 470);
 
         // Header Modal (Bisa di-drag)
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         StackPane kotakIkon = new StackPane(new IconView(Icon.PENSIL, 18));
         kotakIkon.getStyleClass().add("kotak-ikon-stat");
@@ -13153,48 +12983,14 @@ public class CourseDetailController {
 
 
     private void handleEditTugas(Chapter bab, AssignmentMaterial tugasEdit) {
-        Dialog<AssignmentMaterial> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-                pane.getScene().getRoot().setStyle("-fx-background-color: transparent;");
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(520);
-        kartu.setMaxWidth(540);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<AssignmentMaterial> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(520, 540);
 
         // 1. Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         HBox barisJudulBadge = new HBox(8);

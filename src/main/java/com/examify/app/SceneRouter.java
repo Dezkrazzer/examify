@@ -19,6 +19,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 import java.io.IOException;
@@ -114,7 +115,7 @@ public final class SceneRouter {
     }
 
     private static void terapkanTema(boolean gelap) {
-        terapkanTemaKeScene(scene, gelap);
+        terapkanTemaKeScene(scene, gelap, false);
         Window.getWindows().forEach(SceneRouter::terapkanTemaKeJendela);
     }
 
@@ -126,14 +127,14 @@ public final class SceneRouter {
         if (jendela instanceof PopupWindow || jendela.getScene() == null) {
             return; // popup (menu, tooltip) sudah mewarisi stylesheet dari scene pemiliknya
         }
-        terapkanTemaKeScene(jendela.getScene(), temaGelap.get());
+        boolean transparan = jendela instanceof Stage s && s.getStyle() == StageStyle.TRANSPARENT;
+        terapkanTemaKeScene(jendela.getScene(), temaGelap.get(), transparan);
     }
 
-    private static void terapkanTemaKeScene(Scene target, boolean gelap) {
+    private static void terapkanTemaKeScene(Scene target, boolean gelap, boolean transparan) {
         target.getPreferences().setColorScheme(gelap ? ColorScheme.DARK : ColorScheme.LIGHT);
-        // Fill scene = warna latar tema. Saat layar penuh dengan skala DPI pecahan (125%/150%),
-        // ukuran root bisa lebih kecil 1-2 px dari layar; sisanya tidak lagi tampil sebagai strip putih.
-        target.setFill(gelap ? LATAR_GELAP : LATAR_TERANG);
+        // Fill scene mengikuti warna tema, kecuali jendela/dialog transparan agar sudut membulat tidak berbingkai kotak.
+        target.setFill(transparan ? Color.TRANSPARENT : (gelap ? LATAR_GELAP : LATAR_TERANG));
         String theme = sumber(THEME_CSS).toExternalForm();
         String dark = sumber(DARK_CSS).toExternalForm();
         if (!target.getStylesheets().contains(theme)) {
