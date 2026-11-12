@@ -4,13 +4,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/** Konstanta konfigurasi aplikasi. Path relatif terhadap working directory. */
+/**
+ * Konstanta konfigurasi aplikasi. Path relatif terhadap folder dasar aplikasi: nilai system property
+ * {@code examify.home} bila diset (dipakai versi installer/portable), selain itu working directory.
+ */
 public final class AppConfig {
 
     public static final String NAMA_APLIKASI = "Examify";
     public static final String KODE_SERTIFIKAT = "EXF";
 
-    public static final Path DIR_DATA = Path.of("data");
+    public static final Path DIR_DASAR = Path.of(System.getProperty("examify.home", ""));
+
+    public static final Path DIR_DATA = DIR_DASAR.resolve("data");
     public static final Path FILE_BANK_SOAL = DIR_DATA.resolve("bank_soal.txt");
     public static final Path FILE_SISWA = DIR_DATA.resolve("siswa.txt");
     public static final Path FILE_GURU = DIR_DATA.resolve("guru.txt");
@@ -19,7 +24,7 @@ public final class AppConfig {
     public static final Path DIR_PENGUMPULAN_TUGAS = DIR_DATA.resolve("pengumpulan_tugas");
     public static final Path FILE_PENGUMPULAN_TUGAS = DIR_DATA.resolve("pengumpulan_tugas.txt");
 
-    public static final Path DIR_OUTPUT = Path.of("output");
+    public static final Path DIR_OUTPUT = DIR_DASAR.resolve("output");
     public static final Path FILE_REKAP = DIR_OUTPUT.resolve("rekap_nilai.txt");
     public static final Path FILE_PROGRES = DIR_OUTPUT.resolve("progres_belajar.txt");
     public static final Path FILE_PENDAFTARAN = DIR_OUTPUT.resolve("pendaftaran_kursus.txt");

@@ -236,6 +236,16 @@ examify/
 
 ## 4. Instalasi & Menjalankan
 
+### Unduh Aplikasi Jadi (Windows)
+
+Tanpa perlu memasang JDK, unduh dari halaman [Releases](https://github.com/Dezkrazzer/examify/releases/latest):
+
+- **`Examify-<versi>-windows-x64-setup.exe`**: installer (per-user, membuat shortcut Desktop & Start Menu).
+- **`Examify-<versi>-windows-x64-portable.zip`**: versi portable, ekstrak lalu jalankan `Examify.exe`.
+
+Paket dibuat dengan `bash packaging/build-windows.sh` (butuh JDK 21+ dan WiX Toolset 3.x di `PATH`;
+`SKIP_INSTALLER=1` untuk membuat versi portable saja).
+
 ### Kebutuhan
 
 | Kebutuhan | Keterangan |
