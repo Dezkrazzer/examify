@@ -1,6 +1,6 @@
 # Implementasi Pancasila dalam Perundang-undangan
 
-Mata kuliah **Pendidikan Pancasila** (`0953112020`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Pendidikan Pancasila** (`0953112020`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

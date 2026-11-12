@@ -1,6 +1,6 @@
 # Describing Charts, Graphs, and Data Trends
 
-Mata kuliah **Bahasa Inggris II** (`0953222015`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Bahasa Inggris II** (`0953222015`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

@@ -1,88 +1,176 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import com.examify.view.IconView?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-
-<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.examify.controller.CourseDetailController">
-    <top>
-        <VBox spacing="12">
-            <padding><Insets top="24" right="32" bottom="18" left="32"/></padding>
-            <Button text="Kursus Saya" styleClass="tombol-hantu" onAction="#handleKembali">
-                <graphic><IconView ikon="PANAH_KIRI" ukuran="16"/></graphic>
-            </Button>
-            <HBox spacing="20" alignment="CENTER_LEFT">
-                <StackPane fx:id="spPola" minWidth="84" maxWidth="84" minHeight="84" maxHeight="84"/>
-                <VBox spacing="4" HBox.hgrow="ALWAYS">
-                    <HBox spacing="8" alignment="CENTER_LEFT">
-                        <Label fx:id="lblKode" styleClass="badge"/>
-                        <Button fx:id="btnUbahKode" text="Ubah Kode" styleClass="tombol-sekunder" onAction="#handleUbahKode"/>
-                    </HBox>
-                    <Label fx:id="lblNama" styleClass="judul-halaman" wrapText="true"/>
-                    <Label fx:id="lblPengajar" styleClass="teks-redup">
-                        <graphic><IconView ikon="PROFIL" ukuran="14"/></graphic>
-                    </Label>
-                    <Label fx:id="lblDeskripsi" styleClass="teks-kecil" wrapText="true"/>
-                </VBox>
-
-                <VBox styleClass="kaca" spacing="6" minWidth="270" maxWidth="270">
-                    <padding><Insets top="16" right="18" bottom="16" left="18"/></padding>
-                    <Label fx:id="lblJudulProgres" text="Progres kamu" styleClass="teks-kecil"/>
-                    <HBox spacing="10" alignment="BASELINE_LEFT">
-                        <Label fx:id="lblPersen" styleClass="angka-tile"/>
-                        <Label fx:id="lblRingkasProgres" styleClass="teks-kecil"/>
-                    </HBox>
-                    <ProgressBar fx:id="pbProgres" maxWidth="Infinity"/>
-                </VBox>
-            </HBox>
-
-            <!-- BAR TAB NAVIGASI: MATERI & ORANG (POSISI KOTAK MERAH) -->
-            <HBox spacing="10" alignment="CENTER_LEFT">
-                <padding><Insets top="6" bottom="2"/></padding>
-                <HBox styleClass="tab-nav-bar" spacing="6" alignment="CENTER_LEFT">
-                    <ToggleButton fx:id="tabMateri" text="Materi" styleClass="tab-nav-item" selected="true" onAction="#handlePilihTabMateri">
-                        <graphic><IconView ikon="BUKU" ukuran="16"/></graphic>
-                    </ToggleButton>
-                    <ToggleButton fx:id="tabOrang" text="Orang" styleClass="tab-nav-item" onAction="#handlePilihTabOrang">
-                        <graphic><IconView ikon="PENGGUNA" ukuran="16"/></graphic>
-                    </ToggleButton>
-                </HBox>
-            </HBox>
-        </VBox>
-    </top>
-    <center>
-        <StackPane>
-            <!-- TAMPILAN TAB MATERI (Halaman Bab & Konten) -->
-            <HBox fx:id="boxTabMateri" spacing="20">
-                <padding><Insets right="32" bottom="28" left="32"/></padding>
-                <VBox styleClass="kaca" spacing="10" prefWidth="300" minWidth="280" maxWidth="300">
-                    <padding><Insets top="18" right="10" bottom="14" left="10"/></padding>
-                    <Label text="Daftar Bab" styleClass="judul-bagian">
-                        <padding><Insets left="8" bottom="4"/></padding>
-                    </Label>
-                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
-                        <VBox fx:id="vbBab" spacing="4" styleClass="daftar-bab"/>
-                    </ScrollPane>
-                </VBox>
-                <StackPane fx:id="spKonten" styleClass="kaca" HBox.hgrow="ALWAYS" style="-fx-padding: 0;"/>
-            </HBox>
-
-            <!-- TAMPILAN TAB ORANG (Google Classroom Style) -->
-            <ScrollPane fx:id="spTabOrang" fitToWidth="true" hbarPolicy="NEVER" visible="false" managed="false">
-                <padding><Insets right="32" bottom="28" left="32"/></padding>
-                <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
-                    <VBox fx:id="vbTabOrang" styleClass="kaca" spacing="24" maxWidth="900" alignment="TOP_LEFT"/>
-                </VBox>
-            </ScrollPane>
-        </StackPane>
-    </center>
-</BorderPane>
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+
+<?import com.examify.view.IconView?>
+
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.Button?>
+
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.ProgressBar?>
+
+<?import javafx.scene.control.ScrollPane?>
+
+<?import javafx.scene.control.ToggleButton?>
+
+<?import javafx.scene.layout.BorderPane?>
+
+<?import javafx.scene.layout.HBox?>
+
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.layout.VBox?>
+
+
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+
+            fx:controller="com.examify.controller.CourseDetailController">
+
+    <top>
+
+        <VBox spacing="12">
+
+            <padding><Insets top="24" right="32" bottom="18" left="32"/></padding>
+
+            <Button text="Kursus Saya" styleClass="tombol-hantu" onAction="#handleKembali">
+
+                <graphic><IconView ikon="PANAH_KIRI" ukuran="16"/></graphic>
+
+            </Button>
+
+            <HBox spacing="20" alignment="CENTER_LEFT">
+
+                <StackPane fx:id="spPola" minWidth="84" maxWidth="84" minHeight="84" maxHeight="84"/>
+
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+
+                        <Label fx:id="lblKode" styleClass="badge"/>
+
+                        <Button fx:id="btnUbahKode" text="Ubah Kode" styleClass="tombol-sekunder" onAction="#handleUbahKode"/>
+
+                    </HBox>
+
+                    <Label fx:id="lblNama" styleClass="judul-halaman" wrapText="true"/>
+
+                    <Label fx:id="lblPengajar" styleClass="teks-redup">
+
+                        <graphic><IconView ikon="PROFIL" ukuran="14"/></graphic>
+
+                    </Label>
+
+                    <Label fx:id="lblDeskripsi" styleClass="teks-kecil" wrapText="true"/>
+
+                </VBox>
+
+
+
+                <VBox styleClass="kaca" spacing="6" minWidth="270" maxWidth="270">
+
+                    <padding><Insets top="16" right="18" bottom="16" left="18"/></padding>
+
+                    <Label fx:id="lblJudulProgres" text="Progres kamu" styleClass="teks-kecil"/>
+
+                    <HBox spacing="10" alignment="BASELINE_LEFT">
+
+                        <Label fx:id="lblPersen" styleClass="angka-tile" minWidth="-Infinity"/>
+
+                        <Label fx:id="lblRingkasProgres" styleClass="teks-kecil" wrapText="true"/>
+
+                    </HBox>
+
+                    <ProgressBar fx:id="pbProgres" maxWidth="Infinity"/>
+
+                </VBox>
+
+            </HBox>
+
+
+
+            <!-- BAR TAB NAVIGASI: MATERI & ORANG (POSISI KOTAK MERAH) -->
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+
+                <padding><Insets top="6" bottom="2"/></padding>
+
+                <HBox styleClass="tab-nav-bar" spacing="6" alignment="CENTER_LEFT">
+
+                    <ToggleButton fx:id="tabMateri" text="Materi" styleClass="tab-nav-item" selected="true" onAction="#handlePilihTabMateri">
+
+                        <graphic><IconView ikon="BUKU" ukuran="16"/></graphic>
+
+                    </ToggleButton>
+
+                    <ToggleButton fx:id="tabOrang" text="Orang" styleClass="tab-nav-item" onAction="#handlePilihTabOrang">
+
+                        <graphic><IconView ikon="PENGGUNA" ukuran="16"/></graphic>
+
+                    </ToggleButton>
+
+                </HBox>
+
+            </HBox>
+
+        </VBox>
+
+    </top>
+
+    <center>
+
+        <StackPane>
+
+            <!-- TAMPILAN TAB MATERI (Halaman Bab & Konten) -->
+
+            <HBox fx:id="boxTabMateri" spacing="20">
+
+                <padding><Insets right="32" bottom="28" left="32"/></padding>
+
+                <VBox styleClass="kaca" spacing="10" prefWidth="300" minWidth="280" maxWidth="300">
+
+                    <padding><Insets top="18" right="10" bottom="14" left="10"/></padding>
+
+                    <Label text="Daftar Bab" styleClass="judul-bagian">
+
+                        <padding><Insets left="8" bottom="4"/></padding>
+
+                    </Label>
+
+                    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+
+                        <VBox fx:id="vbBab" spacing="4" styleClass="daftar-bab"/>
+
+                    </ScrollPane>
+
+                </VBox>
+
+                <StackPane fx:id="spKonten" styleClass="kaca" HBox.hgrow="ALWAYS" style="-fx-padding: 0;"/>
+
+            </HBox>
+
+
+
+            <!-- TAMPILAN TAB ORANG (Google Classroom Style) -->
+
+            <ScrollPane fx:id="spTabOrang" fitToWidth="true" hbarPolicy="NEVER" visible="false" managed="false">
+
+                <padding><Insets right="32" bottom="28" left="32"/></padding>
+
+                <VBox alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
+
+                    <VBox fx:id="vbTabOrang" styleClass="kaca" spacing="24" maxWidth="900" alignment="TOP_LEFT"/>
+
+                </VBox>
+
+            </ScrollPane>
+
+        </StackPane>
+
+    </center>
+
+</BorderPane>
+

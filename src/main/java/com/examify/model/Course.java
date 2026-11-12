@@ -4,7 +4,6 @@ import com.examify.utils.StringUtil;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /** Kelas e-learning: kumpulan bab yang masing-masing berisi materi (komposisi). */
@@ -51,12 +50,6 @@ public class Course {
         return daftarBab.stream()
                 .flatMap(bab -> bab.getDaftarMateri().stream())
                 .toList();
-    }
-
-    public Optional<Material> cariMateri(String idMateri) {
-        return getSemuaMateri().stream()
-                .filter(materi -> materi.getIdMateri().equals(idMateri))
-                .findFirst();
     }
 
     /** Pencarian sederhana berdasarkan kode atau nama, tanpa peduli huruf besar/kecil. */

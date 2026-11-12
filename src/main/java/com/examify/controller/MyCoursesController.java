@@ -5,8 +5,6 @@ import com.examify.app.AppScreen;
 import com.examify.app.SceneRouter;
 import com.examify.model.Chapter;
 import com.examify.model.Course;
-import com.examify.model.ExamMaterial;
-import com.examify.model.QuizMaterial;
 import com.examify.model.Student;
 import com.examify.model.Teacher;
 import com.examify.service.LearningProgressService;
@@ -366,10 +364,12 @@ public class MyCoursesController {
         lblCatatan.getStyleClass().add("teks-redup");
         lblCatatan.setStyle("-fx-font-size: 11.5px;");
         lblCatatan.setWrapText(true);
+        lblCatatan.setMinHeight(javafx.scene.layout.Region.USE_PREF_SIZE);
 
         Label lblGalat = new Label();
         lblGalat.setWrapText(true);
         lblGalat.setMaxWidth(Double.MAX_VALUE);
+        lblGalat.setMinHeight(javafx.scene.layout.Region.USE_PREF_SIZE);
         lblGalat.setStyle("-fx-text-fill: -bahaya; -fx-background-color: rgba(239, 68, 68, 0.1); "
                 + "-fx-background-radius: 10; -fx-padding: 8 12; -fx-font-size: 12px; -fx-font-weight: bold;");
         lblGalat.setVisible(false);
@@ -479,7 +479,7 @@ public class MyCoursesController {
         lblField.setStyle("-fx-font-weight: bold; -fx-font-size: 12.5px;");
 
         TextField tfKode = new TextField();
-        tfKode.setPromptText("Contoh: BIN, MTK, FIS...");
+        tfKode.setPromptText("Contoh: 0953123017");
         tfKode.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-weight: bold; -fx-font-size: 14px;");
 
         Label lblCatatan = new Label("Perhatikan huruf besar dan kecil (case-sensitive) saat memasukkan kode.");

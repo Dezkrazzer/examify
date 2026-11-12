@@ -1,6 +1,6 @@
 # Algoritma Greedy pada Graf: Prim, Kruskal, dan Dijkstra
 
-Mata kuliah **Desain & Analisis Algoritma** (`0953123022`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Desain & Analisis Algoritma** (`0953123022`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

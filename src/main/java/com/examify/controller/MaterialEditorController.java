@@ -15,8 +15,6 @@ import com.examify.model.material.BlockType;
 import com.examify.service.CourseService;
 import com.examify.utils.HtmlMarkdownUtil;
 import com.examify.utils.StringUtil;
-import com.examify.view.Icon;
-import com.examify.view.IconView;
 import com.examify.view.MarkdownView;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -37,7 +35,6 @@ import javafx.scene.paint.Color;
 import java.util.Optional;
 import javafx.scene.control.IndexRange;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -120,8 +117,6 @@ public class MaterialEditorController {
     @FXML private Button btnPrevSlide;
     @FXML private Button btnNextSlide;
 
-    @FXML private Label lblStatSlide;
-    @FXML private Label lblStatBlok;
 
     private final AppSession session = AppSession.getInstance();
     private final CourseService kursusService = session.getKursusService();
@@ -262,11 +257,6 @@ public class MaterialEditorController {
         if (boxModePratinjau != null && boxModePratinjau.isVisible()) {
             renderPratinjauSiswa();
         }
-        perbaruiStatistik();
-        if (true) return;
-        renderSlideThumbnails();
-        renderKanvasSlide();
-        perbaruiStatistik();
     }
 
     // ------------------------------------------------------------------ Manajemen Snapshot Undo / Redo
@@ -380,9 +370,6 @@ public class MaterialEditorController {
                 if (boxModePratinjau != null && boxModePratinjau.isVisible()) {
                     renderPratinjauSiswa();
                 }
-                if (true) return;
-                renderSlideThumbnails();
-                renderKanvasSlide();
             });
 
             vbSlideList.getChildren().add(kartu);
@@ -489,7 +476,6 @@ public class MaterialEditorController {
             simpanRiwayatUndo();
             slide.getDaftarBlok().remove(index);
             renderKanvasSlide();
-            perbaruiStatistik();
         });
 
         barisHeader.getChildren().addAll(badgeTipe, spacer, btnNaik, btnTurun, btnHapus);
@@ -714,7 +700,6 @@ public class MaterialEditorController {
             String html = editor.getHtmlText();
             String md = HtmlMarkdownUtil.htmlToMarkdown(html);
             blok.setIsi(md);
-            perbaruiStatistik();
         }
     }
 
@@ -852,7 +837,6 @@ public class MaterialEditorController {
         SlideDraft slide = daftarSlide.get(slideAktifIndex);
         slide.tambahBlok(blok);
         renderKanvasSlide();
-        perbaruiStatistik();
     }
 
     // ==================================================================
@@ -1518,12 +1502,6 @@ public class MaterialEditorController {
         boxModePratinjau.setManaged(false);
         renderSlideThumbnails();
         renderKanvasSlide();
-        if (true) return;
-        tbModeEdit.setSelected(true);
-        boxModeEdit.setVisible(true);
-        boxModeEdit.setManaged(true);
-        boxModePratinjau.setVisible(false);
-        boxModePratinjau.setManaged(false);
     }
 
     @FXML
@@ -1572,43 +1550,12 @@ public class MaterialEditorController {
         vbPratinjauKonten.getChildren().addAll(lblSubjudul, MarkdownView.render(md));
     }
 
-    @SuppressWarnings("unused")
-    private void renderPratinjauSiswaLama() {
-        if (daftarSlide.isEmpty()) return;
-
-        hbPratinjauSegmen.getChildren().clear();
-        for (int i = 0; i < daftarSlide.size(); i++) {
-            Region segmen = new Region();
-            segmen.setStyle("-fx-background-radius: 4; -fx-min-height: 4px; -fx-max-height: 4px; "
-                    + "-fx-background-color: " + (i <= slideAktifIndex ? "-aksen" : "-garis") + ";");
-            HBox.setHgrow(segmen, Priority.ALWAYS);
-            hbPratinjauSegmen.getChildren().add(segmen);
-        }
-
-        lblPratinjauNomor.setText("Halaman " + (slideAktifIndex + 1) + " dari " + daftarSlide.size());
-        btnPrevSlide.setDisable(slideAktifIndex == 0);
-        btnNextSlide.setText(slideAktifIndex == daftarSlide.size() - 1 ? "Selesai & Paham" : "Halaman Berikutnya");
-
-        SlideDraft slide = daftarSlide.get(slideAktifIndex);
-        String md = SlideMarkdownConverter.toMarkdown(List.of(slide));
-
-        vbPratinjauKonten.getChildren().clear();
-        Label lblSubjudul = new Label((slide.getJudulSlide().isEmpty() ? ("Bagian " + (slideAktifIndex + 1)) : slide.getJudulSlide()).toUpperCase());
-        lblSubjudul.getStyleClass().add("label-kecil-kapital");
-        vbPratinjauKonten.getChildren().addAll(lblSubjudul, MarkdownView.render(md));
-    }
-
     @FXML
     private void handlePrevPratinjau() {
         if (slideAktifIndex > 0) {
             slideAktifIndex--;
             renderSlideThumbnails();
             renderKanvasSlide();
-            renderPratinjauSiswa();
-        }
-        if (true) return;
-        if (slideAktifIndex > 0) {
-            slideAktifIndex--;
             renderPratinjauSiswa();
         }
     }
@@ -1619,13 +1566,6 @@ public class MaterialEditorController {
             slideAktifIndex++;
             renderSlideThumbnails();
             renderKanvasSlide();
-            renderPratinjauSiswa();
-        } else {
-            DialogUtil.info("Ini adalah halaman slide terakhir. Simulasi selesai!");
-        }
-        if (true) return;
-        if (slideAktifIndex < daftarSlide.size() - 1) {
-            slideAktifIndex++;
             renderPratinjauSiswa();
         } else {
             DialogUtil.info("Ini adalah halaman slide terakhir. Simulasi selesai!");
@@ -1644,16 +1584,6 @@ public class MaterialEditorController {
         daftarSlide.add(slideBaru);
         slideAktifIndex = daftarSlide.size() - 1;
         perbaruiTampilan();
-    }
-
-    private void perbaruiStatistik() {
-        if (lblStatSlide != null) {
-            lblStatSlide.setText(daftarSlide.size() + " Slide (Halaman)");
-        }
-        if (lblStatBlok != null) {
-            int totalBlok = daftarSlide.stream().mapToInt(s -> s.getDaftarBlok().size()).sum();
-            lblStatBlok.setText(totalBlok + " Blok Konten");
-        }
     }
 
     // ------------------------------------------------------------------ Simpan & Navigasi

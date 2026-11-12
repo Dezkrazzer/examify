@@ -3,6 +3,8 @@ package com.examify.exception;
 /** Baris pada file data tidak sesuai data contract; menyimpan lokasi kesalahan. */
 public class DataFormatException extends Exception {
 
+    private static final long serialVersionUID = 1L;
+
     private final int nomorBaris;
     private final String isiBaris;
 

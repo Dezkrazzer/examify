@@ -1,6 +1,6 @@
 # Basis, Dimensi, dan Rank Matriks
 
-Mata kuliah **Aljabar Linier** (`0953223011`) dibimbing oleh **Drs. Bambang Harjito, M.App.Sc., Ph.D.**.
+Mata kuliah **Aljabar Linier** (`0953223011`) dibimbing oleh **Dr. Ratna Sari Dewi, S.Si., M.Sc.**.
 
 ## Ringkasan Materi
 

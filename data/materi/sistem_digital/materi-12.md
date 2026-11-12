@@ -1,6 +1,6 @@
 # Pengantar Rangkaian Sekuensial: Latch dan Flip-Flop
 
-Mata kuliah **Sistem Digital** (`0953123003`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Sistem Digital** (`0953123003`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

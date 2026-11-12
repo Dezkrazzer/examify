@@ -1,6 +1,6 @@
 # Turunan Numerik: Selisih Maju, Mundur, dan Pusat
 
-Mata kuliah **Metode Numerik** (`0953123021`) dibimbing oleh **Dr. Umi Salamah, S.Si., M.Kom.**.
+Mata kuliah **Metode Numerik** (`0953123021`) dibimbing oleh **Dr. Dewi Anggraini, S.Si., M.Kom.**.
 
 ## Ringkasan Materi
 

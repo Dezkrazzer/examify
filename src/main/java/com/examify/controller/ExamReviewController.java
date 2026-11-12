@@ -8,16 +8,12 @@ import com.examify.model.Question;
 import com.examify.model.ExamStatus;
 import com.examify.model.Exam;
 import com.examify.utils.FormatUtil;
-import com.examify.view.Icon;
-import com.examify.view.IconView;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;

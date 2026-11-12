@@ -291,7 +291,7 @@
             </VBox>
 
             <!-- 2. AREA PENULISAN LUAS & RESPONSIF (WYSIWYG / BLOCK EDITOR CANVAS) -->
-            <StackPane fx:id="spAreaKerja" HBox.hgrow="ALWAYS">
+            <StackPane HBox.hgrow="ALWAYS">
                 <!-- MODE EDIT VISUAL (WYSIWYG EDITOR CANVAS) -->
                 <VBox fx:id="boxModeEdit" spacing="12" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
                     <HBox alignment="CENTER_LEFT" spacing="10" maxWidth="1080">

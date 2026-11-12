@@ -47,12 +47,6 @@ public class GradeRecapService {
         return Collections.unmodifiableMap(rekapSementara);
     }
 
-    public List<Map.Entry<Student, Double>> getRanking() {
-        List<Map.Entry<Student, Double>> ranking = new ArrayList<>(rekapSementara.entrySet());
-        ranking.sort(Map.Entry.<Student, Double>comparingByValue().reversed());
-        return ranking;
-    }
-
     /** Riwayat milik siswa, terbaru lebih dulu. */
     public List<GradeHistory> getRiwayat(Student siswa) {
         return riwayat.stream()
@@ -77,10 +71,6 @@ public class GradeRecapService {
 
     public boolean sudahMengerjakan(Student siswa, Exam ujian) {
         return getJumlahPercobaan(siswa, ujian) > 0;
-    }
-
-    public long getJumlahPeserta() {
-        return riwayat.stream().map(GradeHistory::nis).distinct().count();
     }
 
     public List<GradeHistory> getSemuaRiwayat() {

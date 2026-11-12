@@ -1,6 +1,6 @@
 # Queue (Antrean), Circular Queue, dan Priority Queue
 
-Mata kuliah **Struktur Data & Algoritma** (`0953223012`) dibimbing oleh **Esti Suryani, S.Si., M.Kom.**.
+Mata kuliah **Struktur Data & Algoritma** (`0953223012`) dibimbing oleh **Siti Nurhaliza, S.Si., M.Kom.**.
 
 ## Ringkasan Materi
 
