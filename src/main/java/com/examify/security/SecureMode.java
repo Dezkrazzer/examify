@@ -143,19 +143,6 @@ public final class SecureMode {
         stage.setFullScreenExitHint(null);
     }
 
-    public boolean isAktif() {
-        return aktif;
-    }
-
-    /** true bila Alt+Tab/tombol Windows benar-benar diblokir (bukan hanya dideteksi). */
-    public boolean isHookAktif() {
-        return hookAktif;
-    }
-
-    public int getJumlahPelanggaran() {
-        return jumlahPelanggaran;
-    }
-
     // ---------------------------------------------------------------- pintasan di dalam aplikasi
 
     private void saringTombol(KeyEvent e) {

@@ -1,6 +1,6 @@
 # Operasi Input/Output dan File Streams
 
-Mata kuliah **Pemrograman Berorientasi Objek** (`0953123017`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Pemrograman Berorientasi Objek** (`0953123017`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

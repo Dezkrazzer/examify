@@ -1,6 +1,6 @@
 # Evolusi Komputer dan Arsitektur Von Neumann
 
-Mata kuliah **Organisasi Sistem Komputer** (`0953223013`) dibimbing oleh **Herdito Ibnu Dewangkoro**.
+Mata kuliah **Organisasi Sistem Komputer** (`0953223013`) dibimbing oleh **Budi Hartono, S.T., M.T.**.
 
 ## Ringkasan Materi
 

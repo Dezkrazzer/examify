@@ -27,6 +27,7 @@ MAPEL=UAS Pendidikan Agama
 TOKEN=PAIUA1
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pendidikan Agama mencakup ...|Kerukunan Antarumat Beragama dan Toleransi;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Masyarakat Madani dan Kesejahteraan Umat dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pendidikan Agama.|T|10
@@ -65,6 +66,7 @@ MAPEL=UAS Konsep Pemrograman
 TOKEN=KPUA22
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Konsep Pemrograman mencakup ...|Perulangan Bersarang dan Kontrol Alur;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Fungsi, Prosedur, dan Ruang Lingkup Variabel dipelajari setelah pelaksanaan Ujian Tengah Semester pada Konsep Pemrograman.|T|10
@@ -103,6 +105,7 @@ MAPEL=UAS Sistem Digital
 TOKEN=SDIUA3
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Sistem Digital mencakup ...|Metode Quine-McCluskey;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Rangkaian Kombinasional: Adder dan Subtractor dipelajari setelah pelaksanaan Ujian Tengah Semester pada Sistem Digital.|T|10
@@ -141,6 +144,7 @@ MAPEL=UAS Kalkulus I
 TOKEN=KALUA4
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Kalkulus I mencakup ...|Turunan Tingkat Tinggi dan Laju Berkaitan;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Nilai Ekstrem, Kemonotonan, dan Kecekungan dipelajari setelah pelaksanaan Ujian Tengah Semester pada Kalkulus I.|T|10
@@ -179,6 +183,7 @@ MAPEL=UAS Fisika
 TOKEN=FISUA5
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Fisika mencakup ...|Mekanika Fluida Statis dan Dinamis;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Getaran Harmonik dan Gelombang Mekanik dipelajari setelah pelaksanaan Ujian Tengah Semester pada Fisika.|T|10
@@ -217,6 +222,7 @@ MAPEL=UAS Bahasa Inggris I
 TOKEN=BINUA6
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Bahasa Inggris I mencakup ...|Subject-Verb Agreement and Parallel Structure;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Relative Clauses and Adjective Phrases dipelajari setelah pelaksanaan Ujian Tengah Semester pada Bahasa Inggris I.|T|10
@@ -255,6 +261,7 @@ MAPEL=UAS Statistika & Probabilitas
 TOKEN=STAUA7
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Statistika & Probabilitas mencakup ...|Distribusi Peluang Diskrit (Binomial, Poisson);Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Distribusi Peluang Kontinu dan Distribusi Normal dipelajari setelah pelaksanaan Ujian Tengah Semester pada Statistika & Probabilitas.|T|10
@@ -293,6 +300,7 @@ MAPEL=UAS Bahasa Indonesia
 TOKEN=BINUA8
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Bahasa Indonesia mencakup ...|Teknik Kutipan Langsung dan Tidak Langsung;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Penulisan Catatan Kaki dan Daftar Pustaka dipelajari setelah pelaksanaan Ujian Tengah Semester pada Bahasa Indonesia.|T|10
@@ -331,6 +339,7 @@ MAPEL=UAS Kalkulus II
 TOKEN=KALUA9
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Kalkulus II mencakup ...|Barisan Tak Hingga dan Kekonvergenan;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Deret Tak Hingga dan Uji Konvergensi dipelajari setelah pelaksanaan Ujian Tengah Semester pada Kalkulus II.|T|10
@@ -369,6 +378,7 @@ MAPEL=UAS Matematika Diskrit I
 TOKEN=MDIUA0
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Matematika Diskrit I mencakup ...|Fungsi, Fungsi Injektif, Surjektif, dan Bijektif;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Barisan, Notasi Sigma, dan Kardinalitas dipelajari setelah pelaksanaan Ujian Tengah Semester pada Matematika Diskrit I.|T|10
@@ -407,6 +417,7 @@ MAPEL=UAS Aljabar Linier
 TOKEN=ALIUA1
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Aljabar Linier mencakup ...|Ruang Vektor Umum dan Subruang;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Kombinasi Linier dan Kebebasan Linier dipelajari setelah pelaksanaan Ujian Tengah Semester pada Aljabar Linier.|T|10
@@ -445,6 +456,7 @@ MAPEL=UAS Struktur Data & Algoritma
 TOKEN=SDAUA2
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Struktur Data & Algoritma mencakup ...|Algoritma Pengurutan Dasar: Bubble, Selection, Insertion Sort;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Algoritma Pengurutan Lanjut: Merge Sort dan Quick Sort dipelajari setelah pelaksanaan Ujian Tengah Semester pada Struktur Data & Algoritma.|T|10
@@ -483,6 +495,7 @@ MAPEL=UAS Organisasi Sistem Komputer
 TOKEN=OSKUA3
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Organisasi Sistem Komputer mencakup ...|Aritmatika Komputer: Integer dan Floating Point IEEE 754;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Karakteristik dan Fungsi Set Instruksi (ISA) dipelajari setelah pelaksanaan Ujian Tengah Semester pada Organisasi Sistem Komputer.|T|10
@@ -521,6 +534,7 @@ MAPEL=UAS Pendidikan Kewarganegaraan
 TOKEN=PKNUA4
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pendidikan Kewarganegaraan mencakup ...|Dinamika Historis Konstitusi di Indonesia;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Kewarganegaraan Digital dan Etika Ruang Siber dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pendidikan Kewarganegaraan.|T|10
@@ -559,6 +573,7 @@ MAPEL=UAS Bahasa Inggris II
 TOKEN=BINUA5
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Bahasa Inggris II mencakup ...|Describing Charts, Graphs, and Data Trends;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Writing Technical Documentation and Reports dipelajari setelah pelaksanaan Ujian Tengah Semester pada Bahasa Inggris II.|T|10
@@ -597,6 +612,7 @@ MAPEL=UAS Matematika Diskrit II
 TOKEN=MDIUA6
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Matematika Diskrit II mencakup ...|Graf Planar dan Pewarnaan Graf (Graph Coloring);Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Pohon (Trees), Pohon Berakar, dan Aplikasinya dipelajari setelah pelaksanaan Ujian Tengah Semester pada Matematika Diskrit II.|T|10
@@ -635,6 +651,7 @@ MAPEL=UAS Pemrograman Berorientasi Objek
 TOKEN=PBOUA7
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pemrograman Berorientasi Objek mencakup ...|Abstract Class dan Interface;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Manipulasi String dan StringBuilder dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pemrograman Berorientasi Objek.|T|10
@@ -673,6 +690,7 @@ MAPEL=UAS Basis Data
 TOKEN=BDAUA8
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Basis Data mencakup ...|SQL Manipulasi Data: SELECT, INSERT, UPDATE, DELETE;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Fungsi Agregasi, GROUP BY, dan Subquery dipelajari setelah pelaksanaan Ujian Tengah Semester pada Basis Data.|T|10
@@ -711,6 +729,7 @@ MAPEL=UAS Sistem Operasi
 TOKEN=SISUA9
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Sistem Operasi mencakup ...|Deadlock: Karakteristik, Pencegahan, dan Algoritma Banker;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Manajemen Memori Utama, Paging, dan Segmentasi dipelajari setelah pelaksanaan Ujian Tengah Semester pada Sistem Operasi.|T|10
@@ -749,6 +768,7 @@ MAPEL=UAS Pendidikan Pancasila
 TOKEN=PANUA0
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Pendidikan Pancasila mencakup ...|Pancasila sebagai Sistem Filsafat;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Hakikat Sila-Sila Pancasila secara Ontologis dan Epistemologis dipelajari setelah pelaksanaan Ujian Tengah Semester pada Pendidikan Pancasila.|T|10
@@ -787,6 +807,7 @@ MAPEL=UAS Metode Numerik
 TOKEN=MNUUA1
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Metode Numerik mencakup ...|Interpolasi Polinomial: Metode Lagrange;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Interpolasi Beda Terbagi Newton dan Spline dipelajari setelah pelaksanaan Ujian Tengah Semester pada Metode Numerik.|T|10
@@ -825,6 +846,7 @@ MAPEL=UAS Desain & Analisis Algoritma
 TOKEN=DAAUA2
 DURASI=90
 KKM=70
+STRICTLY_SAFE=true
 [SOAL]
 PG|1|Pokok bahasan awal paruh kedua semester pada mata kuliah Desain & Analisis Algoritma mencakup ...|Algoritma Greedy: Coin Change, Knapsack Fraksional, Huffman;Arsitektur Cloud;Biomedis;Robotika Industri|A|10
 TF|2|Topik Algoritma Greedy pada Graf: Prim, Kruskal, dan Dijkstra dipelajari setelah pelaksanaan Ujian Tengah Semester pada Desain & Analisis Algoritma.|T|10

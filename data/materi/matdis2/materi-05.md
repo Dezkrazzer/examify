@@ -1,6 +1,6 @@
 # Representasi Graf dan Isomorfisme Graf
 
-Mata kuliah **Matematika Diskrit II** (`0953122016`) dibimbing oleh **Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.**.
+Mata kuliah **Matematika Diskrit II** (`0953122016`) dibimbing oleh **Dr. Andi Wijaya, S.Kom., M.Kom.**.
 
 ## Ringkasan Materi
 

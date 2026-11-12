@@ -41,7 +41,7 @@
             <ScrollPane fx:id="spKonten" fitToWidth="true" hbarPolicy="NEVER" pannable="false">
                 <VBox fx:id="vbKonten" minWidth="0">
                     <!-- ===== Hero ===== -->
-                    <HBox fx:id="hbHero" spacing="40" alignment="CENTER_LEFT">
+                    <HBox spacing="40" alignment="CENTER_LEFT">
                         <padding><Insets top="56" right="64" bottom="56" left="64"/></padding>
                         <VBox spacing="20" HBox.hgrow="ALWAYS" maxWidth="620" minWidth="0">
                             <HBox styleClass="badge" alignment="CENTER_LEFT" spacing="8" maxWidth="-Infinity">
@@ -111,7 +111,7 @@
                     <!-- ===== Fitur ===== -->
                     <VBox fx:id="vbFitur" spacing="22">
                         <padding><Insets top="8" right="64" bottom="24" left="64"/></padding>
-                        <HBox fx:id="hbFitur" spacing="20">
+                        <HBox spacing="20">
                             <VBox styleClass="kaca, kartu-fitur" spacing="10" HBox.hgrow="ALWAYS">
                                 <StackPane styleClass="ikon-fitur"><IconView ikon="BUKU" ukuran="22"/></StackPane>
                                 <Label text="Materi per bab" styleClass="judul-kartu"/>

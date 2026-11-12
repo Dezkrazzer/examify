@@ -48,23 +48,31 @@ memakai layout Maven standar (`src/main/java`, `src/test/java`). Jalankan lewat 
 
 ## Akun, kursus & token contoh
 
-| NIS     | PIN  | Nama          |
-|---------|------|---------------|
-| 2410001 | 1234 | Andi Pratama  |
-| 2410002 | 5678 | Budi Santoso  |
-| 2410003 | 2468 | Citra Lestari |
+Siswa (`data/siswa.txt`):
 
-| Kursus | Ujian            | Token  | Durasi | Boleh ulang |
-|--------|------------------|--------|--------|-------------|
-| PBO    | PBO-01 (UTS)     | PBO7UT | 30 mnt | tidak       |
-| PBO    | PBO-02 (UAS)     | PBO9UA | 30 mnt | tidak       |
-| MTK    | MTK-01           | MTK7X2 | 30 mnt | tidak       |
-| BIN    | BIN-01           | BIN9K4 | 20 mnt | tidak       |
-| IPA    | IPA-01           | IPA3Q8 | 25 mnt | tidak       |
-| UJI    | UJI-01           | UJI123 | 1 mnt  | ya          |
+| NIS     | PIN  | Nama          | Kelas |
+|---------|------|---------------|-------|
+| 2410001 | 1234 | Andi Pratama  | IF-A  |
+| 2410002 | 5678 | Budi Santoso  | IF-B  |
+| 2410003 | 2468 | Citra Lestari | IF-C  |
+| 2410004 | 1111 | Dimas Saputra | IF-D  |
+| 2410005 | 6767 | Eka Rahmawati | IF-E  |
 
-Kursus **PBO** berisi bab sesuai materi Java Core & OOP (Class & Object hingga Multithreading)
-lengkap dengan UTS dan UAS.
+Guru (`data/guru.txt`): NIP `19850101` s.d. `19850107`, semua dengan PIN `1234`.
+
+Ada 23 kursus di `data/kursus.txt`. Kode kursus berupa angka (contoh: Pemrograman Berorientasi
+Objek = `0953123017`) dan bisa dipakai di tombol **Masuk lewat Kode**. Setiap kursus punya UTS
+(60 menit) dan UAS (90 menit). Beberapa contoh token:
+
+| Kursus                          | Ujian          | Token  | Durasi | Boleh ulang | Mode Aman |
+|---------------------------------|----------------|--------|--------|-------------|-----------|
+| Pemrograman Berorientasi Objek  | PBO-01 (UTS)   | PBOUT7 | 60 mnt | tidak       | tidak     |
+| Pemrograman Berorientasi Objek  | PBO-02 (UAS)   | PBOUA7 | 90 mnt | tidak       | tidak     |
+| Konsep Pemrograman              | KP-01 (UTS)    | KPUT21 | 60 mnt | tidak       | tidak     |
+| Basis Data                      | BDAT-01 (UTS)  | BDAUT8 | 60 mnt | tidak       | tidak     |
+| Kelas Uji Coba (kode `UJI`)     | UJI-01         | UJI123 | 1 mnt  | ya          | ya        |
+
+Token ujian lainnya ada di `data/bank_soal.txt` atau di menu **Bank Soal** (akun guru).
 
 > Ingin mengulang dari awal? Hapus folder `output/`. Riwayat nilai, progres belajar, dan
 > sertifikat akan dibuat ulang saat aplikasi dipakai.

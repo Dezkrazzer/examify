@@ -10,7 +10,6 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -68,10 +67,8 @@ public class ExamResult implements Gradable, Comparable<ExamResult> {
     }
 
     public void toggleTandai(int idSoal) {
-        if (status == ExamStatus.BERLANGSUNG) {
-            if (!soalDitandai.add(idSoal)) {
-                soalDitandai.remove(idSoal);
-            }
+        if (status == ExamStatus.BERLANGSUNG && !soalDitandai.add(idSoal)) {
+            soalDitandai.remove(idSoal);
         }
     }
 
@@ -81,10 +78,6 @@ public class ExamResult implements Gradable, Comparable<ExamResult> {
 
     public int getJumlahDitandai() {
         return soalDitandai.size();
-    }
-
-    public Set<Integer> getSoalDitandai() {
-        return Collections.unmodifiableSet(soalDitandai);
     }
 
     public void hapusJawaban(int idSoal) {
@@ -197,10 +190,6 @@ public class ExamResult implements Gradable, Comparable<ExamResult> {
 
     public LocalDateTime getWaktuMulai() {
         return waktuMulai;
-    }
-
-    public LocalDateTime getBatasWaktu() {
-        return batasWaktu;
     }
 
     public LocalDateTime getWaktuSelesai() {

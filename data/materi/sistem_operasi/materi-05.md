@@ -1,6 +1,6 @@
 # Algoritma Penjadwalan CPU (FCFS, SJF, Round Robin)
 
-Mata kuliah **Sistem Operasi** (`0953123019`) dibimbing oleh **Herdito Ibnu Dewangkoro**.
+Mata kuliah **Sistem Operasi** (`0953123019`) dibimbing oleh **Budi Hartono, S.T., M.T.**.
 
 ## Ringkasan Materi
 

@@ -1,6 +1,6 @@
 # Present Tenses in Academic Context
 
-Mata kuliah **Bahasa Inggris I** (`0953112006`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Bahasa Inggris I** (`0953112006`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

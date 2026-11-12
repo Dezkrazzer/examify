@@ -1,6 +1,6 @@
 # Paraphrasing, Quoting, and Avoiding Plagiarism
 
-Mata kuliah **Bahasa Inggris II** (`0953222015`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Bahasa Inggris II** (`0953222015`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

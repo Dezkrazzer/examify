@@ -13,7 +13,6 @@ import javafx.scene.layout.Region;
 
 import java.util.Collections;
 import java.util.IdentityHashMap;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -51,7 +50,7 @@ final class TableUtil {
             });
             return baris;
         });
-        for (TableColumn<T, String> kolom : List.of(kolomTeks)) {
+        for (TableColumn<T, String> kolom : kolomTeks) {
             kolom.setCellFactory(k -> new SelBisaDibuka<>(terbuka));
         }
     }

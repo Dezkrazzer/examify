@@ -25,7 +25,7 @@ public final class SmoothScroll {
 
     private static final Duration DURASI = Duration.millis(380);
     private static final double KELIPATAN_DELTA = 2.2; // jarak per notch roda, relatif delta bawaan
-    private static final Interpolator EASE_OUT = Interpolator.SPLINE(0.25, 0.1, 0.25, 1);
+    private static final Interpolator EASE_OUT = Interpolator.ofSpline(0.25, 0.1, 0.25, 1);
 
     private static final Map<ScrollPane, Timeline> ANIMASI = new WeakHashMap<>();
     private static final Map<ScrollPane, Double> TUJUAN = new WeakHashMap<>();

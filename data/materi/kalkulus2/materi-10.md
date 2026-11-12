@@ -1,6 +1,6 @@
 # Deret Pangkat, Deret Taylor, dan Deret Maclaurin
 
-Mata kuliah **Kalkulus II** (`0953223009`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Kalkulus II** (`0953223009`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

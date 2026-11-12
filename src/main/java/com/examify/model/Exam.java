@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /** Paket ujian CBT: identitas, token, daftar soal, KKM, durasi, dan jadwal akses. */
@@ -176,10 +175,6 @@ public class Exam {
 
     public int getJumlahSoal() {
         return daftarSoal.size();
-    }
-
-    public double getTotalBobot() {
-        return daftarSoal.stream().mapToDouble(Question::getBobot).sum();
     }
 
     public Question getSoalBerdasarkanIndeks(int indeks) {

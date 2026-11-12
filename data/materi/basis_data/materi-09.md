@@ -1,6 +1,6 @@
 # Fungsi Agregasi, GROUP BY, dan Subquery
 
-Mata kuliah **Basis Data** (`0953124018`) dibimbing oleh **Haryono Setiyadi, S.T., M.Eng.**.
+Mata kuliah **Basis Data** (`0953124018`) dibimbing oleh **Agus Setiawan, S.T., M.Eng.**.
 
 ## Ringkasan Materi
 

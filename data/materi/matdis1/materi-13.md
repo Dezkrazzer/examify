@@ -1,6 +1,6 @@
 # Prinsip Sarang Merpati (Pigeonhole Principle)
 
-Mata kuliah **Matematika Diskrit I** (`0953223010`) dibimbing oleh **Heri Presetyo, S.Kom., M.Eng.Sc., Ph.D.**.
+Mata kuliah **Matematika Diskrit I** (`0953223010`) dibimbing oleh **Dr. Andi Wijaya, S.Kom., M.Kom.**.
 
 ## Ringkasan Materi
 

@@ -68,15 +68,13 @@ public class CourseEnrollmentService {
     public synchronized void daftarkan(Student siswa, Course kursus) throws IOException {
         if (siswa == null || kursus == null) return;
         String k = kunci(siswa.getNis(), kursus.getKode());
-        if (terdaftar.add(k)) {
-            if (filePendaftaran != null) {
-                if (filePendaftaran.getParent() != null) {
-                    Files.createDirectories(filePendaftaran.getParent());
-                }
-                String baris = siswa.getNis() + "|" + kursus.getKode() + "|" + LocalDateTime.now() + System.lineSeparator();
-                Files.writeString(filePendaftaran, baris, StandardCharsets.UTF_8,
-                        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+        if (terdaftar.add(k) && filePendaftaran != null) {
+            if (filePendaftaran.getParent() != null) {
+                Files.createDirectories(filePendaftaran.getParent());
             }
+            String baris = siswa.getNis() + "|" + kursus.getKode() + "|" + LocalDateTime.now() + System.lineSeparator();
+            Files.writeString(filePendaftaran, baris, StandardCharsets.UTF_8,
+                    StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         }
     }
 

@@ -1,6 +1,6 @@
 # Aturan Rantai dan Turunan Implisit
 
-Mata kuliah **Kalkulus I** (`0953123004`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Kalkulus I** (`0953123004`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

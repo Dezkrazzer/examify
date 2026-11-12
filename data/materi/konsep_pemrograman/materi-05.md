@@ -1,6 +1,6 @@
 # Input dan Output Standar
 
-Mata kuliah **Konsep Pemrograman** (`0953124002`) dibimbing oleh **Drs. Bambang Harjito, M.App.Sc., Ph.D.**.
+Mata kuliah **Konsep Pemrograman** (`0953124002`) dibimbing oleh **Dr. Ratna Sari Dewi, S.Si., M.Sc.**.
 
 ## Ringkasan Materi
 

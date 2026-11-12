@@ -112,9 +112,6 @@ public final class AppSession {
         }
     }
 
-    public boolean isLogin() {
-        return siswaAktif != null || guruAktif != null;
-    }
 
     public boolean isGuru() {
         return guruAktif != null;
@@ -130,11 +127,6 @@ public final class AppSession {
         return "";
     }
 
-    public String getIdentitasPengguna() {
-        if (guruAktif != null) return "Guru • NIP " + guruAktif.getNip();
-        if (siswaAktif != null) return siswaAktif.getNis() + " - " + siswaAktif.getKelas();
-        return "";
-    }
 
     public AuthService getAuthService() {
         return authService;
@@ -277,9 +269,6 @@ public final class AppSession {
         return pendaftaranService;
     }
 
-    public void setPendaftaranService(CourseEnrollmentService pendaftaranService) {
-        this.pendaftaranService = pendaftaranService;
-    }
 
     public AssignmentService getTugasService() {
         if (tugasService == null) {
@@ -288,7 +277,4 @@ public final class AppSession {
         return tugasService;
     }
 
-    public void setTugasService(AssignmentService tugasService) {
-        this.tugasService = tugasService;
-    }
 }
