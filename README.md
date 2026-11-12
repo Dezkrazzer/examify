@@ -2,7 +2,7 @@
 
 <img src="src/main/resources/com/examify/img/examifylogo.png" alt="Logo Examify" width="160">
 
-# Examify
+# Examify - E-Learning & Computer-Based Test (CBT)
 
 ### Kelompok 8
 
@@ -638,6 +638,6 @@ GUI dibangun dengan **JavaFX** (`javafx.controls`, `javafx.fxml`, `javafx.web`).
 
 <div align="center">
 
-Dibuat untuk tugas besar mata kuliah **Pemrograman Berorientasi Objek**.
+© Examify 2026 - Kelompok 8
 
 </div>
