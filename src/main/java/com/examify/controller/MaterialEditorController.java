@@ -1261,9 +1261,11 @@ public class MaterialEditorController {
     private void handleFontCustomColor() {
         ColorPicker picker = new ColorPicker(Color.web(warnaFontAktif.startsWith("#") ? warnaFontAktif : "#E53935"));
         Dialog<Color> dialog = new Dialog<>();
+        dialog.initOwner(SceneRouter.getStage());
         dialog.setTitle("Pilih Warna Teks");
         dialog.setHeaderText("Pilih warna khusus untuk teks pembelajaran:");
         DialogPane pane = dialog.getDialogPane();
+        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
         pane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         VBox box = new VBox(12, picker);
         box.setPadding(new Insets(16));

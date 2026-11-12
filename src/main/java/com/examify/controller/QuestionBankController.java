@@ -21,9 +21,7 @@ import java.util.List;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -32,18 +30,13 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.StageStyle;
 
 public class QuestionBankController {
 
@@ -236,47 +229,14 @@ public class QuestionBankController {
     }
 
     private void handleUbahPengaturan(Exam u) {
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(520);
-        kartu.setMaxWidth(540);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(520, 540);
 
         // Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox vbJudul = new VBox(2);
         HBox hbJudulAtas = new HBox(8);
@@ -488,47 +448,14 @@ public class QuestionBankController {
 
     @FXML
     private void handleTambahUjianBaru() {
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(520);
-        kartu.setMaxWidth(540);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(520, 540);
 
         // Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox vbJudul = new VBox(2);
         Label lblJudul = new Label("Buat Paket Ujian Baru");

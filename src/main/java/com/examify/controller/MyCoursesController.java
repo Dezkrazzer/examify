@@ -28,7 +28,6 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
@@ -37,15 +36,10 @@ import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class MyCoursesController {
@@ -308,47 +302,14 @@ public class MyCoursesController {
             return;
         }
 
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(440);
-        kartu.setMaxWidth(460);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(440, 460);
 
         // Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         Label lblJudul = new Label("Masukkan Kode Kursus");
@@ -484,47 +445,14 @@ public class MyCoursesController {
     }
 
     private void tampilkanDialogMasukKode() {
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(430);
-        kartu.setMaxWidth(450);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(430, 450);
 
         // Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         Label lblJudul = new Label("Masuk lewat Kode");
@@ -631,47 +559,14 @@ public class MyCoursesController {
     }
 
     private void tampilkanDialogBuatKursus() {
-        Dialog<Boolean> dialog = new Dialog<>();
-        dialog.initOwner(SceneRouter.getStage());
-        dialog.initStyle(StageStyle.TRANSPARENT);
-
-        DialogPane pane = new DialogPane() {
-            @Override
-            protected Node createButtonBar() {
-                return null;
-            }
-        };
-        pane.setBackground(Background.EMPTY);
-        pane.setStyle("-fx-background-color: transparent;");
-        pane.getStylesheets().setAll(SceneRouter.getScene().getStylesheets());
-        pane.getButtonTypes().add(ButtonType.CLOSE);
-        dialog.setDialogPane(pane);
-
-        dialog.setOnShown(e -> {
-            if (pane.getScene() != null) {
-                pane.getScene().setFill(Color.TRANSPARENT);
-            }
-        });
-
-        VBox kartu = new VBox(16);
-        kartu.getStyleClass().add("modal-kartu");
-        kartu.setPrefWidth(480);
-        kartu.setMaxWidth(500);
-        kartu.setEffect(new DropShadow(BlurType.THREE_PASS_BOX, Color.rgb(0, 0, 0, 0.25), 30, 0.12, 0, 8));
+        Dialog<Boolean> dialog = DialogUtil.buatDialogTransparan();
+        DialogPane pane = dialog.getDialogPane();
+        VBox kartu = DialogUtil.buatKartuModal(480, 500);
 
         // Header Modal tanpa ikon dekoratif
         HBox barisHeader = new HBox(12);
         barisHeader.setAlignment(Pos.CENTER_LEFT);
-
-        final double[] dragOffset = new double[2];
-        barisHeader.setOnMousePressed(e -> {
-            dragOffset[0] = dialog.getX() - e.getScreenX();
-            dragOffset[1] = dialog.getY() - e.getScreenY();
-        });
-        barisHeader.setOnMouseDragged(e -> {
-            dialog.setX(e.getScreenX() + dragOffset[0]);
-            dialog.setY(e.getScreenY() + dragOffset[1]);
-        });
+        DialogUtil.pasangDragModal(dialog, barisHeader);
 
         VBox boxJudul = new VBox(2);
         Label lblJudul = new Label("Buat Kursus Baru");
