@@ -80,8 +80,12 @@ Ada dua peran pengguna:
 
 ### Data Contoh
 
-- **5 siswa** (`data/siswa.txt`), **7 guru** (`data/guru.txt`), **23 kursus** (`data/kursus.txt`)
-  dengan materi Markdown di `data/materi/`, serta bank soal UTS/UAS untuk setiap kursus (`data/bank_soal.txt`).
+- **6 siswa** (`data/siswa.txt`), **7 guru** (`data/guru.txt`), **23 kursus** (`data/kursus.txt`)
+  dengan 353 bab dan 322 bacaan Markdown di `data/materi/`, serta **45 ujian** berisi 443 soal (`data/bank_soal.txt`).
+
+> [!TIP]
+> Seluruh data bawaan (siswa, guru, kursus, bab & materi, ujian, token, dan bank soal beserta kuncinya)
+> tersedia dalam bentuk tabel di **[data/DATA_LIST.md](data/DATA_LIST.md)**.
 
 ---
 
@@ -173,6 +177,7 @@ examify/
 ├── mvnw, mvnw.cmd, .mvn/            Maven Wrapper (Maven 3.10.0)
 ├── LICENSE
 ├── data/                            data input (dibaca & ditulis saat runtime)
+│   ├── DATA_LIST.md                 dokumentasi seluruh data dalam bentuk tabel
 │   ├── siswa.txt                    NIS|NAMA|KELAS|PIN
 │   ├── guru.txt                     data guru
 │   ├── kursus.txt                   kursus, bab, dan materi
@@ -288,6 +293,7 @@ Pasang **Extension Pack for Java**. VS Code otomatis membaca `pom.xml` dan mengu
 | 2410003 | 2468 | Citra Lestari | IF-C  |
 | 2410004 | 1111 | Dimas Saputra | IF-D  |
 | 2410005 | 6767 | Eka Rahmawati | IF-E  |
+| 0000001 | 1111 | Lazuardi Akbar Imani | IF-A |
 
 **Guru** (`data/guru.txt`): NIP `19850101` s.d. `19850107`, semua dengan PIN `1234`.
 
@@ -301,7 +307,9 @@ Pasang **Extension Pack for Java**. VS Code otomatis membaca `pom.xml` dan mengu
 | Basis Data                      | BDAT-01 (UTS)  | BDAUT8 | 60 mnt | tidak       | tidak     |
 | Kelas Uji Coba (kode `UJI`)     | UJI-01         | UJI123 | 1 mnt  | ya          | ya        |
 
-Token lainnya ada di `data/bank_soal.txt` atau menu **Bank Soal** (akun guru). Kode kursus berupa angka
+Daftar lengkap akun, kursus, dan token seluruh 45 ujian ada di **[Dokumentasi Data](data/DATA_LIST.md)**
+(bagian [Data Siswa](data/DATA_LIST.md#2-data-siswa), [Data Guru](data/DATA_LIST.md#3-data-guru), dan
+[Daftar Ujian & Token](data/DATA_LIST.md#6-daftar-ujian--token)), atau di menu **Bank Soal** (akun guru). Kode kursus berupa angka
 (contoh: Pemrograman Berorientasi Objek = `0953123017`) dan bisa dipakai di tombol **Masuk lewat Kode**.
 
 ### Sebagai Siswa
@@ -341,6 +349,8 @@ Token lainnya ada di `data/bank_soal.txt` atau menu **Bank Soal** (akun guru). K
 - Mode Aman berakhir otomatis saat jawaban dikumpulkan atau waktu habis. (Ctrl+Alt+Del tetap tidak bisa diblokir oleh aplikasi biasa.)
 
 ### Format File Data
+
+Isi lengkap setiap file dapat dilihat di **[data/DATA_LIST.md](data/DATA_LIST.md)**. Format penulisannya:
 
 <details>
 <summary><b>data/bank_soal.txt</b></summary>
