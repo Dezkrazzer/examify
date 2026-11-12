@@ -13,6 +13,7 @@ import com.examify.utils.FormatUtil;
 import com.examify.view.AnimationUtil;
 import com.examify.view.Icon;
 import com.examify.view.IconView;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -73,6 +74,10 @@ public class ProfileController {
     @FXML
     private void initialize() {
         siswa = session.getSiswaAktif();
+        if (siswa == null) { // halaman profil hanya untuk siswa; guru dikembalikan ke Kursus Saya
+            Platform.runLater(() -> SceneRouter.pindah(AppScreen.KURSUS_SAYA));
+            return;
+        }
         riwayat = session.getRekapService().getRiwayat(siswa);
         lblAvatar.setText(FormatUtil.inisial(siswa.getNama()));
         lblNama.setText(siswa.getNama());

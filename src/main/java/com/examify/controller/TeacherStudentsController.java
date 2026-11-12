@@ -111,18 +111,20 @@ public class TeacherStudentsController {
     }
 
     private boolean isSiswaOnline(Student s) {
-        if (session.getSiswaAktif() != null && session.getSiswaAktif().getNis().equals(s.getNis())) {
-            return true;
-        }
-        return Math.abs(s.getNis().hashCode()) % 3 == 0;
+        return session.getSiswaAktif() != null && session.getSiswaAktif().getNis().equals(s.getNis());
     }
 
+    /** Status berdasarkan data nyata: sesi aktif, atau waktu ujian terakhir di rekap nilai. */
     private String getStatusAktifTeks(Student s) {
         if (isSiswaOnline(s)) {
             return "Online";
         }
-        int menitLalu = (Math.abs(s.getNis().hashCode()) % 45) + 5;
-        return "Aktif " + menitLalu + "m lalu";
+        return rekapService.getRiwayat(s).stream()
+                .map(GradeHistory::waktu)
+                .filter(java.util.Objects::nonNull)
+                .max(java.time.LocalDateTime::compareTo)
+                .map(w -> "Ujian " + w.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM")))
+                .orElse("Offline");
     }
 
     private VBox buatKartuSiswa(Student s) {
@@ -162,6 +164,7 @@ public class TeacherStudentsController {
         badgeStatus.setStyle("-fx-padding: 3 8; -fx-background-radius: 999; -fx-background-color: "
                 + (online ? "rgba(16, 185, 129, 0.12)" : "rgba(148, 163, 184, 0.14)") + ";");
 
+        badgeStatus.setMinWidth(Region.USE_PREF_SIZE);
         barisProfil.getChildren().addAll(avatar, vbInfo, badgeStatus);
 
         // Capaian: Riwayat Ujian & Progres
@@ -224,7 +227,7 @@ public class TeacherStudentsController {
                 long lulus = riwayat.stream().filter(GradeHistory::lulus).count();
                 double rata = totalUjian == 0 ? 0.0 : riwayat.stream().mapToDouble(GradeHistory::skor).average().orElse(0.0);
                 int materi = progresService.getTotalMateriSelesai(sItem);
-                String status = isSiswaOnline(sItem) ? "Online" : "Offline";
+                String status = getStatusAktifTeks(sItem);
                 writer.write(String.format("\"%s\",\"%s\",\"%s\",%d,%d,%.1f,%d,\"%s\"\n",
                         sItem.getNis(), sItem.getNama(), sItem.getKelas(), totalUjian, lulus, rata, materi, status));
             }

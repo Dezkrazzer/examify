@@ -1,6 +1,6 @@
 # Teknik Presentasi Ilmiah Berbahasa Indonesia
 
-Mata kuliah **Bahasa Indonesia** (`0953112008`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Bahasa Indonesia** (`0953112008`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

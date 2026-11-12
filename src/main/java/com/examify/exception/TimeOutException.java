@@ -3,6 +3,8 @@ package com.examify.exception;
 /** Dilempar ketika aksi ujian dilakukan setelah batas waktu terlewati. */
 public class TimeOutException extends Exception {
 
+    private static final long serialVersionUID = 1L;
+
     private final String kodeUjian;
 
     public TimeOutException(String kodeUjian) {

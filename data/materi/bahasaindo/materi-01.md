@@ -1,6 +1,6 @@
 # Sejarah, Kedudukan, dan Fungsi Bahasa Indonesia
 
-Mata kuliah **Bahasa Indonesia** (`0953112008`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Bahasa Indonesia** (`0953112008`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

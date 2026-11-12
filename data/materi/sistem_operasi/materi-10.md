@@ -1,6 +1,6 @@
 # Memori Virtual, Demand Paging, dan Page Replacement
 
-Mata kuliah **Sistem Operasi** (`0953123019`) dibimbing oleh **Herdito Ibnu Dewangkoro**.
+Mata kuliah **Sistem Operasi** (`0953123019`) dibimbing oleh **Budi Hartono, S.T., M.T.**.
 
 ## Ringkasan Materi
 

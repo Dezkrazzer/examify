@@ -1,6 +1,6 @@
 # Metode Terbuka: Iterasi Titik Tetap, Newton-Raphson, dan Secant
 
-Mata kuliah **Metode Numerik** (`0953123021`) dibimbing oleh **Dr. Umi Salamah, S.Si., M.Kom.**.
+Mata kuliah **Metode Numerik** (`0953123021`) dibimbing oleh **Dr. Dewi Anggraini, S.Si., M.Kom.**.
 
 ## Ringkasan Materi
 

@@ -1,6 +1,6 @@
 # Penegakan Hukum yang Berkeadilan
 
-Mata kuliah **Pendidikan Kewarganegaraan** (`0953212014`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Pendidikan Kewarganegaraan** (`0953212014`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

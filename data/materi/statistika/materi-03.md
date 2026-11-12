@@ -1,6 +1,6 @@
 # Ukuran Penyebaran Data (Variansi dan Simpangan Baku)
 
-Mata kuliah **Statistika & Probabilitas** (`0953123007`) dibimbing oleh **Esti Suryani, S.Si., M.Kom.**.
+Mata kuliah **Statistika & Probabilitas** (`0953123007`) dibimbing oleh **Siti Nurhaliza, S.Si., M.Kom.**.
 
 ## Ringkasan Materi
 

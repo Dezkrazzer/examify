@@ -139,10 +139,6 @@ public record CalendarAgenda(
         return waktu.format(FORMAT_JAM) + " WIB";
     }
 
-    public String getFormatJamSingkat() {
-        return waktu.format(FORMAT_JAM);
-    }
-
     @Override
     public int compareTo(CalendarAgenda o) {
         int cmpWaktu = this.waktu.compareTo(o.waktu);

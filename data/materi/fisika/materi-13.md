@@ -1,6 +1,6 @@
 # Rangkaian Arus Searah dan Hukum Kirchhoff
 
-Mata kuliah **Fisika** (`0953123005`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Fisika** (`0953123005`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

@@ -121,6 +121,10 @@ public class QuestionBankController {
         badgeUlang.getStyleClass().add(u.isBolehUlang() ? "badge" : "badge-netral");
         badgeUlang.setStyle("-fx-font-size: 11px; -fx-padding: 2 8;");
 
+        // kode dan token harus terbaca utuh, jadi jangan biarkan ikut menyusut
+        lblKode.setMinWidth(Region.USE_PREF_SIZE);
+        badgeUlang.setMinWidth(Region.USE_PREF_SIZE);
+        btnToken.setMinWidth(Region.USE_PREF_SIZE);
         barisAtas.getChildren().addAll(lblKode, badgeUlang, spacer, btnToken);
 
         // Judul Mata Pelajaran

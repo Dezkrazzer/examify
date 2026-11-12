@@ -76,7 +76,7 @@
                     <mainClass>com.examify/${main.class}</mainClass>
                     <options>
                         <option>-ea</option>
-                        <option>--enable-native-access=com.sun.jna</option>
+                        <option>--enable-native-access=javafx.graphics,com.sun.jna</option>
                     </options>
                 </configuration>
             </plugin>

@@ -21,7 +21,7 @@
         <VBox spacing="12">
             <padding><Insets top="16" right="32" bottom="10" left="32"/></padding>
             <HBox spacing="12" alignment="CENTER_LEFT">
-                <Button text="Kembali ke Kursus" onAction="#handleKembali" styleClass="tombol-hantu">
+                <Button fx:id="btnKembali" text="Kembali ke Kursus" onAction="#handleKembali" styleClass="tombol-hantu">
                     <graphic><IconView ikon="PANAH_KIRI" ukuran="16"/></graphic>
                 </Button>
                 <Region HBox.hgrow="ALWAYS"/>

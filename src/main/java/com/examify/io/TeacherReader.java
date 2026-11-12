@@ -16,8 +16,6 @@ import java.util.Set;
 /** Membaca guru.txt berformat NIP|NAMA|PIN|MAPEL. */
 public class TeacherReader implements DataReader<Teacher> {
 
-    private static final int JUMLAH_FIELD = 4;
-
     @Override
     public List<Teacher> baca(Path path) throws IOException, DataFormatException {
         List<Teacher> daftarGuru = new ArrayList<>();

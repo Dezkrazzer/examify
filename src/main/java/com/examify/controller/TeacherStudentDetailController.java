@@ -175,18 +175,20 @@ public class TeacherStudentDetailController {
     }
 
     private boolean isSiswaOnline(Student s) {
-        if (session.getSiswaAktif() != null && session.getSiswaAktif().getNis().equals(s.getNis())) {
-            return true;
-        }
-        return Math.abs(s.getNis().hashCode()) % 3 == 0;
+        return session.getSiswaAktif() != null && session.getSiswaAktif().getNis().equals(s.getNis());
     }
 
+    /** Status berdasarkan data nyata: sesi aktif, atau waktu ujian terakhir di rekap nilai. */
     private String getStatusAktifTeks(Student s) {
         if (isSiswaOnline(s)) {
             return "Online";
         }
-        int menitLalu = (Math.abs(s.getNis().hashCode()) % 45) + 5;
-        return "Aktif " + menitLalu + "m lalu";
+        return rekapService.getRiwayat(s).stream()
+                .map(GradeHistory::waktu)
+                .filter(java.util.Objects::nonNull)
+                .max(java.time.LocalDateTime::compareTo)
+                .map(w -> "Ujian " + w.format(java.time.format.DateTimeFormatter.ofPattern("dd/MM")))
+                .orElse("Offline");
     }
 
     @FXML

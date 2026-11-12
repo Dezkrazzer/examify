@@ -58,6 +58,7 @@ public class ExamEditorController {
         }
     }
 
+    @FXML private Button btnKembali;
     @FXML private Label lblHeaderUjian;
     @FXML private TextField tfMapel;
     @FXML private TextField tfDurasi;
@@ -90,6 +91,9 @@ public class ExamEditorController {
             return;
         }
 
+        if (btnKembali != null) {
+            btnKembali.setText(session.getKursusAktif() != null ? "Kembali ke Kursus" : "Kembali ke Bank Soal");
+        }
         lblHeaderUjian.setText("KODE: " + ujian.getKodeUjian());
         tfMapel.setText(ujian.getMataPelajaran());
         tfDurasi.setText(String.valueOf(ujian.getDurasiMenit()));
@@ -456,7 +460,9 @@ public class ExamEditorController {
 
     @FXML
     private void handleKembali() {
-        kembaliKeLayarAsal();
+        if (DialogUtil.konfirmasi("Keluar dari editor? Perubahan yang belum disimpan akan hilang.")) {
+            kembaliKeLayarAsal();
+        }
     }
 
     private void kembaliKeLayarAsal() {

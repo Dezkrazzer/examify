@@ -1,6 +1,6 @@
 # Dasar Analisis Efisiensi Algoritma dan Notasi Asimtotik
 
-Mata kuliah **Desain & Analisis Algoritma** (`0953123022`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Desain & Analisis Algoritma** (`0953123022`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 

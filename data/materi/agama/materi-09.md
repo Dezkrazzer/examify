@@ -1,6 +1,6 @@
 # Masyarakat Madani dan Kesejahteraan Umat
 
-Mata kuliah **Pendidikan Agama** (`0953112001`) dibimbing oleh **Lazuardi Akbar Imani S.Kokop**.
+Mata kuliah **Pendidikan Agama** (`0953112001`) dibimbing oleh **Rudi Hermawan, S.Kom., M.Cs.**.
 
 ## Ringkasan Materi
 
